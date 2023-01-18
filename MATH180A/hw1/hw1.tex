@@ -26,7 +26,7 @@
     $\Omega = \{(1, 2, 3, 4, 5), (1, 2, 3, 4, 6), (1, 2, 3, 4, 7)\dots\}$ with no repetition of numbers in each element and orders do not matter, which means (1, 2, 3, 4, 5) is the same as (5, 4, 3, 2, 1). 
     There are a total of ${39 \choose 5} = 575757$ elements in $\Omega$. 
     \smallbreak
-    Since each number are picked randomly and uniformly, the distribution of each element is uniform with $P = \frac{1}{|\Omega|} = \frac{1}{{39 \choose 5}}$.
+    Since each number are picked randomly and uniformly, the distribution of each element is uniform with $P = \frac{1}{|\Omega|} = \frac{1}{{39 \choose 5}} = \frac{1}{575757}$.
 
     \item
     $P = \frac{{5 \choose 3} \times {(39 - 5) \choose 2}}{{39 \choose 5}} = \frac{10 \times 561}{575757} = \frac{5610}{575757}$ 
@@ -63,7 +63,7 @@
     = (p_1 + p_{12} + p_{13} + p_{123}) + (p_2 + p_{12} + p_{23} + p_{123}) + (p_3 + p_{13} + p_{23} + p_{123}) \\
     \indent - (p_{12} + p_{123}) - (p_{13} + p_{123}) - (p_{23} + p_{123}) + p_{123} \\
     = p_1 + p_2 + p_3 + p_{12} + p_{13} + p_{23} + p_{123} \\
-    = P(A_1 \cup A_2 \cup A_3)$
+    = P(A \cup B \cup C)$
 \end{enumerate}
 \bigbreak
 
@@ -87,19 +87,19 @@ In conclusion, $0.1 \le P(AB) \le 0.4$.
 Let G = \{exactly two balls are green\}, R = \{exactly two balls are red\}, Y = \{exactly two balls are yellow\}, W = \{exactly two balls are white\}.
 \begin{align}
     P(G \cup R \cup Y \cup W) = & P(G) + P(R) + P(Y) + P(W) \\
-    & - P (G \cup R) - P(G \cup Y) -\dots \\
-    & + P(G \cup R \cup Y) + P(G \cup R \cup W) + \dots \\
-    & - P(G \cup R \cup Y \cup W)
+    & - P (G \cap R) - P(G \cap Y) -\dots \\
+    & + P(G \cap R \cap Y) + P(G \cap R \cap W) + \dots \\
+    & - P(G \cap R \cap Y \cap W)
 \end{align}
 Now let's calculate the individual terms:
 
 \begin{align}
     P(G) = P(R) = \dots = \frac{{4 \choose 2} \times 3 \times 3}{4^4} = \frac{54}{256} = \frac{27}{128}\\
-    P(G \cup R) = P(G \cup Y) = \dots = \frac{{4 \choose 2}}{4^4} = \frac{3 }{128}
+    P(G \cap R) = P(G \cap Y) = \dots = \frac{{4 \choose 2}}{4^4} = \frac{3 }{128}
 \end{align}
-Note that it's impossible for more than two of the events happen in the same time, therefore:
+Note that it's impossible for more than two of the specified events to happen at the same time, therefore:
 \begin{align}
-    P(G \cup R \cup Y) = P(G \cup R \cup W) = \dots = P(G \cup R \cup Y \cup W) = 0
+    P(G \cap R \cap Y) = P(G \cap R \cap W) = \dots = P(G \cap R \cap Y \cap W) = 0
 \end{align}
 Therefore,
 \begin{align}

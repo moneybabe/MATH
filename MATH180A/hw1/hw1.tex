@@ -94,9 +94,14 @@ Let G = \{exactly two balls are green\}, R = \{exactly two balls are red\}, Y = 
 Now let's calculate the individual terms:
 
 \begin{align}
-    P(G) = P(R) = \dots = \frac{{4 \choose 2} \times 3 \times 3}{4^4} = \frac{54}{256} = \frac{27}{128}\\
+    P(G) = P(R) = \dots = \frac{{4 \choose 2} \times 3 \times 3}{4^4} = \frac{54}{256} = \frac{27}{128}
+\end{align}
+For (10), imagine we lay out all 4 balls in a row. We first pick two slots to fill in the colored ball corresponding to the event.
+Then we fill the other two slots with colored balls that are not corresponding to the event.
+\begin{align}
     P(G \cap R) = P(G \cap Y) = \dots = \frac{{4 \choose 2}}{4^4} = \frac{3 }{128}
 \end{align}
+For (11), we pick two slots to fill in the colored ball corresponding to the first event. Then we fill the other two slots with the second event. \\
 Note that it's impossible for more than two of the specified events to happen at the same time, therefore:
 \begin{align}
     P(G \cap R \cap Y) = P(G \cap R \cap W) = \dots = P(G \cap R \cap Y \cap W) = 0

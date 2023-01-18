@@ -127,7 +127,11 @@ Since $P((A_1 \cup \dots \cup A_k) \cap A_{k+1}) \ge 0$,
 \begin{align}
     P(A_1 \cup \dots \cup A_k \cup A_{k+1}) \le P(A_1 \cup \dots \cup A_k) + P(A_{k+1})
 \end{align}
-Since $P(A_1) + \dots + P(A_k) \ge P(A_1 \cup \dots \cup A_k \cup A_{k+1})$, we can replace $P(A_1 \cup \dots \cup A_k \cup A_{k+1})$ with $P(A_1) + \dots + P(A_k)$, and we can get:
+Since $P(A_1 \cup \dots \cup A_k) \le P(A_1) + \dots + P(A_k)$,
+\begin{align}
+    P(A_1 \cup \dots \cup A_k) + P(A_{k+1}) \le P(A_1) + \dots + P(A_k) + P(A_{k+1})
+\end{align}
+and 
 \begin{align}
     P(A_1 \cup \dots \cup A_k \cup A_{k+1}) \le P(A_1) + \dots + P(A_k) + P(A_{k+1}).
 \end{align}

@@ -29,12 +29,11 @@
 From (1) to (2), note that $P(B) = P(A \cap B) + P(A^c \cap B)$, thus $P(A^c \cap B) = P(B) - P(A \cap B)$.
 \bigbreak
 
-\textbf{Problem 5.}
+\textbf{Problem 5. }
 \begin{enumerate}[label={(\alph*)}]
     \item  
-    $\Omega_{coin} = \{head, tail\}, P_{coin} = \frac{1}{2}$;
-    $\Omega_{4die} = \{1, 2, 3, 4\}, P_{4die} = \frac{1}{4}$;
-    $\Omega_{6die} = \{1, 2, 3, 4, 5, 6\}, P_{6die} = \frac{1}{6}$
+    $\Omega = \{(head, i); 1 \le i \le 4, i \in \mathbb{Z} \} \cup \{(tail, i); 1 \le i \le 6, i \in \mathbb{Z} \}$. 
+    $P = \frac{1}{2} \times \frac{1}{4} = \frac{1}{8}$ for head or $P = \frac{1}{2} \times \frac{1}{6} = \frac{1}{12}$ for tail.
 
     \item Let $A_1$ and $A_2$ be the event with die roll 1 and 2 respectively, $B_1$ and $B_2$ be the coin event with head and tail respectively. 
     Note that $A_1$, $A_2$ and $B_1$, $B_2$ are disjoint, and $B_1 \cup B_2 = \Omega_{coin}$.
@@ -50,7 +49,7 @@ From (1) to (2), note that $P(B) = P(A \cap B) + P(A^c \cap B)$, thus $P(A^c \ca
 
 \textbf{Problem 6.} 
 Let $A$ be the event of scoring two points, $B_1$ be the event of making the shot, $B_2$ be the event of missing the shot and not geeting fouled, $B_3$ be the event of missing the shot and getting fouled. 
-Note that $B_1$, $B_2$, and $B_3$ are pairwise disjoint, and $B_1 \cup B_2 \cup B_3 = \Omega$.
+Note that $B_1$, $B_2$, and $B_3$ are disjoint, and $B_1 \cup B_2 \cup B_3 = \Omega$.
 
 \begin{align}
     P(A) & = P(B_1)P(A | B_1) + P(B_2)P(A | B_2) + P(B_3)P(A | B_3) \\
@@ -72,7 +71,7 @@ Note that $B_1$, $B_2$, and $B_3$ are pairwise disjoint, and $B_1 \cup B_2 \cup 
 
     \item 
     Let $A$ be the event that the chosen contestant is a villager, $B$ be the event that the chosen contestant is a Merry Man, $C$ be the event of the contestant missing the second shot.
-    Note that $A$ and $B$ are disjoint, and $A + B = \Omega$.
+    Note that $A$ and $B$ are disjoint, and $A \cup B = \Omega$.
     
     Note that for both villager and Merry Man, the first and second shot are independent, thus $P(C | B) = 0.1$ and $P(C | A) = 0.9$ is always true.
 

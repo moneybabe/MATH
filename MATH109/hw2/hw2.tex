@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 109 HW2}
+\author{Neo Lee}
+\date{02/01/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\begin{enumerate}[label={(\arabic*)}]
+% Q1
+\item 
+\begin{prop}
+    $n^2 + n$ is even for all $n \in \mathbb{N}$.
+\end{prop}
+\begin{proof}
+    Note that all natural numbers $n$, n is either even or odd.
+    If $n$ is even, it can be written as $n = 2k$ for some positive integer $k$.
+    If $n$ is odd, it can be written as $n = 2k + 1$ for some whole number $k$.
+
+    Let $n$ be even, $n^2 + n = (2k)^2 + 2k = 4k^2 + 2k = 2(2k^2 + k)$, which is divisible by 2.
+    Therefore, $n^2 + n$ is even if $n$ is even.
+
+    Let $n$ be odd, $n^2 + n = (2k + 1)^2 + (2k + 1) = (4k^2 + 4k + 1) + (2k + 1) = 2(2k^2 + 3k + 1)$, which is also divisible by 2.
+    Therefore, $n^2 + n$ is even if $n$ is odd.
+
+    Hence, $n^2 + n$ is always even for $n \in \mathbb{N}$.
+\end{proof}
+
+% Q2
+\item 
+\begin{prop}
+    $\sqrt{xy} \le \frac{x + y}{2}$ if $x, y \ge 0$ are real numbers.
+\end{prop}
+\begin{proof}
+    \begin{align}
+        \sqrt{xy} \le \frac{x + y}{2} & \Leftarrow 2\sqrt{xy} \le x + y \\
+        & \Leftarrow 4xy \le (x + y)^2 \\
+        & \Leftarrow 4xy \le x^2 + 2xy + y^2 \\
+        & \Leftarrow 0 \le x^2 - 2xy + y^2 \\ 
+        & \Leftarrow 0 \le (x - y)^2 \\ 
+        & \Leftarrow 0 \le x, y \; (x, y \in \mathbb{R})
+    \end{align}
+    
+    Hence, for all real numbers $x, y \ge 0$, $(x - y)^2 \ge 0 \Rightarrow \sqrt{xy} \le \frac{x + y}{2}$.
+\end{proof}
+
+% Q3
+\item 
+\begin{prop}
+    For all real numbers $x > 2$, $\frac{x+1}{x-1} < \frac{x+2}{x-2}$.
+\end{prop}
+\begin{proof}
+    \begin{align}
+        \frac{x+1}{x-1} < \frac{x+2}{x-2} & \Leftarrow (x-2)(x+1) < (x-1)(x+2) \\
+        & \Leftarrow x^2 - x - 2 < x^2 + x - 2 \\
+        & \Leftarrow 0 < 2x \\
+        & \Leftarrow 4 < 2x \\
+        & \Leftarrow 2 < x  \; (x \in \mathbb{R})
+    \end{align}
+\end{proof}
+
+% Q4
+\item 
+\begin{prop}
+    Let $n \ge 2$ be a natural number. 
+    Let $k$ be the maximum integer such that $2^k \le n$. 
+    Among the numbers $1,...,n,$ the number $2^k$ is the only one which is divisible by $2^k$.
+\end{prop}
+\begin{proof}
+    Assume to the contrary that other than $2^k$, there exists $i$ such that $2^k | i$, for which $1 \le i \le n$ and $i \in \mathbb{N}$.
+    Since $2^k | i$, $i$ can be written as $i = 2^k \cdot b = 2^k \cdot (2 + b - 2) = 2^{k+1} + (b-2)2^k$ for some positive integer $b \ge 2$.
+    Note that $b \ge 2 \Rightarrow b-2 \ge 0 \Rightarrow i = 2^{k+1} + (b-2)2^k \ge 2^{k+1}$, which contradicts that $k$ is the maximum integer such that $2^k \le n$.
+    Hence, $2^k$ is the only number that is divisible by $2^k$ within [1, n].
+
+    The claim would not be true if $2^k$ is replaced by $3^k$. For example, for $n = 26$, the greatest $k$ such that $3^k \le n$ is $2$. In this example, 18 is divisible by $3^2 = 9$.
+\end{proof}
+
+% Q5
+\item 
+\begin{prop}
+   $\sum_{k=1}^{2^n}\frac{1}{k} \ge 1 + \frac{n}{2}$ for $n \in \mathbb{N}$.
+\end{prop}
+\begin{proof}
+    Proving $P(n): \sum_{k=1}^{2^n}\frac{1}{k} \ge 1 + \frac{n}{2}$ for $n \in \mathbb{N}$ by induction.
+
+    Base case:
+    \begin{align}
+        P(1) : \sum_{k=1}^{2^1}\frac{1}{k} & = \frac{1}{1} + \frac{1}{2} \\
+        & = \frac{3}{2} \\
+        & \ge 1 + \frac{1}{2}.
+    \end{align}
+    Thus, $P(n)$ is true for $n = 1$.
+
+    Induction step: assuming $P(m)$ is true,
+    \begin{align}
+        P(m+1): \sum_{k=1}^{2^{m+1}}\frac{1}{k} & = \sum_{k=1}^{2^m}\frac{1}{k} + \sum_{k=2^m + 1}^{2^{m+1}}\frac{1}{k} \\
+        & \ge 1 + \frac{m}{2} + (2^{m+1} - (2^m + 1) + 1)\frac{1}{2^{m+1}} \\ 
+        & \ge 1 + \frac{m}{2} + (2^{m+1} - \frac{2^{m+1}}{2})\frac{1}{2^{m+1}} \\ 
+        & \ge 1 + \frac{m}{2} + (\frac{1}{2} \cdot 2^{m+1})\frac{1}{2^{m+1}} \\ 
+        & \ge 1 + \frac{m}{2} + \frac{1}{2} \\ 
+        & \ge 1 + \frac{m+1}{2}.
+    \end{align}
+
+    Therefore, $P(m+1)$ is true.
+
+    By Mathematical Induction, $P(n)$ is true for $n \in \mathbb{N}$.
+\end{proof}
+
+% Q6
+\item 
+\begin{prop}
+    $3 | 4^n + 5$ for $n \in \mathbb{Z}^+$.
+\end{prop}
+\begin{proof}
+    Proving $P(n): 3|4^n + 5$ for $n \in \mathbb{Z}^+$ by induction.
+
+    Base case: 
+    \begin{align}
+        P(1): 4^1 + 5 & = 9 \\
+        & = 3 \cdot 3.
+    \end{align}
+    Hence, $4^1 + 5$ is divisible by 3 and $P(n)$ is true for $n = 1$.
+
+    Induction step: assuming $P(m)$ is true, which means $4^n + 5 = 3 \cdot b$ for $b \in \mathbb{Z}^+$,
+    \begin{align}
+        P(m+1): 4^{m+1} + 5 & = 4 \cdot 4^m + 5 \\
+        & = 3 \cdot 4^m + 4^m + 5 \\
+        & = 3 \cdot 4^m + 3 \cdot b \\
+        & = 3(4^m + b).
+    \end{align}
+
+    Since $4^m + b$ is an integer, $4^{m+1} + 5$ is divisibleb by 3 and $P(m+1)$ is true.
+
+    By Mathematical Induction, $P(n)$ is true for $n \in \mathbb{Z}^+$.
+\end{proof}
+
+% Q7
+\item 
+\begin{prop}
+    $\sum_{i=1}^{n}\frac{1}{i(i+1)} =  \frac{n}{n+1}$ for $n \in \mathbb{Z}^+$.
+\end{prop}
+\begin{proof}
+    Proving $P(n): \sum_{i=1}^{n}\frac{1}{i(i+1)} =  \frac{n}{n+1}$ for $n \in \mathbb{Z}^+$ by induction.
+
+    Base case:
+    \begin{align}
+        P(1): \sum_{i=1}^{1}\frac{1}{i(i+1)} & = \frac{1}{1(1+1)} \\
+        & = \frac{1}{2} \\
+        & = \frac{1}{1+1}.
+    \end{align}
+    Hence, $P(n)$ is true for $n=1$.
+
+    Induction step: assuming $P(m)$ is true,
+    \begin{align}
+        P(m+1): \sum_{i=1}^{m+1}\frac{1}{i(i+1)} & = \sum_{i=1}^{m}\frac{1}{i(i+1)} + \frac{1}{(m+1)(m+2)} \\
+        & = \frac{m}{m+1} + \frac{1}{(m+1)(m+2)} \\
+        & = \frac{m(m+2) + 1}{(m+1)(m+2)} \\ 
+        & = \frac{m^2 + 2m + 1}{(m+1)(m+2)} \\
+        & = \frac{(m+1)^2}{(m+1)(m+2)} \\
+        & = \frac{m+1}{m+2} \\ 
+        & = \frac{m+1}{(m+1)+1}.
+    \end{align}
+
+    Thus, $P(m+1)$ is true.
+
+    By Mathematical Induction, $P(n)$ is true for $n \in \mathbb{Z}^+$.
+\end{proof}
+
+% Q8
+\item 
+\begin{prop}
+    $\Pi_{i=2}^n\left(1 - \frac{1}{i^2}\right) = \frac{n+1}{2n}$ for integers $n \ge 2$.
+\end{prop}
+\begin{proof}
+    Proving $P(n): \Pi_{i=2}^n\left(1-\frac{1}{i^2}\right)$ for integers $n \ge 2$ by induction.
+
+    Base case:
+    \begin{align}
+        P(2): \Pi_{i=2}^2\left(1-\frac{1}{i^2}\right) & = 1 - \frac{1}{2^2} \\
+        & = 1 - \frac{1}{4} \\ 
+        & = \frac{3}{4} \\
+        & = \frac{2 + 1}{2 \cdot 2}
+    \end{align}
+
+    Hence, $P(n)$ is true for $n=2$.
+
+    Induction step: assuming $P(m)$ is true,
+    \begin{align}
+        P(m+1): \Pi_{i=2}^{m+1}\left(1-\frac{1}{i^2}\right) & = \Pi_{i=2}^m\left(1-\frac{1}{i^2}\right) \cdot \left(1-\frac{1}{(m+1)^2}\right) \\
+        & = \frac{m+1}{2m} \cdot \left(1-\frac{1}{(m+1)^2}\right) \\
+        & = \frac{m+1}{2m} - \frac{1}{(2m)(m+1)} \\
+        & = \frac{(m+1)^2 - 1}{(2m)(m+1)} \\
+        & = \frac{m^2 + 2m}{(2m)(m+1)} \\
+        & = \frac{m(m + 2)}{(2m)(m+1)} \\
+        & = \frac{m+2}{2m+2} \\
+        & = \frac{(m+1)+1}{2(m+1)}
+    \end{align}
+
+    Thus, $P(m+1)$ is true.
+
+    By Mathematical Induction, $P(n)$ is true for interger $n \ge 2$.
+\end{proof}
+
+    
+\end{enumerate}
+\end{document}

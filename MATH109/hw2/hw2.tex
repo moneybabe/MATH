@@ -53,7 +53,7 @@
         & \Leftarrow 0 \le x, y \; (x, y \in \mathbb{R})
     \end{align}
     
-    Hence, for all real numbers $x, y \ge 0$, $(x - y)^2 \ge 0 \Rightarrow \sqrt{xy} \le \frac{x + y}{2}$.
+    Hence, for all real numbers $x, y \ge 0 \Rightarrow (x - y)^2 \ge 0 \Rightarrow \sqrt{xy} \le \frac{x + y}{2}$.
 \end{proof}
 
 % Q3
@@ -103,7 +103,7 @@
     \end{align}
     Thus, $P(n)$ is true for $n = 1$.
 
-    Induction step: assuming $P(m)$ is true,
+    Induction step: assuming $P(m)$ is true for $n = m$,
     \begin{align}
         P(m+1): \sum_{k=1}^{2^{m+1}}\frac{1}{k} & = \sum_{k=1}^{2^m}\frac{1}{k} + \sum_{k=2^m + 1}^{2^{m+1}}\frac{1}{k} \\
         & \ge 1 + \frac{m}{2} + (2^{m+1} - (2^m + 1) + 1)\frac{1}{2^{m+1}} \\ 
@@ -133,7 +133,7 @@
     \end{align}
     Hence, $4^1 + 5$ is divisible by 3 and $P(n)$ is true for $n = 1$.
 
-    Induction step: assuming $P(m)$ is true, which means $4^n + 5 = 3 \cdot b$ for $b \in \mathbb{Z}^+$,
+    Induction step: assuming $P(m)$ is true for $n = m$, which means $4^m + 5 = 3 \cdot b$ for $b \in \mathbb{Z}^+$,
     \begin{align}
         P(m+1): 4^{m+1} + 5 & = 4 \cdot 4^m + 5 \\
         & = 3 \cdot 4^m + 4^m + 5 \\
@@ -162,7 +162,7 @@
     \end{align}
     Hence, $P(n)$ is true for $n=1$.
 
-    Induction step: assuming $P(m)$ is true,
+    Induction step: assuming $P(m)$ is true for $n=m$,
     \begin{align}
         P(m+1): \sum_{i=1}^{m+1}\frac{1}{i(i+1)} & = \sum_{i=1}^{m}\frac{1}{i(i+1)} + \frac{1}{(m+1)(m+2)} \\
         & = \frac{m}{m+1} + \frac{1}{(m+1)(m+2)} \\
@@ -191,12 +191,12 @@
         P(2): \Pi_{i=2}^2\left(1-\frac{1}{i^2}\right) & = 1 - \frac{1}{2^2} \\
         & = 1 - \frac{1}{4} \\ 
         & = \frac{3}{4} \\
-        & = \frac{2 + 1}{2 \cdot 2}
+        & = \frac{2 + 1}{2 \cdot 2}.
     \end{align}
 
     Hence, $P(n)$ is true for $n=2$.
 
-    Induction step: assuming $P(m)$ is true,
+    Induction step: assuming $P(m)$ is true for $n=m$,
     \begin{align}
         P(m+1): \Pi_{i=2}^{m+1}\left(1-\frac{1}{i^2}\right) & = \Pi_{i=2}^m\left(1-\frac{1}{i^2}\right) \cdot \left(1-\frac{1}{(m+1)^2}\right) \\
         & = \frac{m+1}{2m} \cdot \left(1-\frac{1}{(m+1)^2}\right) \\
@@ -205,7 +205,7 @@
         & = \frac{m^2 + 2m}{(2m)(m+1)} \\
         & = \frac{m(m + 2)}{(2m)(m+1)} \\
         & = \frac{m+2}{2m+2} \\
-        & = \frac{(m+1)+1}{2(m+1)}
+        & = \frac{(m+1)+1}{2(m+1)}.
     \end{align}
 
     Thus, $P(m+1)$ is true.

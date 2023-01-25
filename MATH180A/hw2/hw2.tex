@@ -32,7 +32,7 @@ From (1) to (2), note that $P(B) = P(A \cap B) + P(A^c \cap B)$, thus $P(A^c \ca
 \textbf{Problem 5. }
 \begin{enumerate}[label={(\alph*)}]
     \item  
-    $\Omega = \{(head, i); 1 \le i \le 4, i \in \mathbb{Z} \} \cup \{(tail, i); 1 \le i \le 6, i \in \mathbb{Z} \}$. 
+    $\Omega = \{(head, i): 1 \le i \le 4, i \in \mathbb{Z} \} \cup \{(tail, i): 1 \le i \le 6, i \in \mathbb{Z} \}$. 
     $P = \frac{1}{2} \times \frac{1}{4} = \frac{1}{8}$ for head or $P = \frac{1}{2} \times \frac{1}{6} = \frac{1}{12}$ for tail.
 
     \item Let $A_1$ and $A_2$ be the event with die roll 1 and 2 respectively, $B_1$ and $B_2$ be the coin event with head and tail respectively. 
@@ -70,16 +70,16 @@ Note that $B_1$, $B_2$, and $B_3$ are disjoint, and $B_1 \cup B_2 \cup B_3 = \Om
     \end{align}
 
     \item 
-    Let $A$ be the event that the chosen contestant is a villager, $B$ be the event that the chosen contestant is a Merry Man, $C$ be the event of the contestant missing the second shot.
-    Note that $A$ and $B$ are disjoint, and $A \cup B = \Omega$.
-    
-    Note that for both villager and Merry Man, the first and second shot are independent, thus $P(C | B) = 0.1$ and $P(C | A) = 0.9$ is always true.
-
+    Let A be the event that the chosen contestant is a Merry Man, B be the event that the first shot missed, C be the event that the second shot missed.
     \begin{align}
-        P(C) & = P(A)P(C | A) + P(B)P(C | B) \\
-        & = 0.75 \times 0.9 + 0.25 \times 0.1 \\ 
-        & = 0.7
+        P(C|B) & = \frac{P(B \cap C)}{P(B)} \\
+        & = \frac{P((B \cap C) \cap A) \cup ((B \cap C) \cap A^c)}{P(A)P(B|A) + P(A^c)P(B|A^c)} \\
+        & = \frac{P(C \cap B \cap A) + P(C \cap B \cap A^c)}{P(A)P(B|A) + P(A^c)P(B|A^c)} \\
+        & = \frac{P(A)P(C \cap B | A) + P(A^c)P(C \cap B | A^c)}{P(A)P(B|A) + P(A^c)P(B|A^c)} \\ 
+        & = \frac{0.25 \times 0.1 \times 0.1 + 0.75 \times 0.9 \times 0.9}{0.25 \times 0.1 + 0.75 \times 0.9} \\
+        & = \frac{61}{70}
     \end{align}
+    Note that from (17) to (18), $B \cup C \cup A$ and $C \cup B \cup A^c$ are disjoint.
 \end{enumerate}
 
 \end{document}

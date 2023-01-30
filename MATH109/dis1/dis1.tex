@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 109 Discussion 1}
+\author{Neo Lee}
+\date{01/29/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.}
+\begin{prop}
+    $m, n \in \mathbb{Z^+} \Rightarrow n^2 - m^2 \neq 1$.
+\end{prop}
+\begin{proof}
+    Assume to the contrary that $n^2 - m^2 = 1$, then $(n+m)(n-m) = 1$.
+    Thus, $n+m=1$ and $n-m=1$. Since $n,m \in \mathbb{Z^+}$, $n \ge 1$ and $m \ge 1$, $n+m \ge 2$, which contradicts $n+m=1$.
+    Hence, $m, n \in \mathbb{Z^+} \Rightarrow n^2 - m^2 \neq 1$.
+\end{proof}
+
+\textbf{Problem 2.}
+\begin{prop}
+    Let $n$ be an integer. If $n^2 - (n-2)^2$ is not divisible by 8, then $n$ is even.
+\end{prop}
+\begin{proof}
+    The contrapositive of the statement is: if $n$ is odd, $8|n^2-(n-2)^2$. 
+    Since $n$ is odd, it can be written as $n=2k+1$ for some whole number k.
+    Then $n^2-(n-2)^2 \Rightarrow (2k+1)^2-(2k+1-2)^2 \Rightarrow (4k^2+4k+1)-(4k^2-4k+1) \Rightarrow 8k^2+8k = 8(k^2+k)$, which is divisible by 8 for $k \in \mathbb{Z^\ge}$.
+    Hence, if $n^2 - (n-2)^2$ is not divisible by 8, then $n$ is even.
+\end{proof}
+
+\textbf{Problem 3.}
+\begin{prop}
+    $\sqrt{2} + \sqrt{3}$ is not rational.
+\end{prop}
+\begin{proof}
+    Primary proof: Assume to the contrary that $\sqrt{2}+\sqrt{3}$ is rational, $(\sqrt{2}+\sqrt{3})^2 = 2 + 2\sqrt{6} + 3 = 5+2\sqrt{6}$ is rational $\Rightarrow 2\sqrt{6}$ is rational $\Rightarrow \sqrt{6}$ is rational.
+    
+    Secondary proof: Now let's prove that $\sqrt{6}$ is irrational. Assume to the contrary that $\sqrt{6}$ is rational, which can be written as $\frac{a}{b}$ for $\{a, b \in \mathbb{Z} | gcd(a, b)=1\}$. 
+    \begin{align}
+        b\sqrt{6} & = a \\
+        6b^2 & = a^2
+    \end{align}
+    
+    Thus $a^2$ is even, which means $a$ is even and can be written as $a = 2k$ for $k \in \mathbb{Z}$. From (2), $6b^2 = a^2 \Rightarrow 6b^2 = (2k)^2 \Rightarrow 6b^2 = 4k^2 \Rightarrow 3b^2 = 2k^2 \Rightarrow b^2$ is even $\Rightarrow b$ is even, which contracts that $gcd(a, b)=1$.
+    Hence, $\sqrt{6}$ is irrational, which contradicts that $\sqrt{6}$ is rational is the primary proof.
+    Thus, $\sqrt{2} + \sqrt{3}$ is not rational.
+\end{proof}
+\end{document}

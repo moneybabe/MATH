@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180A HW3}
+\author{Neo Lee}
+\date{02/01/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 3.}
+Obviously, $P(A)=\frac{1}{2}$ and $P(B)=\frac{1}{5}$. Then, $P(A \cap B)=P(A|B)P(B)=\frac{1}{2} \times \frac{1}{5}=P(A)P(B)$. 
+Hence, $A$ and $B$ are indeed independent.
+\bigbreak
+
+\textbf{Problem 4.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    $E(X)$ will be larger. For $Y$, each outcome is weighted evenly with $p(x_i)=\frac{1}{4}$.
+    Yet, for $X$, the outcome of more students are weighted more while the outcome of fewer students are weighted less with $p(x_i)=\frac{x_i}{90}$.
+    In other words, there's a higher probability of choosing a student from a larger class than from a smaller class in $X$.
+
+    \item 
+    \begin{align}
+        E(X) & = \sum x_ip(x_i) \\
+        & = 21 \times \frac{21}{90} + 24 \times \frac{24}{90} + 17 \times \frac{17}{90} + 28 \times \frac{28}{90} \\
+        & = \frac{209}{9} \\
+        E(Y) & = 21 \times \frac{1}{4} + 24 \times \frac{1}{4} + 17 \times \frac{1}{4} + 28 \times \frac{1}{4} \\
+        & = \frac{45}{2}
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 5.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    Possible values of $Y=0,1$. $P(Y=1)=\frac{1}{2}+\frac{1}{6}=\frac{2}{3}$ and $P(Y=0)=\frac{1}{3}$.
+    \begin{align}
+        E(|X|) & = E(Y) \\
+        & = 1 \times \frac{2}{3} + 0 \times \frac{1}{3} \\
+        & = \frac{2}{3}
+    \end{align}
+
+    \item 
+    \begin{align}
+        E(|X|) & = |-1| \times \frac{1}{2} + |1| \times \frac{1}{6} + 0 \times \frac{1}{6} \\
+        & = \frac{2}{3}
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 6.}
+We can express $X$ in terms of a collection of indictors $I_i = I_{\text{\{$i$th card is a pair with ($i+1$)th card\}}}$, for which $X=I_1 + I_2 + \dots + I_{51}$.
+Note that 
+\begin{align}
+    E(I_1) = E(I_2) = \dots = E(I_{51}) & = 1 \cdot P(\text{\{first card is a pair with second card\}}) \\
+    & = \frac{3}{51}.
+\end{align}
+Therefore, by additivity, $E(X)=E(I_1)+E(I_2)+ \dots +E(I_51)=51 \times \frac{3}{51}=3$.
+
+Side note: this counting method counts 3-of-a-kind as two of two consecutive cards and 4-of-a-kind as three of two consecutive cards.
+\bigbreak
+
+\textbf{Problem 7.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    Let $A$ be the event of a die roll and $B$ be the event of the other die roll. Note that $A$ and $B$ are independent because $P(A \cap B)=P(A)P(B)$.
+    
+    Now let us we consider $P(X \le s):1 \le s \le 20, s \in \mathbb{Z+}$, which is the probability that both the dice rolls are less than or equal to $s$. Therefore, it can be written as $P(X \le s)=P((A \le s) \cap (B \le s))=\frac{s}{20} \times \frac{s}{20}=\frac{s^2}{400}$.
+
+    Hence, $CDF$ of $X$ is 
+    \begin{align}
+        F_x(s) = 
+            \begin{cases}
+                0, & s \le 0 \\
+                \frac{s^2}{400}, & 1 \le s \le 20 \\
+                1, & 20 < s.
+            \end{cases}
+    \end{align}
+
+    Now let us determine the $pmf$ of $X$. 
+    Note that $P(X=k)=P(X \le k)-P(X \le k-1)$.
+    Therefore, 
+    \begin{align}
+        p(k)=P(X=k)=
+        \begin{cases}
+            0, & k < 1 \text{ or } 20 < k \\
+            \frac{k^2}{400}-\frac{(k-1)^2}{400}=\frac{2k-1}{400}, & 1 \le k \le 20.
+        \end{cases}
+    \end{align}
+
+    \item
+    Let us first approach the question with basic combinatorics knowledge then we'll approach the question with $CDF$, which will converge to the same conclusion.
+    
+    For $Y=k$, one die roll has to be equal to k, and another die roll can be between $k$ and 20 (end point inclusice), which has a total of $(21-k)$ possibilities.
+    Then, let's take ordering into account. Since there are two die roll, for every combination there are two orders and we times two for $21-k$.
+    Note we have to minus 1 because there is only one ordering if the two roll die have the same outcome. 
+    Finally, we divide the event outcomes by all possible outcomes $20 \times 20 = 400$.
+
+    Hence, 
+    \begin{align}
+        P(Y=k)=
+        \begin{cases}
+            0, & 1<k \text{ or } 20<k \\
+            \frac{2(21-k)-1}{20 \times 20}=\frac{41-2k}{400}, & 1 \le k \le 20.
+        \end{cases}
+    \end{align}
+
+    Now let us find the $pmf$ of $Y$ from $CDF$ just like how we did it in (a). 
+    Let $A$ be the event of a die roll and $B$ be the event of the other die roll. Note that $A$ and $B$ are independent because $P(A \cap B)=P(A)P(B)$. 
+    For $1 \le s \le 20: s \in \mathbb{Z}$,
+    \begin{align}
+        P(Y \le s) & = 1-P(Y > s) \\
+        & = 1-P(A>s)P(B>s) \\
+        & = 1-(\frac{20-s}{20})(\frac{20-s}{20}) \\
+        & = 1-\frac{s^2-40s+400}{400} \\
+        & = \frac{40s-s^2}{400}.
+    \end{align}
+
+    Hence, the $CDF$ of $Y$ is 
+    \begin{align}
+        F_y(s) = 
+            \begin{cases}
+                0, & s \le 0 \\
+                \frac{40s-s^2}{400}, & 1 \le s \le 20 \\
+                1, & 20 < s.
+            \end{cases}  
+    \end{align}
+
+    By the same reasoning from (a), $P(Y=k)=P(Y \le k)-P(Y \le k-1)$.
+    Therefore, 
+    \begin{align}
+        P(Y=k)=
+        \begin{cases}
+            0, & 1<k \text{ or } 20<k \\
+            \frac{40k-k^2-\left(40(k-1)-(k-1)^2\right)}{400}=\frac{40k-k^2-(40k-40-k^2+2k-1)}{400}=\frac{41-2k}{400}, & 1 \le k \le 20,
+        \end{cases}
+    \end{align}
+    which is the same as the combinatorics approach.
+\end{enumerate}
+\end{document}

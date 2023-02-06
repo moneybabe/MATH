@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180A HW4}
+\author{Neo Lee}
+\date{02/08/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.}
+\begin{enumerate}[label={(\alph*)}]
+    \item $E[3X + 2] = 5$
+    \item $E[X^2] = 2$ 
+    \item $E[(2X+1)^2] = E[4X^2 + 4X + 1] = 8 + 4 + 1  = 13$
+    \item $Var(-2X+7)=E[(-2X+7)^2]-(E[-2X+7])^2=E[4X^2-28X+49]-(-2+7)^2=8-28+49-25=4$
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 2.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        p_x(k) = \begin{cases}
+            \frac{1}{2} \times \frac{1}{4} + \frac{1}{2} \times \frac{1}{6} = \frac{5}{24}, & 1 \le k \le 4 \\
+            \frac{1}{12}, & 5 \le k \le 6 \\
+            0, & otherwise
+        \end{cases}
+        \; ; \forall k \in \mathbb{Z}.
+    \end{align}
+
+    \item 
+    $E[X]=E[X \le 4]+E[5 \le X \le 6]=\frac{5}{24} \times (1+2+3+4) + \frac{1}{12} \times (5+6)=3$.
+
+    \item 
+    $Var(X)=E[X^2]-(E[X])^2=\frac{5}{24} \times (1+4+9+16) + \frac{1}{12} \times (25+36)=\frac{34}{3}-3^2=\frac{7}{3}.$
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 3.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    Let $X$ be random variable of number of correct questions. 
+    \begin{align}
+        P(X \ge 3) & = P(X=3)+P(x=4) \\
+        & = {4 \choose 3} \times 0.8^3 \times 0.2 + 0.8^4 \\
+        & = 0.8192.
+    \end{align}
+
+    \item 
+    $P = {3 \choose 2}\times 0.8^2 \times 0.2 + 0.8^3 = 0.896.$
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 4.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    Let $X$ be the number of winning games. So the experiment is a $Binomial(20, p)$.
+    \begin{align}
+        P(X \ge 12) = \sum_{k=12}^{20} {20 \choose k}p^k(1-p)^{20-k}
+    \end{align}
+
+    \item 
+    Let $A$ be at leat one wins.
+    \begin{align}
+        P(A) & = 1-P(A^c) \\
+        & = 1- \left(\sum_{k=0}^{11} {20 \choose k}p^k(1-p)^{20-k}\right)^{20} 
+    \end{align}
+\end{enumerate}
+\pagebreak
+
+\textbf{Problem 5.}
+\begin{enumerate}[label={(\alph*)}]
+    \item It is $Binomial(9, \frac{3}{7})$.
+    \begin{align}
+        P(X \ge 1) & = 1-P(X=0) \\
+        & = 1- \left(\frac{4}{7}\right)^9 \\ 
+        & \approx 0.9935 
+    \end{align}
+    \begin{align}
+        P(X \le 5) & = 1 - \sum_{k=6}^{9}{9\choose k}\left(\frac{3}{7}\right)^k \left(\frac{4}{7}\right)^{9-k} \\
+        & \approx 0.8653
+    \end{align}
+
+    \item It is $Geometric(\frac{4}{7})$.
+    \begin{align}
+        P(X \le 9) & = \sum_{k = 1}^{9}\left(\frac{3}{7}\right)\left(\frac{4}{7}\right)^{k-1} \\
+        & \approx 0.9935 
+    \end{align}
+
+    \item 
+    Yes, because $P(X \le 9)$ can also be written as $1 - P(X>9) = 1-\left(\frac{4}{7}\right)^9$.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 6.}
+\begin{enumerate}[label={(\alph*)}]
+    \item $X$ is $Geometric(1/5)$.
+    $p_x(k)=(1/5)(4/5)^{k-1} \; \forall k \in \mathbb{Z}^+$
+
+    \item 
+    $E(X)=\frac{1}{\frac{1}{5}}=5$.
+
+    $Var(X)=\frac{1-\frac{1}{5}}{\left(\frac{1}{5}\right)^2}=20$.
+
+    $\sigma=\sqrt{Var(X)}=\sqrt{20}$.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 7.}
+$Binomial(n,p)$ can be represented by a collection of Indicator Random Variables for which $I_{i} = I_{i\text{th trial succeds}}$. Thus, $X=I_1+ \dots + I_p$. 
+Note $P(I_1=1) = \dots = P(I_p=1)=p$. Therefore, 
+\begin{align}
+    E[X] & = np, \\
+    Var(X) & = \sum_{k=1}^{n}Var(I_k) \\
+    & = \sum_{k=1}^{n} \left(E[I_k^2]-(E[I_k])^2\right) \\
+    & = n(p-p^2) \\
+    & = np(1-p)
+\end{align}
+
+\end{document}

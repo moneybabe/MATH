@@ -83,7 +83,7 @@ Side note: this counting method counts 3-of-a-kind as two of two consecutive car
         F_x(s) = 
             \begin{cases}
                 0, & s \le 0 \\
-                \frac{s^2}{400}, & 1 \le s \le 20 \\
+                \frac{\lfloor s \rfloor ^2}{400}, & 1 \le s \le 20 \\
                 1, & 20 < s.
             \end{cases}
     \end{align}
@@ -92,7 +92,7 @@ Side note: this counting method counts 3-of-a-kind as two of two consecutive car
     Note that $P(X=k)=P(X \le k)-P(X \le k-1)$.
     Therefore, 
     \begin{align}
-        p(k)=P(X=k)=
+        \forall k \in \mathbb{Z}, \; p(k)=P(X=k)=
         \begin{cases}
             0, & k < 1 \text{ or } 20 < k \\
             \frac{k^2}{400}-\frac{(k-1)^2}{400}=\frac{2k-1}{400}, & 1 \le k \le 20.
@@ -102,21 +102,21 @@ Side note: this counting method counts 3-of-a-kind as two of two consecutive car
     \item
     Let us first approach the question with basic combinatorics knowledge then we'll approach the question with $CDF$, which will converge to the same conclusion.
     
-    For $Y=k$, one die roll has to be equal to k, and another die roll can be between $k$ and 20 (end point inclusice), which has a total of $(21-k)$ possibilities.
-    Then, let's take ordering into account. Since there are two die roll, for every combination there are two orders and we times two for $21-k$.
+    For $Y=k$, one die roll has to be equal to k, and another die roll can be between $k$ and 20 (end point inclusive), which has a total of $(21-k)$ possibilities.
+    Then, let's take ordering into account. Since there are two die roll, for every combination there are two orders so we times 2 for $(21-k)$.
     Note we have to minus 1 because there is only one ordering if the two roll die have the same outcome. 
     Finally, we divide the event outcomes by all possible outcomes $20 \times 20 = 400$.
 
     Hence, 
     \begin{align}
-        P(Y=k)=
+        \forall k \in \mathbb{Z}, \; P(Y=k)=
         \begin{cases}
             0, & 1<k \text{ or } 20<k \\
             \frac{2(21-k)-1}{20 \times 20}=\frac{41-2k}{400}, & 1 \le k \le 20.
         \end{cases}
     \end{align}
 
-    Now let us find the $pmf$ of $Y$ from $CDF$ just like how we did it in (a). 
+    Now let us find the $pmf$ of $Y$ from $CDF$ just like how we did in (a). 
     Let $A$ be the event of a die roll and $B$ be the event of the other die roll. Note that $A$ and $B$ are independent because $P(A \cap B)=P(A)P(B)$. 
     For $1 \le s \le 20: s \in \mathbb{Z}$,
     \begin{align}
@@ -132,7 +132,7 @@ Side note: this counting method counts 3-of-a-kind as two of two consecutive car
         F_y(s) = 
             \begin{cases}
                 0, & s \le 0 \\
-                \frac{40s-s^2}{400}, & 1 \le s \le 20 \\
+                \frac{40 \lfloor s \rfloor -\lfloor s \rfloor ^2}{400}, & 1 \le s \le 20 \\
                 1, & 20 < s.
             \end{cases}  
     \end{align}
@@ -140,10 +140,10 @@ Side note: this counting method counts 3-of-a-kind as two of two consecutive car
     By the same reasoning from (a), $P(Y=k)=P(Y \le k)-P(Y \le k-1)$.
     Therefore, 
     \begin{align}
-        P(Y=k)=
+        \forall k \in \mathbb{Z}, \; P(Y=k)=
         \begin{cases}
             0, & 1<k \text{ or } 20<k \\
-            \frac{40k-k^2-\left(40(k-1)-(k-1)^2\right)}{400}=\frac{40k-k^2-(40k-40-k^2+2k-1)}{400}=\frac{41-2k}{400}, & 1 \le k \le 20,
+            \frac{40k-k^2-\left(40(k-1)-(k-1)^2\right)}{400}=\frac{41-2k}{400}, & 1 \le k \le 20,
         \end{cases}
     \end{align}
     which is the same as the combinatorics approach.

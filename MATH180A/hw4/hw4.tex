@@ -21,9 +21,9 @@
 \textbf{Problem 1.}
 \begin{enumerate}[label={(\alph*)}]
     \item $E[3X + 2] = 5$
-    \item $E[X^2] = 2$ 
-    \item $E[(2X+1)^2] = E[4X^2 + 4X + 1] = 8 + 4 + 1  = 13$
-    \item $Var(-2X+7)=E[(-2X+7)^2]-(E[-2X+7])^2=E[4X^2-28X+49]-(-2+7)^2=8-28+49-25=4$
+    \item $E[X^2] = Var(X)+(E[X])^2 = 4$ 
+    \item $E[(2X+1)^2] = E[4X^2 + 4X + 1] = 16 + 4 + 1  = 21$
+    \item $Var(-2X+7)=E[(-2X+7)^2]-(E[-2X+7])^2=E[4X^2-28X+49]-(-2+7)^2=16-28+49-25=12$
 \end{enumerate}
 \bigbreak
 
@@ -74,7 +74,7 @@
     Let $A$ be at leat one wins.
     \begin{align}
         P(A) & = 1-P(A^c) \\
-        & = 1- \left(\sum_{k=0}^{11} {20 \choose k}p^k(1-p)^{20-k}\right)^{20} 
+        & = 1- \left(\sum_{k=0}^{11} {20 \choose k}p^k(1-p)^{20-k}\right)^{10} 
     \end{align}
 \end{enumerate}
 \pagebreak

@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180A HW4}
+\author{Neo Lee}
+\date{02/08/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.} (b)
+\bigbreak
+
+\textbf{Problem 2.} (a)
+\bigbreak
+
+\textbf{Problem 3.} 4.
+\bigbreak
+
+\textbf{Problem 4.} 
+\begin{align}
+    E[X] & = \int_{0}^{1}6x^2-6x^3dx \\
+    & = \left[2x^3 - \frac{3}{2}x^4\right]_0^1 \\ 
+    & = \frac{1}{2}
+\end{align}
+\bigbreak
+
+\textbf{Problem 5.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        E[X] & = \int_{-2}^{0}\frac{x}{6}dx + \int_{0}^{3} \frac{2x}{9}dx \\
+        & = \left[\frac{x^2}{12}\right]_{-2}^0 + \left[\frac{x^2}{9}\right]_0^3 \\
+        & = \frac{-1}{3} + 1 \\
+        & = \frac{2}{3}
+    \end{align}
+
+    \item 
+    \begin{align}
+        E[X^2] & = \int_{-2}^{0}\frac{x^2}{6}dx + \int_{0}^{3}\frac{2x^2}{9}dx \\
+        & = \left[\frac{x^3}{18}\right]_{-2}^0 + \left[\frac{2x^3}{27}\right]_0^3 \\
+        & = \frac{4}{9} + 2 \\
+        & = \frac{22}{9} \\
+        Var(X) & = E[X^2] - (E[X])^2 \\
+        & = \frac{22}{9} - \left(\frac{2}{3}\right)^2 \\
+        & = 2
+    \end{align}
+
+    \item 
+    \begin{align}
+        E[(X-1)^2] & = E[X^2-2X+1] \\
+        & = E[X^2]-2E[X]+1 \\
+        & = \frac{22}{9} - \frac{8}{9}+1 \\
+        & = \frac{23}{9}
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 6.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    Consider $x \in [0,\infty)$,
+    \begin{align}
+        f_X(x) & = \frac{d}{dx}\frac{x}{1+x} \\
+        & = \frac{(1+x)-x}{(1+x)^2} \\
+        & = \frac{1}{(1+x)^2}.
+    \end{align}
+
+    Hence, 
+    \begin{align}
+        f_X(x) = 
+        \begin{cases}
+            \frac{1}{(1+x)^2}, & x \ge 0 \\
+            0, & x < 0  .
+        \end{cases}
+    \end{align}
+
+    \item 
+    \begin{align}
+        P(2<X<3) & = P(X<3)-P(X<2) \\
+        & = F(3) - F(2) \\
+        & = \frac{3}{4} - \frac{2}{3} \\ 
+        & = \frac{1}{12}
+    \end{align}
+
+    \item 
+    \begin{align}
+        E\left[(1+X)^2e^{-2X}\right] & = E\left[X^2e^{-2X}+2Xe^{-2X}+e^{-2X}\right] \\
+        & = E\left[X^2e^{-2X}\right] + E\left[2Xe^{-2X}\right] + E\left[e^{-2X}\right] \\
+        & = \int_{0}^{\infty}\frac{x^2e^{-2x}}{(1+x)^2}+\int_{0}^{\infty}\frac{2xe^{-2x}}{(1+x)^2}+\int_{0}^{\infty}\frac{e^{-2x}}{(1+x)^2}dx \\ 
+        & = \int_{0}^{\infty}\frac{e^{-2x}(x^2+2x+1)}{(1+x)^2}dx \\
+        & = \int_{0}^{\infty}e^{-2x}dx \\
+        & = \frac{1}{-2}\left[e^{-2x}\right]_0^{\infty} \\
+        & = \frac{1}{2}
+    \end{align}
+\end{enumerate}
+\pagebreak
+
+\textbf{Problem 7.}
+150 meteros per hour is equivalent to 2.5 meteros per minute. 
+We can divide the first minute into $n$ inifinitely small intervals, and assume each interval is independent. 
+Thus the probability of a metero appearing in one interval is $\frac{2.5}{n}$. 
+Then we can model the situation with $Bionomial(n,p)$, and approximate the wanted probability with $Poisson(2.5)$.
+Hence,
+\begin{align}
+    P(X \ge 2) & = 1 - P(X=0) - P(X=1) - P(X=2) \\
+    & = 1 - e^{-2.5} - 2.5e^{-2.5} - \frac{2.5^2}{2}e^{-2.5} \\
+    & \approx 0.4562.
+\end{align}
+\bigbreak
+
+\textbf{Problem 8.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    $f(x)$ is apparently non-negative because $\forall x \in \mathbb{R}, x^2 \ge 0 \Rightarrow \pi(1+x^2) \ge 0 \Rightarrow \frac{1}{\pi(1+x^2)} \ge 0$.
+    \begin{align}
+        \int_{-\infty}^{\infty}\frac{1}{\pi(1+x^2)}dx & = \frac{1}{\pi}\left[tan^{-1}(y)\right]_{-\infty}^{\infty} \\
+        & = \frac{1}{\pi}\left(\frac{\pi}{2}-\frac{-\pi}{2}\right) \\
+        & = 1
+    \end{align}
+
+    \item 
+    \begin{align}
+        E[|X|] & = \int_{-\infty}^{0}\frac{-x}{\pi(1+x^2)}dx + \int_{0}^{\infty}\frac{x}{\pi(1+x^2)}dx \\
+        & = \frac{-1}{\pi}\int_{\infty}^{1}\frac{1}{2u}du + \frac{1}{\pi}\int_{1}^{\infty}\frac{1}{2u}du \;\;\;\;\;\; \left(\text{let } u = 1+x^2\right)\\
+        & = \frac{1}{2\pi} \int_{1}^{\infty}\frac{1}{u}du + \frac{1}{2\pi} \int_{1}^{\infty}\frac{1}{u}du \\
+        & = \lim_{t \rightarrow \infty}\frac{1}{\pi} \left[ln(u)\right]_1^{t} \\
+        & = \infty
+    \end{align}
+
+    \item Looks like a 0.
+    
+    \item Maybe start by finding the $CDF$, which should be $\frac{1}{\pi}\left[tan^{-1}(y)\right]$: $\frac{1}{\pi}$ represents the weight of the angle, and $tan^{-1}(y)$ converts the slope to the angle. 
+    Then differentiate it to get $\frac{1}{\pi(1+x^2)}$.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 9.} I think the number of commits to a GitHub Repo would be well-modeled by Poisson distribution.
+data-engineering-zoomcap has an average of 4.87 commits per day. Let $X$ be the number of commits per day, it can be modeled by $Poisson(4.87)$. 
+$P(X=2) = \frac{4.87^2}{2}e^{-4.87}$, multiplied by the total of 210 days, we approximated that there are 19 days that there are exactly 2 commits.
+In fact, there are a total of 17 days with total of 2 commits, which is pretty close in my opinion.
+
+
+(https://github.com/DataTalksClub/data-engineering-zoomcamp/graphs/commit-activity)
+
+
+
+\end{document}

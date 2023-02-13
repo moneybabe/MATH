@@ -84,15 +84,154 @@
     \item $n = \emptyset$
 \end{enumerate}
 \bigbreak
+
 \textbf{Problem 7.2}
+\begin{enumerate}[label={(\roman*)}]
+    \item 
+    \begin{prop}
+        Disproving $\forall m, n \in \mathbb{Z^+}, m \le n$ means proving $\exists m, n \in \mathbb{Z^+}, m >n$.
+    \end{prop}
+    \begin{proof}
+        Let $m=3$ and $n=2$, $m>n$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        $\exists m,n \in \mathbb{Z^+}, m \le n$.
+    \end{prop}
+    \begin{proof}
+        Let $m=2$ and $n=3$, $m \le n$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        $\forall m \in \mathbb{Z^+}, \exists n \in \mathbb{Z^+}, m \le n$.
+    \end{prop}
+    \begin{proof}
+        Let $n=m$. $\forall m \in \mathbb{Z^+}, m=n \Rightarrow m \le n$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        $\exists m \in \mathbb{Z^+}, \forall n \in \mathbb{Z^+},  m \le n$.
+    \end{prop}
+    \begin{proof}
+        Let $m = 1$. $\forall n \in \mathbb{Z^+}, m \le n $.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        $\forall n \in \mathbb{Z^+}, \exists m \in \mathbb{Z^+}, m \le n$.
+    \end{prop}
+    \begin{proof}
+        Let $m = 1$. $\forall n \in \mathbb{Z^+}, m \le n$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        Disproving $\exists n \in \mathbb{Z^+}, \forall m \in \mathbb{Z^+}, m \le n$ means proving $\forall n \in \mathbb{Z^+}, \exists m \in \mathbb{Z^+}, m > n$.
+    \end{prop}
+    \begin{proof}
+        Let $m = n+1$. $\forall n \in \mathbb{Z^+}, m > n$.
+    \end{proof}
+\end{enumerate}
 \bigbreak
+
 \textbf{Problem 7.4}
+\begin{enumerate}[label={(\roman*)}]
+    \item 
+    \begin{prop}
+        $\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, x + y = 0$.
+    \end{prop}
+    \begin{proof}
+        Let $y = -x$. $\forall x\in \mathbb{R}, x + y = x - x = 0$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        Disproving $\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, x + y=0$ mean proving $\forall y \in \mathbb{R}, \exists x \in \mathbb{R}, x + y \neq 0$.
+    \end{prop}
+    \begin{proof}
+        Let $x = -y + 1$. $\forall y \in \mathbb{R}, y + x = y - y + 1 = 1 \neq 0$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        $\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, xy=0$.
+    \end{prop}
+    \begin{proof}
+        Let $y = 0$. $\forall x \in \mathbb{R}, xy = x \cdot 0 = 0$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        $\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, xy = 0$.
+    \end{prop}
+    \begin{proof}
+        Let $y = 0$. $\forall x \in \mathbb{R}, xy = x \cdot 0 = 0$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        Disproving $\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, xy = 1$ means proving $\exists x \in \mathbb{R}, \forall y \in \mathbb{R}, xy \neq 1$.
+    \end{prop}
+    \begin{proof}
+        Let $x = 0$. $\forall y \in \mathbb{R}, xy = 0 \cdot y = 0 \neq 1$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        Disproving $\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, xy =1$ means proving $\forall y \in \mathbb{R}, \exists x \in \mathbb{R}, xy \neq 1$.
+    \end{prop}
+    \begin{proof}
+        Let $x = 0$. $\forall y \in \mathbb{R}, xy = 0 \cdot y = 0 \neq 1$.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        $\forall n \in \mathbb{Z^+}$, ($n$ is even or $n$ is odd).
+    \end{prop}
+    \begin{proof}
+        $\forall n \in \mathbb{Z^+}$, $n$ is either even or $n$ is not even. 
+        By definition, if $n$ is not even, then $n$ is odd, which logically means $n$ ie even or $n$ is odd.
+    \end{proof}
+
+    \item 
+    \begin{prop}
+        Disproving $(\forall n \in \mathbb{Z^+}, n \text{ is even})$ or $(\forall n \in \mathbb{Z^+}, n \text{ is odd})$ means proving $(\exists n \in \mathbb{Z^+}, n \text{ is odd})$ and $(\exists n \in \mathbb{Z^+}, n \text{ is even})$.
+    \end{prop}
+    \begin{proof}
+        For the first half of the statement, let $n = 1$, then $n$ is odd, which proves $(\forall n \in \mathbb{Z^+}, n \text{ is odd})$. 
+        For the second half of the statement, let $n = 2$, then $n$ is even, which proves $(\exists n \in \mathbb{Z^+}, n \text{ is even})$.
+    \end{proof}
+\end{enumerate}
 \bigbreak
+
 \textbf{Problem 7.7}
 \bigbreak
+
 \textbf{Page 115 Problem 4}
+\begin{prop}
+    $A \cap B = A \cap C$ and $A \cup B = A \cup C$ if and only if $B = C$.
+\end{prop}
+\begin{proof}
+    $(\Rightarrow)$ 
+    \begin{align}
+        B & = B \cap (A \cup B) \\
+        & = B \cap (A \cup C) \;\;\;\;\; (\because A \cup B = A \cup C) \\
+        & = (B \cap A) \cup (B \cap C) \\
+        & = (A \cap B) \cup (B \cap C) \\
+        & = (A \cap C) \cup (B \cap C) \;\;\;\;\; (\because A \cap B = A \cap C)\\
+        & = (A \cup B) \cap C \\
+        & = (A \cup C) \cap C \;\;\;\;\; (\because A \cup B = A \cup C) \\
+        & = C
+    \end{align}
+    $(\Leftarrow)$ This is apparent because we only need to substitute $B$ with $C$, then we will get $A \cap B = A \cap C$ and $A \cup B = A \cup C$.
+\end{proof}
 \bigbreak
+
 \textbf{Page 117 Problem 13}
+
 \bigbreak
 
 \end{document}

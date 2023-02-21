@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 109 HW4}
+\author{Neo Lee}
+\date{02/22/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+\textbf{Problem 8.1}
+\begin{prop}
+    $g(x,y)=\begin{cases}
+        x & if x \ge y \\
+        y & if x \le y
+    \end{cases}$ is well defined for $g:\mathbb{R}^2\rightarrow\mathbb{R}$.
+\end{prop}
+\begin{proof}
+    For all $(x,y) \in \mathbb{R}^2$, it is exclusively that $x>y$, $x<y$, or $x=y$. 
+    If $x>y$, $g(x,y)$ is uniquely defined as $x \in \mathbb{R}$.
+    If $x<y$, $g(x,y)$ is uniquely defined as $y \in \mathbb{R}$.
+    If $x=y$, $g(x,y)$ is uniquely defined as $x=y \in \mathbb{R}$.
+\end{proof}
+\begin{prop}
+    Let $f(x,y)=\frac{x+y}{2}+\frac{|x-y|}{2}$ for $f:\mathbb{R}^2\rightarrow\mathbb{R}$, $f=g$.
+\end{prop}
+\begin{proof}
+    If $x>y$, $f(x,y)=\frac{x+y}{2}+\frac{x-y}{2}=x$.
+    If $x<y$, $f(x,y)=\frac{x+y}{2}+\frac{y-x}{2}=y$.
+    If $x=y$, $f(x,y)=\frac{x+x}{2}+\frac{x-x}{2}=x=y$.
+    Hence, $f(x,y)=g(x,y)$ for all $(x,y)\in \mathbb{R}^2$.
+\end{proof}
+\bigbreak
+
+\textbf{Problem 8.2}
+\begin{enumerate}[label={(\roman*)}]
+    \item $f\circ f=f(f(x))=f(x^3)=x^{3^3}=x^9$ for $\mathbb{R}\rightarrow\mathbb{R}$.
+    \item $f\circ g=f(g(x))=f(1-x)=(1-x)^3$ for $\mathbb{R}\rightarrow\mathbb{R}$.
+    \item $g\circ f=g(f(x))=g(x^3)=1-x^3$ for $\mathbb{R}\rightarrow\mathbb{R}$.
+    \item $g\circ g=g(g(x))=g(1-x)=1-(1-x)=x$ for $\mathbb{R}\rightarrow\mathbb{R}$.
+\end{enumerate}
+
+$fg(x)=gf(x)\Leftrightarrow(1-x^3)=1-x^3\Leftrightarrow 1-3x+3x^2-x^3=1-x^3\Leftrightarrow x(x-1)=0\Leftrightarrow x=0$ or $x=1$. 
+Hence, $\{x\in\mathbb{R}|fg(x)=gf(x)\}=\{0,1\}$.
+\bigbreak
+
+\textbf{Problem 8.3}
+\begin{enumerate}[label={(\roman*)}]
+    \item $f_1(x)=x$ for $\mathbb{R}\rightarrow\mathbb{R}$.
+    \item $f_2(x)=|x|$  for $\mathbb{R}\rightarrow\mathbb{R}$.
+    \item $f_3(x)=\begin{cases}
+        x & if x\not\in\mathbb{Z} \\
+        0.1 & if x\in\mathbb{Z}
+    \end{cases}$ for $\mathbb{R}\rightarrow\mathbb{R}$.
+    \item $f_4(x)=\lfloor x\rfloor$ for $\mathbb{R}\rightarrow\mathbb{R}$.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 8.5}
+$(i)$ and $(iv)$ are graphs of a function $f:X\rightarrow Y$.
+\begin{center}
+    \begin{tabular}{ |c|c c| } 
+     \hline
+     $x$ & $f_i(x)$ & $f_{iv}(x)$  \\ 
+     \hline
+     $a$ & $z$ & $y$ \\ 
+     $b$ & $y$ & $z$ \\ 
+     $c$ & $z$ & $w$ \\ 
+     $d$ & $x$ & $x$ \\ 
+     \hline
+    \end{tabular}
+\end{center}
+
+For $(ii)$, $\{c\}\times Y$ contains no elements, which means not every element in $X$ is mapped to $Y$. 
+For $(iii)$, $\{b\}\times Y$ contains more than one element, which mean $f(x)$ is not uniquely defined in $Y$ for $x=b$.
+\bigbreak
+
+\textbf{Problem 9.1}
+\bigbreak
+\textbf{Problem 9.2}
+\bigbreak
+\textbf{Problem 9.3}
+\bigbreak
+\textbf{Problem 9.4}
+\bigbreak
+\textbf{Problem 9.6}
+\bigbreak
+\textbf{Problem 14}
+\bigbreak
+\textbf{Problem 15}
+\bigbreak
+\textbf{Problem 16}
+
+\end{document}

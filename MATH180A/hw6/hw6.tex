@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180A HW6}
+\author{Neo Lee}
+\date{02/22/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.}
+\begin{enumerate}
+    \item (b)
+    \item (a)
+    \item 
+    \begin{align}
+        E[X^2] & = Var(X)+\left(E[X]\right)^2 \\
+        & = \sigma^2+\mu^2 \\
+        & = 4 + 9 \\
+        & = 7
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 2.} (c)
+\bigbreak
+
+\textbf{Problem 3.} 
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        P(X\ge 10 + 15|X\ge 10) = P(X\ge 15) & = e^{-(\frac{1}{20}\times 15)} \\
+        & \approx 0.4724
+    \end{align}
+
+    \item 
+    \begin{align}
+        P(X \ge 25) & = \int_{25}^{40}\frac{1}{40}dx \\
+        & = (40-25) \times \frac{1}{40} \\
+        & = \frac{3}{8}
+    \end{align}
+
+    \item 
+    Since exponential random variable is memoryless, the probability of waiting for at least 15 additional minutes is always the same given the time before has already passed.
+
+    On the other hand, uniform random vairable is not memoryless. In fact, the probability is eventually ditributed throughout the interval $[0,40]$.
+    Therefore, the probabily of waiting for at least 15 additional minutes decreases as time progresses.
+\end{enumerate}
+\pagebreak
+
+\textbf{Problem 4.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        E[Z^n] & = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}z^ne^{\frac{-z^2}{2}}dz \\
+        & = \frac{1}{\sqrt{2\pi}}\left[\left[-z^{n-1}e^{\frac{-z^2}{2}}\right]_{-\infty}^{\infty}+\int_{-\infty}^{\infty}(n-1)z^{n-2}e^{\frac{-z^2}{2}}dz\right] \\
+        & = \frac{n-1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}z^{n-2}e^{\frac{-z^2}{2}}dz \\
+        & = (n-1)E[Z^{n-2}]
+    \end{align}
+    
+    Hence, $E[Z^3]=(3-1)E[Z]=0.$
+
+    \item 
+    \begin{align}
+        E[X^3] & = E[\left(\sigma Z+\mu\right)^3] \\
+        & = E[\sigma^3Z^3+\mu^3] \\
+        & = \sigma^3E[Z^3]+E[\mu^3] \\
+        & = E[\mu^3] \\
+        & = \mu^3
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 5.}
+For $a \in [0,1]$,
+\begin{align}
+    P(X \in [0,1] \cap X \in [a,2]) & = P(X\in[a,1]) \\
+    & = e^{-2a}-e^{-2}.
+\end{align}
+
+For the events to be independent,
+\begin{align}
+    P(X \in [0,1] \cap X \in [a,2]) & =P(X\in [0,1])P(X\in [a,2]) \\
+    e^{-2a}-e^{-2} & = \left(1-e^{-2}\right)\times \left(e^{-2a}-e^{-4}\right) \\
+    e^{-2a}-e^{-2} & = e^{-2a}-e^{-4}-e^{-2a-2}+e^{-6} \\
+    e^{-2a-2} & =e^{-6}-e^{-4}+e^{-2} \\
+    e^{-2a-2} & =e^{-2}\left(e^{-4}-e^{-2}+1\right) \\
+    -2a-2 & = -2 + ln(e^{-4}-e^{-2}+1) \\
+    a & = \frac{ln(e^{-4}-e^{-2}+1)}{-2} \\
+    & \approx 0.0622
+\end{align}
+\bigbreak
+
+\textbf{Problem 6.}
+\begin{enumerate}[label={(\alph*)}]
+    \item There can be two scenarios: 1) if the stove breaks within $r$ years, profit $ = \$C-600$; 2) if the stove lasts longer than $r$ years, profit = $\$200+C$.
+    
+    Let $g(x)$ be a function that calculates the profit, then 
+    \begin{align}
+        E[g(x)] & = (C-600) \times \left(1-P(X \ge r)\right)+(200+C)\times P(X\ge r) \\
+        & = (C-600) \times (1 - e^{\frac{-r}{10}})+(200+C)\times e^{\frac{-r}{10}} \\
+        & = C-600+600e^{\frac{-r}{10}}+200e^{\frac{-r}{10}} \\
+        & = 800e^{\frac{-r}{10}}-600+C
+    \end{align}
+
+    \item 
+    \begin{align}
+        800e^{\frac{-5}{10}}-600+C & = 0 \\
+        C & = 600 - 800e^{-0.5} \\
+        & \approx 114.8
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 7.}
+\begin{align}
+    P((X,Y)\in [0,1])&=1 \\
+    c\int_{0}^{1}\int_{0}^{1}xy+y^2dxdy & = 1 \\
+    c\int_{0}^{1}\left[\frac{1}{2}x^2y+y^2\right]_{x=0}^{x=1} & = 1 \\
+    c\int_{0}^{1}\frac{1}{2}y& = 1 \\
+    c\left[\frac{1}{4}y^2\right]_0^1 & = 1 \\
+    \frac{1}{4}c & = 1 \\
+    c & = 4
+\end{align}
+\end{document}

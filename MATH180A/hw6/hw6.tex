@@ -104,21 +104,20 @@ For the events to be independent,
 
 \textbf{Problem 6.}
 \begin{enumerate}[label={(\alph*)}]
-    \item There can be two scenarios: 1) if the stove breaks within $r$ years, profit $ = \$C-600$; 2) if the stove lasts longer than $r$ years, profit = $\$200+C$.
+    \item There can be two scenarios: 1) if the stove breaks within $r$ years, warranty profit $ = \$C-800$; 2) if the stove lasts longer than $r$ years, warranty profit = $\$C$.
     
     Let $g(x)$ be a function that calculates the profit, then 
     \begin{align}
-        E[g(x)] & = (C-600) \times \left(1-P(X \ge r)\right)+(200+C)\times P(X\ge r) \\
-        & = (C-600) \times (1 - e^{\frac{-r}{10}})+(200+C)\times e^{\frac{-r}{10}} \\
-        & = C-600+600e^{\frac{-r}{10}}+200e^{\frac{-r}{10}} \\
-        & = 800e^{\frac{-r}{10}}-600+C
+        E[g(x)] & = (C-800) \times \left(1-P(X \ge r)\right)+C\times P(X\ge r) \\
+        & = (C-800) \times (1 - e^{\frac{-r}{10}})+C\times e^{\frac{-r}{10}} \\
+        & = C-800+800^{\frac{-r}{10}}
     \end{align}
 
     \item 
     \begin{align}
-        800e^{\frac{-5}{10}}-600+C & = 0 \\
-        C & = 600 - 800e^{-0.5} \\
-        & \approx 114.8
+        800e^{\frac{-5}{10}}-800+C & = 0 \\
+        C & = 800 - 800e^{-0.5} \\
+        & \approx 314.8
     \end{align}
 \end{enumerate}
 \bigbreak

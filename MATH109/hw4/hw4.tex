@@ -10,7 +10,7 @@
 % title information
 \title{Math 109 HW4}
 \author{Neo Lee}
-\date{02/22/2023}
+\date{03/01/2023}
 
 % main content
 \begin{document} 
@@ -85,19 +85,101 @@ For $(iii)$, $\{b\}\times Y$ contains more than one element, which mean $f(x)$ i
 \bigbreak
 
 \textbf{Problem 9.1}
+\begin{enumerate}[label={(\roman*)}]
+    \item Bijective. It is surjective because for every image $y$, there is a pre-image $x=\frac{y-5}{2}$. It is injective because if $y=f(x_1)=f(x_2)$, $x_1=x_2=\frac{y-5}{2}$.
+    \item Neither injective nor surjective. Let $f(x)=1$, $x=-2$ or $x=0$, thus it's not injective. Since there does not exists $x$ for $f(x)=-1$, it's not surjective.
+    \item Neither injective nor surjective. Let $f(x)=0$, $x=0$ or $x=2$, thus it's not injective. Since there does not exists $x$ for $f(x)=-2$, it's not surjective.
+    \item Bijective. It is surjective because for every image $y\neq 0$, there is a pre-image $x=\frac{1}{y}$; for $y=0$, $x=0$. It is injective becasue if $0\neq y =f(x_1)=f(x_2)$, $x_1=x_2=\frac{1}{y}$; if $y=0$, $x=0$.
+\end{enumerate}
 \bigbreak
+
 \textbf{Problem 9.2}
+\begin{enumerate}[label={(\roman*)}]
+    \item Injective only. It is injective because if $y=f(x_1)=f(x_2)$, $x_1=x_2=\frac{y-5}{2}$. It is not surjective because there does not exist $x$ for $f(x) = 1$.
+    \item Injective only. It is injective because if $y=f(x_1)=f(x_2)$, $x_1=x_2=-1+\frac{\sqrt{y}}{2}$. It is not surjective because there does not exist $x$ for $f(x) = 0.1$.
+    \item Not a function. There does not exist $f(x) \in \mathbb{R}^+$ for $x=0.1$.
+    \item Bijective. It is surjective because for every image $y$, there is a pre-image $x=\frac{1}{y}$. It is injective becasue if $y =f(x_1)=f(x_2)$, $x_1=x_2=\frac{1}{y}$.
+\end{enumerate}
 \bigbreak
+
 \textbf{Problem 9.3}
+\begin{enumerate}[label={(\roman*)}]
+    \item $f^{-1}(y)=\frac{y-2}{3}$.
+    \item $f^{-1}(y)=\sqrt[3]{y-1}$.
+\end{enumerate}
 \bigbreak
+
 \textbf{Problem 9.4}
+\begin{prop}
+    $g\circ f$ is injective if $g$ and $f$ are both injective.
+\end{prop}
+\begin{proof}
+    \begin{align}
+        z = g(f(x_1)) = g(f(x_1)) & \Rightarrow f(x_1) = f(x_2) \;\;\;\;\; \because g \text{ is injective} \\
+        & \Rightarrow x_1 = x_2 \;\;\;\;\; \because f \text{ is injective}
+    \end{align}
+    Hence, $g\circ f(x_1)=g\circ f(x_2)\Rightarrow x_1 = x_2$.
+\end{proof}
 \bigbreak
+
 \textbf{Problem 9.6}
+\begin{prop}
+    Let $f:X\rightarrow Y$ be a function with graph $G_f \subseteq X\times Y$. $f$ is surjective if and only if $\forall y \in Y, (X\times \{y\}\cap G_f)\neq \emptyset$.
+\end{prop}
+\begin{proof}
+    $(\Rightarrow)$ Since $f$ is surjective, $\forall y \in Y$, $\exists x$ such that $f(x)=y$. 
+    Let $x_0 \in X$ such that $f(x_0)=y_0$ for arbitrary $y_0\in Y$.
+    Then $(x_0,y_0) \in (X \times \{y_0\}\cap G_f)$. Hence, for all $y\in Y$, $(X \times \{y\}\cap G_f)\neq \emptyset$.
+    
+    $(\Leftarrow)$ Since $\forall y \in Y, (X\times \{y\}\cap G_f)\neq \emptyset$, we can take an arbitrary $y_1 \in Y$ and there must exist $(x_1,y_1) \in X\times \{y_1\}$.
+    At the same time $(x_1,y_1)\in G_f$, so we know that $f(x_1)=y_1$. 
+    Hence, it satisfies that definition of surjection that $\forall y \in Y, \exists x$ such that $f(x)=y$.
+\end{proof}
 \bigbreak
+
 \textbf{Problem 14}
+$f\circ f = x \mapsto x^4$. $f\circ g = x \mapsto x^4 -2x^2 + 1$. $g\circ f=x \mapsto x^4-1$. $g\circ g = x \mapsto x^4-2x^2$. \\
+$\{x \in \mathbb{R}|fg(x)=gf(x)\} \Leftrightarrow x^4-2x^2+1=x^4-2x^2 \Leftrightarrow \emptyset$.
 \bigbreak
+
 \textbf{Problem 15}
+\begin{enumerate}[label={(\roman*)}]
+    \item 
+    We can easily see that $\chi_A(x)\chi_B(x) \equiv \chi_{A\cap B}(x)$ by drawing a truth table.
+    \begin{displaymath}
+        \begin{array}{|c|c|c|c|}
+        x\in A & x\in B & \chi_A(x)\chi_B(x) & \chi_{A\cap B}(x)\\ 
+        \hline  
+        T & T & 1 & 1 \\
+        T & F & 0 & 0 \\
+        F & T & 0 & 0 \\
+        F & F & 0 & 0 \\
+        \end{array}
+    \end{displaymath}
+
+    \item 
+    Let $C = A \cup B$.
+    \begin{displaymath}
+        \begin{array}{|c|c|c|c|}
+        x\in A & x\in B & \chi_A(x)+\chi_B(x)-\chi_A(x)\chi_B(x) & \chi_C(x)\\ 
+        \hline  
+        T & T & 1 & 1 \\
+        T & F & 1 & 1 \\
+        F & T & 1 & 1 \\
+        F & F & 0 & 0 \\
+        \end{array}
+    \end{displaymath}
+\end{enumerate}
 \bigbreak
+
 \textbf{Problem 16}
+\begin{enumerate}[label={(\roman*)}]
+    \item Bijective. Surjective: $\forall y=f_1(x), \exists x = y +1\in \mathbb{R}$. Injective: $y_0=f_1(x_1)=f_1(x_2)\Rightarrow x_1=x_2=y_0+1$. $f_1^{-1}(y)=y+1$.
+    \item Bijective. Surjective: $\forall y=f_2(x), \exists x = \sqrt[3]{y}\in \mathbb{R}$. Injective: $y_0=f_2(x_1)=f_2(x_2)\Rightarrow x_1=x_2=\sqrt[3]{y}$. $f_2^{-1}(y)=\sqrt[3]{y}$.
+    \item Surjective. Surjective: $\lim_{x\rightarrow \infty}f_3(x)=\infty$ and $\lim_{x\rightarrow -\infty}f_3(x)=-\infty$. Since $f_3(x)$ is a continuous function, by intermediate value theorem, $\forall y  \in (-\infty,\infty)\equiv \mathbb{R}$, $\exists x$ such that $y=f(x)$. Not injective: let $f(x)=0$, $x=-1$ or $x=0$ or $x=1$.
+    \item Bijective. Surjective: $\lim_{x\rightarrow \infty}f_4(x)=\infty$ and $\lim_{x\rightarrow -\infty}f_4(x)=-\infty$. Since $f_4(x)$ is a continuous function, by intermediate value theorem, $\forall y  \in (-\infty,\infty)\equiv \mathbb{R}$, $\exists x$ such that $y=f(x)$. Injective: $f_4'(x)=3x^2-6x+3\ge 0$. Hence, there's never a repeating $x$ for $y=f(x)$.
+    \item Bijective. Surjective: $\forall y = f_5(x), \exists x = ln(y)$. Injective: $y_0=f_5(x_1)=f_5(x_2)\Rightarrow x_1=x_2=ln(y_0)$. $f_5^{-1}(y)=ln(y)$.
+    \item Surjective. Surjective: $\forall y = f_6(x) > 0, \exists x=\sqrt{y}$; $\forall y=f_6(x)<0,\exists x=\sqrt{-y};y=0,x=0$. Not injective: let $4=f(x)$, $x=2$ or $x=-2$.
+\end{enumerate}
 
 \end{document}

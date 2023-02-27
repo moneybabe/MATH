@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180A HW7}
+\author{Neo Lee}
+\date{02/22/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 0.3.
+    \item $\frac{7}{30}$.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 2.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        f_X(x) & = \int_{0}^{1} \frac{12}{7}(xy+y^2)dy \\
+        & = \frac{12}{7}\left[\frac{1}{2}xy^2+\frac{1}{3}y^3\right]_0^1 \\
+        & = \frac{12}{7}\left(\frac{x}{2}+\frac{1}{3}\right) \\
+        & = \frac{6x+4}{7}
+    \end{align}
+    for $x \in [0,1]$ and 0 otherwise.
+
+    \item 
+    \begin{align}
+        f_Y(y) & = \int_{0}^{1} \frac{12}{7}(xy+y^2)dx \\
+        & = \frac{12}{7}\left[\frac{1}{2}x^2y+xy^2\right]_0^1 \\
+        & = \frac{12}{7}\left(\frac{y}{2}+y^2\right) \\
+        & = \frac{6y + 12y^2}{7}
+    \end{align}
+    for $y \in [0,1]$ and 0 otherwise.
+
+    \item 
+    \begin{align}
+        P(X<Y) & = \int_{0}^{1}\int_{0}^{y} \frac{12}{7}(xy+y^2)dxdy \\
+        & = \frac{12}{7}\int_{0}^{1}\left[\frac{1}{2}x^2y+xy^2\right]_{x=0}^{x=y} dy \\
+        & = \frac{12}{7}\int_{0}^{1} \frac{1}{2}y^3+y^3dy \\
+        & = \frac{12}{7}\left[\frac{1}{8}y^4+\frac{1}{4}y^4\right]_0^1 \\
+        & = \frac{12}{6}\left(\frac{3}{8}\right) \\
+        & = \frac{3}{4}.
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 3.}
+\begin{align}
+    P(X=x,Y=y) & = P(X=x)P(Y=y) \\
+    & = \left(p(1-p)^{x-1}\right) \left(r(1-r)^{y-1}\right).
+\end{align}
+
+Then,
+\begin{align}
+    P(X<Y) & = P(X\in [1,\infty))P(Y>X) \\
+    & = \sum_{n=1}^{\infty}p(1-p)^{n-1}(1-r)^n.
+\end{align}
+\bigbreak
+
+\textbf{Problem 4.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        \int_{0}^{\pi}\int_{0}^{\pi}c(1-cos(x)cos(y))dxdy & = 1 \\
+        c\int_{0}^{\pi}\int_{0}^{\pi}dxdy - c\int_{0}^{\pi}\int_{0}^{\pi}cos(x)cos(y)dxdy & = 1 \\
+        c\pi^2 - c\int_{0}^{\pi}\left[sin(x)cos(y)\right]_{x=0}^{x=\pi}dy & = 1\\
+        c\pi^2 & = 1 \\
+        c & = \frac{1}{\pi^2}.
+    \end{align}
+
+    \item 
+    \begin{align}
+        f_X(x) & = \frac{1}{\pi^2}\int_{0}^{\pi}1-cos(x)cos(y)dy \\
+        & = \frac{1}{\pi^2}\left(\pi - \left[cos(x)sin(y)\right]_{y=0}^{y=\pi}\right) \\
+        & = \frac{1}{\pi} 
+    \end{align}
+    for $x\in [0,\pi]$ and 0 otherwise. Similarly,
+    \begin{align}
+        f_Y(y) = \frac{1}{\pi}
+    \end{align}
+    for $y\in [0,\pi]$ and 0 otherwise. The probability distribution is uniform.
+
+    \item 
+    \begin{align}
+        f(0,0) & = \frac{1}{\pi^2}\left(1-cos(0)cos(0)\right) \\
+        & = 0.
+    \end{align}
+    On the other hand,
+    \begin{align}
+        f_X(0)f_Y(0) & = \left(\frac{1}{\pi}\right)\left(\frac{1}{\pi}\right) \\
+        & = \frac{1}{\pi^2} \\
+        & \neq f(0,0)
+    \end{align}
+    Hence, $X$ and $Y$ are not independent.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 6.}
+The convolution formula tells us
+\begin{align}
+    P_{X+Y}(z) & = \sum_{X}P_X(x)P_Y(z-x) \\
+    & = P(X=0)P(Y=z-0)+P(X=1)P(Y=z-1) \\
+    & = (1-p)P(Y=z)+pP(Y=z-1).
+\end{align}
+
+Hence,
+\begin{align}
+    P_{X+Y}(z) = 
+    \begin{cases}
+        (1-p)(1-r) & z = 0 \\
+        p(1-r)+r(1-p) & z = 1 \\
+        pr & z = 2 \\
+        0 & otherwise.
+    \end{cases}
+\end{align}
+\bigbreak
+
+\textbf{Problem 7.}
+\emph{Convolution Approach} \\
+We know $f_Y(y)=1$ for $y \in (1,2)$ and 0 otherwise. For $z \le 1$, $f_{X+Y}(z)=0$.
+For $z \in [1,2]$,
+\begin{align}
+    f_{X+Y}(z) & = \int_{1}^{z}f_Y(y)f_X(z-y)dy \\ 
+    & = \int_{1}^{z}2(z-y)dy \\
+    & = \int_{1}^{z}2z - 2y dy \\
+    & = \left[2yz\right]_{y=1}^{y=z}-\left[y^2\right]_1^z \\
+    & = 2z^2-2z-z^2+1 \\
+    & = z^2-2z+1.
+\end{align}
+For $z \in [2,3]$,
+\begin{align}
+    f_{X+Y}(z) & = \int_{z-2}^{1}f_Y(z-x)f_X(x)dx \\
+    & = \int_{z-2}^{1}2xdx \\
+    & = \left[x^2\right]_{z-2}^1 \\
+    & = -z^2+4z-3.
+\end{align}
+For $z\ge 3$, $f_{X+Y}(z)=0$.
+\bigbreak
+
+\emph{CDF Approach}\\
+Since $X$ and $Y$ are independent, $f(x,y)=f_X(x)f_Y(y)=2x$. For $z \le 1$, $f_{X+Y}(z)=0$. For $z \in [1,2]$, 
+\begin{align}
+    P(X+Y \le Z) & = \int_{1}^{z}\int_{0}^{z-y}2xdxdy \\
+    & = \int_{1}^{z}\left[x^2\right]_0^{z-y}dy \\
+    & = \int_{1}^{z}z^2-2zy+y^2dy \\
+    & = \left[z^2y-zy^2+\frac{1}{3}y^3\right]_1^z \\
+    & = z^3-z^3+\frac{1}{3}z^3-z^2+z-\frac{1}{3} \\
+    & = \frac{1}{3}z^3-z^2+z-\frac{1}{3}.
+\end{align}
+Hence, for $z \in [1,2]$,
+\begin{align}
+    f_{X+Y}(z)&=\frac{d}{dz}\left(\frac{1}{3}z^3-z^2+z-\frac{1}{3}\right) \\
+    & = z^2-2z+1.
+\end{align}
+For $z \in [2,3]$,
+\begin{align}
+    P(X+Y\le Z) & = \int_{0}^{1}\int_{1}^{2}2xdydx - \int_{z-2}^{1}\int_{z-x}^{2}2xdydx \\
+    & = \int_{0}^{1}\left[2xy\right]_{y=1}^{y=2}dx - \int_{z-2}^{1}\left[2xy\right]_{y=z-x}^{y=2}dx \\
+    & = \int_{0}^{1}2xdx-\int_{z-2}^{1}2x^2+4x-2zxdx \\
+    & = 1 - \left[\frac{2}{3}x^3\right]_{z-2}^1 - \left[2x^2\right]_{z-2}^1 + \left[zx^2\right]_{z-2}^1 \\
+    & = -\frac{1}{3}z^3+2z^2-3z+1.
+\end{align}
+Hence, for $z\in [2,3]$,
+\begin{align}
+    f_{X+Y}(z)&=\frac{d}{dz}\left(-\frac{1}{3}z^3+2z^2-3z+1\right) \\
+    & = -z^2+4z-3.
+\end{align}
+For $z\ge 3$, $f_{X+Y}(z)=0$.
+\end{document}

@@ -179,7 +179,10 @@ $\{x \in \mathbb{R}|fg(x)=gf(x)\} \Leftrightarrow x^4-2x^2+1=x^4-2x^2 \Leftright
     \item Surjective. Surjective: $\lim\limits_{x\rightarrow \infty}f_3(x)=\infty$ and $\lim\limits_{x\rightarrow -\infty}f_3(x)=-\infty$. Since $f_3(x)$ is a polynomial, it is a continuous function. By intermediate value theorem, $\forall y  \in (-\infty,\infty)\equiv \mathbb{R}$, $\exists x$ such that $y=f_3(x)$. Not injective: let $f_3(x)=0$, $x=-1$ or $x=0$ or $x=1$. 
     \item Bijective. Surjective: $\forall y=f_4(x), \exists x$ such that $x^3-3x^2+3x-1=y \Leftrightarrow (x-1)^3=y \Leftrightarrow x=\sqrt[3]{y}+1$. Injective: let $y=f_4(x_1)=f_4(x_2)\Rightarrow x_1=x_2=\sqrt[3]{y}+1$. $f_4^{-1}(y)=\sqrt[3]{y}+1$. 
     \item Bijective. Surjective: $\forall y = f_5(x), \exists x = ln(y)$. Injective: $y_0=f_5(x_1)=f_5(x_2)\Rightarrow x_1=x_2=ln(y_0)$. $f_5^{-1}(y)=ln(y)$. 
-    \item Surjective. Surjective: $\forall y = f_6(x) > 0, \exists x=\sqrt{y}$; $\forall y=f_6(x)<0,\exists x=\sqrt{-y};y=0,x=0$. Not injective: let $f_6(x)=4$, $x=2$ or $x=-2$.
+    \item Bijective. Surjective: $\forall y = f_6(x) \ge 0, \exists x=\sqrt{y}$; $\forall y=f_6(x)<0,\exists x=\sqrt{-y}$. Injective: let $0\ge y=f_6(x_1)=f_6(x_2)\Rightarrow x_1=x_2=\sqrt{y}$. Let $0>y=f_6(x_3)=f_6(x_4)\Rightarrow x_3=x_4=\sqrt{-y}$. $f_6^{-1}(y)=\begin{cases}
+        \sqrt{y} & \text{if }y\ge 0,\\
+        \sqrt{-y} & \text{if }y<0.
+    \end{cases}$
 \end{enumerate}
 
 \end{document}

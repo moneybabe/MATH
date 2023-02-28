@@ -51,8 +51,8 @@
         & = \frac{12}{7}\int_{0}^{1}\left[\frac{1}{2}x^2y+xy^2\right]_{x=0}^{x=y} dy \\
         & = \frac{12}{7}\int_{0}^{1} \frac{1}{2}y^3+y^3dy \\
         & = \frac{12}{7}\left[\frac{1}{8}y^4+\frac{1}{4}y^4\right]_0^1 \\
-        & = \frac{12}{6}\left(\frac{3}{8}\right) \\
-        & = \frac{3}{4}.
+        & = \frac{12}{7}\left(\frac{3}{8}\right) \\
+        & = \frac{9}{14}.
     \end{align}
 \end{enumerate}
 \bigbreak
@@ -105,6 +105,46 @@ Then,
         & \neq f(0,0)
     \end{align}
     Hence, $X$ and $Y$ are not independent.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 5.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    We need to computer $F_T(t)=P(T\le t)=1-P(T>t)=1-P(min(X,Y)>t)=1-P(X,Y>t)$. Assuming the unit to be 1 year, we have, for $x,y\ge 0$,
+    \begin{align}
+        f_X(x)=e^{-x}
+    \end{align}
+    and
+    \begin{align}
+        f_Y(y)=\frac{1}{2}e^{-\frac{y}{2}}
+    \end{align}
+    and the joint density is 
+    \begin{align}
+        f(x,y)=\frac{1}{2}e^{-x-\frac{y}{2}}.
+    \end{align}
+    Hence, 
+    \begin{align}
+        F_T(t)=1-\int_{t}^{\infty}\int_{t}^{\infty}f(x,y)dxdy & = 1-\int_{t}^{\infty}\int_{t}^{\infty}\frac{1}{2}e^{-x-\frac{y}{2}}dxdy \\
+        & = 1-\frac{1}{2}\int_{t}^{\infty}e^{-x}dx\int_{t}^{\infty}e^{-\frac{y}{2}}dy \\
+        & = 1-\frac{1}{2}e^{-t}\cdot 2e^{-\frac{t}{2}} \\
+        & = 1-e^{-\frac{3t}{2}}. 
+    \end{align}
+
+    \item
+    For $t\in [0,\infty)$,
+    \begin{align}
+        f_T(t)&=\frac{d}{dt}\left(1-e^{-\frac{3t}{2}}\right) \\
+        &=\frac{3}{2}e^{-\frac{3t}{2}}
+    \end{align}
+    and 0 otherwise.
+    \item 
+    \begin{align}
+        E[T]&=\int_{0}^{\infty}t\cdot \frac{3}{2}e^{-\frac{3t}{2}}dt \\
+        &=-\left[te^{-\frac{3t}{2}}\right]_{0}^{\infty}+\int_{0}^{\infty}e^{-\frac{3t}{2}}dt \\
+        & = 0+\frac{-2}{3}\lim_{z\rightarrow\infty}\left[e^{-\frac{3t}{2}}\right]_0^z \\
+        & = \frac{2}{3}.
+    \end{align}
 \end{enumerate}
 \bigbreak
 

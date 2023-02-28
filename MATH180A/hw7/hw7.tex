@@ -120,9 +120,9 @@ Hence,
 \begin{align}
     P_{X+Y}(z) = 
     \begin{cases}
-        (1-p)(1-r) & z = 0 \\
-        p(1-r)+r(1-p) & z = 1 \\
-        pr & z = 2 \\
+        (1-p)(1-r) & z = 0, \\
+        p(1-r)+r(1-p) & z = 1, \\
+        pr & z = 2, \\
         0 & otherwise.
     \end{cases}
 \end{align}
@@ -179,4 +179,47 @@ Hence, for $z\in [2,3]$,
     & = -z^2+4z-3.
 \end{align}
 For $z\ge 3$, $f_{X+Y}(z)=0$.
+\bigbreak
+
+\textbf{Problem 8.}
+\begin{align}
+    p_{x+y}(z)&=\sum_{x\in X}P(X=x)P(Y=z-x) \\
+    & = \sum_{i=0}^{\infty}\left(\frac{\lambda^i}{i!}e^{-\lambda}\right)\left(\frac{\mu^{z-i}}{(z-i)!}e^{-\mu}\right) \\
+    & = e^{-(\lambda+\mu)}\sum_{i=0}^{\infty}\left(\frac{\lambda^i}{i!}\right)\left(\frac{\mu^{z-i}}{(z-i)!}\right) \\
+    & = e^{-(\lambda+\mu)}\sum_{i=0}^{\infty}\frac{1}{i!(z-i)!}(\lambda^i)(\mu^{z-i}) \\
+    & = e^{-(\lambda+\mu)}\frac{1}{z!}\sum_{i=0}^{\infty}\frac{z!}{i!(z-i)!}(\lambda^i)(\mu^{z-i}) \\
+    & = e^{-(\lambda+\mu)}\frac{1}{z!}\sum_{i=0}^{\infty}{z\choose i}(\lambda^i)(\mu^{z-i}) \\
+    & = \frac{(\lambda+\mu)^z}{z!}e^{-(\lambda+\mu)} \\
+    & = Poisson(\lambda+\mu).
+\end{align}
+\bigbreak
+
+\textbf{Problem 9.}
+$X=\sigma_1Z+\mu_1$ and $Y=\sigma_2Z+\mu_2\Rightarrow X+Y=(\sigma_1+\sigma_2)Z+(\mu_1+\mu_2)\Rightarrow N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2)$.
+\begin{align}
+    f_{X+Y}(z) & = \int_{-\infty}^{\infty}f_X(x)f_Y(z-x)dx \\
+    & = \int_{-\infty}^{\infty}\left(\frac{1}{\sigma_1\sqrt{2\pi}}e^{-\frac{(x-\mu_1)^2}{2\sigma_1^2}}\right)\left(\frac{1}{\sigma_2\sqrt{2\pi}}e^{-\frac{(z-x-\mu_2)^2}{2\sigma_2^2}}\right)dx \\
+    & = \frac{1}{\sigma_1\sigma_2\sqrt{2\pi}\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-\frac{(x-\mu_1)^2}{2\sigma_1^2}-\frac{(z-x-\mu_2)^2}{2\sigma_2^2}}dx \\
+    & = \frac{1}{\sigma_1\sigma_2\sqrt{2\pi}\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-\frac{\sigma_2^2(x-\mu_1)^2+\sigma_1^2(z-x-\mu_2)^2}{2\sigma_1^2\sigma_2^2}}dx \\
+    & = \frac{1}{\sigma_1\sigma_2\sqrt{2\pi}\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-\frac{\sigma_2^2(x^2-2x\mu_1+\mu_1^2)+\sigma_1^2(z^2+x^2+\mu_2^2-2zx+2x\mu_2-2z\mu_2)}{2\sigma_1^2\sigma_2^2}}dx \\
+    & = \frac{1}{\sigma_1\sigma_2\sqrt{2\pi}\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-\frac{x^2(\sigma_1^2+\sigma_2^2)-2x(\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1)+\sigma_1^2(z^2+\mu_2^2-2z\mu_2)+\sigma_2^2\mu_1^2}{2\sigma_1^2\sigma_2^2}}dx.
+\end{align}
+Let $\sigma_z=\sqrt{\sigma_1^2+\sigma_2^2}$,
+\begin{align}
+    f_{X+Y}(z)=\frac{1}{\sqrt{2\pi}\sigma_z}\frac{1}{\sqrt{2\pi}\frac{\sigma_1\sigma_2}{\sigma_z}}\int_{-\infty}^{\infty}e^{-\frac{x^2-2x\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}+\frac{\sigma_1^2(z^2+\mu_2^2-2z\mu_2)+\sigma_2^2\mu_1^2}{\sigma_z^2}}{2\frac{\sigma_1\sigma_2}{\sigma_z}^2}}dx.
+\end{align}
+Interlude: 
+\begin{align}
+    & -\frac{x^2-2x\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}+\frac{\sigma_1^2(z^2+\mu_2^2-2z\mu_2)+\sigma_2^2\mu_1^2}{\sigma_z^2}}{2\frac{\sigma_1\sigma_2}{\sigma_z}^2} \\
+    = & -\frac{\left(x-\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}\right)^2-\left(\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}\right)^2+\frac{\sigma_1^2(z-\mu_2)^2+\sigma_2^2\mu_1^2}{\sigma_z^2}}{2\frac{\sigma_1\sigma_2}{\sigma_z}^2} \\
+    = & -\left[\frac{\sigma_z^2(\sigma_1^2(z-\mu_2)^2+\sigma_2^2\mu_1^2)-(\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1)^2}{2\sigma_z^2(\sigma_1\sigma_2)^2}\right]-\left[\frac{\left(x-\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}\right)^2}{2\left(\frac{\sigma_1\sigma_2}{\sigma_z}\right)^2}\right] \\
+    = & -\left[\frac{(z-(\mu_1+\mu_2))^2}{2\sigma_z^2}\right]-\left[\frac{\left(x-\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}\right)^2}{2\left(\frac{\sigma_1\sigma_2}{\sigma_z}\right)^2}\right]
+\end{align}
+Hence,
+\begin{align}
+    f_{X+Y}(z) & = \frac{1}{\sqrt{2\pi}\sigma_z}\frac{1}{\sqrt{2\pi}\frac{\sigma_1\sigma_2}{\sigma_z}}\int_{-\infty}^{\infty}e^{-\left[\frac{(z-(\mu_1+\mu_2))^2}{2\sigma_z^2}\right]-\left[\frac{\left(x-\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}\right)^2}{2\left(\frac{\sigma_1\sigma_2}{\sigma_z}\right)^2}\right]}dx \\
+    & = \frac{1}{\sqrt{2\pi}\sigma_z}e^{-\left[\frac{(z-(\mu_1+\mu_2))^2}{2\sigma_z^2}\right]}\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\frac{\sigma_1\sigma_2}{\sigma_z}}e^{\left[\frac{-\left(x-\frac{\sigma_1^2(z-\mu_2)+\sigma_2^2\mu_1}{\sigma_z^2}\right)^2}{2\left(\frac{\sigma_1\sigma_2}{\sigma_z}\right)^2}\right]}dx \\
+    & = \frac{1}{\sqrt{2\pi}\sigma_z}e^{-\left[\frac{(z-(\mu_1+\mu_2))^2}{2\sigma_z^2}\right]} \;\;\;\;\; (\text{the right had side term evaluates to 1}) \\
+    & = N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2).
+\end{align}
 \end{document}

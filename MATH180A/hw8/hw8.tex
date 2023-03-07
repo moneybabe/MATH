@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180A HW7}
+\author{Neo Lee}
+\date{03/01/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.} True
+\bigbreak
+
+\textbf{Problem 2.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 4
+    \item $\sigma_x = 3, \sigma_y = 2$. Cov$(X,Y)=4$. Corr$(X,Y)=\frac{4}{3\times 2}=\frac{2}{3}$.
+    \item 8
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 3.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    Area of the square $=\sqrt{1+1}^2=2.$ For $x\in[-1,0], y\in[-x-1,x+1]$ and $x\in[0,1],y\in[x-1,-x+1],$
+    \begin{align}
+        f_{X,Y}(x,y)=\frac{1}{2}
+    \end{align}
+    and 0 otherwise.
+
+    \item 
+    Corr$(X,Y)=E[XY]-E[X]E[Y]$.
+    \begin{align}
+        E[XY]=\int_{-1}^{0}\int_{-x-1}^{x+1}xy\frac{1}{2}dydx + \int_{0}^{1}\int_{x-1}^{-1+1}xy\frac{1}{2}dydx
+    \end{align}
+    By symmetry, 
+    \begin{align}
+        \int_{-1}^{0}\int_{-x-1}^{x+1}xy\frac{1}{2}dydx=0
+    \end{align}
+    and 
+    \begin{align}
+        \int_{0}^{1}\int_{x-1}^{-1+1}xy\frac{1}{2}dydx=0.
+    \end{align}
+    Hence, $E[XY]=0.$
+
+    For $x\in[-1,0],$
+    \begin{align}
+        f_X(x)&=\int_{-x-1}^{x+1}\frac{1}{2}dy \\
+        &= x+1.
+    \end{align}
+    For $x\in[0,-1],$
+    \begin{align}
+        f_X(x)&=\int_{x-1}^{-x+1}\frac{1}{2}dy \\
+        &= -x+1.
+    \end{align}
+    Hence,
+    \begin{align}
+        E[X]&=\int_{-1}^{0}x(x+1)dx + \int_{0}^{1}x(-x+1)dx \\
+        &=\frac{-1}{6}+\frac{1}{6} \\
+        &=0.
+    \end{align}
+    By symmetry, $E[Y]=0.$ Thus, Corr$(X,Y)=E[XY]-E[X]E[Y]=0.$
+
+    \item 
+    $X$ and $Y$ are not independent. Let $x=-1,f_X(-1)=0\Rightarrow f_X(-1)f_Y(y)=0$ for all $y\in\mathbb{R}$. Yet, $f_{X,Y}(-1,0)=\frac{1}{2}$.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 4.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        M_Y'(t)=\frac{-5}{9}e^{-5t}+\frac{1}{18}e^t+e^{2t}.
+    \end{align}
+    Then,
+    \begin{align}
+        E[Y]&=M_Y'(0) \\
+        &=\frac{-5}{9}+\frac{1}{18}+1\\
+        &=0.5.
+    \end{align}
+    
+    \item 
+    $M_Y(t)=E[e^{tY}]$. Let 
+    \begin{align}
+        f_Y(y)=\begin{cases}
+            \frac{1}{3} &\text{if }y=0, \\
+            \frac{1}{9} &\text{if }y=-5, \\
+            \frac{1}{18} &\text{if }y=1, \\
+            \frac{1}{2} &\text{if }y=2, \\
+            0 &\text{otherwise}.
+        \end{cases}
+    \end{align}
+    Then,
+    \begin{align}
+        E[Y]&=\frac{1}{9}\times -5+\frac{1}{18}+\frac{1}{2}\times2 \\
+        &= 0.5.
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 5.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        M_Y(t)=E[e^{tY}]&=E[e^{t(aX+b)}]\\
+        &=E[e^{t(aX)}\cdot e^{tb}]\\
+        &=e^{tb}E[e^{t(aX)}]\\
+        &=e^{tb}M_X(at).
+    \end{align}
+
+    \item 
+    \begin{align}
+        M_Y(t)&=e^{t}M_X(2t)\\
+        &=e^{t}E[e^{2tX}]\\
+        &=e^t \cdot\frac{1}{5}\int_{0}^{\infty}e^{2tx}e^{-\frac{1}{5}x}dx\\
+        &=\frac{e^t}{5}\int_{0}^{\infty}e^{(2t-\frac{1}{5})x}dx\\
+        &=\frac{e^t}{5(2t-\frac{1}{5})}\lim_{z\rightarrow\infty}\left[e^{(2t-\frac{1}{5})x}\right]_{x=0}^{x=z}\\
+        &=\frac{e^t}{10t-1}\lim_{z\rightarrow\infty}\left[e^{(2t-\frac{1}{5})x}\right]_{x=0}^{x=z}.
+    \end{align}
+    Hence,
+    \begin{align}
+        M_Y(t)=
+        \begin{cases}
+            \infty &\text{if }t>10, \\
+            \frac{e^t}{1-10t} &\text{if }t<10, \\
+            0 &\text{if }t=10.
+        \end{cases}
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Porblem 6.}
+\begin{enumerate}[label={(\alph*)}]
+    \item 
+    \begin{align}
+        M_X(t)=E[e^{tX}]&=\sum_{n=1}^{\infty}e^{tn}p(1-p)^{n-1}\\
+        &=p\left[e^t+e^{2t}(1-p)+e^{3t}(1-p)^2+e^{4t}(1-p)^3+...\right]\\
+        &=p\left[\lim_{n\rightarrow\infty}e^t\cdot\frac{1-[e^t(1-p)]^n}{1-e^t(1-p)}\right].
+    \end{align}
+    Hence,
+    \begin{align}
+        M_X(t)=
+        \begin{cases}
+            \infty &\text{if }e^t(1-p)\ge1\Rightarrow t\ge -ln(1-p),\\
+            \frac{pe^t}{1-e^t+pe^t} &\text{otherwise}.
+        \end{cases}
+    \end{align}
+
+    \item
+    \begin{align}
+        &M_X'(t)=\frac{pe^t(1-e^t+pe^t)-pe^t(-e^t+pe^t)}{(1-e^t+pe^t)^2}=\frac{pe^t}{(1-e^t+pe^t)^2},\\
+        &E[X]=M_X'(0)=\frac{p}{(1-1+p)^2}=\frac{1}{p},\\
+        &M_X''(t)=\frac{pe^t(1-e^t+pe^t)^2-pe^t\cdot2(1-e^t+pe^t)(-e^t+pe^t)}{(1-e^t+pe^t)^4},\\
+        &E[Y^2]=M_X''(0)\frac{p(1-1+p)^2-2p(1-1+p)(-1+p)}{(1-1+p)^4}=\frac{2-p}{p^2},\\
+        &Var(X)=E[Y^2]-(E[Y])^2=\frac{2-p}{p^2}-\frac{1}{p^2}=\frac{1-p}{p^2}.
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 7.}
+
+
+\end{document}

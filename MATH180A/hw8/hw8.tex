@@ -8,9 +8,9 @@
 \newtheorem{cor}[thm]{Corollary}
 
 % title information
-\title{Math 180A HW7}
+\title{Math 180A HW8}
 \author{Neo Lee}
-\date{03/01/2023}
+\date{03/15/2023}
 
 % main content
 \begin{document} 
@@ -168,6 +168,19 @@
 \bigbreak
 
 \textbf{Problem 7.}
+\begin{enumerate}[label={(\alph*)}]
+    \item $X=$ exponential$(\frac{1}{10})$. By Markov's inequality, $P(X\ge 30) \le \frac{E[X]}{30} = \frac{10}{30} = \frac{1}{3}$.
 
+    \item 
+    $E[X]=\mu=10$. $Var(X)=\sigma^2=100$. 
+    By Chebyshev's inequality, $P(X\ge 30)\le P(|X-10|\ge 20)\le \frac{100}{20^2}\le\frac{1}{4}$.
+
+    \item 
+    $P(X\ge 30)=e^{-\frac{1}{10}\times 30}=e^{-3}\approx0.04979$.
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 8.}
+$P(X\ge a)=P(e^X\ge e^a)\le \frac{E[e^x]}{e^a}=e^{-a}M_X(1)$.
 
 \end{document}

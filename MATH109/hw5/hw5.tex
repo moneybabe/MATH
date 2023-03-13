@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 109 HW5}
+\author{Neo Lee}
+\date{03/18/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+\textbf{Problem 1}
+Let $A, B, C$ be the set of students that like Reasoning, Algebra, and Calculus respectively.
+The question is asking for $|(A\cup B \cup C)^c|$.
+\begin{align}
+    |(A\cup B \cup C)^c| & = 182 - |A\cup B \cup C| \nonumber\\
+    & = 182-\left[|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C|\right] \nonumber\\
+    & = 182 - \left[129 + 129 + 129 -85 -89-86+53\right] \nonumber\\
+    & =2.\nonumber
+\end{align}
+\bigbreak
+
+% \textbf{Problem 2.}
+% Let $X = (A\cap B \cap C^c); Y=(A\cap B^c \cap C);Z=(A^c\cap B \cap C);W=(A\cap B\cap C)$, and $x=|X|;y=|Y|;z=|Z|;w=|W|$.
+% The question is asking for $w$.
+% We know 
+% \begin{align}
+%     A\cap B & = W \cup X \nonumber \\
+%     A\cap C & = W \cup Y \nonumber \\
+%     B\cap C & = W \cup Z \nonumber \\ 
+%     A & = (A\cap B^c\cap C^c)\cup X\cup Y\cup W  \\
+%     B & = (A^c\cap B\cap C^c)\cup X\cup Z\cup W  \\
+%     C & = (A^c\cap B^c\cap C)\cup Y\cup Z\cup W, 
+% \end{align}
+% and notice that all the right hand side expressions are pairwise disjoint. Now, let us apply the inclusion-exclusion principle,
+% \begin{align}
+%     170-|A\cup B\cup C| = 2 & = 170 - \left[|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C|\right] \nonumber \\
+%     2 & = 170 - \left[124+124+124-(w+x)-(w+y)-(w+z)+w\right] \nonumber \\
+%     204 & = x+y+z+2w,
+% \end{align}
+% which is our first equation. Then we can apply the addition principle on (1), (2), and (3), and we get 
+% \begin{align}
+%     |A| & = 10+x+y+w = 124\\
+%     |B| & = x+z+w =124\\
+%     |C| & = 4+y+z+w =124.
+% \end{align}
+% Solving (4), (5), (6), and (7), we get $w=50, x=34, y=30, z=40$.
+% \bigbreak
+
+\textbf{Problem 2.}
+Let $X = (A\cap B); Y=(A\cap C);Z=(B \cap C);W=(A\cap B\cap C)$, and $x=|X|;y=|Y|;z=|Z|;w=|W|$.
+The question is asking for $w$.
+We know 
+\begin{align}
+    A & = (A\cap B^c\cap C^c)\cup (X\cup Y) \\
+    B & = (A^c\cap B\cap C^c)\cup (X\cup Z) \\
+    C & = (A^c\cap B^c\cap C)\cup (Y\cup Z).
+\end{align}
+and notice that the sets enclosed with parentheses are disjoint. Now, let us apply the inclusion-exclusion principle,
+\begin{align}
+    170-|A\cup B\cup C| = 2 & = 170 - \left[|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C|\right] \nonumber \\
+    2 & = 170 - \left[124+124+124-x-y-z+w\right] \nonumber \\
+    204 & = x+y+z+-w,
+\end{align}
+which is our first equation. Then we can apply the addition principle and inclusion-exclusion principle on (1), (2), and (3), and we get 
+\begin{align}
+    |A| = 124 & = 10+(x+y-w) \nonumber\\
+    114 & = x+y-w \\
+    |B| = 124 & = x+z-w \\
+    |C| = 124 & = 4+y+z-w \nonumber\\
+    120&=y+z-w.
+\end{align}
+Solving (4), (5), (6), and (7), we get $w=50, x=84, y=80, z=90$.
+\bigbreak
+
+\textbf{Problem 3.}
+\begin{enumerate}[label={(\roman*)}]
+    \item 
+    Let $A,B,C$ be the set of people that speak English, Spanish, and Swahili respectively.
+    Let 
+    \begin{align}
+        a&=|(A\cap B^c\cap C^c)|\nonumber\\
+        b&=|(A^c\cap B\cap C^c)|\nonumber\\
+        c&=|(A^c\cap B^c\cap C)|\nonumber\\
+        x&=|(A\cap B)|\nonumber\\
+        y&=|(A\cap C)|\nonumber\\
+        z&=|(B \cap C)|\nonumber\\
+        w&=|(A\cap B\cap C)|.\nonumber
+    \end{align}
+    Our goal is to maximize $a+b+c$.
+    We know
+    \begin{align}
+        |A\cup B\cup C| = 100 &=\left[|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C|\right] \nonumber\\
+        100 &=75+60+45-x-y-z+w \nonumber\\
+    80 &=x+y+z-w.
+\end{align}
+Also, 
+\begin{align}
+    |A| = 75& =a+x+y-w\nonumber \\
+    |B| = 60& =b+x+z-w\nonumber \\
+    |C| = 45& =c+y+z-w. \nonumber
+\end{align}
+Then,
+\begin{align}
+    |A|+|B|+|C|=75+60+45&=a+b+c+2x+2y+2z-3w \nonumber \\
+    180& = a+b+c+2x+2y+2z-3w.
+\end{align}
+$(9)-2\times(8)$:
+\begin{align}
+    a+b+c=20+w.
+\end{align}
+Hence, we need to maximize $w$. Note that $x,y,z\ge w$. Thus, by (8), $w\le 40$, and $a+b+c\le 60$.
+Taking $w,x,y,z=40$, $a=35,b=20,c=5$.
+    
+    \item 
+    From (10), $a=20+w-b-c$. So we need to maximize $w-b-c$. Take $w=35, b=10, c=0$, $a=40$.
+
+    \item 
+    Already proved in (i). 
+\end{enumerate}
+\end{document}

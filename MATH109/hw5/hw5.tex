@@ -104,25 +104,42 @@ Solving (4), (5), (6), and (7), we get $w=50, x=84, y=80, z=90$.
 \end{align}
 Also, 
 \begin{align}
-    |A| = 75& =a+x+y-w\nonumber \\
-    |B| = 60& =b+x+z-w\nonumber \\
-    |C| = 45& =c+y+z-w. \nonumber
+    |A| = 75& =a+x+y-w \\
+    |B| = 60& =b+x+z-w \\
+    |C| = 45& =c+y+z-w. 
 \end{align}
-Then,
+Then, from (9) to (11),
 \begin{align}
     |A|+|B|+|C|=75+60+45&=a+b+c+2x+2y+2z-3w \nonumber \\
     180& = a+b+c+2x+2y+2z-3w.
 \end{align}
-$(9)-2\times(8)$:
+$(12)-2\times(8)$:
 \begin{align}
     a+b+c=20+w.
 \end{align}
 Hence, we need to maximize $w$. Note that $x,y,z\ge w$. Thus, by (8), $w\le 40$, and $a+b+c\le 60$.
-Taking $w,x,y,z=40$, $a=35,b=20,c=5$.
+Taking $w,x,y,z=40$ and solving (9) to (11), $a=35,b=20,c=5$.
     
     \item 
-    From (10), $a=20+w-b-c$. So we need to maximize $w-b-c$. Take $w=35, b=10, c=0$, $a=40$.
-
+    $(9)-(8)$:
+    \begin{align}
+        -5 &= a-z \nonumber\\
+        a & = z-5 \nonumber
+    \end{align}
+    Hence, maximizing $a$ is equivalent to maximizing $z$. 
+    $z=|B\cap C|\le |C|=45\Rightarrow a \le 40$.
+    Thus, we take $a=40, z=45.$ 
+    Notice that $c=|(A^c\cap B^c\cap C)|$ an $z=|B\cap C|$, so if $z=45=|C|$, then $c=0$.
+    Then, solving (9) to (11), we can conclude with the following equations equations:
+    \begin{align}
+        & a = 40 \nonumber\\
+        & z = 45 \nonumber\\
+        & c = 0 \nonumber\\
+        & x = 35 \nonumber\\
+        & b = w - 20 = y - 20 \nonumber\\
+        & 0 \le b \le 15 ~~~~~ (\because w = y \le |A| - a = 35)
+    \end{align}
+    Maximum number of people who speak only English = 40. In this case, the number of people who speak only Spanish = 0, and the number of people who speak only Swahili can range from 0 to 15.
     \item 
     Already proved in (i). 
 \end{enumerate}

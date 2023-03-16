@@ -39,7 +39,7 @@
     and 0 otherwise.
 
     \item 
-    Corr$(X,Y)=E[XY]-E[X]E[Y]$.
+    Corr$(X,Y)=\frac{E[XY]-E[X]E[Y]}{\sigma_X \sigma_Y}$.
     \begin{align}
         E[XY]=\int_{-1}^{0}\int_{-x-1}^{x+1}xy\frac{1}{2}dydx + \int_{0}^{1}\int_{x-1}^{-1+1}xy\frac{1}{2}dydx
     \end{align}
@@ -69,7 +69,7 @@
         &=\frac{-1}{6}+\frac{1}{6} \\
         &=0.
     \end{align}
-    By symmetry, $E[Y]=0.$ Thus, Corr$(X,Y)=E[XY]-E[X]E[Y]=0.$
+    By symmetry, $E[Y]=0.$ Thus, Corr$(X,Y)=\frac{E[XY]-E[X]E[Y]}{\sigma_X \sigma_Y}=0.$
 
     \item 
     $X$ and $Y$ are not independent. Let $x=-1,f_X(-1)=0\Rightarrow f_X(-1)f_Y(y)=0$ for all $y\in\mathbb{R}$. Yet, $f_{X,Y}(-1,0)=\frac{1}{2}$.

@@ -138,9 +138,13 @@ Then,
     & = \sum_{n=x-1}^{\infty}\frac{1}{n+2} \cdot \frac{e^{-1}}{n!} \nonumber \\
     & = \frac{1}{e}\sum_{n=x-1}^{\infty}\frac{n+1}{(n+2)!} \nonumber \\
     & = \frac{1}{e}\sum_{n=x}^{\infty}\frac{n}{(n+1)!} \nonumber \\
-    & = \frac{1}{e}\sum_{n=1}^{\infty}\frac{n}{(n+1)!} - \sum_{n=1}^{x-1}\frac{n}{(n+1)!} \nonumber \\
-    & = \frac{1}{e}\left(1-\frac{x!-1}{x!}\right) \nonumber \\ 
-    & = \frac{1}{e} + \frac{1-x!}{e\cdot x!}. \nonumber
+    & = \frac{1}{e}\sum_{n=x}^{\infty}\frac{n+1-1}{(n+1)!} \nonumber \\
+    & = \frac{1}{e}\sum_{n=x}^{\infty}\left(\frac{n+1}{(n+1)!} - \frac{1}{(n+1)!}\right) \nonumber \\
+    & = \frac{1}{e}\left[\sum_{n=x}^{\infty}\frac{n+1}{(n+1)!} - \sum_{n=x}^{\infty}\frac{1}{(n+1)!}\right] \nonumber \\
+    & = \frac{1}{e}\left[\sum_{n=x}^{\infty}\frac{1}{n!} - \sum_{n=x}^{\infty}\frac{1}{(n+1)!}\right] \nonumber \\
+    & = \frac{1}{e}\left[\left(\frac{1}{x!} + \frac{1}{(x+1)!} + \cdots\right) - \left(\frac{1}{(x+1)!} + \frac{1}{(x+2)!} + \cdots\right)\right] \nonumber \\
+    & = \frac{1}{e}\cdot \frac{1}{x!} \nonumber \\
+    & = \frac{e^{-1}\cdot 1^{x}}{x!} \sim \emph{Poisson}(\lambda = 1). \nonumber
 \end{align}
 \bigbreak
 

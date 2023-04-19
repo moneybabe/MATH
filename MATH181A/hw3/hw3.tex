@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 181A HW3}
+\author{Neo Lee}
+\date{04/18/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 5.2.6}
+\begin{align}
+    L(\theta) & = \prod_{i \in [1,4]} \frac{\theta}{2\sqrt{y_i}}e^{-\theta\sqrt{y_i}} \nonumber \\
+    l(\theta) & = \sum_{i\in [1,4]} \ln\theta - \ln(2\sqrt{y_i}) - \theta\sqrt{y_i} \nonumber \\
+    l'(\theta) & = \sum_{i \in [1,4]} \frac{1}{\theta}  - \sqrt{y_i}. \nonumber 
+\end{align}
+
+Then, set $l'(\theta) = 0$,
+\begin{align}
+    l'(\theta) = 0 & = \sum_{i \in [1,4]} \frac{1}{\theta}  - \sqrt{y_i} \nonumber \\
+    0 & = \frac{4}{\theta} - \sqrt{6.2} - \sqrt{7.0} - \sqrt{2.5} - \sqrt{4.2} \nonumber \\
+    \hat{\theta}_{\emph{MLE}} & = \frac{4}{\sqrt{6.2} + \sqrt{7.0} + \sqrt{2.5} + \sqrt{4.2}} \nonumber \\
+    & \approx 0.456. \nonumber 
+\end{align}
+\bigbreak
+
+\textbf{Problem 5.2.12}
+\begin{align}
+    L(\theta) & = \prod_{i\in[1,n]}\frac{2y_i}{\theta^2}. \nonumber 
+\end{align}
+
+We realize that $L(\theta)$ is a strictly decreasing function for $\theta \ge 0$. 
+Thus, $L(\theta)$ is maximized when $\theta \rightarrow 0$.
+However, notice that $0 \le y \le \theta$, so $L(\theta)$ is maximized when $\theta = \emph{max}(y_i)$ for $i \in [1,n]$.
+
+Hence, we can write $\hat{\theta}_{\emph{MLE}} = \emph{max}(y_i)$.
+\bigbreak
+
+\textbf{Problem 5.2.15}
+\begin{align}
+    L(\alpha, \beta) & = \prod_{i\in[1,n]}\alpha\beta y_i^{\beta-1}e^{-\alpha y_i^\beta} \nonumber \\
+    l(\alpha, \beta) & = \sum_{i\in[1,n]} \ln\alpha + \ln\beta + (\beta-1)\ln y_i - \alpha y_i^\beta. \nonumber 
+\end{align}
+
+Then, we differentiate $l(\alpha, \beta)$ with respect to $\alpha$ and set it equal to 0,
+\begin{align}
+    \frac{\partial}{\partial\alpha}l(\alpha, \beta) & = \sum_{i\in[1,n]} \frac{1}{\alpha} - y_i^\beta = 0 \nonumber \\
+    \frac{n}{\alpha} & = \sum_{i\in[1,n]} y_i^\beta \nonumber \\ 
+    \hat{\alpha}_{\emph{MLE}} & = \frac{n}{\sum\limits_{i\in[1,n]} y_i^\beta}. \nonumber 
+\end{align}
+\bigbreak
+
+\textbf{Problem 5.3.1}
+$\bar{y} \sim \emph{N}(107.5, \frac{15}{\sqrt{50}})$. 
+\begin{align}
+    \emph{CI} = \bar{y} \pm z_{\alpha/2} \frac{15}{\sqrt{50}} \nonumber \\
+    \emph{CI} = 107.9 \pm 1.96 \frac{15}{\sqrt{50}} \nonumber \\
+    \emph{CI} \approx 107.9 \pm 4.16. \nonumber 
+\end{align}
+
+Hence, the $95\%$ confidence interval is $(103.74, 112.06)$.
+\bigbreak
+
+\textbf{Problem 5.3.2}
+Let $X_i$ be the FEV$_1$/VC ratio of the $i$th subject. Then,
+\begin{align}
+    \bar{X} & = \frac{1}{19}\sum_{i = 1}^{19}x_i \nonumber \\
+    & = \frac{1}{19} (0.61 + \cdots + 0.85 + 0.87) \nonumber \\ 
+    & \approx 0.766. \nonumber
+\end{align}
+    
+Then, we can compute the standard error of $\bar{X}$,
+\begin{align}
+    \sigma_{\bar{X}} & = \frac{\sigma}{\sqrt{n}} \nonumber \\
+    & = \frac{0.09}{\sqrt{19}} \nonumber \\
+    & \approx 0.0206. \nonumber
+\end{align}
+
+Hence, the 95\% confidencen interval is
+\begin{align}
+    \emph{CI} & = \bar{X} \pm z_{\alpha/2} \sigma_{\bar{X}} \nonumber \\
+    & = 0.766 \pm 1.96 \times 0.0206 \nonumber \\
+    & \approx 0.766 \pm 0.0404 \nonumber \\
+    & = (0.726, 0.806). \nonumber
+\end{align}
+
+Therefore, the norm 0.80 still falls within our 95\% confidence interval, and it is believable that the exposure has not particular effect.
+\end{document}

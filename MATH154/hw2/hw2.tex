@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 154 HW2}
+\author{Neo Lee}
+\date{04/19/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.}
+\begin{enumerate}[label=(\alph*)]
+    \item \begin{itemize}
+        \item $n = 2k + 1$ for $k \in \mathbb{N}$.
+        \item $n=2$.
+        \item All $n \ge 3$.
+    \end{itemize}
+
+    \item \begin{itemize}
+        \item $r = 2n, s = 2k$ for $n, k \in \mathbb{N}$.
+        \item $r = 2$, $s = 2k + 1$ or $s = 2, r = 2k + 1$ for $k\in\mathbb{Z}^{^\ge}$, and $r = s = 1$.
+        \item $r, s \ge 2;  r = s$.
+    \end{itemize}
+\end{enumerate}
+\bigbreak
+
+\textbf{Problem 2.}
+\begin{prop}
+    Let P be a longest path in a connected graph G, and suppose there exists a cycle C such that $P \subseteq C \subseteq G$. Then G is Hamiltonian.
+\end{prop}
+\begin{proof}
+    Proof goals: $P$ is a Hamiltonian path in $G$ $\Rightarrow$ $C$ is a Hamiltonian cycle $\Rightarrow$ $G$ is Hamiltonian.
+
+    First, let $P = (v_1, v_2,\dots, v_n)$. Then, we can construct $C = (v_1, v_2,\dots, v_n, \dots, v_1)$.
+    Notice $C$ can only be in the form of $(v_1, v_2,\dots, v_n) + (v_n,\dots, v_1)$ by appending a path to the end of $P$ that connects $v_n$ to $v_1$ because connecting any non-end points vertices would yield a cycle that $P$ is not a subset of.
+
+    Then, we will prove that $P$ contains all vertices in $G$.
+    Assume to the contrary that there exists $w \in V(G)$ that is not contained in $P$. 
+    Since $G$ is connected, there exists a path between $w$ and an arbitrary point $v_i \in P$.
+    Then, we can construct a path $P' = (w, \dots, v_i, v_{i-1}, \dots, v_1, v_n, v_{n-1}, \dots, v_{i+1})$ that is longer than $P$.
+    Hence, we reached contradiction and proved that $P$ contains all vertices in $G$, which means $P$ is a Hamiltonian path in $G$.
+
+    Next, we will prove that $C$ is a Hamiltonian cycle. Since $P$ is a Hamiltonian path and $P \subseteq C$, $C$ is a cycle that contains all vertices in $G$ too, which is the definition of a Hamiltonian cycle.
+    Thus, by definition, $G$ is Hamiltonian since it has a Hamiltonian cycle $C$.
+\end{proof}
+\bigbreak
+
+\textbf{Problem 3.}
+\begin{prop}
+    A graph $G$ of minimum degree at leas $k\ge 2$ contains no triangles contains a cycle of length at least $2k$.
+\end{prop}
+\begin{proof}
+    Let $P = (v_1, v_2 \dots, v_n)$ be the longest path in $G$.
+    We know $P$ must contain all the neighbors of $v_1$, otherwise we can construct a longer path $P' = (w, v_1, \dots, v_n)$ such that $w\in N(v_1)$ and $w \notin P$. 
+    Therefore, we know \emph{length(P)} $\ge d_G(v_1) + 1 \ge k + 1$.
+    By connecting $v_1$ with the further vertex $u \in N(v_1)$ in $P$, we can then form a cycle with length $\ge k+1$. [Proved in class]
+
+    Then, notice that for $2\le i \le n-2$, $v_i, v_{i+1} \in P$ cannot be neighbor of $v_1$ at the same time, otherwise a triangle can be constructed with $(v_1, v_i, v_{i+1}, v_1)$.
+    Therefore, $P = (v_1, \dots, v_i, w, \dots, v_{i+1}, \dots, v_n)$. 
+    In other words, any vertices in $P$ that are neighbor of $v_1$ must be separated by at least one vertex that is non-neighbor of $v_1$.
+    Finally, by connecting $v_1$ to the further vertex $u \in N(v_1)$ in $P$, we can actually form a even longer cycle with length $\ge 2k$.
+    [Consider the minimum case that all the neighbors of $v_1$ are separated by exactly one vertex that is non-neighbor of $v_1$, namely $(v_2, w_1, v_3, w_2, \dots, v_k)$. Then, this path has length $d_G(v_1) + (d_G(v_1)-1)$. Finally, adding $v_1$ to the front and connecting the ends, we can guarantee to form the cycle with length $2d_G(v_1) \ge 2k$.]
+\end{proof}
+\bigbreak
+
+\textbf{Problem 4.}
+
+Drawing pictures was definitely helpful. It helped me when I was brainstorming the proof for Problem 3. 
+I first recalled how Dr. Gwen proved the the lemma that for graph with minimum degree at least $k$, there exists a cycle of length at least $k+1$.
+I first drew the picture of that path and cycle. Then I stared at it and looked for more clues from the question.
+I was just randomly doodling and drawing triangles and suddenly I just found the proof. It was like magic haha.
+I would say drawing pictures definitely helped me spot out some of the patterns and clues.
+
+Also, considering related theorem is definitely helpful too. Just like the lemma I mentioned in the previous praragraph. 
+I started by first noticing the similarity between the lemma and the question. 
+Then, I tried to base my proof on that lemma.
+
+\end{document}

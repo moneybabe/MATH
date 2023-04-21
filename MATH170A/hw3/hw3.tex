@@ -18,4 +18,18 @@
 % placing title information; comment out if using fancyhdr
 \maketitle 
 
+\textbf{Problem 4.}
+$B = X^{^\top}AX = X^{^\top}R^{^\top}RX = (RX)^{^\top}(RX)$. 
+Let $M = RX$, then $B = (RX)^{^\top}(RX) \Leftrightarrow B = M^{^\top}M$. 
+Since $R, X$ are both invertible with determinant $\neq 0$, $M$ is also invertible with determinant $\neq 0$.
+
+$B^{^\top} = (M^{^\top}M)^{^\top} = M^{^\top}M = B$. So $B$ is symmetric.
+
+Then let $\vec{x}\neq \vec{0}$. $\vec{x}^{^\top}B\vec{x} = \vec{x}^{^\top}M^{^\top}M\vec{x} = (M\vec{x})^{^\top}M\vec{x} = M\vec{x} \cdot M\vec{x}$. 
+Let $y = M\vec{x}$. 
+Since $M$ is invertible and $\vec{x} \neq \vec{0}$, $\vec{y}\neq\vec{0}$.
+Hence, $M\vec{x}\cdot M\vec{x} = \vec{y}\cdot \vec{y} > 0$.
+
+Therefore, $B$ is positive definite.
+
 \end{document}

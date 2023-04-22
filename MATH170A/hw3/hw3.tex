@@ -2,6 +2,8 @@
 \usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
 \usepackage{enumitem}
 \usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
 
 \newtheorem{thm}{Theorem}
 \newtheorem{prop}[thm]{Proposition}
@@ -17,6 +19,82 @@
 
 % placing title information; comment out if using fancyhdr
 \maketitle 
+\textbf{Problem 1.}
+\begin{figure}[h]
+    \centering
+    \includegraphics*[scale=0.5]{Gauss_solve.png}
+    \caption{\emph{Gauss\_solve.m}}
+\end{figure}
+\bigbreak
+
+\textbf{Problem 2.}
+\begin{align}
+    & \begin{bmatrix}
+        2 & 2 & -4 \\
+        1 & 1 & 5 \\
+        1 & 3 & 6 
+    \end{bmatrix} \nonumber 
+    \Rightarrow (\emph{row 2 - $0.5\times$ row 1, row 3 - $0.5\times$ row 1}) \\ \Rightarrow
+    & \begin{bmatrix}
+        2 & 2 & -4 \\
+        0 & 0 & 7 \\
+        0 & 2 & 8 
+    \end{bmatrix} \nonumber 
+    \Rightarrow (\emph{row 2 and row 3 swap}) \\ \Rightarrow
+    & \begin{bmatrix}
+        2 & 2 & -4 \\
+        0 & 2 & 8 \\
+        0 & 0 & 7 
+    \end{bmatrix} \nonumber \\ \Rightarrow
+    & P = \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 0 & 1 \\
+        0 & 1 & 0
+    \end{bmatrix}; \quad
+    L = \begin{bmatrix}
+        1 & 0 & 0 \\
+        0.5 & 1 & 0 \\
+        0.5 & 0 & 1
+    \end{bmatrix}; \quad
+    U = \begin{bmatrix}
+        2 & 2 & -4 \\
+        0 & 2 & 8 \\
+        0 & 0 & 7
+    \end{bmatrix} \nonumber
+\end{align}
+\bigbreak
+
+\textbf{Problem 3.}
+\begin{align}
+    \begin{bmatrix}
+        1 & 0 & 2 \\
+        0 & 1 & -1 \\
+        2 & -1 & 9
+    \end{bmatrix} & =
+    \begin{bmatrix}
+        r_{1,1} & 0 & 0 \\
+        r_{1,2} & r_{2,2} & 0 \\
+        r_{1,3} & r_{2,3} & r_{3,3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        r_{1,1} & r_{1,2} & r_{1,3} \\
+        0 & r_{2,2} & r_{2,3} \\
+        0 & 0 & r_{3,3}
+    \end{bmatrix} \nonumber \\
+    & \Rightarrow r_{1,1} = \sqrt{1} = 1 \nonumber \\
+    & \Rightarrow r_{1,1} \times r_{1,2} = 0 \Rightarrow r_{1,2} = 0 \nonumber \\
+    & \Rightarrow r_{1,1} \times r_{1,3} = 2 \Rightarrow r_{1,3} = 2 \nonumber \\
+    & \Rightarrow r_{1,2}^2 + r_{2,2}^2 = 1 \Rightarrow r_{2,2} = 1 \nonumber \\
+    & \Rightarrow r_{1,2} \times r_{1,3} + r_{2,2} \times r_{2,3} = -1 \Rightarrow r_{2,3} = -1 \nonumber \\
+    & \Rightarrow r_{1,3}^2 + r_{2,3}^2 + r_{3,3}^2 = 9 \Rightarrow r_{3,3} = 2 \nonumber \\
+    & \Rightarrow R = \begin{bmatrix}
+        1 & 0 & 2 \\
+        0 & 1 & -1 \\
+        0 & 0 & 2
+    \end{bmatrix} \nonumber 
+\end{align}
+Since all the diagonal entires are greater than 0, $R$ is positive definite.
+\bigbreak
 
 \textbf{Problem 4.}
 $B = X^{^\top}AX = X^{^\top}R^{^\top}RX = (RX)^{^\top}(RX)$. 
@@ -31,5 +109,83 @@ Since $M$ is invertible and $\vec{x} \neq \vec{0}$, $\vec{y}\neq\vec{0}$.
 Hence, $M\vec{x}\cdot M\vec{x} = \vec{y}\cdot \vec{y} > 0$.
 
 Therefore, $B$ is positive definite.
+\bigbreak
 
+\textbf{Problem 5.}
+\begin{enumerate}[label={\alph*)}]
+    \item 
+    \begin{align}
+        A = \begin{bmatrix}
+            1 & 1 & 0 & 0 & 0 \\
+            2 & 3 & 3 & 0 & 0 \\
+            0 & 1 & 2 & 1 & 0 \\
+            0 & 0 & 2 & 3 & 1 \\
+            0 & 0 & 0 & 5 & 2
+        \end{bmatrix} & \Rightarrow 
+        L = \begin{bmatrix}
+            1 & 0 & 0 & 0 & 0 \\
+            2 & 1 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 0 & 1
+        \end{bmatrix}; \quad
+        U = \begin{bmatrix}
+            1 & 1 & 0 & 0 & 0 \\
+            0 & 1 & 3 & 0 & 0 \\
+            0 & 1 & 2 & 1 & 0 \\
+            0 & 0 & 2 & 3 & 1 \\
+            0 & 0 & 0 & 5 & 2
+        \end{bmatrix} \nonumber \\ 
+        & \Rightarrow
+        L = \begin{bmatrix}
+            1 & 0 & 0 & 0 & 0 \\
+            2 & 1 & 0 & 0 & 0 \\
+            0 & 1 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 0 & 1
+        \end{bmatrix}; \quad
+        U = \begin{bmatrix}
+            1 & 1 & 0 & 0 & 0 \\
+            0 & 1 & 3 & 0 & 0 \\
+            0 & 0 & -1 & 1 & 0 \\
+            0 & 0 & 2 & 3 & 1 \\
+            0 & 0 & 0 & 5 & 2
+        \end{bmatrix} \nonumber \\
+        & \Rightarrow
+        L = \begin{bmatrix}
+            1 & 0 & 0 & 0 & 0 \\
+            2 & 1 & 0 & 0 & 0 \\
+            0 & 1 & 1 & 0 & 0 \\
+            0 & 0 & -2 & 1 & 0 \\
+            0 & 0 & 0 & 0 & 1
+        \end{bmatrix}; \quad
+        U = \begin{bmatrix}
+            1 & 1 & 0 & 0 & 0 \\
+            0 & 1 & 3 & 0 & 0 \\
+            0 & 0 & -1 & 1 & 0 \\
+            0 & 0 & 0 & 5 & 1 \\
+            0 & 0 & 0 & 5 & 2
+        \end{bmatrix} \nonumber \\
+        & \Rightarrow
+        L = \begin{bmatrix}
+            1 & 0 & 0 & 0 & 0 \\
+            2 & 1 & 0 & 0 & 0 \\
+            0 & 1 & 1 & 0 & 0 \\
+            0 & 0 & -2 & 1 & 0 \\
+            0 & 0 & 0 & 1 & 1
+        \end{bmatrix}; \quad
+        U = \begin{bmatrix}
+            1 & 1 & 0 & 0 & 0 \\
+            0 & 1 & 3 & 0 & 0 \\
+            0 & 0 & -1 & 1 & 0 \\
+            0 & 0 & 0 & 5 & 1 \\
+            0 & 0 & 0 & 0 & 1
+        \end{bmatrix} \nonumber 
+    \end{align}
+
+    $L$ is a lower triangular matrix with bandwidth $s=1$ (only have non-zero entries on diagonal and subdiagonal), and $U$ is an upper triangular matrix with bandwidth $t=1$ (only have non-zero entries on diagonal and superdiagonal).
+
+    \item 
+    $L$ would be a lower triangular matrix with bandwidth $s$ and $U$ would be an upper triangular matrix with bandwidth $t$.
+\end{enumerate}
 \end{document}

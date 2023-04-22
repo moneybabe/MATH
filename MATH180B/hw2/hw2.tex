@@ -48,6 +48,12 @@ Since we are considering only stationary Markov's Chain,
     \end{blockarray} \nonumber
 \end{align}
 
+Each entry of the matrix is simply determined by combinatorics after considering how the two people can be picked, which we will omit here for better readability.
+For solely demonstration purposes, 
+\begin{align}    
+    P_{33} = \frac{{3\choose 2} + {2\choose 2} + 0.9\times {3\choose 1}{2\choose 1}}{{5\choose 2}} = 0.94; \quad P_{34} = \frac{0.1\times{3\choose 1}{2\choose 1}}{{5\choose 2}} = 0.06 = 1-0.94. \nonumber
+\end{align}
+
 Then, at the end of \emph{n-th} period, the transition matrix is simply $P^n$.
 \bigbreak
 
@@ -55,27 +61,88 @@ Then, at the end of \emph{n-th} period, the transition matrix is simply $P^n$.
 \textbf{PK Problem 3.1.2}
 \begin{enumerate}[label=(\alph*)]
     \item \begin{align}
-        P(X_0=0, X_1=0, X_2=0) = P_{00}\times P_{00}\times P_{00} = (1-\alpha)^3. \nonumber
+        P(X_0=0, X_1=0, X_2=0) = P_{00}\times P_{00} = (1-\alpha)^2. \nonumber
     \end{align}
 
     \item \begin{align}
-        P(X_0=0, X_1=0, X_2=0) & = P_{00}\times P_{00}\times P_{01} + P_{00}\times P_{01}\times P_{01} \nonumber \\
-        & = (1-\alpha)^3 + \alpha(1-\alpha)^2. \nonumber
+        P(X_0=0, X_2=0) & = P_{00}\times P_{00} + P_{01}\times P_{10} = (1-\alpha)^2 + \alpha^2. \nonumber
     \end{align}
 \end{enumerate}
 \bigbreak
 
 
 \textbf{PK Exercise 3.2.6}
+\begin{align}
+    P^2 = 
+    \begin{blockarray}{cccc}
+        & 0 & 1 & 2  \\
+        \begin{block}{c||ccc||}
+          0 & 0.44 & 0.18 & 0.38  \\
+          1 & 0.4 & 0.19 & 0.41  \\
+          2 & 0.4 & 0.18 & 0.42  \\
+        \end{block}
+    \end{blockarray}~; \quad
+    P^3 =
+    \begin{blockarray}{cccc}
+        & 0 & 1 & 2  \\
+        \begin{block}{c||ccc||}
+          0 & 0.412 & 0.182 & 0.406  \\
+          1 & 0.42 & 0.181 & 0.399  \\
+          2 & 0.42 & 0.182 & 0.398  \\
+        \end{block}
+    \end{blockarray}~. \nonumber
+\end{align}
 
+Then,
+\begin{align}
+    P(X_2=0) & = P(X_2=0|X_0=0)P(X_0=0) + P(X_2=0|X_0=1)P(X_0=1) \nonumber \\ 
+    & = 0.44 \times 0.5 + 0.4 \times 0.5 \nonumber \\
+    & = 0.42, \nonumber
+\end{align} and
+
+\begin{align}
+    P(X_3=0) & = P(X_3=0|X_0=0)P(X_0=0) + P(X_3=0|X_0=1)P(X_0=1) \nonumber \\
+    & = 0.412 \times 0.5 + 0.42 \times 0.5 \nonumber \\
+    & = 0.416. \nonumber
+\end{align}
 \bigbreak
 
 
 \textbf{PK Problem 3.2.2}
+Let each transition be a \emph{Bernoulli} random variable with 1 being sending a wrong signal and 0 being sending a correct signal. 
+Then,
+\begin{align}
+    I = \begin{cases}
+        1, & \alpha \\
+        0, & 1-\alpha.
+    \end{cases} \nonumber
+\end{align}
 
+Then, the distribution of sending a signal is a \emph{Binomial(5, $1-\alpha$)}, and the probability of sending a correct signal is 
+\begin{align}
+    P & = {5\choose 0} (1-\alpha)^5 + {5\choose 2} \alpha^2(1-\alpha)^3 + {5\choose 4} \alpha^4(1-\alpha) \nonumber \\
+    & = -16\alpha^5 + 40\alpha^4 - 40\alpha^3 + 20\alpha^2 - 5\alpha + 1. \nonumber
+\end{align}
 \bigbreak
 
 
 \textbf{PK Problem 3.3.1}
+\begin{align}
+    P = 
+    \begin{blockarray}{ccccc}
+        & 0 & 1 & 2 & 3  \\
+        \begin{block}{c||cccc||}
+          0 & 1 & 0 & 0 & 0  \\
+          1 & \frac{1}{15} & \frac{14}{15} & 0 & 0  \\
+          2 & 0 & \frac{4}{15} & \frac{11}{15} & 0  \\
+          3 & 0 & 0 & 0.6 & 0.4 \\
+        \end{block}
+    \end{blockarray} \nonumber
+\end{align}
 
+Again, each entry of the matrix is simply determined by combinatorics after considering how the two tags can be picked, which we will omit here for better readability.
+For solely demonstration purposes,
+\begin{align}
+    P_{21} = \frac{{2\choose 1}{2\choose 1}}{{6\choose 2}} = \frac{4}{15};\quad P_{22} = \frac{3\times {2\choose 2}}{{6\choose 2}} + \frac{2\times {2\choose 1}{2\choose 1}}{{6\choose 2}}= \frac{11}{15} = 1-\frac{4}{15}. \nonumber
+\end{align}
 \end{document}

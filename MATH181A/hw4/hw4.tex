@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 181A HW4}
+\author{Neo Lee}
+\date{04/25/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 5.4.2}
+\begin{enumerate}[label={(\alph*)}]
+    \item \begin{align}
+        P(\hat{2.8\le \theta\le 3.2}) = P(\hat{\theta} \ge 2.8) & = 1-P(\{Y_1, \dots, Y_6\}\le 2.8) \nonumber \\
+        & = 1 - P(Y_1\le 2.8)^6 \nonumber \\
+        & = 1 - \left(\frac{2.8}{3}\right)^6 \nonumber \\
+        & \approx 0.339. \nonumber
+    \end{align}
+
+    \item 
+    \begin{align}
+        P(\hat{2.8\le \theta\le 3.2}) = P(\hat{\theta} \le 2.8) & = 1- P(\{Y_1, \dots, Y_3\}\le 2.8) \nonumber \\
+        & = 1 - P(Y_1\le 2.8)^3 \nonumber \\
+        & = 1 - \left(\frac{2.8}{3}\right)^3 \nonumber \\
+        & \approx 0.187. \nonumber
+    \end{align}
+\end{enumerate}
+\bigbreak
+
+
+\textbf{Problem 5.4.15}
+\begin{align}
+    E[\overline{W}^2] & = Var(\overline{W}) + (E[\overline{W}])^2 \nonumber \\
+    & = Var(\frac{1}{n}\sum_{i=1}^{n}W_i) + \left(E[\frac{1}{n}\sum_{i=1}^{n}W_i]\right)^2 \nonumber \\
+    & = \frac{1}{n^2}\sum_{i=1}^{n}Var(W_i) + \left(\frac{1}{n}\sum_{i=1}^{n}E[W_i]\right)^2 \nonumber \\
+    & = \frac{n\sigma^2}{n^2} + \left(\frac{n\mu}{n}\right)^2 \nonumber \\
+    & = \frac{\sigma^2}{n} + \mu^2, \nonumber \\
+    \lim_{n\to\infty}E[\overline{W}^2] & = \lim_{n\to\infty}\frac{\sigma^2}{n} + \mu^2 \nonumber \\
+    & = \mu^2. \nonumber
+\end{align}
+\bigbreak
+
+
+\textbf{Problem 5.4.18}
+By symmetry, $Var(Y_{min}) = Var(Y_{max})$, let $\sigma^2$. Hence, 
+\begin{align}
+    \emph{MSE}(\hat{\theta}_1) & = Var(\hat{\theta}_1) + \emph{Bias}(\hat{\theta}_1) \nonumber \\ 
+    & = Var(\hat{\theta}_1) \nonumber \\
+    & = \frac{36}{25}\sigma^2. \nonumber \\
+    \emph{MSE}(\hat{\theta}_2) & = Var(\hat{\theta}_2) + \emph{Bias}(\hat{\theta}_2) \nonumber \\
+    & = Var(\hat{\theta}_2) \nonumber \\
+    & = 36\sigma^2 \nonumber \\
+    & > \emph{MSE}(\hat{\theta}_1). \nonumber
+\end{align}
+
+Therefore, $\hat{\theta}_1$ is better than $\hat{\theta}_2$.
+\bigbreak
+
+
+\textbf{Problem 5.4.21}
+With the same notation from last question, then
+\begin{align}
+    \frac{Var(\hat{\theta}_1)}{Var(\hat{\theta}_2)} & = \frac{(n+1)^2\sigma^2}{\left(\frac{n+1}{n}\right)^2\sigma^2}  \nonumber \\
+    & = n^2. \nonumber
+\end{align}
+\bigbreak
+
+
+\textbf{Problem 5.5.2}
+\begin{align}
+    l(\lambda) & = \log(\frac{e^{-\lambda}\lambda^k}{k!}) \nonumber \\
+    & = -\lambda + k\log(\lambda) - \log(k!), \nonumber \\
+    l'(\lambda) & = -1 + \frac{k}{\lambda}, \nonumber \\
+    l''(\lambda) & = -\frac{k}{\lambda^2}. \nonumber \\
+    I(\lambda) & = -E[l''(\lambda)] \nonumber \\
+    & = -E[\frac{-k}{\lambda^2}] \nonumber \\
+    & =  \sum_{k=0}^{\infty} \frac{k}{\lambda^2}\cdot e^{-\lambda}\frac{\lambda^k}{k!} \nonumber \\
+    & = \frac{e^{-\lambda}}{\lambda}\sum_{k=0}^{\infty} \frac{\lambda^{k-1}}{(k-1)!} \nonumber \\
+    & = \frac{e^{-\lambda}}{\lambda} \left(\frac{0\cdot \lambda^{k-1}}{0!} + \sum_{k=1}^{\infty}\frac{\lambda^{k-1}}{(k-1)!}\right) \nonumber \\
+    & = \frac{e^{-\lambda}}{\lambda} \left(\sum_{k=0}^{\infty}\frac{\lambda^{k}}{k!}\right) \nonumber \\
+    & = \frac{e^{-\lambda}}{\lambda} \cdot e^{\lambda} \nonumber \\
+    & = \frac{1}{\lambda}. \nonumber \\
+    Var(\hat{\lambda}) & = Var\left(\frac{1}{n}\sum_{i=1}^{n}X_i\right) \nonumber \\
+    & = \frac{1}{n^2}Var\left(\sum_{i=1}^{n}X_i\right) \nonumber \\
+    & = \frac{1}{n}Var(X_i) \nonumber \\
+    & = \frac{1}{n}\lambda \nonumber \\
+    & = \frac{1}{n(1/\lambda)} \nonumber \\
+    & = \frac{1}{nI(\lambda)}. \nonumber
+\end{align}
+\bigbreak
+
+
+
+
+\end{document}

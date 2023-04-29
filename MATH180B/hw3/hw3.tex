@@ -1,0 +1,189 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage{blkarray}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180B HW3}
+\author{Neo Lee}
+\date{04/28/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{PK Exercise 3.4.4}
+\begin{align}
+    v_0 = E[T|X_0=0] & = 1 + E[T|X_1=0]P(X_1=0|X_0=0) + E[T|X_1=1]P(X_1=1|X_0=0) \nonumber \\
+    v_0 & = 1 + \frac{1}{2}v_0 + \frac{1}{2}(1 + \frac{1}{2}v_0) \nonumber \\
+    v_0 & = 6. \nonumber 
+\end{align}
+\bigbreak
+
+
+\textbf{PK Exercise 3.4.7}
+\begin{align}
+    W_{11} & = 1 + 0.1\times 0 + 0.2\times W_{11} + 0.5\times W_{21} + 0.2\times 0 \nonumber \\
+    & = 1 + 0.2\times W_{11} + 0.5\times W_{21}; \nonumber \\
+    W_{21} & = 0.1\times 0 + 0.2\times W_{11} + 0.6\times W_{21} + 0.1\times 0 \nonumber \\
+    & = 0.2\times W_{11} + 0.6\times W_{21}. \nonumber 
+\end{align}
+Solving the system of linear equations, we get $\underline{W_{11} = \frac{20}{11}}$ and $W_{21} = \frac{10}{11}$. \bigbreak
+\begin{align}
+    W_{12} & = 0.1\times 0 + 0.2\times W_{12} + 0.5\times W_{22} + 0.2\times 0 \nonumber \\
+    & = 0.2\times W_{12} + 0.5\times W_{22}; \nonumber \\
+    W_{22} & = 1 + 0.1\times 0 + 0.2\times W_{12} + 0.6\times W_{22} + 0.1\times 0 \nonumber \\
+    & = 1 + 0.2\times W_{12} + 0.6\times W_{22}. \nonumber 
+\end{align}
+Solving the system of linear equations, we get $\underline{W_{12} = \frac{25}{11}}$ and $W_{22} = \frac{40}{11}$. \bigbreak
+\begin{align}
+    v_1 & = 1 + 0.2\times v_1 + 0.5\times v_2; \nonumber \\
+    v_2 & = 1 + 0.2\times v_1 + 0.6\times v_2. \nonumber
+\end{align}
+Solving the system of linear equations, we get $v_1 = \frac{45}{11} = W_{11} + W_{12}$ and $v_2 = \frac{50}{11} = W_{21} + W_{22}$. \bigbreak
+\bigbreak
+
+
+\textbf{PK Problem 3.4.1}
+For \emph{HHT} pattern, let $X_n$ be the number of successsive flips matching the pattern, then $\{X_0: T, X_1: H, X_2: HH, X_3: HHT\}$. 
+The transition probability matrix is
+\begin{align}
+    P & = 
+    \begin{blockarray}{ccccc}
+        & 0 & 1 & 2 & 3 \\
+        \begin{block}{c||cccc||}
+          0 & \frac{1}{2} & \frac{1}{2} & 0 & 0  \\
+          1 & \frac{1}{2} & 0 & \frac{1}{2} & 0  \\
+          2 & 0 & 0 & \frac{1}{2} & \frac{1}{2}  \\
+          3 & 0 & 0 & 0 & 1 \\
+        \end{block}
+    \end{blockarray}\; , \nonumber \\
+\end{align}
+and
+\begin{align}
+    v & = 1 + (0.5\times v + 0.5\times (1 + 0.5\times v + 0.5\times 2)) \nonumber \\
+    & = 8. \nonumber
+\end{align}
+
+For \emph{HTH} pattern,
+\begin{align}
+    P & = 
+    \begin{blockarray}{ccccc}
+        & 0 & 1 & 2 & 3 \\
+        \begin{block}{c||cccc||}
+          0 & \frac{1}{2} & \frac{1}{2} & 0 & 0  \\
+          1 & 0 & \frac{1}{2} & \frac{1}{2} & 0  \\
+          2 & \frac{1}{2} & 0 & 0 & \frac{1}{2}  \\
+          3 & 0 & 0 & 0 & 1 \\
+        \end{block}
+    \end{blockarray}\; , \nonumber \\
+    v_0 & = 1 + (0.5\times v_0 + 0.5(1 + 0.5\times v_1 + 0.5(1 + 0.5\times v_0))), \nonumber \\
+    v_1 & = 1 + (0.5\times v_1 + 0.5(1 + 0.5\times v_0)). \nonumber
+\end{align}
+Solving the system of linear equations, we get $v_0 = 10$ and $v_1 = 8$.
+
+The solutions can be represented by writing out all the expectations $v_i$ starting at states $i$ for $i\in[0,3]$. 
+But for simplicity, the aboves equations are formed directly after plugging in the expectations.
+
+Since $v_0 > v$, the pattern \emph{HHT} takes fewer flips on average. 
+Intuitively speaking, it is because for \emph{HHT}, once you get pass the first two flips \emph{HH}, then it's just a geometric sequence of getting a tail with expectation 2.
+On the other hand, for \emph{HTH}, although you will never fall back to the first flip during the second flip, but once you're at the third flip and you missed it, you have to restart the whole game, which is more costly.
+\bigbreak
+
+
+\textbf{PK Problem 3.4.2}
+\begin{align}
+    v_m & = 1 + \sum_{i=0}^{m-1}\frac{1}{m}v_i \nonumber \\
+    v_{m-1} & = 1 + \sum_{i=0}^{m-2}\frac{1}{m-1}v_i \nonumber \\
+    & \quad\qquad \vdots \nonumber \\
+    v_2 & = 1 + \frac{1}{2}v_1 + \frac{1}{2} v_0 = 1 + \frac{1}{2}v_1 \nonumber \\
+    v_1 & = 1 + \frac{1}{1}v_0  = 1 \nonumber \\
+    v_0 & = 0. \nonumber
+\end{align}
+Then, the solution is just solving the system of linear equations from $v_m$ to $v_0$ with the matrix representation as follow:
+\begin{align}
+    \begin{bmatrix}
+        1 & -\frac{1}{m} & -\frac{1}{m} & \cdots & -\frac{1}{m} \\
+        0 & 1 & -\frac{1}{m-1} & \cdots & -\frac{1}{m-1} \\
+        0 & 0 & 1 & \cdots & -\frac{1}{m-2} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_m \\
+        v_{m-1} \\
+        v_{m-2} \\
+        \vdots \\
+        v_1
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        1 \\
+        1 \\
+        1 \\
+        \vdots \\
+        1
+    \end{bmatrix}. \nonumber
+\end{align}
+
+The system of linear equations can be solved by backward substitution.
+\bigbreak
+
+
+\textbf{PK Problem 3.4.4}
+Let $u_i$ be the probability of starting at state $i$ and eventually abosorbed at state $0$ without visiting state 2.
+Then, we have the following system of linear equations:
+\begin{align}
+    u_1 & = 0.1 + 0.2u_1 + 0.2u_3 \nonumber \\
+    u_3 & = 0.2 + 0.2u_1 + 0.3u_3. \nonumber
+\end{align}
+Solving the system of linear equations, we get $\underline{u_1 = \frac{11}{52}}$ and $u_3 = \frac{9}{26}$.
+\bigbreak
+
+
+\textbf{PK Problem 3.4.5}
+Let $u_i$ be the probability of starting at state $i$ and visiting 3 before 7.
+The transition probability matrix is as follow:
+\begin{align}
+    P = 
+    \begin{blockarray}{cccccccc}
+        & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+        \begin{block}{c||ccccccc||}
+          1 & 0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 \\
+          2 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & 0 \\
+          3 & 0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2} & 0 \\
+          4 & \frac{1}{3} & 0 & 0 & 0 & \frac{1}{3} & 0 & \frac{1}{3} \\
+          5 & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 \\
+          6 & 0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 \\
+          7 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        \end{block}
+    \end{blockarray} \nonumber
+\end{align}
+
+Then, we can formulate the system of linear equations as follow:
+\begin{align}
+    u_3 & = 1 \nonumber \\
+    u_7 & = 0 \nonumber \\
+    u_1 & = \frac{1}{2}u_2 + \frac{1}{2}u_4 \nonumber \\
+    u_2 & = \frac{1}{3}u_1 + \frac{1}{3}u_3 + \frac{1}{3}u_5 = \frac{1}{3}u_1 +\frac{1}{3} + \frac{1}{3}u_5\nonumber \\
+    u_4 & = \frac{1}{3}u_1 + \frac{1}{3}u_5 + \frac{1}{3}u_7 =\frac{1}{3}u_1 + \frac{1}{3}u_5\nonumber \\
+    u_5 & = \frac{1}{3}u_2 + \frac{1}{3}u_4 + \frac{1}{3}u_6 \nonumber \\
+    u_6 & = \frac{1}{2}u_3 + \frac{1}{2}u_5 = \frac{1}{2} + \frac{1}{2}u_5. \nonumber 
+\end{align}
+Solving the system of linear equations, we get 
+\begin{align}
+    u_1 & = \frac{7}{12} \nonumber \\
+    u_2 & = \frac{3}{4} \nonumber \\
+    u_3 & = 1 \nonumber \\
+    u_4 & \; \underline{= \frac{5}{12}} \nonumber \\
+    u_5 & = \frac{2}{3} \nonumber \\
+    u_6 & = \frac{5}{6} \nonumber \\
+    u_7 & = 0. \nonumber
+\end{align}
+\end{document}

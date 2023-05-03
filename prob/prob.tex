@@ -16,14 +16,14 @@
 
 % placing title information; comment out if using fancyhdr
 \maketitle 
-\section*{1. Discrete Distributions}
-\subsection*{1.1 Uniform random variable}
+\section{Discrete Distributions}
+\subsection{Uniform Random Variable}
 \begin{align}
     & E[X] = \frac{x_1 + \dots + x_n}{n}; \quad Var(X) = \frac{x_1^2 + \dots + x_n^2}{n} - \left(\frac{x_1 + \dots + x_n}{n}\right)^2. \nonumber \\
     & E[X] = \frac{n+1}{2}; \quad Var(X) = \frac{n^2-1}{12}; \quad \emph{only when $x_i = [1, 2, \dots, n]$}. \nonumber
 \end{align}
 
-\subsection*{1.2 Bernoulli random variable}
+\subsection{Bernoulli Random Variable}
 \begin{align}
     & I = \begin{cases}
         1 & \text{if $X = 1$}, \\
@@ -32,27 +32,27 @@
     & E[I] = p; \quad Var(I) = p(1-p). \nonumber
 \end{align}
 
-\subsection*{1.3 Binomial random variable}
+\subsection{Binomial Random Variable}
 \begin{align}
     & P(X=k) = {n\choose k}p^k(1-p)^{n-k} \quad \emph{for } k \in [0,n]. \nonumber \\
     & E[X] = np; \quad Var(X) = np(1-p). \nonumber
 \end{align}
 
-\subsection*{1.4 Poisson random variable}
+\subsection{Poisson Random Variable}
 \begin{align}
     & P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} \quad \emph{for } k \in \mathbb{Z}^{^\ge}. \nonumber \\
     & E[X] = \lambda; \quad Var(X) = \lambda. \nonumber
 \end{align}
 
-\subsection*{1.5 Geometric random variable}
+\subsection{Geometric Random Variable}
 \begin{align}
     & P(X=n) = (1-p)^{n-1}p \quad \emph{for } n \in \mathbb{N}. \nonumber \\
     & E[X] = \frac{1}{p}; \quad Var(X) = \frac{1-p}{p^2}; \quad P(X > n) = (1-p)^n ; \quad P(X>n+k|X>k) = P(X>n). \nonumber
 \end{align}
 
 \newpage
-\section*{2. Continuous Distributions}
-\subsection*{2.1 Uniform random variable}
+\section{Continuous Distributions}
+\subsection{Uniform Random Variable}
 \begin{align}
     & f(x) = \begin{cases}
         \frac{1}{\beta-\alpha} & \text{if $x \in [\alpha, \beta]$}, \\
@@ -61,7 +61,7 @@
     & E[X] = \frac{\alpha+\beta}{2}; \quad Var(X) = \frac{(\beta-\alpha)^2}{12}. \nonumber
 \end{align}
 
-\subsection*{2.2 Exponential random variable}
+\subsection{Exponential Random Variable}
 \begin{align}
     & f(x) = \begin{cases}
         \lambda e^{-\lambda x} & \text{if $x \ge 0$}, \\
@@ -70,21 +70,21 @@
     & E[X] = \frac{1}{\lambda}; \quad Var(X) = \frac{1}{\lambda^2}; \quad P(X\ge x) = e^{-\lambda x}; \quad P(X\ge x + y|X\ge y) = e^{-\lambda x}. \nonumber
 \end{align}
 
-\subsection*{2.3 Normal random variable}
+\subsection{Normal Random Variable}
 \begin{align}
     & f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \quad \emph{for $x\in \mathbb{R}$}. \nonumber \\
     & E[X] = \mu; \quad Var(X) = \sigma^2; \quad Z \sim \emph{N(0,1)} = \frac{X-\mu}{\sigma}. \nonumber
 \end{align}
 
-\subsection*{2.4 Gamma random variable}
+\subsection{Gamma Random Variable}
 \begin{align}
-    & f(x) = \frac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \beta, x\in \mathbb{R}^{^+}$}; \quad \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt. \nonumber \\
+    & f(x) = \frac{\lambda}{\Gamma(\alpha)} (\lambda x)^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \beta, x\in \mathbb{R}^{^+}$}; \quad \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt. \nonumber \\
     & E[X] = \frac{\alpha}{\lambda}; \quad Var(X) = \frac{\alpha}{\lambda^2}. \nonumber
 \end{align}
 
 \newpage
-\section*{3. Multivariate Distributions}
-\subsection*{3.1 Multivariate Normal Distribution}
+\section{Multivariate Distributions}
+\subsection{Multivariate Normal Distribution}
 \begin{align}
     & f(\vec{x}) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} e^{-\frac{1}{2}(\vec{x}-\vec{\mu})^{^\top}\Sigma^{-1}(\vec{x}-\vec{\mu})} \quad \emph{for $x\in \mathbb{R}^n$}. \nonumber \\
     & E[X] = \vec{\mu}; \quad Var(X) = \Sigma. \nonumber
@@ -105,7 +105,7 @@ For bivariate random vector $\begin{bmatrix}
     Var(Z) = a^2\sigma_X^2+2ab\rho\sigma_X\sigma_Y+b^2\sigma_Y^2. \nonumber
 \end{align}
 
-\subsection*{3.2 Multinomial Distribution}
+\subsection{Multinomial Distribution}
 \begin{align}
     & P(\vec{x}) = \frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k} \quad \emph{for $\vec{x} = \begin{bmatrix}
         x_1 \\ \vdots \\ x_k
@@ -113,39 +113,52 @@ For bivariate random vector $\begin{bmatrix}
     & E[\vec{x}] = n\vec{p}; \quad Var(\vec{x}) = n\overrightarrow{p(1-p)}. \nonumber
 \end{align}
 
+\subsection{Random Sums}
+
 \newpage
-\section*{4. Theorems}
-\subsection*{4.1 Chebyshev's Inequality}
+\section{Theorems}
+\subsection{Chebyshev's Inequality}
 \begin{align}
     & P(|X-\mu| \ge k\sigma) \le \frac{1}{k^2}. \nonumber
 \end{align}
 
-\subsection*{4.2 Markov's Inequality}
+\subsection{Markov's Inequality}
 \begin{align}
     & P(X \ge k) \le \frac{E[X]}{k}. \nonumber
 \end{align}
 
-\subsection*{4.3 Central Limit Theorem}
+\subsection{Central Limit Theorem}
 Let $S_n = X_1 + \dots + X_n$. When $n$ is large, $S_n$ is approximately normally distributed with mean $n\mu $ and variance $n\sigma^2$.
 \begin{align}
     & \frac{S_n-n\mu}{\sqrt{n}\sigma} = \frac{\bar{S_n} - \mu}{\sigma / \sqrt{n}} \sim \emph{N(0,1)} \quad \emph{as $n\to\infty$}. \nonumber
 \end{align}
 
-\subsection*{4.4 Weak Law of Large Numbers}
+\subsection{Weak Law of Large Numbers}
 Let $S_n = X_1 + \dots + X_n$. 
 \begin{align}
     & \lim_{n\rightarrow\infty}P(|\bar{S_n}-\mu|<\epsilon) = 1. \nonumber
 \end{align}
 
-\subsection*{4.5 Strong Law of Large Numbers}
+\subsection{Strong Law of Large Numbers}
 Let $S_n = X_1 + \dots + X_n$.
 \begin{align}
     & P(\lim_{n\rightarrow\infty}\bar{S_n}=\mu) = 1. \nonumber
 \end{align}
 
-\subsection*{4.6 Moment Generating Function}
+\subsection{Moment Generating Function}
 \begin{align}
     & M_X(t) = E[e^{tX}] = \int_{-\infty}^\infty e^{tx}f(x)dx. \nonumber
 \end{align}
+
+\newpage
+\section{Special Markov's Chains}
+\subsection{Two State Markov's Chain}
+\subsection{Successive Maxima}
+\subsection{Partial Sums}
+\subsection{One-dimensional Random Walk}
+\subsubsection{Simple Random Walk}
+\subsubsection{Gambler's Ruin}
+\subsection{Success Runs}
+\subsubsection{Repeated Trials}
 
 \end{document}

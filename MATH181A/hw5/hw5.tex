@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 181A HW5}
+\author{Neo Lee}
+\date{05/02/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 10-1}
+\begin{align*}
+    E[Z] & = E[\sum_{i=1}^{n}\frac{\partial}{\partial\theta}\log f_X(X_i;\theta)] \\
+    & = nE[\frac{\partial}{\partial\theta}\log f_X(X_i;\theta)] \\
+    & = nE[\frac{\frac{\partial}{\partial\theta}f_X(X_i;\theta)}{f_X(X_i;\theta)}] \\
+    & = n\int_{\mathbb{R}} \frac{\frac{\partial}{\partial\theta}f_X(X_i;\theta)}{f_X(X_i;\theta)}\cdot f_X(X_i;\theta)dx \\
+    & = n\int_{\mathbb{R}} \frac{\partial}{\partial\theta}f_X(X_i;\theta)dx \\
+    & = n\frac{\partial}{\partial\theta}\int_{\mathbb{R}} f_X(X_i;\theta)dx \\
+    & = n \frac{\partial}{\partial\theta}1 \\
+    & = 0. \\
+    Var(Z) & = E[Z^2] - E[Z]^2 \\
+    & = E[Z^2] \\
+    & = E\left[\left(\sum_{i=1}^{n}\frac{\partial}{\partial\theta}\log f_X(X_i;\theta)\right)^2\right] \\
+    & = E\left[\sum_{i=1}^{n}\left(\frac{\partial}{\partial\theta}\log f_X(X_i;\theta)\right)^2- 2\left(\sum_{i<j}\log f_X(X_i;\theta)\cdot\log f_X(X_j;\theta)\right)\right] \\
+    & = E\left[\sum_{i=1}^{n}\left(\frac{\partial}{\partial\theta}\log f_X(X_i;\theta)\right)^2\right] \\
+    & = nE\left[\left(\frac{\partial}{\partial\theta}\log f_X(X_i;\theta)\right)^2\right] \\
+    & = nI(\theta).
+\end{align*}
+\bigbreak
+
+\textbf{Problem 10-2}
+\begin{align*}
+    I(\mu) & = -E\left[\frac{\partial^2}{\partial\mu^2}\log \frac{1}{2\sqrt{2\pi}}e^{\frac{-1}{2\cdot 4}(x-\mu)^2}\right] \\
+    & = -E\left[\frac{\partial^2}{\partial\mu^2}\left(-\log 2\sqrt{2\pi}-\frac{1}{8}(x-\mu)^2\right)\right] \\
+    & = -E\left[\frac{\partial}{\partial\mu}\left(\frac{1}{4}(x-\mu)\right)\right] \\
+    & = E\left[\frac{1}{4}\right] \\
+    & = \frac{1}{4}. \\
+    Var(\hat{\mu}) & = \frac{1}{nI(\mu)} \\
+    & = \frac{4}{n} \\
+\end{align*}
+
+Hence, the 95\% confidence interval is $\hat{\mu}\pm 1.96\sqrt{\frac{4}{n}} = 5\pm 1.96\frac{2}{\sqrt{n}}$.
+\bigbreak
+
+\textbf{Problem 11-1}
+\begin{align*}
+    s^2 & = \frac{1}{n-1}\sum_{i=1}^{n}(Y_i - \overline{Y})^2 \\
+    & = \frac{1}{n-1}\sum_{i=1}^{n}(Y_i^2 - 2Y_i\overline{Y} + \overline{Y}^2) \\
+    & = \frac{1}{n-1}\left(\sum_{i=1}^{n}Y_i^2 - 2\sum_{i=1}^{n}Y_i\overline{Y} + \sum_{i=1}^{n}\overline{Y}^2\right) \\
+    & = \frac{1}{n-1}\left(\sum_{i=1}^{n}Y_i^2 - 2\overline{Y}\frac{n}{n}\sum_{i=1}^{n}Y_i+ n\overline{Y}^2\right) \\
+    & = \frac{1}{n-1}\left(\sum_{i=1}^{n}Y_i^2 - 2n\overline{Y}^2+ n\overline{Y}^2\right) \\
+    & = \frac{1}{n-1}\left(\sum_{i=1}^{n}Y_i^2 - n\overline{Y}^2\right) \\
+    & = \frac{n}{n-1}\left(\hat{\mu}_2-\hat{\mu}_1\right). \\
+\end{align*}
+
+Then, we want to find 
+\begin{align*}
+    \lim_{n\rightarrow\infty}P(|s^2 - \sigma^2| > \epsilon) & = \lim_{n\rightarrow\infty}P(|s^2 - \left(\mu_2-\mu_1\right)| > \epsilon) \\
+    & = \lim_{n\rightarrow\infty}P(|\frac{n}{n-1}\left(\hat{\mu}_2-\hat{\mu}_1\right) - \left(\mu_2-\mu_1\right)| > \epsilon) \\
+    & = \lim_{n\rightarrow\infty}P(|\left(\hat{\mu}_2-\hat{\mu}_1\right) - \left(\mu_2-\mu_1\right)| > \epsilon) \qquad (\because \lim_{n\rightarrow\infty}\frac{n}{n-1}=1) \\
+    & = \lim_{n\rightarrow\infty}P(|\left(\hat{\mu}_2-\mu_2\right) - \left(\hat{\mu}_1-\mu_1\right)| > \epsilon) \\
+    & = 0. \qquad (\emph{weak law of large number: }\hat{\mu}_2 \rightarrow \mu_2, \hat{\mu}_1 \rightarrow \mu_1)
+\end{align*}
+\pagebreak
+
+\textbf{Problem 5.7.6}
+\begin{align*}
+    \lim_{n\rightarrow\infty}P(|Y'_{n+1} - \mu| > \epsilon) & = \lim_{n\rightarrow\infty}P(|Y'_{n+1} - E[Y'_{n+1}]| > \epsilon) \\
+    & \le \frac{Var(Y'_{n+1})}{\epsilon^2} \qquad (\emph{Chebyshev's inequality}) \\
+    & = \frac{1}{8\left[f_Y(\mu;\mu)\right]^2n}\cdot \frac{1}{\epsilon^2} \\
+    & = 0. \qquad (\lim_{n\rightarrow\infty}\frac{1}{8\left[f_Y(\mu;\mu)\right]^2n} = 0)
+\end{align*}
+\bigbreak
+
+\textbf{Problem 5.6.4}
+\begin{align*}
+    L(\sigma^2) & = \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{-y^2}{2\sigma^2}} \\
+    & = \frac{1}{(2\pi)^{n/2}(\sigma^2)^{n/2}}e^{\frac{-1}{2\sigma^2}\sum_{i=1}^{n}y_i^2} \\
+    & = \frac{1}{(2\pi)^{n/2}(\sigma^2)^{n/2}}e^{\frac{-1}{2\sigma^2}\hat{\sigma}^2}. \\
+\end{align*}
+Then, 
+\begin{align*}
+    g(\hat{\sigma}^2;\sigma^2) & = \frac{1}{(2\pi)^{n/2}(\sigma^2)^{n/2}}e^{\frac{-1}{2\sigma^2}\hat{\sigma}^2}, \\
+    b(Y_1,\dots,Y_n) & = 1.
+\end{align*}
+\bigbreak
+
+\textbf{Problem 5.6.8}
+$\hat{\theta} = max(Y_1, \dots, Y_n)$ is sufficient for $\theta$.
+\begin{align*}
+    L(\theta) & = \prod_{i=1}^{n}\frac{1}{\theta} \\
+    & = \frac{1}{\theta}\mathbb{I}_{\{0\le y_1\le\theta\}}\cdots \frac{1}{\theta}\mathbb{I}_{\{0\le y_n\le\theta\}} \qquad (\emph{let }\mathbb{I} \emph{ be an indicator function})\\
+    & = \frac{1}{\theta^n}\mathbb{I}_{\{0\le max(y_i)\le \theta\}}\cdot \mathbb{I}_{\{0\le min(y_i)\le \theta\}}. \\
+\end{align*}
+Then, 
+\begin{align*}
+    g(\hat{\theta};\theta) & = \frac{1}{\theta^n}\mathbb{I}_{\{0\le max(y_i)\le \theta\}}, \\
+    b(Y_1,\dots,Y_n) & = \mathbb{I}_{\{0\le min(y_i)\le \theta\}}.
+\end{align*}
+
+\end{document}

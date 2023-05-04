@@ -46,6 +46,10 @@
     The proof using induction inherently assumed that all graphs are constructed algorithmically by adding one vertex each at a time. 
     However, it overlooked the case where the graph can be constructed by adding multiple vertices at a time, and the condition of having at least degree one will still be true.
     Hence, the proof is not exhaustive.
+
+    More concretely saying, usually when we are doing induction on graph, we assume a graph $G$ with something $n=k+1$, \emph{then} proceed to remove 1 edge / vertex or whatever to get $G'$.
+    During the removal process, it's exhausting all possible cases, so we can say that the proof is exhaustive.
+    Yet, the false proof misses this idea.
 \end{enumerate}
 \bigbreak
 

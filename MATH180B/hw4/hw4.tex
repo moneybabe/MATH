@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage{blkarray}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180B HW4}
+\author{Neo Lee}
+\date{05/05/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{PK Exercise 3.5.6}
+\begin{align*}
+    E[T] & = E[T|\xi_1 \ge 100]P(\xi_1 \ge 100) + E[T|\xi_1 < 100]P(\xi_1 < 100) \\
+    E[T] & = 1 + E[T]P(\xi_1 < 100) \\
+    E[T](1-P(\xi_1 < 100)) & = 1 \\
+    E[T] & = \frac{1}{P(\xi_1 \ge 100)} \\
+    E[T] & = \frac{1}{\sum_{k=100}^{\infty}0.01(0.99)^k} \\
+    & = \frac{1}{0.01(0.99)^{100}\sum_{k=0}^{\infty}(0.99)^k} \\
+    & = \frac{1}{0.01(0.99)^{100}\frac{1}{1-0.99}} \\
+    & = \frac{1}{0.99^{100}}. \\
+\end{align*}
+\bigbreak
+
+\textbf{PK Problem 3.5.2}
+\begin{enumerate}[label=(\alph*)]
+    \item Define $p_i$ to be the probability of the component failing at $T=i+1$, which means it has a lifetime of $T=i+1$ given $T > i$, so $p_i = \frac{a_{i+1}}{\sum\limits_{k=i+1}^{\infty}a_k}$. 
+    Define $q_i$ to be the probability that the component is not failing at $T=i+1$, which is just the complement of $p_i$, so $q_i = 1-p_i$.
+    Define the probability transition matrix to be:
+    \begin{align*}
+        P & = 
+        \begin{blockarray}{ccccc}
+            & 0 & 1 & 2 & \cdots  \\
+            \begin{block}{c||cccc||}
+                0 & p_0 & q_0 & 0 & \cdots \\
+                1 & p_1 & 0 & q_1 & \cdots \\
+                2 & p_2 & 0 & 0 & \cdots \\
+                \vdots & \vdots & \vdots & \vdots & \ddots \\
+            \end{block}
+        \end{blockarray}\; , \nonumber \\
+    \end{align*}
+
+    \item
+    For $i\in[0, N-2], p_i = \frac{a_{i+1}}{\sum\limits_{k=i+1}^{\infty}a_k}, q_i = 1-p_i$. For $i = N-1, p_{N-1} = 1, q_{N-1} = 0.$
+\end{enumerate}
+\bigbreak
+
+\textbf{PK Exercise 3.6.1}
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    Define $P(R)$ to be the probability that the rat finds the food before getting shocked given it is in box $r$ at the current state.
+    Then, by first step analysis, 
+    \begin{align*}
+        P(R=r) & = 0.5P(R=r-1) + 0.5P(R=r+1) \\ 
+        P(R) - P(R=r-1) & = P(R=r+1) - P(R=r).
+    \end{align*}
+    By observing the equation, we can see that $P(R)$ is a linear function of $r$. 
+    Then, let $P(R=5) = 1, P(R=0) = 0$. Hence, $P(R=3) = 3\times \frac{1}{5} = \frac{3}{5}$.
+
+    \item
+    Simply plugging $p, q$ into the formula, we get 
+    \begin{align*}
+        P(R=3) = \frac{(p/q)^{5-3}-(p/q)^5}{1-(p/q)^5}
+    \end{align*}
+\end{enumerate}
+\bigbreak
+
+\textbf{PK Exercise 3.8.1}
+\begin{align*}
+    E[\xi] & = \frac{1}{2}\cdot 0 + \frac{1}{2}\cdot 2 = 1 \\
+    Var(\xi) & = \frac{1}{2}(-1)^2 + \frac{1}{2}(2-1)^2 = 1 \\
+    E[X_n] & = E[\xi]^n \\
+    & = 1^n = 1.\\
+    Var(X_n) & = n\cdot Var(\xi)E[\xi]^{n-1} \\
+    & = n\cdot 1\cdot 1^{n-1} = n. \\
+\end{align*}
+\bigbreak
+
+\textbf{PK Exercise 3.8.3}
+\begin{align*}
+    u_0 & = 0 \\
+    u_1 & = \frac{1}{2} + \frac{1}{2}(u_0)^2 = \frac{1}{2} \\
+    u_2 & = \frac{1}{2} + \frac{1}{2}(u_1)^2 = \frac{5}{8} \\
+    u_3 & = \frac{1}{2} + \frac{1}{2}(u_2)^2 = \frac{89}{128} \approx 0.695 \\
+    u_4 & = \frac{1}{2} + \frac{1}{2}(u_3)^2 = \frac{24305}{32768} \approx 0.742 \\
+    u_5 & = \frac{1}{2} + \frac{1}{2}(u_4)^2 \approx 0.775.
+\end{align*}
+\bigbreak
+
+\textbf{PK Problem 3.8.2} \emph{Correction to problem statement in the textbook: $Z = \sum\limits_{n=0}^{\infty}X_n$}
+\begin{align*}
+    E[Z] & = E\left[\sum_{n=0}^{x}X_n\right] \\
+    & = E[X_0] + E[X_1] + E[X_2] + \dots \\
+    & = 1 + \mu + \mu^2 + \dots \\
+    & = \frac{1}{1-\mu}. 
+\end{align*}
+
+
+
+
+\end{document}

@@ -2,6 +2,7 @@
 \usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
 \usepackage{enumitem}
 \usepackage[margin=1in]{geometry}
+\usepackage{blkarray}
 
 \newtheorem{thm}{Theorem}
 \newtheorem{prop}[thm]{Proposition}
@@ -18,77 +19,77 @@
 \maketitle 
 \section{Discrete Distributions}
 \subsection{Uniform Random Variable}
-\begin{align}
-    & E[X] = \frac{x_1 + \dots + x_n}{n}; \quad Var(X) = \frac{x_1^2 + \dots + x_n^2}{n} - \left(\frac{x_1 + \dots + x_n}{n}\right)^2. \nonumber \\
-    & E[X] = \frac{n+1}{2}; \quad Var(X) = \frac{n^2-1}{12}; \quad \emph{only when $x_i = [1, 2, \dots, n]$}. \nonumber
-\end{align}
+\begin{align*}
+    & E[X] = \frac{x_1 + \dots + x_n}{n}; \quad Var(X) = \frac{x_1^2 + \dots + x_n^2}{n} - \left(\frac{x_1 + \dots + x_n}{n}\right)^2. \\
+    & E[X] = \frac{n+1}{2}; \quad Var(X) = \frac{n^2-1}{12}; \quad \emph{only when $x_i \in [1, 2, \dots, n]$}.
+\end{align*}
 
 \subsection{Bernoulli Random Variable}
-\begin{align}
+\begin{align*}
     & I = \begin{cases}
-        1 & \text{if $X = 1$}, \\
-        0 & \text{if $X = 0$}.
-    \end{cases} \nonumber \\
-    & E[I] = p; \quad Var(I) = p(1-p). \nonumber
-\end{align}
+        1 & \emph{if $X = 1$}, \\
+        0 & \emph{if $X = 0$}.
+    \end{cases} \\
+    & E[I] = p; \quad Var(I) = p(1-p).
+\end{align*}
 
 \subsection{Binomial Random Variable}
-\begin{align}
-    & P(X=k) = {n\choose k}p^k(1-p)^{n-k} \quad \emph{for } k \in [0,n]. \nonumber \\
-    & E[X] = np; \quad Var(X) = np(1-p). \nonumber
-\end{align}
+\begin{align*}
+    & P(X=k) = {n\choose k}p^k(1-p)^{n-k} \quad \emph{for } k \in [0,n]. \\
+    & E[X] = np; \quad Var(X) = np(1-p).
+\end{align*}
 
 \subsection{Poisson Random Variable}
-\begin{align}
-    & P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} \quad \emph{for } k \in \mathbb{Z}^{^\ge}. \nonumber \\
-    & E[X] = \lambda; \quad Var(X) = \lambda. \nonumber
-\end{align}
+\begin{align*}
+    & P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} \quad \emph{for } k \in \mathbb{Z}^{^\ge}. \\
+    & E[X] = \lambda; \quad Var(X) = \lambda.
+\end{align*}
 
 \subsection{Geometric Random Variable}
-\begin{align}
-    & P(X=n) = (1-p)^{n-1}p \quad \emph{for } n \in \mathbb{N}. \nonumber \\
-    & E[X] = \frac{1}{p}; \quad Var(X) = \frac{1-p}{p^2}; \quad P(X > n) = (1-p)^n ; \quad P(X>n+k|X>k) = P(X>n). \nonumber
-\end{align}
+\begin{align*}
+    & P(X=n) = (1-p)^{n-1}p \quad \emph{for } n \in \mathbb{N}. \\
+    & E[X] = \frac{1}{p}; \quad Var(X) = \frac{1-p}{p^2}; \quad P(X > n) = (1-p)^n ; \quad P(X>n+k|X>k) = P(X>n).
+\end{align*}
 
 \newpage
 \section{Continuous Distributions}
 \subsection{Uniform Random Variable}
-\begin{align}
+\begin{align*}
     & f(x) = \begin{cases}
-        \frac{1}{\beta-\alpha} & \text{if $x \in [\alpha, \beta]$}, \\
-        0 & \text{otherwise}.
-    \end{cases} \nonumber \\
-    & E[X] = \frac{\alpha+\beta}{2}; \quad Var(X) = \frac{(\beta-\alpha)^2}{12}. \nonumber
-\end{align}
+        \frac{1}{\beta-\alpha} & \emph{if $x \in [\alpha, \beta]$}, \\
+        0 & \emph{otherwise}.
+    \end{cases} \\
+    & E[X] = \frac{\alpha+\beta}{2}; \quad Var(X) = \frac{(\beta-\alpha)^2}{12}.
+\end{align*}
 
 \subsection{Exponential Random Variable}
-\begin{align}
+\begin{align*}
     & f(x) = \begin{cases}
-        \lambda e^{-\lambda x} & \text{if $x \ge 0$}, \\
-        0 & \text{otherwise}.
-    \end{cases} \nonumber \\
-    & E[X] = \frac{1}{\lambda}; \quad Var(X) = \frac{1}{\lambda^2}; \quad P(X\ge x) = e^{-\lambda x}; \quad P(X\ge x + y|X\ge y) = e^{-\lambda x}. \nonumber
-\end{align}
+        \lambda e^{-\lambda x} & \emph{if $x \ge 0$}, \\
+        0 & \emph{otherwise}.
+    \end{cases} \\
+    & E[X] = \frac{1}{\lambda}; \quad Var(X) = \frac{1}{\lambda^2}; \quad P(X\ge x) = e^{-\lambda x}; \quad P(X\ge x + y|X\ge y) = e^{-\lambda x}.
+\end{align*}
 
 \subsection{Normal Random Variable}
-\begin{align}
-    & f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \quad \emph{for $x\in \mathbb{R}$}. \nonumber \\
-    & E[X] = \mu; \quad Var(X) = \sigma^2; \quad Z \sim \emph{N(0,1)} = \frac{X-\mu}{\sigma}. \nonumber
-\end{align}
+\begin{align*}
+    & f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \quad \emph{for $x\in \mathbb{R}$}. \\
+    & E[X] = \mu; \quad Var(X) = \sigma^2; \quad Z \sim \emph{N(0,1)} = \frac{X-\mu}{\sigma}.
+\end{align*}
 
 \subsection{Gamma Random Variable}
-\begin{align}
-    & f(x) = \frac{\lambda}{\Gamma(\alpha)} (\lambda x)^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \beta, x\in \mathbb{R}^{^+}$}; \quad \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt. \nonumber \\
-    & E[X] = \frac{\alpha}{\lambda}; \quad Var(X) = \frac{\alpha}{\lambda^2}. \nonumber
-\end{align}
+\begin{align*}
+    & f(x) = \frac{\lambda}{\Gamma(\alpha)} (\lambda x)^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \beta, x\in \mathbb{R}^{^+}$}; \quad \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt. \\
+    & E[X] = \frac{\alpha}{\lambda}; \quad Var(X) = \frac{\alpha}{\lambda^2}.
+\end{align*}
 
 \newpage
 \section{Multivariate Distributions}
 \subsection{Multivariate Normal Distribution}
-\begin{align}
-    & f(\vec{x}) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} e^{-\frac{1}{2}(\vec{x}-\vec{\mu})^{^\top}\Sigma^{-1}(\vec{x}-\vec{\mu})} \quad \emph{for $x\in \mathbb{R}^n$}. \nonumber \\
-    & E[X] = \vec{\mu}; \quad Var(X) = \Sigma. \nonumber
-\end{align}
+\begin{align*}
+    & f(\vec{x}) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} e^{-\frac{1}{2}(\vec{x}-\vec{\mu})^{^\top}\Sigma^{-1}(\vec{x}-\vec{\mu})} \quad \emph{for $x\in \mathbb{R}^n$}. \\
+    & E[X] = \vec{\mu}; \quad Var(X) = \Sigma.
+\end{align*}
 
 Let random vector $\begin{bmatrix} X_1 \\ \vdots \\ X_n \end{bmatrix}$ have a multivariate normal distribution and $Z$ be the linear combination of the random vector with coefficients $\vec{A} = \begin{bmatrix}
     a_1 \\ 
@@ -101,64 +102,260 @@ For bivariate random vector $\begin{bmatrix}
 \end{bmatrix}$ with $\vec{A} = \begin{bmatrix}
     a \\ b
 \end{bmatrix}$,
-\begin{align}
-    Var(Z) = a^2\sigma_X^2+2ab\rho\sigma_X\sigma_Y+b^2\sigma_Y^2. \nonumber
-\end{align}
+\begin{align*}
+    Var(Z) = a^2\sigma_X^2+2ab\rho\sigma_X\sigma_Y+b^2\sigma_Y^2.
+\end{align*}
 
 \subsection{Multinomial Distribution}
-\begin{align}
+\begin{align*}
     & P(\vec{x}) = \frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k} \quad \emph{for $\vec{x} = \begin{bmatrix}
         x_1 \\ \vdots \\ x_k
-    \end{bmatrix}$, $x_i\in \mathbb{N}$, $\sum_{i=1}^k x_i = n$, $p_i\in [0,1]$}. \nonumber \\
-    & E[\vec{x}] = n\vec{p}; \quad Var(\vec{x}) = n\overrightarrow{p(1-p)}. \nonumber
-\end{align}
+    \end{bmatrix}$, $x_i\in \mathbb{N}$, $\sum_{i=1}^k x_i = n$, $p_i\in [0,1]$}. \\
+    & E[\vec{x}] = n\vec{p}; \quad Var(\vec{x}) = n\overrightarrow{p(1-p)}.
+\end{align*}
 
 \subsection{Random Sums}
+\begin{align*}
+    X & = \xi_1 + \dots + \xi_N; \quad \emph{where $N$ is a R.V. and $\xi_i$ are i.i.d. R.Vs}. \\
+    E[X] & = E[\xi]E[N]; \quad Var(X) = E[N]Var(\xi) + E[\xi]^2Var(N).
+\end{align*}
 
 \newpage
 \section{Theorems}
 \subsection{Chebyshev's Inequality}
-\begin{align}
-    & P(|X-\mu| \ge k\sigma) \le \frac{1}{k^2}. \nonumber
-\end{align}
+\begin{align*}
+    & P(|X-\mu| \ge k\sigma) \le \frac{1}{k^2}.
+\end{align*}
 
-\subsection{Markov's Inequality}
-\begin{align}
-    & P(X \ge k) \le \frac{E[X]}{k}. \nonumber
-\end{align}
+\subsection{Markov Inequality}
+\begin{align*}
+    & P(X \ge k) \le \frac{E[X]}{k}.
+\end{align*}
 
 \subsection{Central Limit Theorem}
 Let $S_n = X_1 + \dots + X_n$. When $n$ is large, $S_n$ is approximately normally distributed with mean $n\mu $ and variance $n\sigma^2$.
-\begin{align}
-    & \frac{S_n-n\mu}{\sqrt{n}\sigma} = \frac{\bar{S_n} - \mu}{\sigma / \sqrt{n}} \sim \emph{N(0,1)} \quad \emph{as $n\to\infty$}. \nonumber
-\end{align}
+\begin{align*}
+    & \frac{S_n-n\mu}{\sqrt{n}\sigma} = \frac{\bar{S_n} - \mu}{\sigma / \sqrt{n}} \sim \emph{N(0,1)} \quad \emph{as $n\to\infty$}.
+\end{align*}
 
 \subsection{Weak Law of Large Numbers}
 Let $S_n = X_1 + \dots + X_n$. 
-\begin{align}
-    & \lim_{n\rightarrow\infty}P(|\bar{S_n}-\mu|<\epsilon) = 1. \nonumber
-\end{align}
+\begin{align*}
+    & \lim_{n\rightarrow\infty}P(|\bar{S_n}-\mu|<\epsilon) = 1.
+\end{align*}
 
 \subsection{Strong Law of Large Numbers}
 Let $S_n = X_1 + \dots + X_n$.
-\begin{align}
-    & P(\lim_{n\rightarrow\infty}\bar{S_n}=\mu) = 1. \nonumber
-\end{align}
+\begin{align*}
+    & P(\lim_{n\rightarrow\infty}\bar{S_n}=\mu) = 1.
+\end{align*}
 
 \subsection{Moment Generating Function}
-\begin{align}
-    & M_X(t) = E[e^{tX}] = \int_{-\infty}^\infty e^{tx}f(x)dx. \nonumber
-\end{align}
+\begin{align*}
+    & M_X(t) = E[e^{tX}] = \int_{-\infty}^\infty e^{tx}f(x)dx.
+\end{align*}
 
 \newpage
-\section{Special Markov's Chains}
-\subsection{Two State Markov's Chain}
-\subsection{Successive Maxima}
-\subsection{Partial Sums}
+\section{Special Markov Chains}
+\subsection{Two State Markov Chain}
+\begin{align*}
+    P & = 
+        \begin{blockarray}{ccc}
+            & 0 & 1 \\
+            \begin{block}{c||cc||}
+                0 & 1-a & a \\
+                1 & b & 1-b \\
+            \end{block}
+        \end{blockarray}\; ; \emph{ state 0, 1 are independent R.V. iff $a=1-b$.}\\
+        P^n & = \frac{1}{a+b}
+        \begin{bmatrix}
+            b & a \\
+            b & a \\
+        \end{bmatrix} + 
+        \frac{(1-a-b)^n}{a+b}
+        \begin{bmatrix}
+            a & -a \\
+            -b & b \\
+        \end{bmatrix} ; \quad
+        \lim_{n\rightarrow\infty}P^n = 
+            \begin{blockarray}{ccc}
+                & 0 & 1 \\
+                \begin{block}{c||cc||}
+                    0 & \frac{b}{1+b} & \frac{a}{1+b} \\
+                    1 & \frac{b}{1+b} & \frac{a}{1+b} \\
+                \end{block}
+            \end{blockarray}\; .
+\end{align*} 
+
+\subsection{i.i.d. Markov Chain}
+\begin{align*}
+    \xi_1, \dots, \xi_n \emph{ are i.i.d. R.Vs.}; \quad P(\xi = k) = a_k \emph{ for } k\in\mathbb{Z^{^\ge}}.
+\end{align*}
+
+\subsubsection{Independent Random Variables}
+\begin{align*}
+    X_n = \xi; P & = 
+    \begin{blockarray}{cccc}
+        \begin{block}{||cccc||}
+            a_0 & a_1 & a_2 & \cdots \\
+            a_0 & a_1 & a_2 & \cdots \\
+            a_0 & a_1 & a_2 & \cdots \\
+            a_0 & a_1 & a_2 & \cdots \\
+            \vdots & \vdots & \vdots &  \ddots \\
+        \end{block} 
+    \end{blockarray}\; .
+\end{align*}
+
+\subsubsection{Successive Maxima}
+\begin{align*}
+    X_n & = max(\xi_1, \dots, \xi_n) \emph{ for } n\in \mathbb{N}.
+\end{align*}
+\begin{align*}
+    P & = 
+        \begin{blockarray}{ccccc}
+            \begin{block}{||ccccc||}
+                A_0 & a_1 & a_2 & a_3 & \cdots \\
+                0 & A_1 & a_2 & a_3 & \cdots \\
+                0 & 0 & A_2 & a_3 & \cdots \\
+                0 & 0 & 0 & A_3 & \cdots \\
+                \vdots & \vdots & \vdots & \vdots & \ddots \\
+            \end{block} 
+        \end{blockarray} \emph{ where }A_k = P(X_{n+1} \le x | X_n = x) = P(\xi_{n+1} \le x).
+\end{align*}
+
+Let $T$ be the number of trials needed for $X_n = max(\xi_1, \dots, \xi_n)\ge M$ for an arbitrary value $M$,
+\begin{align*}
+    E[T] & = \frac{1}{P(\xi \ge M)}.
+\end{align*}
+\emph{Successive Maxima} can be interpreted as a \emph{Geometric(p)} random variable with $p = P(\xi \ge M)$.
+
+\subsubsection{Partial Sums}
+\begin{align*}
+    X_n & = \xi_1 + \dots + \xi_n \emph{ for } n\in \mathbb{N}.
+\end{align*}
+\begin{align*}
+    P = 
+    \begin{blockarray}{ccccc}
+        \begin{block}{||ccccc||}
+            a_0 & a_1 & a_2 & a_3 & \cdots \\
+            0 & a_0 & a_1 & a_2 & \cdots \\
+            0 & 0 & a_0 & a_1 & \cdots \\
+            0 & 0 & 0 & a_0 & \cdots \\
+            \vdots & \vdots & \vdots & \vdots & \ddots \\
+        \end{block} 
+    \end{blockarray}\; ; \quad 
+    P = 
+    \begin{blockarray}{cccccc}
+        \begin{block}{||cccccc||}
+            & \vdots & \vdots & \vdots & \vdots & \\
+            \cdots & a_{-1} & a_0 & a_1 & a_2 & \cdots \\
+            \cdots & a_{-2} & a_{-1} & a_0 & a_1 & \cdots \\
+            \cdots & a_{-3} & a_{-2} & a_{-1} & a_0 & \cdots \\
+            & \vdots & \vdots & \vdots & \vdots & \\
+        \end{block} 
+    \end{blockarray} \emph{ if } P(\xi = k) = a_k \emph{ for }k \in \mathbb{Z}.
+\end{align*}
+
+\subsubsection{Branching Processes}
+\begin{align*}
+    X_{n+1} & = \xi_1^{(n)} + \dots + \xi_{X_n}^{(n)} \emph{ for } n\in \mathbb{N}; \quad X_0 = 1. \\
+    u_n & = \emph{probability of extinction by n-th generation} \\
+    & = \sum_{k=0}^{\infty}P(\xi = k)(u_{n-1})^k \emph{ for } n\in \mathbb{N}; \\
+    u_0 & = 0.
+\end{align*}
+
+From random sums, we know
+\begin{align*}
+    E[X_{n+1}] = E[\xi]E[X_{n}]; \quad Var(X_{n+1}) = Var(\xi)E[X_n] + E[\xi]^2Var(X_n).
+\end{align*}
+After derivation, 
+\begin{align*}
+    E[X_n] = E[\xi]^n; \quad Var(X_n) = Var(\xi)E[\xi]^{n-1}\times \begin{cases}
+        n & \emph{if } E[\xi] = 1, \\
+        \frac{1-E[\xi]^n}{1-E[\xi]} & \emph{otherwise}.
+    \end{cases}
+\end{align*}
+    
 \subsection{One-dimensional Random Walk}
+\begin{align*}
+    P = 
+    \begin{blockarray}{cccccc}
+        & 0 & 1 & 2 & 3 & \cdots \\
+        \begin{block}{c||ccccc||}
+            0 & r_0 & p_0 & 0 & 0 & \cdots \\
+            1 & q_1 & r_1 & p_1 & 0 & \cdots \\
+            2 & 0 & q_2 & r_2 & p_2 & \cdots \\
+            3 & 0 & 0 & q_3 & r_3 & \cdots \\
+            \vdots & \vdots & \vdots & \vdots & \vdots & \ddots \\
+        \end{block} 
+    \end{blockarray}\; .
+\end{align*}
+
 \subsubsection{Simple Random Walk}
+\begin{align*}
+    r_i = r = 0; \quad q_i = q = \frac{1}{2}; \quad p_i = p = \frac{1}{2}.
+\end{align*}
 \subsubsection{Gambler's Ruin}
+\begin{align*}
+    P = 
+    \begin{blockarray}{cccccccc}
+        & 0 & 1 & 2 & 3 & \cdots & N-1 & N \\
+            \begin{block}{c||ccccccc||}
+                0 & 1 & 0 & 0 & 0 & \cdots & 0 & 0 \\
+                1 & q & 0 & p & 0 & \cdots & 0 & 0 \\
+                2 & 0 & q & 0 & p & \cdots & 0 & 0 \\
+                \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                N-1 & 0 & 0 & 0 & 0 & \cdots & 0 & p \\
+                N & 0 & 0 & 0 & 0 & \cdots & 0 & 1 \\
+            \end{block} 
+        \end{blockarray}\; .
+\end{align*}
+
+Let $u_i$ be the probability of $X_n$ reaching state 0 before state $N$ given current state $i$.
+\begin{align*}
+    u_i & = \begin{cases}
+        \frac{N-i}{n} & \emph{if } p = q = \frac{1}{2}, \\
+        \frac{(q/p)^i-(q/p)^N}{1-(q/p)^N} & \emph{if } p \neq q.
+    \end{cases} \\
+    \lim_{N\rightarrow\infty} u_i & = \begin{cases}
+        1 & \emph{if } p \le q, \\
+        \left(\frac{q}{p}\right)^i & \emph{if } p > q.
+    \end{cases}
+\end{align*}
+
+Let $T$ be the time needed to reach state 0.
+\begin{align*}
+    E[T] & = i(N-i) \emph{ if } p = q = \frac{1}{2}.
+\end{align*}
+
 \subsection{Success Runs}
-\subsubsection{Repeated Trials}
+\begin{align*}
+    P = 
+        \begin{blockarray}{ccccccc}
+            & 0 & 1 & 2 & 3 & 4 & \cdots \\
+            \begin{block}{c||cccccc||}
+                0 & p_0 & q_0 & 0 & 0 & 0 & \cdots \\
+                1 & p_1 & r_1 & q_1 & 0 & 0 & \cdots \\
+                2 & p_2 & 0 & r_2 & q_2 & 0 & \cdots \\
+                3 & p_3 & 0 & 0 & r_3 & q_3 & \cdots \\
+                \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots \\
+            \end{block} 
+        \end{blockarray}\; .
+\end{align*}
+
+\subsubsection{Two Outcomes Repeated Trials}
+\begin{align*}
+    r_i = r = 0; \quad q_i = q = \frac{1}{2}; \quad p_i = p = \frac{1}{2}.
+\end{align*}
+
+\subsubsection{Renewal Process} 
+Model a light bulb's lifetime as a random variable $\xi$, where
+\begin{align*}
+    P(\xi=k) = a_k \emph{ for } k \in\mathbb{N},
+\end{align*}
+and $X_n$ as the age of the bulb in service at time $n$.
+\begin{align*}
+    r_k = 0; \quad p_k = \frac{a_{k+1}}{a_{k+1} + a_{k+1} + \dots}; \quad q_k = 1-p_k \emph{ for } k \in\mathbb{Z^{^\ge}}.
+\end{align*}
 
 \end{document}

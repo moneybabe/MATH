@@ -229,6 +229,7 @@ Let $T$ be the number of trials needed for $X_n = max(\xi_1, \dots, \xi_n)\ge M$
 \end{align*}
 \emph{Successive Maxima} can be interpreted as a \emph{Geometric(p)} random variable with $p = P(\xi \ge M)$.
 
+\newpage
 \subsubsection{Partial Sums}
 \begin{align*}
     X_n & = \xi_1 + \dots + \xi_n \emph{ for } n\in \mathbb{N}.
@@ -243,7 +244,7 @@ Let $T$ be the number of trials needed for $X_n = max(\xi_1, \dots, \xi_n)\ge M$
             0 & 0 & 0 & a_0 & \cdots \\
             \vdots & \vdots & \vdots & \vdots & \ddots \\
         \end{block} 
-    \end{blockarray}\; ; \quad 
+    \end{blockarray}\; \emph{ if } P(\xi = k) = a_k \emph{ for }k \in \mathbb{Z^{^\ge}}. \\
     P = 
     \begin{blockarray}{cccccc}
         \begin{block}{||cccccc||}
@@ -314,7 +315,7 @@ After derivation,
 Let $u_i$ be the probability of $X_n$ reaching state 0 before state $N$ given current state $i$.
 \begin{align*}
     u_i & = \begin{cases}
-        \frac{N-i}{n} & \emph{if } p = q = \frac{1}{2}, \\
+        \frac{N-i}{N} & \emph{if } p = q = \frac{1}{2}, \\
         \frac{(q/p)^i-(q/p)^N}{1-(q/p)^N} & \emph{if } p \neq q.
     \end{cases} \\
     \lim_{N\rightarrow\infty} u_i & = \begin{cases}

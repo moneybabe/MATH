@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 154 HW5}
+\author{Neo Lee}
+\date{05/17/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 1.}
+\begin{prop}
+    Let $G$ be a bipartite graph with parts $A$ and $B$, where $|A| = |B| = n$. If $\delta(G) \ge n/2$, $G$ has a perfect matching.
+\end{prop}
+\begin{proof}
+    We proceed by proving that the Hall's condition holds for both $A$ and $B$. Without loss of generality, we will prove the condition for $A$ only and the same argument would hold for $B$ similarly.
+
+    Let $X$ be a subset of $A$.
+    \begin{enumerate}[label=Case \arabic*:]
+        \item $|X| \le \frac{n}{2}$. Then $|N(X)| \ge \frac{n}{2} \ge |X|$.
+        \item $|X| > \frac{n}{2}$. Assume for the sake of contradiction that $|N(X)| < |X|$. 
+        Then $B - N(X)$ can only form edges with $A - X$, which has a cardinality of $n - |X| < \frac{n}{2}$.
+        This mean for all $b \in B - N(X)$, $d_G(b) < \frac{n}{2}$, which contradicts the assumption that $\delta(G) \ge \frac{n}{2}$.
+        Hence, $|N(X)| \ge |X|$.
+    \end{enumerate}
+
+    Therefore, by Hall's theorem, $G$ has a perfect matching.
+\end{proof}
+\bigbreak
+
+\textbf{Problem 2.}
+\begin{prop}
+    A standard deck of 52 playing cards is shuffled and then dealt into 13 piles of 4 cards each. Regardless of how the deck is shuffled, there is always a way to divide the cards into 4 groups of 13 cards each, where each group has one card from every pile, and one card from each of the 13 possible ranks (A, 2, 3,..., 10, J, K, Q).
+\end{prop}
+\begin{proof}
+    We proceed by constructing a bipartite graph $G$ with parts $A$ and $B$, where $A$ is the set of piles and $B$ is the set of ranks.
+    If we can prove that $G$ has a one-factorization, then we will have proved the proposition.
+
+    Notice that $G$ is 4-regular, since each pile has 4 cards (they can be either same or different ranks) and each rank has 4 cards (they can be in the same or different piles).
+    Then, follow directly from \emph{Corollary 5.2.2}, there exists an one-factorization of $G$.
+\end{proof}
+\bigbreak
+
+\textbf{Problem 3.}
+For the graph on the left hand side, let $G_1$, assign green to $\{A, B\}, \{D, C\}$; blue to $\{B, C\}, \{A, E\}$; red to $\{A, C\}, \{D, E\}$.
+Since $\chi'(G_1) \ge \Delta(G_1) = 3$, $\chi'(G_1) = 3$ is the minimum-sized edge coloring.
+
+For the graph on the right hand side, let $G_2$, assign green to $\{A, B\}, \{D, C\}$; blue to $\{B, C\}, \{A, E\}$; red to $\{A, C\}, \{D, E\}$, and yellow to $\{B, D\}$.
+Since $G_2$ has 5 vertices, $\alpha'(G_2) \le \lfloor\frac{5}{2}\rfloor = 2$.
+Assume for the sake of contradiction that $\chi'(G_2) = \Delta = 3$, then the edges of $G_2$ can be partitioned into 3 matchings.
+However notice that the sum of the partitions $\le 3\times \alpha' = 3\times 2 = 6$, which is less than $|E(G_2)| = 7$. Hence, contradiction is reached and $\chi'(G_2) > 3$.
+\bigbreak
+
+\textbf{Problem 4.}
+\begin{prop}
+    If $G$ is a k-regular graph with an odd number of vertices, show that $\chi'(G) = k + 1$.
+\end{prop}
+\begin{proof}
+    By Vizing's theorem, $\chi'(G) = k$ or $\chi'(G) = k + 1$.
+    Assume for the sake of contradiction that $\chi'(G) = k$.
+    Then, $E(G)$ can be partitioned into $k$ matchings.
+    Since $G$ has an odd number of vertices, $\alpha'(G) \le \frac{n-1}{2}$.
+    Now we sum up the matching partitions, we get the total edges $\le k \alpha'(G) \le k \cdot \frac{n-1}{2} = \frac{kn - k}{2} < \frac{kn}{2} = |E(G)|$, which is a contradiction.
+    Hence, $\chi'(G) = k + 1$.
+\end{proof}
+
+\end{document}

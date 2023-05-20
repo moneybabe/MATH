@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180B HW6}
+\author{Neo Lee}
+\date{05/19/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{PK Exercise 4.3.3 (b)}
+\begin{proof}[Solution]
+    \{0\}, \{1, 2\}, \{3, 4\}, \{5\} are communicating classes. By observing whether the class is closed or not, we can immediately tell that \{0\}, \{1, 2\}, \{5\} are recurrent and \{3, 4\} are transient.
+\end{proof}
+\bigbreak
+
+
+\textbf{PK Exercise 4.3.4}
+\begin{proof}[Solution]
+    \{2, 3, 4, 5\} is a communicating class. By observing the period of \{5\} is 1, we can immediately tell that the period of \{2, 3, 4, 5\} is 1. The period of \{0\} is 1. The period of \{1\} is 0.
+\end{proof}
+\bigbreak
+
+
+\textbf{PK Problem 4.3.3} \emph{(for n = 1,2,3,4)}
+\begin{proof}[Solution]
+    Using MATLAB and computing the matrix multiplication $P^n$, we have
+    \begin{align*}
+        P^{(0)} & = 1 \\
+        P^{(1)} & = 0 \\
+        P^{(2)} & = \frac{1}{4} \\
+        P^{(3)} & = \frac{1}{8} \\
+        P^{(4)} & = \frac{3}{8} \\
+        P^{(5)} & = \frac{7}{32}.
+    \end{align*}
+
+    Then, using \emph{equation (4.16)}, 
+    \begin{align*}
+        P^{(1)} & = f^{(1)}P^{(0)} \Rightarrow f^{(1)} = 0 \\
+        P^{(2)} & = f^{(1)}P^{(1)} + f^{(2)}P^{(0)} \Rightarrow f^{(2)} = \frac{1}{4} \\
+        P^{(3)} & = f^{(1)}P^{(2)} + f^{(2)}P^{(1)} + f^{(3)}P^{(0)} \Rightarrow f^{(3)} = \frac{1}{8} \\
+        P^{(4)} & = f^{(1)}P^{(3)} + f^{(2)}P^{(2)} + f^{(3)}P^{(1)} + f^{(4)}P^{(0)} \Rightarrow f^{(4)} = \frac{5}{16} \\
+        P^{(5)} & = f^{(1)}P^{(4)} + f^{(2)}P^{(3)} + f^{(3)}P^{(2)} + f^{(4)}P^{(1)} + f^{(5)}P^{(0)} \Rightarrow f^{(5)} = \frac{5}{32}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\newpage
+\textbf{PK Exercise 4.4.2}
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    \begin{align*}
+        0.1\pi_1 + 0.2\pi_2 + 0.3\pi_3 & = \pi_0 \\
+        \pi_0 + 0.4\pi_1 + 0.2\pi_2 + 0.3\pi_3 & = \pi_1 \\
+        0.2\pi_1 + 0.5\pi_2 + 0.4\pi_3 & = \pi_2 \\
+        \pi_0 + \pi_1 + \pi_2 + \pi_3 & = 1.
+    \end{align*}
+
+    By solving the system of equations, we have $\underline{\pi_0 \approx 0.1449}, \pi_1 \approx 0.4140, \pi_2 \approx 0.2880, \pi_3 \approx 0.1530$.
+
+    \item
+    \begin{align*}
+        v_1 & = 1 + 0.4v_1 + 0.2v_2 + 0.3v_3 \\
+        v_2 & = 1 + 0.2v_1 + 0.5v_2 + 0.1v_3 \\
+        v_3 & = 1 + 0.3v_1 + 0.4v_2.
+    \end{align*}
+    
+    By solving the system of equations, we have $\underline{v_1 \approx 5.90}, v_2 \approx 5.34, v_3 \approx 4.91$.
+
+    \item
+    $$m_0 = 1 + 5.90 = 6.90.$$
+    Indeed, $$\pi_0 = \frac{1}{m_0} = \frac{1}{6.90} \approx 0.1449.$$
+    
+\end{enumerate}
+\bigbreak
+
+
+\textbf{PK Problem 4.4.6}
+\begin{proof}[Solution]
+    $P^{(4)}_{00} > 0$ and $P^{(5)}_{00} > 0$. $gcd(4,5) = 1$. Hence, $d(0) = 1$.
+\end{proof}
+\bigbreak
+
+
+\textbf{PK Problem 4.4.8}
+\begin{proof}[Solution]
+    \begin{align*}
+        P = \begin{bmatrix}
+            \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & \cdots \\
+            \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 & 0 & \cdots \\
+            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \cdots \\
+            \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+        \end{bmatrix}
+    \end{align*}
+
+    Then, we can set up the system of linear equations:
+    \begin{align*}
+        \pi_0 + \pi_1 + \pi_2 + \pi_3 + \cdots & = 1 \\
+        \frac{1}{2}\pi_0 + \frac{1}{3}\pi_1 + \frac{1}{4}\pi_2 + \cdots & = \pi_0 \\
+        \frac{1}{2}\pi_0 + \frac{1}{3}\pi_1 + \frac{1}{4}\pi_2 + \cdots & = \pi_1 \\
+        \frac{1}{3}\pi_1 + \frac{1}{4}\pi_2 + \cdots & = \pi_2 \\
+        \frac{1}{4}\pi_2 + \cdots & = \pi_3 \\
+        \vdots &
+    \end{align*}
+
+    Now, notice that by subtracting $\pi_{n}$ from $\pi_{n-1}$, $$\pi_n = \pi_{n-1} - \frac{1}{n}\pi_{n-2}.$$
+    Then, we can set up the recurrence relation:
+    \begin{align*}
+        \pi_1 & = \pi_0 \\
+        \pi_2 & = \pi_1 - \frac{1}{2}\pi_0 = \frac{1}{2}\pi_0 \\
+        \pi_3 & = \pi_2 - \frac{1}{3}\pi_1 = \frac{1}{2}\pi_0 - \frac{1}{3}\pi_0 = \frac{1}{6}\pi_0 \\
+        \pi_4 & = \pi_3 - \frac{1}{4}\pi_2 = \frac{1}{6}\pi_0 - \frac{1}{8}\pi_0 = \frac{1}{24}\pi_0 \\
+        \pi_5 & = \pi_4 - \frac{1}{5}\pi_3 = \frac{1}{24}\pi_0 - \frac{1}{30}\pi_0 = \frac{1}{120}\pi_0. \\
+    \end{align*}
+    By observing the pattern, we claim that $$\pi_n = \frac{1}{n!}\pi_0.$$ This can be proved rigorously by induction, but we will omit here.
+
+    Now, we can solve for $\pi_0$:
+    \begin{align*}
+        \pi_0 + \pi_1 + \pi_2 + \pi_3 + \cdots & = 1 \\
+        \pi_0 + \frac{1}{1!}\pi_0 + \frac{1}{2!}\pi_0 + \frac{1}{3!}\pi_0 + \cdots & = 1 \\
+        \pi_0\left(1 + \frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \cdots\right) & = 1 \\
+        \pi_0\left(e\right) & = 1 \\
+        \pi_0 & = \frac{1}{e}.
+    \end{align*}
+    Then, we plug in $\pi_0 = \frac{1}{e}$ to get $\pi_n$
+    \begin{align*}
+        \pi_n & = \frac{1}{n!}\pi_0 \\
+        \pi_n & = \frac{1}{n!\cdot e}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+
+
+\end{document}

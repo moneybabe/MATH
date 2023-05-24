@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 181A HW8}
+\author{Neo Lee}
+\date{05/23/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Probelm 7.3.4} 
+Use the fact that $\frac{(n-1)S^2}{\sigma^2}$ is a chi square random variable with $n - 1$ df to prove that
+$Var(S^2) = \frac{2\sigma^4}{n-1}$.
+\begin{proof}[Solution]
+    \begin{align*}
+        \frac{(n-1)S^2}{\sigma^2} & = \chi^2_{n-1} \\
+        S^2 & = \frac{\sigma^2}{n-1}\chi^2_{n-1} \\
+        Var(S^2) & = \frac{\sigma^4}{(n-1)^2}Var(\chi^2_{n-1}) \\
+        Var(S^2) & = \frac{\sigma^4}{(n-1)^2}\cdot2(n-1) \\
+        Var(S^2) & = \frac{2\sigma^4}{n-1}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+
+\textbf{Probelm 7.3.5}
+Let $Y_1,Y_2,...,Y_n$ be a random sample from a normal distribution. 
+Use the statement of \emph{Question 7.3.4} to prove that $S^2$ is consistent for $\sigma^2$.
+\begin{proof}[Solution]
+    Notice that $S^2 = \frac{1}{n-1}\sum_{k=1}^{n}(Y_k-\overline{Y})$ is an unbiased estimator of $\sigma^2$, which mean $E[S^2] = \sigma^2$.
+    Then, by \emph{Chebyshev's Inequality}, we have
+    \begin{align*}
+        P(|S^2 - \sigma^2| \ge \epsilon) & \le \frac{Var(S^2)}{\epsilon^2} \\
+        P(|S^2 - \sigma^2| \ge \epsilon) & \le \frac{2\sigma^4}{(n-1)\epsilon^2} \\
+        \lim_{n\to\infty}P(|S^2 - \sigma^2| \ge \epsilon) & \le \lim_{n\to\infty}\frac{2\sigma^4}{(n-1)\epsilon^2} \\
+        \lim_{n\to\infty}P(|S^2 - \sigma^2| \ge \epsilon) & \le 0 \\
+        \lim_{n\to\infty}P(|S^2 - \sigma^2| \ge \epsilon) & = 0.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+
+\textbf{Probelm 7.4.4}
+A random sample of size $n = 9$ is drawn from a normal distribution with $\mu = 27.6$. 
+Within what interval $(-a, +a)$ can we expect to find $\frac{\overline{Y}-27.6}{S/\sqrt{9}} 80\%$ the time? 90\% the time?
+\begin{proof}[Solution]
+    The sameple size is $n=9$, so the degree of freedom is $n-1=8$. 
+    Then, we have $\frac{\overline{Y}-27.6}{S/\sqrt{9}} \sim t_8$ . Hence the critical value for 80\% and 90\% confidence are $t_{8, 0.01}= 1.397$ and $t_{8,0.05} = 1.86$ respectively.
+    Therefore, the interval for 80\% confidence is $(-1.397, 1.397)$ and the interval for 90\% confidence is $(-1.86, 1.86)$.
+\end{proof}
+
+
+\bigbreak
+
+
+\textbf{Probelm 7.4.7}
+Cell phones emit radio frequency energy that is absorbed by the body when the phone is next to the ear may be harmful.
+The table in the next column gives the absorption rate for a sample of twenty high-radiation cell phones.
+(The Federal Communication Commission sets a maximum of 1.6 watts per kilogram for the absorption rate of such energy.) 
+Construct a 90\% confidence interval for the true average cell phone absorption rate.
+Sample: \{1.54, 1.41, 1.54, 1.40, 1.49, 1.40, 1.49, 1.39, 1.48, 1.39, 1.45, 1.39, 1.44, 1.38, 1.42, 1.38, 1.41, 1.37, 1.41, 1.33\}.
+\begin{proof}[Solution]
+    We will construct the confidence interval using the $t$ distribution with degree of freedom $n=19$ and $\alpha = 0.1$.
+    First, let us find $\overline{X}$ and $s$.
+    \begin{align*}
+        \overline{X} & = \frac{1}{20}\sum_{k=1}^{n}X_k \\
+        \overline{X} & \approx 1.4255 \\
+        s^2 & = \frac{1}{n-1}\sum_{k=1}^{n}(X_k-\overline{X})^2 \\
+        s^2 & \approx 0.003184 \\
+        s & \approx 0.0564.
+    \end{align*}
+    
+    The critical value is $t_{19, 0.05} \approx 1.729$.
+    Then, the confidence interval is $1.4255 \pm 1.729\times\frac{0.0564}{\sqrt{20}} \approx (1.402, 1.449)$.
+\end{proof}
+\bigbreak
+
+
+\textbf{Probelm 7.4.14}
+Revenues reported last week from nine boutiques franchised by an international clothier averaged \$59,540 with a standard deviation of \$6860. 
+Based on those figures, in what range might the company expect to find the average revenue of all of its boutiques?
+\begin{proof}[Solution]
+    We will construct the confidence interval using the $t$ distribution with degree of freedom $n=8$ and $\alpha = 0.05$.
+    First, let's define our parameters $\overline{X} = 59540$ and $s = 6860$.
+    
+    The critical value is $t_{8, 0.025} \approx 2.306$.
+    Then, the confidence interval is $59540 \pm 2.306\times\frac{6860}{\sqrt{9}} \approx (54267, 64813)$.
+    Hence, with 95\% confidence, the company can expect to find the average revenue of all of its boutiques in the range of $(54267, 64813)$.
+\end{proof}
+\bigbreak
+
+
+
+\end{document}

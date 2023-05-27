@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180B HW7}
+\author{Neo Lee}
+\date{05/23/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{PK Exercise 5.1.4}
+Customers arrive at a service facility according to a Poisson process of rate $\lambda$
+customer/hour. Let $X(t)$ be the number of customers that have arrived up to time t.
+\begin{enumerate}[label=(\alph*)]
+    \item What is $P\{X(t) = k\}$ for $k = 0,1,\dots$?
+    \begin{proof}[Solution]
+        $P\{X(t)=k\}$ is simply \emph{Poisson}$(\lambda t)$.
+        Hence, $P\{X(t)=k\} = \frac{(\lambda t)^k}{k!}e^{-\lambda t}$.
+    \end{proof}
+
+    \item Consider fixed times $0<s<t$. Determine the conditional probability
+    $P\{X(t) = n + k|X(s) = n\}$ and the expected value $E[X(t)X(s)]$.
+    \begin{proof}[Solution]
+        \begin{align*}
+            P\{X(t) = n + k|X(s) & = n\} = P\{X(t-s) = k\} \\
+            & = \frac{(\lambda (t-s))^k}{k!}e^{-\lambda (t-s)}. \\
+            E[X(t)X(s)] & = E[\left(X(t) - X(s) + X(s)\right)\cdot X(s)] \\
+            & = E[(X(t) - X(s))\cdot X(s)] + E[X(s)^2] \\
+            & = E[X(t) - X(s)]\cdot E[X(s)] + E[X(s)^2] \\
+            & = E[X(t) - X(s)]\cdot E[X(s)] + \left[E[X(s)]^2 + Var(X(s))\right] \\
+            & = \lambda(t-s)\cdot\lambda s + \lambda^2 s^2 + \lambda s \\
+            & = \lambda^2 ts + \lambda s.
+        \end{align*}
+    \end{proof}
+\end{enumerate}
+\bigbreak
+
+\newpage
+\textbf{PK Exercise 5.1.5}
+Suppose that a random variable $X$ is distributed according to a Poisson distribution with parameter $\lambda$. 
+The parameter $\lambda$ is itself a random variable, exponentially distributed with density $f(x) = \theta e^{-\theta x}$ for $x\ge \theta$. 
+Find the probability mass function for $X$.
+\begin{proof}[Solution]
+    \begin{align*}
+        P(X = k) & = \int_{0}^{\infty} P(X = k|\lambda = x)f(x)dx \\
+        & = \int_{0}^{\infty} \frac{x^k}{k!}e^{-x}\cdot\theta e^{-\theta x}dx \\
+        & = \frac{\theta}{k!}\int_{0}^{\infty} x^ke^{-(\theta + 1)x}dx \\
+        & = \frac{\theta}{k!}\int_{0}^{\infty} \left(\frac{t}{\theta+1}\right)^ke^{-t} \cdot \frac{1}{\theta+1}dt \qquad (\emph{let } (\theta+1)x = t) \\
+        & = \frac{\theta}{k!}\cdot\frac{1}{(\theta+1)^{k+1}}\int_{0}^{\infty} t^ke^{-t} dt \\
+        & = \frac{\theta}{k!}\cdot\frac{1}{(\theta+1)^{k+1}}\cdot\Gamma(k+1) \\
+        & = \frac{\theta}{k!}\cdot\frac{1}{(\theta+1)^{k+1}}\cdot k! \\
+        & = \frac{\theta}{(\theta+1)^{k+1}}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\textbf{PK Exercise 5.1.7}
+Suppose that customers arrive at a facility according to a Poisson process having rate $\lambda = 2$. 
+Let $X(t)$ be the number of customers that have arrived up to time $t$. 
+Determine the following probabilities and conditional probabilities:
+\begin{enumerate}[label=(\alph*)]
+    \item $P\{X(1)=2\}$.
+    \begin{proof}[Solution]
+        $P\{X(1)=2\} = \frac{2^2}{2!}e^{-2} = 2e^{-2}$.
+    \end{proof}
+
+    \item $P\{X(1) = 2 \emph{ and } X(3) = 6\}$.
+    \begin{proof}[Solution]
+        \begin{align*}
+            P\{X(1) = 2 \emph{ and } X(3) = 6\} 
+            & = P\{X(1) = 2\}\cdot P\{X(2) = 4\} \\
+            & = \frac{2^2}{2!}e^{-2}\cdot\frac{(2\times2)^4}{4!}e^{-(2\times2)} \\
+            & = \frac{2^{10}}{2!4!}e^{-6} \\
+            & = \frac{2^{6}}{3}e^{-6} \\
+            & = \frac{64}{3}e^{-6}.
+        \end{align*}
+    \end{proof}
+    
+    \newpage
+    \item $P\{X(1) = 2 | X(3) = 6\}$.
+    \begin{proof}[Solution]
+        \begin{align*}
+            P\{X(1) = 2 | X(3) = 6\} & = \frac{P\{X(1) = 2 \emph{ and } X(3) = 6\}}{P\{X(3) = 6\}} \\
+            & = \frac{\frac{2^{6}}{3}e^{-6}}{\frac{(2\times3)^6}{6!}e^{-6}} \\
+            & = \frac{6!}{3^7} \\
+            & = \frac{80}{243}.
+        \end{align*}
+    \end{proof}
+
+    \item $P\{X(3) = 6 | X(1) = 2\}$.
+    \begin{proof}[Solution]
+        $P\{X(3) = 6 | X(1) = 2\} = P\{X(2) = 4\} = \frac{(2\times2)^4}{4!}e^{-(2\times2)} = \frac{2^5}{3}e^{-4} = \frac{32}{3}e^{-4}$.
+    \end{proof}
+\end{enumerate}
+\bigbreak
+
+\textbf{PK Problem 5.1.5}
+\begin{prop}
+    For each value of $h > 0$, let $X(h)$ have a Poisson distribution with parameter $\lambda h$. 
+    Let $p_k(h) = P\{X(h) = k\}$ for $k = 0,1,\dots$, then
+    \begin{align*}
+        p_0(h) & = 1-\lambda h +o(h) \\
+        p_1(h) & = \lambda h + o(h) \\
+        p_2(h) & = o(h).
+    \end{align*}
+\end{prop}
+\begin{proof}
+    \begin{align*}
+        p_0(h) & = \frac{(\lambda h)^{0}e^{-\lambda h}}{0!} \\ 
+        & = e^{-\lambda h} \\
+        & = 1 - \lambda h + \frac{(\lambda h)^2}{2!} - \frac{(\lambda h)^3}{3!} + \dots \\
+        & = 1 - \lambda h + o(h). \\
+        p_1(h) & = \frac{(\lambda h)^{1}e^{-\lambda h}}{1!} \\
+        & = \lambda h e^{-\lambda h} \\
+        & = \lambda h (1 - \lambda h + o(h)) \\
+        & = \lambda h + o(h). \\
+        p_2(h) & = \frac{(\lambda h)^{2}e^{-\lambda h}}{2!} \\
+        & = \frac{(\lambda h)^2}{2}e^{-\lambda h} \\
+        & = \frac{(\lambda h)^2}{2}(1 - \lambda h + o(h)) \\ 
+        & = \frac{(\lambda h)^2}{2} - \frac{(\lambda h)^3}{2} + o(h) \\
+        & = o(h).
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\textbf{PK Problem 5.1.7}
+Shocks occur to a system according to a Poisson process of rate $\lambda$. 
+Suppose that the system survives each shock with probability $\alpha$, independently of other shocks, so that its probability of surviving k shocks is $\alpha^k$. 
+What is the probability that the system is surviving at time $t$?
+\begin{proof}[Solution]
+    \begin{align*}
+        P(\emph{Surviving at time t}) & =\sum_{k=0}^{\infty}\alpha^k\cdot \frac{(\lambda t)^ke^{-\lambda t}}{k!} \\ 
+        & = e^{-\lambda t} \sum_{k=0}^{\infty} \frac{(\alpha\lambda t)^k}{k!} \\
+        & = e^{-\lambda t} e^{\alpha\lambda t} \\
+        & = e^{\lambda t (\alpha -1)}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\textbf{PK Exercise 5.2.1}
+Determine numerical values to three decimal places for $P\{X = k\}, k = 0, 1, 2$, when
+\begin{enumerate}[label=(\alph*)]
+    \item $X$ has a binomial distribution with parameters $n = 20$ and $p = 0.06$.
+    \begin{proof}[Solution]
+        \begin{align*}
+            p_0 & = {20\choose 0}0.94^{20} \approx 0.290 \\
+            p_1 & = {20\choose 1}0.06^{1}0.94^{19} \approx 0.370 \\
+            p_2 & = {20\choose 2}0.06^{2}0.94^{18} \approx 0.225.
+        \end{align*}
+    \end{proof}
+    \item $X$ has a binomial distribution with parameters $n = 40$ and $p = 0.03$.
+    \begin{proof}[Solution]
+        \begin{align*}
+            p_0 & = {40\choose 0}0.97^{40} \approx 0.296 \\
+            p_1 & = {40\choose 1}0.03^{1}0.97^{39} \approx 0.366 \\
+            p_2 & = {40\choose 2}0.03^{2}0.97^{38} \approx 0.221.
+        \end{align*}
+    \end{proof}
+    \item $X$ has a Poisson distribution with parameter $\lambda = 1.2$.
+    \begin{align*}
+        p_0 & = \frac{1.2^0e^{-1.2}}{0!} \approx 0.301 \\
+        p_1 & = \frac{1.2^1e^{-1.2}}{1!} \approx 0.361 \\
+        p_2 & = \frac{1.2^2e^{-1.2}}{2!} \approx 0.217.
+    \end{align*}
+\end{enumerate}
+\bigbreak
+
+
+\end{document}

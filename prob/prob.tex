@@ -90,7 +90,6 @@
     & f(\vec{x}) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} e^{-\frac{1}{2}(\vec{x}-\vec{\mu})^{^\top}\Sigma^{-1}(\vec{x}-\vec{\mu})} \quad \emph{for $x\in \mathbb{R}^n$}. \\
     & E[X] = \vec{\mu}; \quad Var(X) = \Sigma.
 \end{align*}
-
 Let random vector $\begin{bmatrix} X_1 \\ \vdots \\ X_n \end{bmatrix}$ have a multivariate normal distribution and $Z$ be the linear combination of the random vector with coefficients $\vec{A} = \begin{bmatrix}
     a_1 \\ 
     \vdots \\
@@ -116,18 +115,19 @@ For bivariate random vector $\begin{bmatrix}
 
 \subsection{Random Sums}
 \begin{align*}
-    X & = \xi_1 + \dots + \xi_N; \quad \emph{where $N$ is a R.V. and $\xi_i$ are i.i.d. R.Vs}. \\
-    E[X] & = E[\xi]E[N]; \quad Var(X) = E[N]Var(\xi) + E[\xi]^2Var(N).
+    & X = \xi_1 + \dots + \xi_N; \quad \emph{where $N$ is a R.V. and $\xi_i$ are i.i.d. R.Vs}. \\
+    & E[X] = E[\xi]E[N]; \quad Var(X) = E[N]Var(\xi) + E[\xi]^2Var(N).
 \end{align*}
 
 \newpage
 \section{Theorems}
 \subsection{Chebyshev's Inequality}
 \begin{align*}
-    & P(|X-\mu| \ge k\sigma) \le \frac{1}{k^2}.
+    & P(|X-E[X]| \ge k) \le \frac{Var(X)}{k^2}.
 \end{align*}
 
 \subsection{Markov Inequality}
+For a non-negative R.V. $X$,
 \begin{align*}
     & P(X \ge k) \le \frac{E[X]}{k}.
 \end{align*}
@@ -222,7 +222,6 @@ Let $S_n = X_1 + \dots + X_n$.
             \end{block} 
         \end{blockarray} \emph{ where }A_k = P(X_{n+1} \le x | X_n = x) = P(\xi_{n+1} \le x).
 \end{align*}
-
 Let $T$ be the number of trials needed for $X_n = max(\xi_1, \dots, \xi_n)\ge M$ for an arbitrary value $M$,
 \begin{align*}
     E[T] & = \frac{1}{P(\xi \ge M)}.
@@ -264,7 +263,6 @@ Let $T$ be the number of trials needed for $X_n = max(\xi_1, \dots, \xi_n)\ge M$
     & = \sum_{k=0}^{\infty}P(\xi = k)(u_{n-1})^k \emph{ for } n\in \mathbb{N}; \\
     u_0 & = 0.
 \end{align*}
-
 From random sums, we know
 \begin{align*}
     E[X_{n+1}] = E[\xi]E[X_{n}]; \quad Var(X_{n+1}) = Var(\xi)E[X_n] + E[\xi]^2Var(X_n).
@@ -311,7 +309,6 @@ After derivation,
             \end{block} 
         \end{blockarray}\; .
 \end{align*}
-
 Let $u_i$ be the probability of $X_n$ reaching state 0 before state $N$ given current state $i$.
 \begin{align*}
     u_i & = \begin{cases}
@@ -323,7 +320,6 @@ Let $u_i$ be the probability of $X_n$ reaching state 0 before state $N$ given cu
         \left(\frac{q}{p}\right)^i & \emph{if } p > q.
     \end{cases}
 \end{align*}
-
 Let $T$ be the time needed to reach state 0.
 \begin{align*}
     E[T] & = i(N-i) \emph{ if } p = q = \frac{1}{2}.
@@ -358,5 +354,69 @@ and $X_n$ as the age of the bulb in service at time $n$.
 \begin{align*}
     r_k = 0; \quad p_k = \frac{a_{k+1}}{a_{k+1} + a_{k+2} + \dots}; \quad q_k = 1-p_k \emph{ for } k \in\mathbb{Z^{^\ge}}.
 \end{align*}
+
+\newpage
+\section{Estimators}
+\subsection{Unbiasedness}
+\begin{align*}
+    Bias(\hat{\theta}) = E[\hat{\theta}] - \theta.
+\end{align*}
+
+\subsection{Efficiency}
+Let $\hat{\theta}_1$ and $\hat{\theta}_2$ be two unbiased estimators of $\theta$. 
+$\hat{\theta}_1$ is more efficient than $\hat{\theta}_2$ if
+\begin{align*}
+    Var(\hat{\theta}_1) < Var(\hat{\theta}_2).
+\end{align*}
+The relative efficiency of $\hat{\theta}_1$ to $\hat{\theta}_2$ is
+\begin{align*}
+    \frac{Var(\hat{\theta}_2)}{Var(\hat{\theta}_1)}.
+\end{align*}
+
+\subsection{Consistency}
+$\hat{\theta}$ is a consistent estimator of $\theta$ if
+\begin{align*}
+    \lim_{n\rightarrow\infty}P(|\hat{\theta}-\theta|\ge\epsilon) = 0.
+\end{align*}
+
+\subsection{Sufficiency}
+An estimator $\hat{\theta}$ is sufficient for $\theta$ if the conditional distribution of $X_1,\dots,X_n$ given $\hat{\theta}$ does not depend on $\theta$;
+equivalently $\hat{\theta}$ is sufficient for $\theta$ if the likelihood function $L(\theta) = f(X;\theta)$ can be factorized as
+\begin{align*}
+    L(\theta) = g(\hat{\theta}; \theta)b(X_1, \dots, X_n).
+\end{align*}
+
+\subsection{Mean Squared Error (MSE)}
+\begin{align*}
+    MSE(\hat{\theta}) = E[(\hat{\theta}-\theta)^2] = Var(\hat{\theta}) + Bias(\hat{\theta})^2.
+\end{align*}
+
+\subsection{Minimum Variance Unbiased Estimator}
+\subsubsection{Fishers Information}
+\begin{align*}
+    I(\theta) = E\left[\left(\frac{\partial}{\partial\theta}\log f(X;\theta)\right)^2\right] = -E\left[\frac{\partial^2}{\partial\theta^2}\log f(X;\theta)\right].
+\end{align*}
+
+\subsubsection{Cramer-Rao Lower Bound}
+Let $\hat{\theta}$ be an unbiased estimator of $\theta$, then
+\begin{align*}
+    Var(\hat{\theta}) \ge \frac{1}{I(\theta)}.
+\end{align*}
+If $Var(\hat{\theta}) = \frac{1}{I(\theta)}$, then $\hat{\theta}$ is a minimum variance unbiased estimator, aka asymptotically efficient.
+
+\subsection{Asymptotic Properties of Maximum Likelihood Estimators}
+\subsubsection{Asymptotic Normality}
+\begin{align*}
+    \lim_{n\rightarrow\infty}\hat{\theta} \sim \emph{N($\theta$, $\frac{1}{nI(\theta)}$)}.
+\end{align*}
+\subsubsection{Asymptotic Unbiasedness}
+\begin{align*}
+    \lim_{n\rightarrow\infty}E[\hat{\theta}] = \theta.
+\end{align*}
+\subsubsection{Asymptotic Efficiency}
+\begin{align*}
+    \lim_{n\rightarrow\infty}Var(\hat{\theta}) = \frac{1}{nI(\theta)}.
+\end{align*}
+
 
 \end{document}

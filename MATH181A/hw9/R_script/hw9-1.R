@@ -25,3 +25,13 @@ plot(AAPL.simRet)
 
 # =====================  Bootstrap CI ======================================
 # adding your code here:
+
+xBar = mean(AAPL.simRet)
+x = replicate(1000, sample(AAPL.simRet, size=length(AAPL.simRet), replace=TRUE))
+xBars = colMeans(x)
+
+criticalVal = quantile(xBars - xBar, probs=c(0.05, 0.95))
+
+CIlower = xBar - unname(criticalVal[2])
+CIupper = xBar - unname(criticalVal[1])
+print(c(CIlower, CIupper))

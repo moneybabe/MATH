@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 180B HW8}
+\author{Neo Lee}
+\date{06/07/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{PK Problem 5.2.1}
+Let $X(n, p)$ have a binomial distribution with parameters $n$ and $p$. 
+Let $n\rightarrow \infty$  and $p \rightarrow 0$ in such a way that $np=\lambda$. 
+Show that $$\lim_{n\rightarrow\infty}P\{X(n,p)=0\}=e^{-\lambda}$$
+and $$\lim_{n\rightarrow\infty}\frac{P\{X(n,p)=k+1\}}{P\{X(n,p)=k\}}=\frac{\lambda}{k+1} \emph{ for } k = 0, 1, \dots .$$ 
+\begin{proof}[Solution]
+    The first equation is immediate from the Poisson approximation to the binomial distribution with the error bounded by $np^2$:
+    \begin{align*}
+        \vert P(X = 0) - e^{-\lambda} \vert & \le np^2 \le n\left(\frac{1}{n}\right)^2 \qquad (p \le \frac{1}{n} \emph{ as } p \rightarrow 0)\\
+        \lim_{n\rightarrow\infty} \vert P(X = 0) - e^{-\lambda} \vert & \le \lim_{n\rightarrow\infty} n\left(\frac{1}{n}\right)^2 = 0\\
+        \lim_{n\rightarrow\infty} P(X = 0) & = e^{-\lambda}.
+    \end{align*}
+
+    For the second equation, we can use the Poisson approximation to the binomial distribution again, then similarly, we get:
+    \begin{align*}
+        \lim_{n\rightarrow\infty}P(X = k+1) & = \frac{\lambda^{k+1}e^{-\lambda}}{(k+1)!} \\
+        \lim_{n\rightarrow\infty}P(X = k) & = \frac{\lambda^{k}e^{-\lambda}}{k!} 
+    \end{align*}
+    and we can get the second equation by dividing the two equations above:
+    \begin{align*}
+        \lim_{n\rightarrow\infty} \frac{P(X = k+1)}{P(X = k)} & = \lim_{n\rightarrow\infty} \frac{\lambda^{k+1}e^{-\lambda}}{(k+1)!} \cdot \frac{k!}{\lambda^{k}e^{-\lambda}} \\
+        & = \frac{\lambda}{k+1}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\textbf{PK Problem 5.2.7}
+$N$ bacteria are spread independently with uniform distribution on a microscope slide of area $A$. 
+An arbitrary region having area $a$ is selected for observation. 
+Determine the probability of $k$ bacteria within the region of area $a$. 
+Show that as $N \rightarrow\infty$ and $a\rightarrow0$ such that$(a/A)N \rightarrow c(0<c<\infty)$,then $p(k)\rightarrow e^{-c}c^{k}/k!$.
+\begin{proof}[Solution]
+    The probability interested is essentially a binomial distribution with $N$ trials and $p = a/A$.
+    Hence, we can use the Poisson approximation to the binomial distribution to get:
+    \begin{align*}
+        p(k) = \frac{c^{k}e^{-c}}{k!}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\textbf{PK Exercise 5.3.2}
+A radioactive source emits particles according to a Poisson process of rate $\lambda=2$ particles per minute.
+\begin{enumerate}[label=(\alph*)]
+    \item 
+    What is the probability that the first particle appears some time after 3 min but before 5 min?
+    \begin{proof}[Solution]
+        We are interested in $P(3\le W_1\le 5)$, where $W_1$ is the waiting time for the first particle, following an exponential distribution with parameter $\lambda = 2$.
+        \begin{align*}
+            P(3\le W_1\le 5) & = \int_{3}^{5} 2e^{-2t}dt \\
+            & = \left[-e^{-2t}\right]_{3}^{5} \\
+            & = e^{-6} - e^{-10}.
+        \end{align*}
+    \end{proof}
+
+    \item 
+    What is the probability that exactly one particle is emitted in the interval from 3 to 5 min?
+    \begin{align*}
+        P(N(3,5) = 1) & = \frac{e^{-2\times 2}(2\times 2)^1}{1!} \\
+        & = 4e^{-4}.
+    \end{align*}
+\end{enumerate}
+\bigbreak
+
+\textbf{PK Exercise 5.3.6}
+For $i = 1,...,n,$ let $\{X_i(t);t \ge 0\}$ be independent Poisson processes, 
+each with the same parameter $\lambda$. 
+Find the distribution of the first time that at least one event has occurred in every process.
+\begin{proof}[Solution]
+    Let $Y = min(t;X_i(t)\ge 1)$. 
+    We will find $f_Y(y)$ by finding $P(Y\le y)$.
+    \begin{align*}
+        P(Y\le y) & = P(W^{(1)}_1\le y, W^{(2)}_1\le y, \dots, W^{(n)}_1\le y) \\
+        & = (1-e^{-\lambda y})^n \\
+        f_Y(y) & = \frac{d}{dy}P(Y\le y) \\
+        & = n(1-e^{-\lambda y})^{n-1}\cdot \lambda e^{-\lambda y}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\textbf{PK Problem 5.3.3}
+The joint probability density function for the waiting times $W_1$ and $W_2$ is given by
+$$f(w_1, w_2)=\lambda^2e^{-\lambda w_2} \emph{ for } 0 \le w_1\le w_2.$$
+Change variables according to 
+$$S_0 = W_1 \emph{ and } S_1 = W_2-W_1$$
+and determine the joint distribution of the first two sojourn times. Compare
+with Theorem 5.5.
+\begin{proof}[Solution]
+    \begin{align*}
+        f(w_1, w_2) & = \lambda^2e^{-\lambda w_2} \\
+        & = \lambda^2e^{-\lambda(w_1 + w_2 - w_1)} \\
+        & = \lambda^2e^{-\lambda(s_0 + s_1)} \\
+        & = \lambda e^{-\lambda s_0}\cdot \lambda e^{-\lambda s_1} \\
+        & = f(s_0, s_1).
+    \end{align*}
+    Hence, the joint distribution of the first two sojourn times is two independent exponential distribution with parameter $\lambda$, which agrees with Theorem 5.5.
+\end{proof}
+\bigbreak
+
+\textbf{PK Problem 5.3.7}
+A critical component on a submarine has an operating lifetime that is 
+exponentially distributed with mean 0.50 years. 
+As soon as a component fails, it is replaced by a new one having 
+statistically identical properties. 
+What is the smallest number of spare components that the submarine 
+should stock if it is leaving for a one-year tour and wishes the 
+probability of having an inoperable unit caused by failures exceeding 
+the spare inventory to be less than 0.02?
+\begin{proof}[Solution]
+    Let $S_n = X_1 + \dots + X_n$, where $X_k$ represents the life time of the $k$-th component.
+    Notice that $S_n$ is a sum of $n$ independent exponential random variables with parameter $\lambda = 2$, 
+    so $S_n$ follows a gamma distribution with parameter $\alpha = n$ and $\lambda = 2$, 
+    which interestingly is the waiting time of the $n$-th event in a Poisson process with parameter $\lambda = 2$.
+
+    We are interested in finding $n$ such that $P(S_n < 1) < 0.02$.
+    \begin{align*}
+        P(S_n < 1) & = \int_{0}^{1} \frac{2^n}{(n-1)!}t^{n-1}e^{-2t}dt \\
+        & = \int_{0}^{2}\frac{2^n}{(n-1)!}\left(\frac{u}{2}\right)^{n-1}e^{-u}\cdot \frac{1}{2}du \qquad (u = 2t) \\
+        & = \frac{1}{(n-1)!}\int_{0}^{2}u^{n-1}e^{-u}du \\
+        & = \frac{1}{(n-1)!}\Gamma(n).
+    \end{align*}
+    With the help of a calculator, $P(S_5 < 1)\approx 0.0527, P(S_6 < 1)\approx 0.0166$. 
+    Hence, $n = 6$ is the smallest number of spare components that the submarine should stock.
+\end{proof}
+
+
+\end{document}

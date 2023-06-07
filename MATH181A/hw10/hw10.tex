@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+% title information
+\title{Math 181A HW10}
+\author{Neo Lee}
+\date{06/06/2023}
+
+% main content
+\begin{document} 
+
+% placing title information; comment out if using fancyhdr
+\maketitle 
+
+\textbf{Problem 6.5.1}
+Let $k_1, k_2, \dots, k_n$ be a random sample from the geometric probability function
+$$p_X(k;p)=(1-p)^{k-1}p, k=1,2,\dots$$
+Find $\Lambda$, the generalized likelihood ratio for testing $H_0: p = p_0$ versus $H_1: p  \neq p_0$.
+\begin{proof}[Solution]
+    \begin{align*}
+        \Lambda & = \frac{L(p_0)}{^{max}_{p \in \mathbb{R}}L(p)}. \\
+    \end{align*}
+    To find $^{max}_{p\in\mathbb{R}}L(p)$, we take the derivative of $l(p) = \ln[L(p)]$ and set it to 0.
+    \begin{align*}
+        L(p) & = \prod_{i=1}^{n}(1-p)^{k_i-1}p \\
+        & = p^n(1-p)^{\sum\limits_{i=1}^{n}(k_i)-n} \\
+        l(p) & = n\ln(p) + \left(\sum\limits_{i=1}^{n}(k_i)-n\right)\ln(1-p) \\
+        l'(p) = 0 & = \frac{n}{p} - \frac{\sum\limits_{i=1}^{n}(k_i)-n}{1-p} \\
+        p\sum_{i=1}^{n}(k_i) - np & = n(1-p) \\
+        p & = \frac{n}{\sum_{i=1}^{n}(k_i)} \\
+        & = \frac{1}{\overline{K}}. \\
+    \end{align*}
+    Hence,
+    \begin{align*}
+        \Lambda & = \frac{L(p_0)}{^{max}_{p \in \mathbb{R}}L(p)} \\
+        & = \frac{\prod\limits_{i=1}^{n}(1-p_0)^{k_i-1}p_0}{\prod\limits_{i=1}^{n}(1-\frac{1}{\overline{K}})^{k_i-1}\frac{1}{\overline{K}}} \\
+        & = \frac{p_0^n(1-p_0)^{\sum_{i=1}^{n}(k_i)-n}}{(1/\overline{K})^n(1-(1/\overline{K}))^{\sum_{i=1}^{n}(k_i)-n}} \\
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\textbf{Problem 6.5.2}
+Let $y_1, y_2, \dots, y_{10}$ be a random sample from an exponential pdf with unknown parameter $\lambda$. 
+Find the form of the GLRT for $H_0: \lambda = \lambda_0$ versus $H_1: \lambda \neq \lambda_0$. 
+What integral would have to be evaluated to determine the critical value if $\alpha$ were equal to 0.05?
+\begin{proof}[Solution]
+    $$\Lambda = \frac{L(\lambda_0)}{^{max}_{\lambda\in\mathbb{R}}L(\lambda)}.$$
+    To find $^{max}_{\lambda\in\mathbb{R}}L(\lambda)$, we first find 
+    the maximum likelihood estimator by taking the derivative of $l(\lambda) = \ln[L(\lambda)]$ and set it to 0.
+    \begin{align*}
+        L(\lambda) & = \prod_{k=1}^{10}\lambda e^{-\lambda y_k} \\
+        & = \lambda^{10}e^{-\lambda\sum_{k=1}^{10}y_k} \\
+        l(\lambda) & = 10\ln(\lambda) - \lambda\sum_{k=1}^{10}y_k \\
+        l'(\lambda) = 0 & = \frac{10}{\lambda} - \sum_{k=1}^{10}y_k \\
+        \lambda & = \frac{10}{\sum_{k=1}^{10}y_k} \\
+        & = \frac{1}{\overline{Y}}. \\
+    \end{align*}
+    Hence,
+    \begin{align*}
+        \Lambda & = \frac{L(\lambda_0)}{^{max}_{\lambda\in\mathbb{R}}L(\lambda)} \\
+        & = \frac{\lambda_0^{10}\cdot e^{-\lambda_0\sum_{k=1}^{10}y_k}}{(1/\overline{Y})^{10}\cdot e^{-(1/\overline{Y})\sum_{k=1}^{10}y_k}} \\
+        & = \frac{\lambda_0^{10}\cdot e^{-\lambda_0\sum_{k=1}^{10}y_k}}{(1/\overline{Y})^{10}\cdot e^{-10}} \\
+        & = (\overline{Y}\cdot \lambda_0)^{10}\cdot e^{10 -\lambda_0\sum_{k=1}^{10}y_k} \\
+        & = (\overline{Y}\cdot \lambda_0)^{10}\cdot e^{10 -\lambda_0\cdot 10\overline{Y}} \\
+        & = (\overline{Y}\cdot \lambda_0)^{10}\cdot e^{10(1 -\lambda_0\cdot \overline{Y})}.
+    \end{align*}
+    To find the critical value, we need to find $c$ such that
+    \begin{align*}
+        \alpha & = P(\Lambda \leq c) \\
+        \alpha & = \int_{0}^{c} (\overline{Y}\cdot \lambda_0)^{10}\cdot e^{10(1 -\lambda_0\cdot \overline{Y})} d\overline{Y}.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+
+\textbf{Problem 6.5.3}
+
+\bigbreak
+
+
+\textbf{Problem 6.5.4}
+
+\bigbreak
+
+
+\textbf{Problem 6.5.5}
+
+\bigbreak
+
+
+\textbf{Problem 6.5.6}
+
+
+
+\end{document}

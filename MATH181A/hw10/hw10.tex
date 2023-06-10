@@ -31,9 +31,9 @@ Find $\Lambda$, the generalized likelihood ratio for testing $H_0: p = p_0$ vers
         L(p) & = \prod_{i=1}^{n}(1-p)^{k_i-1}p \\
         & = p^n(1-p)^{\sum\limits_{i=1}^{n}(k_i)-n} \\
         l(p) & = n\ln(p) + \left(\sum\limits_{i=1}^{n}(k_i)-n\right)\ln(1-p) \\
-        l'(p) = 0 & = \frac{n}{p} - \frac{\sum\limits_{i=1}^{n}(k_i)-n}{1-p} \\
-        p\sum_{i=1}^{n}(k_i) - np & = n(1-p) \\
-        p & = \frac{n}{\sum_{i=1}^{n}(k_i)} \\
+        l'(\hat{p}) = 0 & = \frac{n}{\hat{p}} - \frac{\sum\limits_{i=1}^{n}(k_i)-n}{1-\hat{p}} \\
+        \hat{p}\sum_{i=1}^{n}(k_i) - n\hat{p} & = n(1-\hat{p}) \\
+        \hat{p} & = \frac{n}{\sum_{i=1}^{n}(k_i)} \\
         & = \frac{1}{\overline{K}}. \\
     \end{align*}
     Hence,
@@ -57,8 +57,8 @@ What integral would have to be evaluated to determine the critical value if $\al
         L(\lambda) & = \prod_{k=1}^{10}\lambda e^{-\lambda y_k} \\
         & = \lambda^{10}e^{-\lambda\sum_{k=1}^{10}y_k} \\
         l(\lambda) & = 10\ln(\lambda) - \lambda\sum_{k=1}^{10}y_k \\
-        l'(\lambda) = 0 & = \frac{10}{\lambda} - \sum_{k=1}^{10}y_k \\
-        \lambda & = \frac{10}{\sum_{k=1}^{10}y_k} \\
+        l'(\hat{\lambda}) = 0 & = \frac{10}{\hat{\lambda}} - \sum_{k=1}^{10}y_k \\
+        \hat{\lambda} & = \frac{10}{\sum_{k=1}^{10}y_k} \\
         & = \frac{1}{\overline{Y}}. \\
     \end{align*}
     Hence,
@@ -72,20 +72,56 @@ What integral would have to be evaluated to determine the critical value if $\al
     \end{align*}
     To find the critical value, we need to find $c$ such that
     \begin{align*}
-        \alpha & = P(\Lambda \leq c) \\
-        \alpha & = \int_{0}^{c} (\overline{Y}\cdot \lambda_0)^{10}\cdot e^{10(1 -\lambda_0\cdot \overline{Y})} d\overline{Y}.
+        \alpha & = P(\Lambda \leq c|\lambda = \lambda_0) \\
+        \alpha & = \int_{0}^{c} f_\Lambda(z|\lambda=\lambda_0) dz.
+    \end{align*}
+\end{proof}
+\bigbreak
+
+\newpage
+\textbf{Problem 6.5.3}
+Let $y_1,y_2,...,y_n$ be a random sample from a normal pdf with unknown mean $\mu$ and variance 1. 
+Find the form of the GLRT for $H_0 : \mu = \mu_0$ versus $H_1:\mu\neq\mu_0$.
+\begin{proof}[Solution]
+    Let's find the maximum likelihood estimator $\hat{\mu}$ first.
+    \begin{align*}
+        L(\mu) & = \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(y_i-\mu)^2} \\
+        & = \left(\frac{1}{\sqrt{2\pi}}\right)^n e^{-\frac{1}{2}\sum_{i=1}^{n}(y_i-\mu)^2} \\
+        l(\mu) & = -\frac{n}{2}\ln(2\pi) - \frac{1}{2}\sum_{i=1}^{n}(y_i-\mu)^2 \\
+        l'(\hat{\mu}) = 0 & = \sum_{i=1}^{n}(y_i-\hat{\mu}) \\
+        \hat{\mu} & = \frac{1}{n}\sum_{i=1}^{n}y_i \\
+        & = \overline{Y}. \\
+    \end{align*}
+    Then, we can find the likelihood ratio by setting $^{max}_{\mu\in\mathbb{R}}L(\mu) = L(\hat{\mu})$.
+    \begin{align*}
+        \Lambda & = \frac{L(\mu_0)}{^{max}_{\mu\in\mathbb{R}}L(\mu)} \\
+        & = \frac{\left(\frac{1}{\sqrt{2\pi}}\right)^n e^{-\frac{1}{2}\sum_{i=1}^{n}(y_i-\mu_0)^2}}{\left(\frac{1}{\sqrt{2\pi}}\right)^n e^{-\frac{1}{2}\sum_{i=1}^{n}(y_i-\overline{Y})^2}} \\
+        & = e^{-\frac{1}{2}\sum_{i=1}^{n}(y_i-\mu_0)^2 + \frac{1}{2}\sum_{i=1}^{n}(y_i-\overline{Y})^2} \\
+        & = e^{-\frac{1}{2}\sum_{i=1}^{n}(y_i^2-2y_i\mu_0+\mu_0^2) + \frac{1}{2}\sum_{i=1}^{n}(y_i^2-2y_i\overline{Y}+\overline{Y}^2)} \\
+        & = e^{-\frac{1}{2}\sum_{i=1}^{n}(2y_i\overline{Y}-2y_i\mu_0-\overline{Y}^2+\mu_0^2)} \\
+        & = e^{-\frac{n}{2}\sum_{i=1}^{n}(2\frac{y_i}{n}\overline{Y}-2\frac{y_i}{n}\mu_0) + \frac{n}{2}\overline{Y}^2-\frac{n}{2}\mu_0^2} \\
+        & = e^{-\frac{n}{2}\left(2\overline{Y}^2 - 2\overline{Y}\mu_0\right) + \frac{n}{2}\overline{Y}^2-\frac{n}{2}\mu_0^2} \\
+        & = e^{-\frac{n}{2}\left(\overline{Y}^2 - 2\overline{Y}\mu_0 + \mu_0^2\right)} \\
+        & = e^{-\frac{n}{2}\left(\overline{Y} - \mu_0\right)^2}. 
+    \end{align*}
+    To conduct a hypothesis test, we need to find $c^*$ such that
+    \begin{align*}
+        \alpha & = P(\Lambda \leq c|\mu = \mu_0) \qquad (\emph{notice $e^{-\frac{n}{2}\left(\overline{Y} - \mu_0\right)^2}$ is always} \le 1, \emph{so } c \le 1) \\
+        \alpha & = P(e^{-\frac{n}{2}\left(\overline{Y} - \mu_0\right)^2} \le c | \mu = \mu_0) \\
+        \alpha & = P\left(-\frac{n}{2}\left(\overline{Y} - \mu_0\right)^2 \le \ln(c) | \mu = \mu_0\right) \\
+        \alpha & = P\left(\frac{\left(\overline{Y} - \mu_0\right)^2}{1/n} \ge -2\ln(c) | \mu = \mu_0\right) \\
+        \alpha & = P\left(\left(\frac{\overline{Y} - \mu_0}{1/\sqrt{n}}\right)^2 \ge -2\ln(c) | \mu = \mu_0\right) \\
+        \alpha & = P\left(Z^2 \ge -2\ln(c) | \mu = \mu_0\right) \\
+        \alpha & = P\left(Z \ge c^* | \mu = \mu_0\right) + P\left(Z \le -c^* | \mu = \mu_0\right). \qquad (c^* = z_{\alpha/2})
     \end{align*}
 \end{proof}
 \bigbreak
 
 
-\textbf{Problem 6.5.3}
-
-\bigbreak
-
-
 \textbf{Problem 6.5.4}
-
+In the scenario of Question 6.5.3, suppose the alternative hypothesis is $H_1: \mu = \mu_1$, 
+for some particular value of $\mu_1$. How does the likelihood ratio test change in this case? 
+In what way does the critical region depend on the particular value of $\mu_1$?
 \bigbreak
 
 
@@ -95,7 +131,9 @@ What integral would have to be evaluated to determine the critical value if $\al
 
 
 \textbf{Problem 6.5.6}
-
+Suppose a sufficient statistic exists for the parameter $\theta$. 
+Use Theorem 5.6.1 to show that the critical region of a likelihood ratio test 
+will depend on the sufficient statistic.
 
 
 \end{document}

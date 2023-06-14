@@ -79,7 +79,7 @@
 
 \subsection{Gamma Random Variable}
 \begin{align*}
-    & f(x) = \frac{\lambda}{\Gamma(\alpha)} (\lambda x)^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \beta \in\mathbb{R}^{^+}$}, x \ge 0. \\
+    & f(x) = \frac{\lambda}{\Gamma(\alpha)} (\lambda x)^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \lambda \in\mathbb{R}^{^+}$}, x \ge 0. \\
     & \Gamma(\alpha) = \int_0^\infty u^{\alpha-1}e^{-u}du; \quad \Gamma(\alpha) = (\alpha-1)! \emph{ if } \alpha\in\mathbb{Z^{^+}}. \\
     & E[X] = \frac{\alpha}{\lambda}; \quad Var(X) = \frac{\alpha}{\lambda^2}.
 \end{align*}
@@ -221,7 +221,7 @@ Let $S_n = X_1 + \dots + X_n$.
                 0 & 0 & 0 & A_3 & \cdots \\
                 \vdots & \vdots & \vdots & \vdots & \ddots \\
             \end{block} 
-        \end{blockarray} \emph{ where }A_k = P(X_{n+1} \le x | X_n = x) = P(\xi_{n+1} \le x).
+        \end{blockarray} \emph{ where }A_k = P(X_{n+1} \le k | X_n = k) = P(\xi_{n+1} \le k).
 \end{align*}
 Let $T$ be the number of trials needed for $X_n = max(\xi_1, \dots, \xi_n)\ge M$ for an arbitrary value $M$,
 \begin{align*}

@@ -79,7 +79,8 @@
 
 \subsection{Gamma Random Variable}
 \begin{align*}
-    & f(x) = \frac{\lambda}{\Gamma(\alpha)} (\lambda x)^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \beta, x\in \mathbb{R}^{^+}$}; \quad \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt. \\
+    & f(x) = \frac{\lambda}{\Gamma(\alpha)} (\lambda x)^{\alpha-1} e^{-\lambda x} \quad \emph{for $\alpha, \beta \in\mathbb{R}^{^+}$}, x \ge 0. \\
+    & \Gamma(\alpha) = \int_0^\infty u^{\alpha-1}e^{-u}du; \quad \Gamma(\alpha) = (\alpha-1)! \emph{ if } \alpha\in\mathbb{Z^{^+}}. \\
     & E[X] = \frac{\alpha}{\lambda}; \quad Var(X) = \frac{\alpha}{\lambda^2}.
 \end{align*}
 
@@ -109,7 +110,7 @@ For bivariate random vector $\begin{bmatrix}
 \begin{align*}
     & P(\vec{x}) = \frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k} \quad \emph{for $\vec{x} = \begin{bmatrix}
         x_1 \\ \vdots \\ x_k
-    \end{bmatrix}$, $x_i\in \mathbb{N}$, $\sum_{i=1}^k x_i = n$, $p_i\in [0,1]$}. \\
+    \end{bmatrix}$, $x_i\in \mathbb{Z^{^\ge}}$, $\sum_{i=1}^k x_i = n$, $p_i\in [0,1]$}. \\
     & E[\vec{x}] = n\vec{p}; \quad Var(\vec{x}) = n\overrightarrow{p(1-p)}.
 \end{align*}
 

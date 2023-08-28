@@ -29,11 +29,28 @@ equivalent to independence).
 
 SOLUTION GOES HERE
 
+Consider a uniform random variable $X$ over the space of $\{-1, 0, 1\}$, and another random variable 
+$Y = |X|$. Then, $Cov(X, Y) = E[XY] - E[X]E[Y] = (1 \times P(X = 1, Y = 1) - 1 \times 
+P(X = -1, Y = 1) + 0\times P(X = 0, Y = 0)) - 0\times \frac{2}{3} = 0$. Hence, their 
+correlation is also 0. However, we know $X, Y$ are definitely not independent, because we have 
+explicitly defined $Y = |X|$. We can also check by looking at $P(Y = 1 | X = -1) = 1 \neq P(Y = 1) 
+= \frac{2}{3}$.
+
 2. (2 pts)
 If $(X,Y)$ has a multivariate Gaussian distribution, and $X,Y$ are uncorrelated: 
 $\mathrm{Cov}(X,Y) = 0$, then show that $X,Y$ are independent.
 
+
 SOLUTION GOES HERE
+
+We just have to show that $f_{X, Y}(x, y) = f_X(x)\cdot f_Y(y)$. Now we evaluate the joint 
+distribution
+\begin{align*}
+    f_{X, Y}(x, y) & = \frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}\cdot exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{(x-\mu_X)^2}{\sigma^2_X}-2\rho\frac{(x-\mu_X)(y-\mu_Y)}{\sigma_X\sigma_Y}+\frac{(y-\mu_Y)^2}{\sigma_Y^2}\right]\right) \\
+    & = \frac{1}{2\pi\sigma_X\sigma_Y}\cdot exp\left(-\frac{1}{2}\left[\frac{(x-\mu_X)^2}{\sigma^2_X}+\frac{(y-\mu_Y)^2}{\sigma_Y^2}\right]\right) \qquad (\rho = 0 \because X, Y \textit{ are uncorrelated}) \\
+    & = \frac{1}{\sqrt{2\pi}\sigma_X}\cdot exp\left(-\frac{1}{2}\left[\frac{(x-\mu_X)^2}{\sigma^2_X}\right]\right) \cdot \frac{1}{\sqrt{2\pi}\sigma_Y}\cdot exp\left(-\frac{1}{2}\left[\frac{(y-\mu_Y)^2}{\sigma_Y^2}\right]\right) \\
+    & = f_X(x)\cdot f_Y(y).
+\end{align*}
 
 3. (3 pts)
 Give an example to show that two random variables $X,Y$ can be marginally 
@@ -41,6 +58,30 @@ Gaussian (meaning, $X$ is Gaussian, and $Y$ is Gaussian) and uncorrelated but
 *not* independent. Hint: $(X,Y)$ cannot be multivariate Gaussian in this case.
 
 SOLUTION GOES HERE
+
+Define $X \sim N(0, 1)$. Then define 
+\begin{align*}
+    Y = \begin{cases}
+        X & \textit{with probability } \frac{1}{2} \\
+        -X & \textit{with probability } \frac{1}{2}.
+    \end{cases}
+\end{align*}
+We can verify that $Y$ is Gaussian by checking its *CDF*
+\begin{align*}
+    P(Y \le y) & = P(X \le y | Y = X)P(Y = X) + P(-X \le y | Y = -X)P(Y = -X) \\
+    & = P(X \le y)\cdot\frac{1}{2} + P(X \ge -y)\cdot\frac{1}{2} \qquad (\textit{notice $P(X \le y) = P(X \ge -y)$}) \\
+    & = P(X \le y).
+\end{align*}
+Hence, $Y \sim N(0, 1)$. Now we check that $X, Y$ are uncorrelated by evaluating their covariance
+\begin{align*}
+    Cov(X, Y) & = E[XY] - E[X]E[Y] \\
+    & = E[XY] - 0 \\
+    & = E[XY | Y = X]P(Y = X) + E[XY | Y = -X]P(Y = -X) \\
+    & = E[X^2]\cdot\frac{1}{2} + E[-X^2]\cdot\frac{1}{2} \\
+    & = 0.
+\end{align*}
+However, we know $X, Y$ are not independent, because $P(Y \le -1 | -0.1 \le X \le 0.1) = 0 \neq 
+P(Y \le -1)$.
 
 # Random walks
 
@@ -63,6 +104,18 @@ or "$\phi$-test", or ...
 
 SOLUTION GOES HERE
 
+We will proceed by testing the difference of the random walk sequence. Let $d_t = x_t - x_{t-1} = 
+\delta + \epsilon_t$. 
+Then $d_t \sim N(0 + \delta, \sigma^2)$ and $d_t$ is *i.i.d*. Since $\sigma$ is unknown,
+we can use the *t-test* to test 
+whether the mean of $d_t$ is zero, which means $\delta = 0$. The null distribution is $t_{n-1}$, 
+where $n$ is the length of the random walk sequence. The test statistic is
+\begin{align*}
+    t & = \frac{\bar{d}}{\hat{\sigma}/\sqrt{n}}.
+\end{align*}
+We can compute it in R by using the function 
+`t.test()`.
+
 5. (2 pts)
 Simulate a random walk of length 100 *without* drift, i.e., $\delta = 0$, and 
 compute the test statistic you devised in Q4 and report its value. Then repeat,
@@ -70,6 +123,56 @@ but using a large nonzero value $\delta$.
 
 ```{r}
 # CODE GOES HERE
+# Generate some data
+n <- 101
+delta <- 0
+sigma <- 1
+epsilon <- rnorm(n, 0, sigma)
+x <- rep(0, n)
+for (t in 2:n) {
+  x[t] <- delta + x[t - 1] + epsilon[t]
+}
+
+# First differences
+diff_x <- diff(x)
+
+# t-test
+test_result <- t.test(diff_x, mu = 0, alternative = "two.sided")
+t_value <- test_result$statistic
+p_value <- test_result$p.value
+
+print(test_result)
+print(paste("test statistic:", t_value))
+print(paste("likelihood of null hypothesis", p_value))
+
+
+```
+
+```{r}
+# CODE GOES HERE
+# Generate some data
+# let drift be 10
+n <- 101
+delta <- 10
+sigma <- 1
+epsilon <- rnorm(n, 0, sigma)
+x <- rep(0, n)
+for (t in 2:n) {
+  x[t] <- delta + x[t - 1] + epsilon[t]
+}
+
+# First differences
+diff_x <- diff(x)
+
+# t-test
+test_result <- t.test(diff_x, mu = 0, alternative = "two.sided")
+t_value <- test_result$statistic
+p_value <- test_result$p.value
+
+print(test_result)
+print(paste("test statistic:", t_value))
+print(paste("likelihood of null hypothesis", p_value))
+
 ```
 
 6. (4 pts)

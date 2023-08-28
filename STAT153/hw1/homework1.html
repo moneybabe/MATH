@@ -2770,12 +2770,37 @@ are uncorrelated but not independent (for the latter, you may invoke any
 property that you know is equivalent to independence).</li>
 </ol>
 <p>SOLUTION GOES HERE</p>
+<p>Consider a uniform random variable <span class="math inline">\(X\)</span> over the space of <span class="math inline">\(\{-1, 0, 1\}\)</span>, and another random variable
+<span class="math inline">\(Y = |X|\)</span>. Then, <span class="math inline">\(Cov(X, Y) = E[XY] - E[X]E[Y] = (1 \times P(X = 1,
+Y = 1) - 1 \times P(X = -1, Y = 1) + 0\times P(X = 0, Y = 0)) - 0\times
+\frac{2}{3} = 0\)</span>. Hence, their correlation is also 0. However,
+we know <span class="math inline">\(X, Y\)</span> are definitely not
+independent, because we have explicitly defined <span class="math inline">\(Y = |X|\)</span>. We can also check by looking at
+<span class="math inline">\(P(Y = 1 | X = -1) = 1 \neq P(Y = 1) =
+\frac{2}{3}\)</span>.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>(2 pts) If <span class="math inline">\((X,Y)\)</span> has a
 multivariate Gaussian distribution, and <span class="math inline">\(X,Y\)</span> are uncorrelated: <span class="math inline">\(\mathrm{Cov}(X,Y) = 0\)</span>, then show that
 <span class="math inline">\(X,Y\)</span> are independent.</li>
 </ol>
 <p>SOLUTION GOES HERE</p>
+<p>We just have to show that <span class="math inline">\(f_{X, Y}(x, y)
+= f_X(x)\cdot f_Y(y)\)</span>. Now we evaluate the joint distribution
+<span class="math display">\[\begin{align*}
+    f_{X, Y}(x, y) &amp; =
+\frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}\cdot
+exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{(x-\mu_X)^2}{\sigma^2_X}-2\rho\frac{(x-\mu_X)(y-\mu_Y)}{\sigma_X\sigma_Y}+\frac{(y-\mu_Y)^2}{\sigma_Y^2}\right]\right)
+\\
+    &amp; = \frac{1}{2\pi\sigma_X\sigma_Y}\cdot
+exp\left(-\frac{1}{2}\left[\frac{(x-\mu_X)^2}{\sigma^2_X}+\frac{(y-\mu_Y)^2}{\sigma_Y^2}\right]\right)
+\qquad (\rho = 0 \because X, Y \textit{ are uncorrelated}) \\
+    &amp; = \frac{1}{\sqrt{2\pi}\sigma_X}\cdot
+exp\left(-\frac{1}{2}\left[\frac{(x-\mu_X)^2}{\sigma^2_X}\right]\right)
+\cdot \frac{1}{\sqrt{2\pi}\sigma_Y}\cdot
+exp\left(-\frac{1}{2}\left[\frac{(y-\mu_Y)^2}{\sigma_Y^2}\right]\right)
+\\
+    &amp; = f_X(x)\cdot f_Y(y).
+\end{align*}\]</span></p>
 <ol start="3" style="list-style-type: decimal">
 <li>(3 pts) Give an example to show that two random variables <span class="math inline">\(X,Y\)</span> can be marginally Gaussian (meaning,
 <span class="math inline">\(X\)</span> is Gaussian, and <span class="math inline">\(Y\)</span> is Gaussian) and uncorrelated but
@@ -2783,6 +2808,30 @@ multivariate Gaussian distribution, and <span class="math inline">\(X,Y\)</span>
 this case.</li>
 </ol>
 <p>SOLUTION GOES HERE</p>
+<p>Define <span class="math inline">\(X \sim N(0, 1)\)</span>. Then
+define <span class="math display">\[\begin{align*}
+    Y = \begin{cases}
+        X &amp; \textit{with probability } \frac{1}{2} \\
+        -X &amp; \textit{with probability } \frac{1}{2}.
+    \end{cases}
+\end{align*}\]</span> We can verify that <span class="math inline">\(Y\)</span> is Gaussian by checking its
+<em>CDF</em> <span class="math display">\[\begin{align*}
+    P(Y \le y) &amp; = P(X \le y | Y = X)P(Y = X) + P(-X \le y | Y =
+-X)P(Y = -X) \\
+    &amp; = P(X \le y)\cdot\frac{1}{2} + P(X \ge -y)\cdot\frac{1}{2}
+\qquad (\textit{notice $P(X \le y) = P(X \ge -y)$}) \\
+    &amp; = P(X \le y).
+\end{align*}\]</span> Hence, <span class="math inline">\(Y \sim N(0,
+1)\)</span>. Now we check that <span class="math inline">\(X, Y\)</span>
+are uncorrelated by evaluating their covariance <span class="math display">\[\begin{align*}
+    Cov(X, Y) &amp; = E[XY] - E[X]E[Y] \\
+    &amp; = E[XY] - 0 \\
+    &amp; = E[XY | Y = X]P(Y = X) + E[XY | Y = -X]P(Y = -X) \\
+    &amp; = E[X^2]\cdot\frac{1}{2} + E[-X^2]\cdot\frac{1}{2} \\
+    &amp; = 0.
+\end{align*}\]</span> However, we know <span class="math inline">\(X,
+Y\)</span> are not independent, because <span class="math inline">\(P(Y
+\le -1 | -0.1 \le X \le 0.1) = 0 \neq P(Y \le -1)\)</span>.</p>
 </div>
 <div id="random-walks" class="section level1">
 <h1>Random walks</h1>
@@ -2804,13 +2853,95 @@ differences along the sequence … after that, what you want sounds like
 “c-test”, or “p-test”, or “<span class="math inline">\(\phi\)</span>-test”, or …</p></li>
 </ol>
 <p>SOLUTION GOES HERE</p>
+<p>We will proceed by testing the difference of the random walk
+sequence. Let <span class="math inline">\(d_t = x_t - x_{t-1} = \delta +
+\epsilon_t\)</span>. Then <span class="math inline">\(d_t \sim N(0 +
+\delta, \sigma^2)\)</span> and <span class="math inline">\(d_t\)</span>
+is <em>i.i.d</em>. Since <span class="math inline">\(\sigma\)</span> is
+unknown, we can use the <em>t-test</em> to test whether the mean of
+<span class="math inline">\(d_t\)</span> is zero, which means <span class="math inline">\(\delta = 0\)</span>. The null distribution is
+<span class="math inline">\(t_{n-1}\)</span>, where <span class="math inline">\(n\)</span> is the length of the random walk
+sequence. The test statistic is <span class="math display">\[\begin{align*}
+    t &amp; = \frac{\bar{d}}{\hat{\sigma}/\sqrt{n}}.
+\end{align*}\]</span> We can compute it in R by using the function
+<code>t.test()</code>.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>(2 pts) Simulate a random walk of length 100 <em>without</em> drift,
 i.e., <span class="math inline">\(\delta = 0\)</span>, and compute the
 test statistic you devised in Q4 and report its value. Then repeat, but
 using a large nonzero value <span class="math inline">\(\delta\)</span>.</li>
 </ol>
-<pre class="r"><code># CODE GOES HERE</code></pre>
+<pre class="r"><code># CODE GOES HERE
+# Generate some data
+n &lt;- 101
+delta &lt;- 0
+sigma &lt;- 1
+epsilon &lt;- rnorm(n, 0, sigma)
+x &lt;- rep(0, n)
+for (t in 2:n) {
+  x[t] &lt;- delta + x[t - 1] + epsilon[t]
+}
+
+# First differences
+diff_x &lt;- diff(x)
+
+# t-test
+test_result &lt;- t.test(diff_x, mu = 0, alternative = &quot;two.sided&quot;)
+t_value &lt;- test_result$statistic
+p_value &lt;- test_result$p.value
+
+print(test_result)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  diff_x
+## t = -0.25414, df = 99, p-value = 0.7999
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.2259378  0.1746320
+## sample estimates:
+##  mean of x 
+## -0.0256529</code></pre>
+<pre class="r"><code>print(paste(&quot;test statistic:&quot;, t_value))</code></pre>
+<pre><code>## [1] &quot;test statistic: -0.254142560967539&quot;</code></pre>
+<pre class="r"><code>print(paste(&quot;likelihood of null hypothesis&quot;, p_value))</code></pre>
+<pre><code>## [1] &quot;likelihood of null hypothesis 0.799912527798033&quot;</code></pre>
+<pre class="r"><code># CODE GOES HERE
+# Generate some data
+# let drift be 10
+n &lt;- 101
+delta &lt;- 10
+sigma &lt;- 1
+epsilon &lt;- rnorm(n, 0, sigma)
+x &lt;- rep(0, n)
+for (t in 2:n) {
+  x[t] &lt;- delta + x[t - 1] + epsilon[t]
+}
+
+# First differences
+diff_x &lt;- diff(x)
+
+# t-test
+test_result &lt;- t.test(diff_x, mu = 0, alternative = &quot;two.sided&quot;)
+t_value &lt;- test_result$statistic
+p_value &lt;- test_result$p.value
+
+print(test_result)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  diff_x
+## t = 100.55, df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##   9.835979 10.231999
+## sample estimates:
+## mean of x 
+##  10.03399</code></pre>
+<pre class="r"><code>print(paste(&quot;test statistic:&quot;, t_value))</code></pre>
+<pre><code>## [1] &quot;test statistic: 100.54858812993&quot;</code></pre>
+<pre class="r"><code>print(paste(&quot;likelihood of null hypothesis&quot;, p_value))</code></pre>
+<pre><code>## [1] &quot;likelihood of null hypothesis 1.75523040449195e-101&quot;</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>(4 pts) Simulate 100 random walks each of length 500, with nonzero
 drift, and plot them on the same plot using transparent coloring,

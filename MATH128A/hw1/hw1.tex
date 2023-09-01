@@ -49,6 +49,22 @@
 
 \subsection*{Problem 4d}
 Find interval containing solutions to $x^3 + 4.001x^2 + 4.002x + 1.101 = 0$.
+\begin{proof}[Solution]
+    Since there is no further intructions on the error bound of the interval, we will proceed with 
+    the simplest calculus method by finding critical points. Consider the first derivative and set 
+    it equal to zero.
+    \begin{align*}
+        3x^2 + 8.002x + 4.002 & = 0 \\
+        x & = \frac{-8.002 \pm \sqrt{8.002^2 - 4\cdot 3\cdot 4.002}}{2\cdot 3} \\
+        & \approx \frac{-8 \pm 4}{6} = \frac{-4 \pm 2}{3}.
+    \end{align*}
+
+    Now, we can look at both points respectively. $f(-2) = 1.101, f(\frac{-2}{3}) \approx -0.0851$.
+    By intermediate theorem, we know that there exists a solution in $[-2, \frac{-2}{3}]$. Now, by 
+    simple observation, we can easily conclude that the equation tends to $-\infty$ when $x 
+    \rightarrow -\infty$ and tends to $\infty$ when $x \rightarrow \infty$. Hence, by intermediate 
+    theorem, there exists one solution in $[-\infty, -2]$ and one in $[\frac{-2}{3}, \infty]$.
+\end{proof}
 
 \subsection*{Problem 6a}
 Find $max_{a\le x\le b}|f(x)|$ for $f(x) = \frac{2x}{x^2+1}$ on $[0,2]$.
@@ -98,14 +114,119 @@ Let $f(x) = 2x\cdot cos(2x) - (x-2)^2$ and $x_0 = 0$.
             & \le 0.06827.
         \end{align*}
     \end{proof}
+
+    \item Find the third Taylor polynomial $P_4(x)$ and use it to approximate $f(0.4)$.
+    \begin{proof}[Solution]
+        \begin{align*}
+            f^4(x) & = 64sin(2x) + 32xcos(2x) \\
+            f^4(0) & = 0 \\
+            P_4(x) & = -4 + 6x -x^2 \\
+            f(0.4) & \approx P_4(0.4) = -2.016.
+        \end{align*}
+    \end{proof}
+
+    \item Use the error formula in Taylor's Theorem to find an upper bound for the error
+    $|f(0.4) - P_4(0.4)|$. Compute the actual error.
+
+    \begin{proof}[Solution]
+        \begin{align*}
+            f^5(x) & = 160cos(2x) - 64xsin(2x) \\
+            |f(0.4) - P_4(0.4)| = R_4(x) & = \frac{f^5(\xi(x))}{5!}(0.4)^5 \qquad 
+            \emph{for } 0 \le \xi(x) \le 0.4. \\
+            & \le \frac{160}{5!}\times 0.4^5 \\
+            & \le 0.01366.
+        \end{align*}
+    \end{proof}
 \end{enumerate}
 
 \subsection*{Problem 26} 
-Note that the variable $n-1$ needs to be replace by $n$.
+
+\begin{enumerate}[label=\alph*.]
+    \item Use Rolle's Theorem to show that $f'(z_i) = 0$ for $n$ numbers in $[a,b]$ with 
+    $a < z_1 < z_2 < \cdots < z_{n} < b$.
+
+    \begin{proof}[Solution]
+        We are unable to show that without further assumption. Since our goal is proving the 
+        Generalized Rolle's Theorem, we will proceed with the assumption that $f(x)$ is $n$ times 
+        differentiable on $(a, b)$, and that $f(x) = f(a) = f(b)$ at $n - 1$ distinct numbers such 
+        that $a < x_2 < x_3 \cdots < x_n < b$. For clarity, we will also denote $x_1 = a$ and 
+        $x_{n+1} = b$ such that $a = x_1 < x_2 < \cdots < x_{n+1} = b$.
+
+        Now consider each interval $[x_i, x_{i+1}]$ for all $i\in [0, 1, \dots, n]$. Notice that 
+        there are $n$ such intervals and $f(x_i) = f(x_{i+1})$. Hence, by 
+        Rolle's Theorem, there exists $z_i \in (x_i, x_{i+1})$ such that $f'(z_i) = 0$. Therefore, 
+        we can conclude that $f'(z_i) = 0$ for $n$ numbers in $[a,b]$ with $a < z_1 < z_2 < \cdots 
+        < z_{n} < b$.
+    \end{proof}
+    
+    \item Use Rolle's Theorem to show that $f''(w_i) = 0$ for $n-1$ numbers in $[a,b]$ with 
+    $z_1 < w_1 < z_2 < w_2 \cdots w_{n} < z_{n} < b$.
+
+    \begin{proof}[Solution]
+        We have shown from (a) that $f'(z_i) = 0$ for $i \in [1, 2, \dots, n]$. Now consider each 
+        interval $(z_i, z_{i+1})$ for $i \in [1, 2, \dots, n-1]$. There are $n-1$ such intervals and 
+        $f'(z_i) = f'(z_{i+1})$. Hence, by Rolle's Theorem, there exists $w_i \in (z_i, z_{i+1})$ 
+        such that $f''(w_i) = 0$. Therefore, we can conclude that $f''(w_i) = 0$ for $n-1$ numbers 
+        in $[a,b]$ with $a < z_1 < w_1 < z_2 < w_2 \cdots w_{n-1} < z_{n} < b$.
+    \end{proof}
+
+    \item Continue the arguments in parts (a) and (b) to show that for each $j = 1, 2, \dots, n$, 
+    there are $n+1-j$ distinct numbers in $[a,b]$, where $f^{(j)}$ is 0.
+
+    \begin{proof}[Solution]
+        We can easily show by induction on $j$. Base case is already established in (a). Now, assume that 
+        $f^{(k)}(y_i) = 0$ for $n+1-k$ distinct numbers in $[a,b]$. Consider each interval $(y_i, 
+        y_{i+1})$ for $i\in [1, 2, \dots, n-k]$. There are $n-k$ such intervals and $f^{(k)}(y_i) =
+        f^{(k)}(y_{i+1})$. Hence, by Rolle's Theorem, there exists $n-k$ numbers of $u_i \in (y_i, y_{i+1})$ such 
+        that $f^{(k+1)}(u_i) = 0$. Therefore, we can conclude that $f^{(k+1)}(u_i) = 0$ for $n-k = 
+        n + 1 - (k+1)$ distinct numbers in $[a,b]$. 
+
+        Hence, by induction, we can conclude that for each $j = 1, 2, \dots, n$, there are $n+1-j$
+        distinct numbers in $[a,b]$, where $f^{(j)}$ is 0.
+    \end{proof}
+
+    \item  Show that part (c) implies the conclusion of the Generalized Rolle's Theorem.
+    
+    \begin{proof}[Solution]
+        Notice our only assumptions are that $f(x)$ is $n$ times differentiable on $(a, b)$, and that 
+        $f(x) = f(a) = f(b)$ at $n - 1$ distinct numbers such that $a < x_2 < x_3 \cdots < x_n < b$, 
+        which is equivalent to saying $f(x)$ is constant for $n+1$ distinct numbers in $[a,b]$. 
+
+        With the mentioned assumptions, we concluded that there are $n+1-j$ distinct numbers in 
+        $[a,b]$, where $f^{(j)}$ is 0. Now take $j = n$, we have $n+1-n = 1$ distinct number in 
+        $[a,b]$, where $f^{(n)}$ is 0. Hence, we can conclude that there exists $c \in (a,b)$ such 
+        that $f^{(n)}(c) = 0$.
+
+        Notice this is exactly what the Generalized Rolle's Theorem says.
+    \end{proof}
+
+
+\end{enumerate}
 
 \section*{Section 1.2}
 \subsection*{Problem 2c}
+Compute the absolute error and relative error in approximations of $p$ by $p^*$: $p = 8!, p^* = 
+39900$.
+
+\begin{proof}[Solution]
+    \begin{align*}
+        |p - p^*| & = 8! - 39900 = 40320 - 39900 = 420. \\
+        \frac{|p-p^*|}{p} & = \frac{420}{8!} =\frac{1}{96} \approx 0.0104.
+    \end{align*}
+\end{proof}
+
 \subsection*{Problem 4b}
+Find the largest interval in which $p^*$ must lie to approximate $p$ with relative error at most 
+$10^{-4}$ for $p = e$.
+\begin{proof}[Solution]
+    \begin{align*}
+        \frac{|p^*-e|}{e} & \le 10^{-4} \\
+        |p^*-e| & \le 10^{-4}e \\
+        |p^* - e| & \le 10^{-4}e \\
+        (1-10^{-4})\cdot e & \le p^* \le (1+10^{-4})\cdot e \\
+    \end{align*}
+\end{proof}
+
 \subsection*{Problem 12}
 \subsection*{Problem 22}
 
@@ -115,8 +236,8 @@ Note that the variable $n-1$ needs to be replace by $n$.
 \subsection*{Discussion Question 2 (p. 38)}
 
 \section*{Section 2.1}
-\subsection{Problem 6d}
-\subsection{Problem 8}
-\subsection{Problem 20}
+\subsection*{Problem 6d}
+\subsection*{Problem 8}
+\subsection*{Problem 20}
 
 \end{document}

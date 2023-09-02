@@ -113,8 +113,8 @@ get, check this is indeed a field. What is the 'natural' way to think of this fi
     additive and multiplicative inverse. Also, addition and multiplication are commutative since 
     the tables are symmetric about the main diagonal. We can also check that addition and 
     multiplication are indeed associative by simply listing all the possible cases. We can check 
-    that distributive law holds in the same manner, but we will omit the proof here. Hence, we can 
-    conclude that $\{0, 1, x\}$ is a field.
+    that distributive law holds by listing all combinations, but for readability, we will omit the 
+    listing proof. Hence, we can conclude that $\{0, 1, x\}$ is a field.
 
     The natural way to think of the field is to define addition as addition modulo 3, and
     multiplication as multiplication modulo 3. We can see that the field is isomorphic to 
@@ -198,9 +198,10 @@ vector space with these definitions.
 
         \item \emph{Additive inverse:}
         
-        Define $-f \in V^S$ such that $(-f)(s) = -f(s) \in V$ for all $s \in S$. Consider $f \in V^S$, 
-        then $(f + (-f))(s) = f(s) + (-f)(s) = f(s) - f(s) = 0$. Hence, $f + (-f) = \varnothing$,
-        and $-f$ is the additive inverse of $f$.
+        Define $-f \in V^S$ such that $(-f)(s) = -f(s) \in V$ for all $s \in S$. We know $-f(s)$, 
+        inverse of $f(s) \in V$ exists because $V$ has additive inverse for $f(s)$. Consider $f \in 
+        V^S$, then $(f + (-f))(s) = f(s) + (-f)(s) = f(s) + (-f(s)) = 0$. Hence, $f + (-f) = 
+        \varnothing$, and $-f$ is the additive inverse of $f$.
 
         \item \emph{Closed under scalar multiplication:}
         
@@ -211,19 +212,20 @@ vector space with these definitions.
 
         \item \emph{Scalar multiplication identity:}
         
-        Consider $f \in V^S$, then $1\cdot f(s) = f(s)$ for all $s \in S$. Hence, $1\cdot f = f$.
+        Consider $f \in V^S$, then $(1\cdot f)(s) = 1\cdot f(s) = f(s)$ for all $s \in S$. 
+        Hence, $1\cdot f = f$.
 
         \item \emph{Distributivity of scalar multiplication with respect to field addition:}
         
         Consider $f \in V^S$ and $c, d \in \mathbb{F}$, then $(c + d)\cdot f(s) = c\cdot f(s)
-        + d\cdot f(s) [\emph{V is distributive}] = cf(s) + df(s) = (cf + df)(s)$. Hence, 
-        $(c + d)\cdot f = cf + df$.
+        + d\cdot f(s) [\emph{V is distributive for } f(s)\in V] = (cf)(s) + (df)(s) = (cf + df)(s)$. 
+        Hence, $(c + d)\cdot f = cf + df$.
         
         \item \emph{Distributivity of scalar multiplication with respect to vector addition:}
         
         Consider $f, g \in V^S$ and $c \in \mathbb{F}$, then $c\cdot(f + g)(s) = c\cdot (f(s)
-        + g(s)) = c\cdot f(s) + c\cdot g(s) [\emph{V is distributive}] = (cf)(s) + (cg)(s) = 
-        (cf + cg)(s)$. Hence, $c\cdot(f + g) = cf + cg$.
+        + g(s)) = c\cdot f(s) + c\cdot g(s)$ [\emph{V is distributive for }$f(s), g(s)\in V] = 
+        (cf)(s) + (cg)(s) = (cf + cg)(s)$. Hence, $c\cdot(f + g) = cf + cg$.
     \end{enumerate}
 \end{proof}
 

@@ -188,6 +188,43 @@ increase over time).
 
 ```{r}
 # CODE GOES HERE
+
+
+n_simulations <- 100
+n_steps <- 500
+
+# 1. Simulate 100 random walks each of length 500, with nonzero drift
+random_walks <- matrix(0, n_simulations, n_steps)
+for (i in 1:n_simulations){
+  random_walks[i, ] <- cumsum(rnorm(n_steps, 0, 1))
+}
+
+# 2. Plot them on the same plot using transparent coloring
+matplot(
+    t(random_walks),
+    type = "l",
+    lty = 1,
+    col = adjustcolor("grey", alpha.f = 0.5),
+    main = "100 Random Walks",
+    xlab = "Time",
+    ylab = "Value"
+)
+
+# 3. Calculate the sample mean and add to the plot
+sample_mean <- colMeans(random_walks)
+lines(sample_mean, col = "black", lwd = 2)
+
+# 4. Calculate the sample standard deviation and add to the plot
+sample_sd <- apply(random_walks, 2, sd)
+lines(sample_mean + sample_sd, col = "black", lty = 2, lwd = 1.5)
+lines(sample_mean - sample_sd, col = "black", lty = 2, lwd = 1.5)
+
+legend("topright",
+    legend = c("Random Walks", "Mean", "Mean ± 1 SD"),
+    col = c("grey", "black", "black"),
+    lty = c(1, 1, 2), cex = 0.8, bty = "n"
+)
+
 ```
 
 # Stationarity
@@ -203,11 +240,114 @@ stationary?
 
 SOLUTION GOES HERE
 
+\begin{align*}
+    E[x_t] & = E[w_t w_{t-1}] \\
+    & = E[w_t]E[w_{t-1}] \qquad (\textit{because $w_t, w_{t-1}$ 
+    are independent}) \\
+    & = 0 \cdot 0 \\
+    & = 0. \\
+    Var(X_t) & = Var(w_t w_{t-1}) \\
+    & = E[w_t^2 w_{t-1}^2] - E[w_t w_{t-1}]^2 \\
+    & = E[w_t^2]E[w_{t-1}^2] - 0^2 \qquad (\textit{because $w_t, w_{t-1}$
+    are independent}) \\
+    & = \sigma^2 \cdot \sigma^2 \\
+    & = \sigma^4. \\
+\end{align*}
+
+For Auto-covariance, we will evaluate case by case for $h = 0, 1$ and else.
+For $h=0$, we have
+\begin{align*}
+    \gamma_x(0) & = Cov(x_t, x_t) \\
+    & = Var(x_t) \\ 
+    & = \sigma^4.
+\end{align*}
+For $h=1$, we have
+\begin{align*}
+    \gamma_x(1) & = Cov(x_t, x_{t+1}) \\
+    & = E[w_t w_{t-1} w_{t+1} w_t] - E[x_t]E[x_{t+1}] \\
+    & = E[w_t^2]E[w_{t-1}]E[w_{t+1}] - 0 \cdot 0 \qquad 
+    (\textit{because $w_t, w_{t-1}, w_{t+1}$ are independent}) \\
+    & = \sigma^2 \cdot 0 \cdot 0 \\
+    & = 0.
+\end{align*}
+We can easily tell that for $h < -1, h > 1$, $x_t, x_{t+h}$ are completely 
+independent.
+Hence, 
+\begin{align*}
+    \gamma_x(h) = \begin{cases}
+        \sigma^4 & \textit{if } h = 0 \\
+        0 & \textit{else.} \\
+    \end{cases}
+\end{align*}
+
+Normalize the auto-covariance with the variance, we have
+\begin{align*}
+    \rho_x(h) = \begin{cases}
+        \frac{\sigma^4}{\sigma^4} = 1 & \textit{if } h = 0 \\
+        0 & \textit{else.} \\
+    \end{cases}
+\end{align*}
+
+Since $\mu_{x,y} = 0$ is constant and $\gamma_x(x_t, x_{t+h})$ is only 
+dependent on $h$, we can conclude that $x_t$ is stationary.
+
 8. (3 pts)
 Repeat the same calculations in Q7, but where each $w_t \sim N(\mu, \sigma^2)$,
 independently, for $\mu \not= 0$. Is $x_t$, $t = 1,2,3,\dots$ stationary?
 
 SOLUTION GOES HERE
+
+\begin{align*}
+    E[x_t] & = E[w_t w_{t-1}] \\
+    & = E[w_t]E[w_{t-1}] \qquad (\textit{because $w_t, w_{t-1}$ 
+    are independent}) \\
+    & = \mu \cdot \mu \\
+    & = \mu^2. \\
+    Var(X_t) & = Var(w_t w_{t-1}) \\
+    & = E[w_t^2 w_{t-1}^2] - E[x_t]^2 \\
+    & = E[w_t^2]E[w_{t-1}^2] - \mu^4 \qquad (\textit{because $w_t, w_{t-1}$
+    are independent}) \\
+    & = (\sigma^2 + \mu^2)^2 - \mu^4 \\
+    & = \sigma^4 + 2\sigma^2\mu^2.
+\end{align*}
+
+For Auto-covariance, we will evaluate case by case for $h = 0, 1$ and else.
+For $h=0$, we have
+\begin{align*}
+    \gamma_x(0) & = Cov(x_t, x_t) \\
+    & = Var(x_t) \\ 
+    & = \sigma^4 + 2\sigma^2\mu^2.
+\end{align*}
+For $h=1$, we have
+\begin{align*}
+    \gamma_x(1) & = Cov(x_t, x_{t+1}) \\
+    & = E[w_t w_{t-1} w_{t+1} w_t] - E[x_t]E[x_{t+1}] \\
+    & = E[w_t^2]E[w_{t-1}]E[w_{t+1}] - \mu^2 \cdot \mu^2 \qquad 
+    (\textit{because $w_t, w_{t-1}, w_{t+1}$ are independent}) \\
+    & = (\sigma^2 + \mu^2)(\mu)(\mu) - \mu^4 \\
+    & = \sigma^2\mu^2.
+\end{align*}
+We can easily tell that for $h < -1, h > 1$, $x_t, x_{t+h}$ are completely 
+independent.
+Hence, 
+\begin{align*}
+    \gamma_x(h) = \begin{cases}
+        \sigma^4 + 2\sigma^2\mu^2 & \textit{if } h = 0 \\
+        \sigma^2\mu^2 & \textit{if } h = 1, -1 \\
+        0 & \textit{else.} \\
+    \end{cases}
+\end{align*}
+
+Normalize the auto-covariance with the variance, we have
+\begin{align*}
+    \rho_x(h) = \begin{cases}
+        1 & \textit{if } h = 0 \\
+        \frac{\sigma^2\mu^2}{\sigma^4 + 2\sigma^2\mu^2} & \textit{else.} \\
+    \end{cases}
+\end{align*}
+
+Since $\mu_{x,y} = \mu^2$ is constant and $\gamma_x(x_t, x_{t+h})$ is only 
+dependent on $h$, we can conclude that $x_t$ is stationary.
 
 9. (3 pts)
 Simulate the processes from Q7 (with  $\mu = 0$) and Q8 (with $\mu \not= 0$) and 
@@ -219,12 +359,57 @@ and Q8.
 
 ```{r}
 # CODE GOES HERE
+n_steps <- 1000
+mu <- 10
+sigma <- 2
+norm_0 <- rnorm(n_steps, 0, sigma)
+norm_mu <- rnorm(n_steps, mu, sigma)
+
+x_1 <- norm_0[-1] * norm_0[-n_steps]
+x_2 <- norm_mu[-1] * norm_mu[-n_steps]
+
+par(mfrow = c(1, 2))
+plot(x_1, type = "l", main = "Process from Q7", xlab = "step")
+legend("topright",
+    legend = c("theoretical mu = 0", "theoretical sigma^2 = 16"),
+    cex = 0.8, bty = "n"
+)
+plot(x_2, type = "l", main = "Process from Q8", xlab = "step")
+legend("topright",
+    legend = c("theoretical mu = 100", "theoretical sigma^2 = 816"),
+    cex = 0.8, bty = "n"
+)
+cat("Sample mean of Process 1 (Q7):", mean(x_1), "\n")
+cat("Sample variance of Process 1 (Q7):", var(x_1), "\n")
+cat("Sample mean of Process 2 (Q8):", mean(x_2), "\n")
+cat("Sample variance of Process 2 (Q8):", var(x_2), "\n")
+
+par(mfrow = c(1, 2))
+acf(x_1, main = "ACF for Process from Q7")
+legend("topright",
+    legend = c("theoretical corr = 1 for h = 0", "theoretical corr = 0 else"),
+    cex = 0.8, bty = "n"
+)
+acf(x_2, main = "ACF for Process from Q8")
+legend("topright",
+    legend = c("theoretical corr = 1 for h = 0",
+    "theoretical corr ~ 0.49 for h = 1", "theoretical corr = 0 else"),
+    cex = 0.8, bty = "n"
+)
 ```
 
 10. (2 pts)
 Give an example of a weakly stationary process that is not strongly stationary.
 
 SOLUTION GOES HERE
+
+Define a time series $x_t$ such that when $t$ is odd, $x_t \sim N(0, 1)$, and when 
+$t$ is even, $x_t \sim Uniform([-\sqrt{3}, \sqrt{3}])$, and $x_t$ is independent
+for all $t$. Then, $x_t$ is weakly stationary because its mean and variance are 
+constant. Also, the covariance with lag $h \neq 0$ is $0$ because $x_t$ are 
+independent. However, $x_t$ is not strongly stationary because obviously 
+$x_t \not\sim x_{t+1}$
+
 
 11. (Bonus)
 A function $\kappa$ is said to be *positive semidefinite* (PSD) provided that
@@ -274,6 +459,17 @@ strongly jointly stationary.
 
 SOLUTION GOES HERE
 
+Define a time series $x_t$ the same as in Q10, and define $y_{t+1} = x_t$. Then, 
+as proved in Q10, both $x$ and $y$ are weekly stationary. Also, the cross 
+covariance $\gamma_{xy}(s,t) = 1$ for $t = s + 1$  and $\gamma_{xy}(s,t) = 
+0$ for $t \neq s+1$ because of their independence. Hence, $\gamma_{xy}(s,t)$ is 
+only dependent on $s-t$ and 
+is invariant to any shift in time. However, $x$ and $y$ are not strongly 
+jointly stationary. A counter-example would be to take $(x_t, y_{t+1}) \not\sim 
+(x_{t+1}, y_{y+2})$ because one pair would be a joint independent 
+gaussian distribution and the other would be a joint independent uniform 
+distribution.
+
 13. (3 pts)
 If $x_t$, $t = 1,2,3,\dots$ and $y_t$, $t = 1,2,3,\dots$ form a *joint Gaussian
 process*, which means that any collection $(x_{s_1}, x_{s_2}, \dots, x_{s_k}, 
@@ -283,14 +479,56 @@ implies strong joint stationarity.
 
 SOLUTION GOES HERE
 
+Notice that a multivariate Gaussian distribution is completely determined by its 
+mean vector and covariance matrix. If the  mean vector and covariance matrix are 
+invariant to time shift, then the distribution is invariant to time shift, 
+hence the process is strongly jointly stationary.
+
+We will first prove that the mean vector is invariant to time shift. Since the 
+times series are weakly jointly stationary, they are marginally weakly 
+stationary. Hence, $\mu_x$ and $\mu_y$ are constant. Now we evaluate the mean
+vector of $(x_{s_1}, x_{s_2}, \dots, x_{s_k}, y_{t_1}, y_{t_2}, \dots, 
+y_{t_\ell})$. Indeed, the mean of each coordinate is $\mu_x$ or $\mu_y$, which 
+are constant. Hence, the mean vector is invariant to time shift.
+
+We will then prove that the covariance matrix is invariant to time shift. Notice the 
+entries of the convariance matrix is determined by the covariance between each 
+coordinate in the $(x_{s_1}, x_{s_2}, \dots, x_{s_k}, y_{t_1}, y_{t_2}, \dots, 
+y_{t_\ell})$. If the covariance is between $x$, the convariance is invariant 
+of time shift because $x$ is weakly stationary, and the same holds for $y$. 
+If the convariance is between $x, y$, the convariance is also invariant to time 
+shift, because $x,y$ are weakly jointly stationary. Hence, convariance between 
+any two arbitrary coordinates are invariant to time shift. Hence, the 
+convariance matrix is invariant to time shift.
+
 14. (3 pts)
 Write down explicit formulas that shows how to estimate the cross-covariance 
-and cross-correlation function of two finite time series $t = 1,\dots,n$ and 
+and cross-correlation function of two finite time series $x_t, t = 1,\dots,n$ and 
 $y_t$, $t = 1,\dots,n$, under the assumption of joint stationarity. Hint: these
 should be analogous to the *sample auto-covariance and sample auto-correlation 
 functions* that we covered in lecture.
 
 SOLUTION GOES HERE
+
+Define $\bar{x} = \frac{1}{n}\sum^n_{t=1}x_t$ to be the sample mean of $x$ and 
+$\bar{y} = \frac{1}{n}\sum^n_{t=1}y_t$ to be the sample mean of $y$. 
+
+For positive lag $h$ such that $y$ is ahead of $x$ or $h=0$ such that $x$ and 
+$y$ are at the same time, we have:
+\begin{align*}
+    \hat{\gamma}_{xy}(h) & = \frac{1}{n}\sum_{t=1}^{n-h}(x_t - \bar{x})(y_{t+h} - \bar{y}).
+\end{align*}
+For negative lag $h$ such that $y$ is behind $x$, we have:
+\begin{align*}
+    \hat{\gamma}_{xy}(h) & = \frac{1}{n}\sum_{t=1-h}^{n}(x_{t} - \bar{x})(y_{t+h} - \bar{y}).
+\end{align*}
+
+For correlation, we have:
+\begin{align*}
+    \hat{\rho}_{xy}(h) & = \frac{\hat{\gamma}_{xy}(h)}{\hat{\sigma}_x\hat{\sigma}_y} \\
+    \hat{\sigma}_x^2 & = \frac{1}{n}\sum_{t=1}^{n}(x_t - \bar{x})^2 \\
+    \hat{\sigma}_y^2 & = \frac{1}{n}\sum_{t=1}^{n}(y_t - \bar{y})^2.
+\end{align*}
 
 15. (4 pts) 
 Following the code used in the lecture notes from week 2 ("Measures of 
@@ -308,4 +546,83 @@ patterns agree with what you see visually between the case and death signals.
 
 ```{r}
 # CODE GOES HERE
+library(epidatasets)
+library(tidyverse)
+
+
+plot_state_data <- function(state) {
+    # Covid-19 cases and deaths in California, pivot longer
+    df = cases_deaths_subset |>
+        filter(geo_value == state) |>
+        select(time_value, case_rate_7d_av, death_rate_7d_av) |>
+        pivot_longer(cols = c(case_rate_7d_av, death_rate_7d_av)) |>
+        mutate(name = recode(name, 
+                            case_rate_7d_av = "Cases", 
+                            death_rate_7d_av = "Deaths"))
+
+    # Handy function to produce a transformation from one range to another
+    trans = function(x, from_range, to_range) {
+        (x - from_range[1]) / (from_range[2] - from_range[1]) *
+            (to_range[2] - to_range[1]) + to_range[1]
+    }
+
+    # Compute ranges of the two signals, and transformations in b/w them
+    range1 = df |> filter(name == "Cases") |> select("value") |> range()
+    range2 = df |> filter(name == "Deaths") |> select("value") |> range()
+    trans12 = function(x) trans(x, range1, range2)
+    trans21 = function(x) trans(x, range2, range1)
+
+    ggplot_object <- ggplot(
+        bind_rows(
+            df |> filter(name == "Cases"),
+            df |> filter(name == "Deaths") |> mutate_at("value", trans21)
+        ),
+        aes(x = time_value, y = value)
+    ) +
+        geom_line(aes(color = name)) +
+        scale_color_manual(values = palette()[c(2, 4)]) +
+        scale_y_continuous(
+            name = "Reported Covid-19 cases per 100k people",
+            limits = range1,
+            sec.axis = sec_axis(
+                trans = trans12,
+                name = "Reported Covid-19 deaths per 100k people"
+            )
+        ) +
+        labs(
+            title = paste("Covid-19 cases and deaths in", state),
+            x = "Date"
+        ) +
+        theme_bw() +
+        theme(legend.position = "bottom", legend.title = element_blank())
+
+    print(ggplot_object)
+        
+    return(df)
+}
+
+states <- c("fl", "ga", "ny", "pa", "tx")
+for (state in states) {
+  df <- plot_state_data(state)
+  ccf(df |> filter(name == "Cases") |> select(value),
+      df |> filter(name == "Deaths") |> select(value),
+      lag.max = 40, ylab = "Cross-correlation", main = ""
+  )
+  title(main = paste("Cross-correlation for", state))
+}
+
+
+
 ```
+
+Across different states, the cross-correlation patterns do look similar. This is 
+unsurprising as lag between the death after case report should generally be 
+consistent. We are expecting that death (if any) should occur some time 
+after the case is reported and never lead the case.
+
+The  cross-correlation patterns do agree with what we can see visually 
+between the case and death signals. For some states, such as Florida, Georgia, 
+and Texas, we can see the death signals generally lag behind the case signals. 
+For those states, we can see that the cross-correlation peaked at around -20 
+days. Meanwhile, for the other states that the death signals are closer to the 
+case signals, the cross-correlation peaked at around -5 day.

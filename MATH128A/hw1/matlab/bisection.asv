@@ -1,0 +1,20 @@
+function midpoint = bisection(front, back, func)
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+
+midpoint = (front + back) / 2;
+error = abs(midpoint - front) / abs(front);
+
+while midpoint error > 10^-5
+    midpoint = (front + back) / 2;
+    if (func(front) * func(midpoint) < 0)
+        back = midpoint;
+    elseif (func(front) * func(midpoint) == 0)
+            break
+    else 
+        front = midpoint;
+    end
+
+    error = abs(back-front) / abs(front);
+    
+end

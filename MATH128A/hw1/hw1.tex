@@ -2,6 +2,7 @@
 \usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
 \usepackage{enumitem}
 \usepackage{graphicx}
+\usepackage{tabularx}
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace}
 \graphicspath{{./images/}} % Path to images
@@ -11,6 +12,21 @@
 %      \includegraphics[scale=0.5]{coloring.png}
 %      \caption{Coloring of the graph.}
 % \end{figure}
+
+% \begin{figure}[htb]
+%     \qquad
+%     \begin{minipage}{.4\textwidth}
+%         \centering
+%         {\includegraphics[scale=0.35]{prims.png}}
+%         \qquad\qquad\emph{Prim's}\label{fig:1}
+%     \end{minipage}    
+%     \qquad
+%     \begin{minipage}{.4\textwidth}
+%         \centering
+%         {\includegraphics[scale=0.35]{kruskal.png}}
+%         \qquad\qquad\emph{Kruskal's}\label{fig:2}
+%     \end{minipage}        
+% \end{figure} 
 
 \newtheorem{thm}{Theorem}
 \newtheorem{proposition}[thm]{Proposition}
@@ -107,11 +123,11 @@ Let $f(x) = 2x\cdot cos(2x) - (x-2)^2$ and $x_0 = 0$.
 
         Hence, \begin{align*}
             |f(0.4) - P_3(0.4)| = |R_3(0.4)| & = \frac{f^4(\xi(x))}{4!}(0.4)^4 \\
-            & = \frac{64sin(2\xi(x))-32\cdot \xi(x)cos(2\xi(x))}{24}\times 0.0256 \\
-            & \le \frac{64-32\cdot \xi(x)}{24}\times 0.0256 \qquad (\emph{notice } 0 \le sin(2\xi(x)),
+            & = \frac{64sin(2\xi(x))+32\cdot \xi(x)cos(2\xi(x))}{24}\times 0.0256 \\
+            & \le \frac{64+32\cdot \xi(x)}{24}\times 0.0256 \qquad (\emph{notice } 0 \le sin(2\xi(x)),
             cos(2\xi(x))\le 1)\\
-            & \le \frac{64}{24}\times 0.0256 \\
-            & \le 0.06827.
+            & \le \frac{64 + 32\times 0.4}{24}\times 0.0256 \\
+            & \le 0.08192.
         \end{align*}
     \end{proof}
 
@@ -131,7 +147,7 @@ Let $f(x) = 2x\cdot cos(2x) - (x-2)^2$ and $x_0 = 0$.
     \begin{proof}[Solution]
         \begin{align*}
             f^5(x) & = 160cos(2x) - 64xsin(2x) \\
-            |f(0.4) - P_4(0.4)| = R_4(x) & = \frac{f^5(\xi(x))}{5!}(0.4)^5 \qquad 
+            |f(0.4) - P_4(0.4)| = |R_4(x)| & = \frac{f^5(\xi(x))}{5!}(0.4)^5 \qquad 
             \emph{for } 0 \le \xi(x) \le 0.4. \\
             & \le \frac{160}{5!}\times 0.4^5 \\
             & \le 0.01366.
@@ -224,20 +240,228 @@ $10^{-4}$ for $p = e$.
         |p^*-e| & \le 10^{-4}e \\
         |p^* - e| & \le 10^{-4}e \\
         (1-10^{-4})\cdot e & \le p^* \le (1+10^{-4})\cdot e \\
+        0.9999\cdot e & \le p^* \le 1.0001\cdot e.
     \end{align*}
+
+    If we want to find a numerical bound, we can arbitrarily choose $e = 2.71828$, the most commonly 
+    used approximation of $e$. Then, we have 
+    \begin{align*}
+        2.71828\cdot 0.9999 & \le p^* \le 2.71828\cdot 1.0001 \\
+        2.71800 & \le p^* \le 2.71855.
+    \end{align*}
+
 \end{proof}
 
 \subsection*{Problem 12}
+The number $e$ can be defined by $e = \sum^\infty_{n=0}(1/n!)$ where 
+$n! = n(n-1)\cdots 2\cdot 1$
+for $n\neq 0$ and $0! = 1$.
+Compute the absolute error and relative error in the following approximations of $e$:
+\begin{enumerate}[label=\alph*.]
+    \item $\sum\limits^5_{n=0}\frac{1}{n!}$
+    \begin{proof}[Solution]
+        \begin{align*}
+            |e - \sum\limits_{n=0}^{5}\frac{1}{n!}| & \approx 0.0016152 \\
+            \frac{|e - \sum\limits_{n=0}^{5}\frac{1}{n!}|}{|e|} & \approx 0.00059418.
+        \end{align*}
+    \end{proof}
+    
+    \item $\sum\limits^{10}_{n=0}\frac{1}{n!}$
+    \begin{proof}[Solution]
+        \begin{align*}
+            |e - \sum\limits_{n=0}^{10}\frac{1}{n!}| & \approx 2.7313 \times 10^{-8} \\
+            \frac{|e - \sum\limits_{n=0}^{10}\frac{1}{n!}|}{|e|} & \approx 1.0048 \times 10^{-8}.
+        \end{align*}
+    \end{proof}
+\end{enumerate}
+
 \subsection*{Problem 22}
+The Taylor polynomial of degree $n$ for $f(x) = e^x$ is $\sum_{i=0}^\infty(x^i/i!)$. Use the Taylor 
+polynomial of degree nine and three-digit chopping arithmetic to find an approximation to $e^{-5}$ 
+by each of the following methods.
+\begin{enumerate}[label=\alph*.]
+    \item $e^{-5} \approx \sum\limits_{i=0}^9\frac{(-5)^i}{i!} = 
+    \sum\limits_{i=0}^9\frac{(-1)^i5^i}{i!}$.
+    \begin{proof}[Solution]
+        With three-digit chopping arithmetic, we have
+        \begin{align*}
+            \sum\limits_{i=0}^9\frac{(-1)^i5^i}{i!} & = 1 - 5 + \frac{25}{2} - \frac{125}{6} + 
+            \frac{625}{24} - \frac{3120}{120} + \frac{15600}{720} - \frac{78000}{5040} + 
+            \frac{390000}{40300} - \frac{1950000}{362000} \\
+            & = 1 - 5 + 12.5 - 20.8 + 26.0 - 26.0 + 21.6 - 15.4 + 9.67 - 5.38 \\
+            & = -1.81.
+        \end{align*}
+    \end{proof}
+    
+    \item $e^{-5} = \frac{1}{e^5} \approx \frac{1}{\sum_{i=0}^{9}\frac{5^i}{i!}}$.
+    \begin{proof}[Solution]
+        With three-digit chopping arithmetic, we have
+        \begin{align*}
+            \sum\limits_{i=0}^9\frac{(-1)^i5^i}{i!} & = 1 / \left(1 + 5 + \frac{25}{2} + \frac{125}{6} + 
+            \frac{625}{24} + \frac{3120}{120} + \frac{15600}{720} + \frac{78000}{5040} + 
+            \frac{390000}{40300} + \frac{1950000}{362000}\right) \\
+            & = 1/ (1 + 5 + 12.5 + 20.8 + 26.0 + 26.0 + 21.6 + 15.4 + 9.67 + 5.38) \\
+            & = 1/141 \\
+            & = 0.00709.
+        \end{align*}
+    \end{proof}
+    
+    \item An approximate value of $e^{-5}$ correct to three digits is $6.74\times 10^{-3}$. 
+    Which formula,(a) or (b), gives the most accuracy, and why?
+    \begin{proof}[Solution]
+        (b) obviously gives a more accurate answer. With (a) method, we are adding and subtracting 
+        large numbers, which will cause a lot of cancellation and takes longer to converge. With 
+        (b) method, we are only adding the numbers and taking the reciprocal. Dividing by an 
+        increasing large number will cause the result to converge faster.
+    \end{proof}
+\end{enumerate}
 
 \section*{Section 1.3}
 \subsection*{Problem 8}
-\subsection*{Problem 15}
-\subsection*{Discussion Question 2 (p. 38)}
+Suppose that $0 < q < p$ and that $\alpha_n = \alpha + O(n^{-p})$.
+\begin{enumerate}[label=\alph*.]
+    \item Show that $a_n = \alpha + O(n^{-q})$.
+    \begin{proof}
+        For $n \ge 1$,
+        \begin{align*}
+            \frac{n^q}{n^p} & \le 1 \\
+            \frac{1}{n^p} & \le \frac{1}{n^q} \\
+            n^{-p} & \le n^{-q} \\
+            |a_n - \alpha| \le k\cdot n^{-p} & \le k\cdot n^{-q} \qquad
+            (\emph{we know the existence of }k) \\
+            |a_n -\alpha| & \le k\cdot n^{-q} \\
+            a_n & = \alpha + O(n^{-q}).
+        \end{align*}
+    \end{proof}
 
+    \item Make a table listing $1/n$, $1/n^2$, $1/n^3$, and $1/n^4$ for n = 5, 10, 100, and 1000 
+    and discuss the varying rates of convergence of these sequences as $n$ becomes large.
+    \begin{align*}
+        \begin{tabularx}{0.8\textwidth} { 
+            | >{\centering\arraybackslash}X 
+            | >{\centering\arraybackslash}X 
+            | >{\centering\arraybackslash}X 
+            | >{\centering\arraybackslash}X 
+            | >{\centering\arraybackslash}X | }
+           \hline
+           $n=$ & 5 & 10 & 100 & 1000 \\
+           \hline
+           $1/n$  & 0.2 & 0.1 & 0.01 & 0.001  \\
+           \hline
+           $1/n^2$  & 0.04  & 0.01 & 0.001 & 0.000001  \\
+           \hline
+           $1/n^3$  & 0.008  & 0.001 & $10^{-6}$ & $10^{-9}$  \\
+           \hline
+           $1/n^4$  & 0.0016  & 0.0001 & $10^{-8}$ & $10^{-12}$  \\
+           \hline
+        \end{tabularx}
+    \end{align*}
+    They all converge to 0, but at different rates. The value converges faster with a larger 
+    exponent. For example, $1/n^4$ converges faster than $1/n^3$.
+\end{enumerate}
+
+\subsection*{Problem 15}
+\begin{enumerate}[label=\alph*.]
+    \item How many multiplications and additions are required to determine a sum of the form
+    $$\sum_{i=1}^{n}\sum_{j=1}^{i}a_ib_j$$
+
+    \begin{proof}[Solution]
+        Let's expand the summation to count more easily.
+        \begin{align*}
+            \sum_{i=1}^{n}\sum_{j=1}^{i}a_ib_j = & a_1\cdot b_1 + (a_2\cdot b_1 + a_2\cdot b_2) + 
+            (a_3\cdot b_1 + a_3\cdot b_2 + a_3\cdot b_3) \\ 
+            & + \cdots + (a_n\cdot b_1 + a_n\cdot b_2 + \cdots + a_n\cdot b_n).
+        \end{align*}
+        Then, we can just count the number of $\cdot$ and $+$. The number of multiplication is 
+        $1 + 2 + \cdots + n = \frac{n(n+1)}{2}$. The number of addition is $(n-1) + (n-1) + \cdots 
+        + 1 = \frac{n(n-1)}{2} + (n-1)$. Hence, the total number of operations is $n^2+n-1$.
+    \end{proof}
+
+    \item Modify the sum in part (a) to an equivalent form that reduces the number of computations.
+    \begin{proof}[Solution]
+        \begin{align*}
+            \sum_{i=1}^{n}\sum_{j=1}^{i}a_ib_j & = \sum_{i=1}^{n}a_i \cdot \left(\sum_{j=1}^{i}b_j\right).
+        \end{align*}
+
+        There are still $(n-1) + (n-1) + \cdots + 1 = \frac{n(n-1)}{2}+(n-1)$ additions. But the
+        number of multiplication is reduced to $n$. Hence, the total number of operations is 
+        $\frac{n(n-1)}{2} + (n-1) + n = \frac{n^2+3n-2}{2}$.
+    \end{proof}
+\end{enumerate}
+
+\subsection*{Discussion Question 2 (p. 38)}
+Construct an algorithm that has as input an integer $n \ge 1$,numbers $x_0,x_1,\dots,x_n$, and 
+a number $x$ and that produces as output the product $(x-x_0)(x-x_1)\cdots(x-x_n)$.
+\begin{proof}[Solution]
+    \begin{align*}
+        & \text{INPUT} \quad x_0, x_1, \dots, x_n, x \\
+        & \text{OUTPUT} \quad \text{TOTAL} \\
+        & \text{Step 1} \quad \text{Set } \text{TOTAL} = 1 \\
+        & \text{Step 2} \quad \text{For } i = 0, 1, \dots, n \text{ do} \\
+        & \qquad\qquad\qquad \text{Set TOTAL = TOTAL *} (x - x_i) \\
+        & \text{Step 3} \quad \text{OUTPUT TOTAL;} \\
+        & \qquad\qquad \text{STOP}
+    \end{align*}
+\end{proof}
+
+\newpage
 \section*{Section 2.1}
 \subsection*{Problem 6d}
+Use the Bisection method to find solutions, accurate to within $10^{-5}$ for 
+\begin{align*}
+    x+1-2sin(\pi x) = 0 \qquad (\emph{for $0\le x\le 0.5$ and $0.5 \le x \le 1$}).
+\end{align*}
+\begin{figure}[htb]
+    \qquad
+    \begin{minipage}{.4\textwidth}
+        \centering
+        {\includegraphics[scale=0.2]{first.png}}
+        \qquad\qquad\emph{$0\le x\le 0.5$}\label{fig:1}
+    \end{minipage}    
+    \qquad
+    \begin{minipage}{.4\textwidth}
+        \centering
+        {\includegraphics[scale=0.2]{second.png}}
+        \qquad\qquad\emph{$0.5\le x\le 1$}\label{fig:2}
+    \end{minipage}        
+\end{figure} 
+
 \subsection*{Problem 8}
+\begin{enumerate}[label=\alph*.]
+    \item Sketch the graphs of $y=x$ and $y=tan(x)$.
+    \begin{proof}[Solution]\indent 
+        \begin{figure}[htb!]
+            \centering
+            \includegraphics[scale=0.25]{sketch.png}
+            \caption{Too trivial to draw by hand.}
+        \end{figure}
+    \end{proof}
+    
+    \newpage
+    \item Use the Bisection method to find an approximation to within $10^{-5}$ to the first positive 
+    value of $x$ with $x = tan(x)$.
+    \begin{proof}[Solution]
+        We use the same function coded from last problem to solve the equation $tan(x) - x = 0$ on 
+        the interval $[4, 4.6]$.
+        \begin{figure}[htb!]
+            \centering
+            \includegraphics[scale=0.25]{8b.png}
+        \end{figure}
+    \end{proof}
+\end{enumerate}
+
 \subsection*{Problem 20}
+Let $f(x) = (x-1)^{10}, p=1$, and $p_n = 1+\frac{1}{n}$. Show that $|f(p_n)|<10^{-3}$ whenever $n>1$ 
+but that $|p-p_n|<10^{-3}$ requires that $n>1000$.
+
+\begin{proof}
+    $f(p_n) = (1+\frac{1}{n}-1)^{10} = \left(\frac{1}{n}\right)^{10}$. Notice that 
+    $\left(\frac{1}{n}\right)^{10}$ is a positive function. Then $|f(p_n)| = \frac{1}{n^{10}} < 
+    10^{-3} \Rightarrow n > \sqrt[10]{1000} \Rightarrow n > 1.996 \Rightarrow n > 1$ for $n \in 
+    \mathbb{N}$.
+
+    Notice $p_n > p$ for all $n$. Hence, $|p-p_n| = p_n - p = \frac{1}{n}$. Then, we have 
+    $\frac{1}{n} < 10^{-3} \Rightarrow n > 1000$.
+\end{proof}
 
 \end{document}

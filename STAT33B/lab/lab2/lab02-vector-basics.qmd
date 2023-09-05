@@ -1,0 +1,491 @@
+---
+title: "Lab-2: Vectors"
+subtitle: "Stat 33B"
+author: "Gaston Sanchez"
+format: 
+  html:
+    toc: true
+    number-sections: true
+    theme: simplex
+embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+```
+
+::: {.callout-tip icon=false}
+## Learning Objectives
+
+- Work with vectors of different data types
+- Understand the concept of _atomic_ structures
+- Learn how to subset and slice R vectors
+- Understand the concept of _vectorization_
+- Understand _recycling_ rules in R
+:::
+
+
+::: {.callout-note icon=false}
+
+## General Instructions
+
+-   Write your code and content in a `qmd` (quarto markdown) file. You can use
+    the provided source `qmd` file (bCourses).
+
+-   Rename this file as `lab02-first-last.qmd`, where `first` and `last`
+    are your first and last names (e.g. `lab02-gaston-sanchez.qmd`).
+
+-   Submit both your qmd and HTML files to the corresponding assignment
+    submission in bCourses. This submission is just to make sure that 
+    everything works on your side.
+
+-   This lab does not count toward your final score.
+
+:::
+
+
+------
+
+
+# Getting the Data File
+
+In this lab, you are going to work with a handful of variables about NBA players
+from the regular season 2017-2018:
+
+- `player`: name of player.
+- `team`: team name abbreviation.
+- `position`: player position.
+- `age`: age of player.
+- `experience`: years of experience in NBA.
+- `salary`: salary (in dollars).
+- `scored`: total scored points.
+- `points1`: number of free throws, worth 1 point each.
+- `points2`: number of 2-point field goals, worth 2 points each.
+- `points3`: number of 3-point field goals, worth 3 points each.
+
+The data is in the file `nba2018-salary-points.RData`, located in bCourses.
+See the folder containing this `qmd` of instructions.
+
+Open a new session in Rstudio, and make sure you have a clean workspace by
+typing this command on the __console__:
+
+```
+# remove existing objects
+rm(list = ls())
+```
+
+Download the `.RData` file to your working directory (or to your preferred 
+location). We recommend that you have some filestructure like this 
+(`first` and `last` refer to your first and last names):
+
+```
+stat33b/
+   labs/
+      lab01/
+         lab01-first-last.qmd
+      lab02/
+         lab02-first-last.qmd
+         nba2018-salary-points.RData
+      lab03/
+      ...
+   hws/
+      hw1/
+      hw2/
+      ...
+   cheatsheets/
+      ...
+```
+
+
+## Loading the data file
+
+To load or import the contents of the binary file into your R session you use 
+`load()`. This function allows you to import R binary files. This time, include 
+the code  below in your `qmd` file:
+
+```{r}
+# load data in your R session
+load('data/nba2018-salary-points.RData')
+```
+
+Note: the code above will only work as long as your `qmd` file lives in the 
+same directory of the `.RData` file. So far I'm assuming that you have both 
+files in your working directory.
+
+Once you imported (or loaded) the data, run `ls()` on the console to __list__ 
+all the available R objects in your workspace (_Global Environment_):
+
+```{r}
+# list the available objects with ls()
+ls()
+```
+
+
+-----
+
+
+# Your Turn: Subsetting vectors
+
+Create a vector `five` by selecting the first five elements in `player`:
+
+```{r}
+five <- head(player, n = 5)
+```
+
+Single brackets `[ ]` are used to subset (i.e. subscript, split) vectors.
+Find out what happens if you specify:
+
+a) number one: `five[1]`
+
+```{r}
+# your code
+five[1]
+```
+
+
+b) an index of zero: `five[0]`?
+
+```{r}
+# your code
+five[0]
+```
+
+
+c) a negative index: `five[-1]`?
+
+```{r}
+# your code
+five[-1]
+```
+
+
+d) a sequence of consecutive integers: `five[1:3]`?
+
+```{r}
+# your code
+five[1:3]
+```
+
+
+e) various negative indices: `five[-c(1,2,3)]`?
+
+```{r}
+# your code
+five[-c(1,2,3)]
+```
+
+
+f) an index greater than the length of the vector: `five[6]`?
+
+```{r}
+# your code
+five[6]
+```
+
+
+g) repeated indices: `five[c(1,2,2,3,3,3)]`?
+
+```{r}
+# your code
+five[c(1,2,2,3,3,3)]
+```
+
+
+Often, you will need to generate vectors of numeric sequences, like the first 
+four elements `1:4`, or from the first till the last element `1:length(player)`. 
+R provides the colon operator `:`, and the functions `seq()`, and `rep()` 
+to create various types of sequences.
+
+
+## Your Turn: sequences and repetitions
+
+Figure out how to use `seq()`, `rev()`, and bracket notation, to extract:
+
+a) all the even elements in `player`
+
+```{r}
+# your code
+player[seq(2, length(player), by = 2)]
+```
+
+
+b) all the odd elements in `salary`
+
+```{r}
+# your code
+salary[seq(1, length(salary), by = 2)]
+```
+
+
+c) all multiples of 5 (e.g. 5, 10, 15, etc) of `team`
+
+```{r}
+# your code
+team[seq(5, length(team), by = 5)]
+```
+
+
+d) elements in positions 10, 20, 30, 40, etc of `scored`
+
+```{r}
+# your code
+scored[seq(10, length(scored), by = 10)]
+```
+
+
+e) all the even elements in `team` but this time in reverse order
+
+```{r}
+# your code
+rev(team[seq(2, length(team), by = 2)])
+```
+
+
+-----
+
+
+# Logical Subsetting and Comparisons
+
+Another kind of subsetting/subscripting is the so-called __logical subsetting__. 
+This kind of subsetting typically takes place when making comparisons. 
+A __comparison operation__ occurs when you use comparison operators such as: 
+
+- `>` greater than
+- `>=` greater than or equal
+- `<` less than
+- `<=` less than or equal
+- `==` equal
+- `!=` different
+
+For example:
+
+```{r}
+scored_four <- scored[1:4]
+
+# elements greater than 100
+scored_four[scored_four > 100]
+
+# elements less than 100
+scored_four[scored_four < 100]
+
+# elements less than or equal to 10
+scored_four[scored_four <= 10]
+
+# elements different from 10
+scored_four[scored_four != 10]
+```
+
+In addition to using comparison operators, you can also use __logical operators__ to produce a logical vector. The most common type of logical operators are:
+
+- `&` AND
+- `|` OR
+- `!` negation
+
+Run the following commands to see what R does:
+
+```{r}
+# AND
+TRUE & TRUE
+TRUE & FALSE
+FALSE & FALSE
+
+# OR
+TRUE | TRUE
+TRUE | FALSE
+FALSE | FALSE
+
+# NOT
+!TRUE
+!FALSE
+```
+
+Logical operators allow you to combine several comparisons:
+
+```r
+# players of Golden State (GSW)
+player[team == 'GSW']
+
+# name of players with salaries greater than 20 million dollars
+player[salary > 20000000]
+
+# name of players with scored points between 1000 and 1200 (exclusive)
+player[scored > 1000 & points < 1200]
+```
+
+
+## Your Turn: logical subsetting
+
+Write commands, using bracket notation, to answer the following questions 
+(you may need to use `min()`, `max()`, `which()`, `which.min()`, `which.max()`):
+
+a) players in position Center (`C`), of Warriors (`GSW`)
+
+```{r}
+# your code
+player[position == "C" & team == "GSW"]
+```
+
+
+b) players of both `GSW` (warriors) and `LAL` (lakers)
+
+```{r}
+# your code
+player[team == "GSW" | team == "LAL"]
+```
+
+
+c) players in positions Shooting Guard (`SG`) and Point Guards (`PG`), of Lakers 
+(`LAL`) 
+
+```{r}
+# your code
+player[team == "LAL" & position == "SG" | position == "PG"]
+```
+
+
+d) subset Small Forwards (`SF`) of teams `GSW` and `LAL`
+
+```{r}
+# your code
+player[position == "SF" & (team == "GSW" | team == "LAL")]
+```
+
+
+e) name of the player with largest salary; _tip_: `which.max()` is your friend
+
+```{r}
+# your code
+player[which.max(salary)]
+```
+
+
+f) name of the player with smallest salary; _tip_: `which.min()` is your friend
+
+```{r}
+# your code
+player[which.min(salary)]
+```
+
+
+g) name of the player with largest number of scored points
+
+```{r}
+# your code
+player[which.max(scored)]
+```
+
+
+h) largest salary of all Centers
+
+```{r}
+# your code
+max(salary[position == "C"])
+```
+
+
+i) team of the player with the largest number of scored points
+
+```{r}
+# your code
+team[which.max(scored)]
+```
+
+
+-----
+
+
+# Some plotting
+
+Use the function `plot()` to make a scatterplot of `scored` and `salary`
+
+```{r}
+plot(scored, salary)
+```
+
+Keep in mind that `plot()` is a generic function. This means that the behavior
+of `plot()` depends on the type of input. When you pass two numeric vectors,
+`plot()` will attempt to create a scatter plot.
+
+
+## Your Turn: Log-transformed scales
+
+Looking at the generated plot, can you see any issues?
+To get a better display of the scatterplot, let's create two vectors
+`log_scored` and `log_salary` by transforming `scored` and `salary` with the 
+logarithm function `log()`
+
+```{r}
+log_scored <- log(scored)
+log_salary <- log(salary)
+```
+
+a) Make another scatterplot but now use the log-transformed vectors:
+
+```{r}
+# your code
+plot(log_scored, log_salary)
+```
+
+
+## Your Turn: Adding text
+
+a) Take `scored`, `salary`, and `player`, and use logical subsetting to create 
+the following vectors for Golden State Warriors `GSW`:
+
+    + `gsw_scored`
+    + `gsw_salary`
+    + `gsw_player`
+
+```{r}
+# your code
+gsw_scored <- scored[team == "GSW"]
+gsw_salary <- salary[team == "GSW"]
+gsw_player <- player[team == "GSW"]
+```
+
+
+b) Make a scatterplot of `gsw_scored` and `gsw_salary`, and then use the low-level 
+graphing function `text()` to add player names. This function---`text()`---
+needs the same x-y coordinates of `plot()` and a `labels` argument. Pass
+`gsw_player` to the argument `labels`:
+
+```{r}
+# your code
+plot(gsw_scored, gsw_salary)
+text(gsw_scored, gsw_salary, labels = gsw_player)
+```
+
+
+## Your Turn: More Plots
+
+See the documentation of the following functions and use them to create 
+various plots. Feel free to play with the arguments of the functions.
+
+a) `boxplot()`: boxplot of `age`
+
+```{r}
+# your code
+boxplot(age, main = "Boxplot of Age", ylab = "Age")
+```
+
+
+b) `hist()`: histogram of `experience` (replace `"R"` with `0`, and coerce
+`experience` into a numeric vector with `as.numeric()`)
+
+```{r}
+# your code
+experience[experience == "R"] <- 0
+experience_numeric <- as.numeric(experience)
+hist(experience_numeric, main="Histogram of Experience", xlab="Years of Experience", breaks=20)
+```
+
+
+c) `barplot()`: barchart of `position`; first use `table()` to get frequencies
+and then pass them to `barplot()`
+
+```{r}
+# your code
+position_freq <- table(position)
+barplot(position_freq, xlab="position", ylab="frequency", main="position vs frequency")
+```
+

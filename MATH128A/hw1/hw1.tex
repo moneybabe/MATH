@@ -156,21 +156,21 @@ Let $f(x) = 2x\cdot cos(2x) - (x-2)^2$ and $x_0 = 0$.
 \end{enumerate}
 
 \subsection*{Problem 26} 
+The \emph{Generalized Rolle's Theorem} states that suppose $f\in C[a,b]$ is $n$ times differentiable 
+on $(a,b)$. If $f(x) = 0$ at the $n+1$ distinct number $a\le x_0<x_1<\cdots <x_n\le b$, then a 
+number $c$ in $(x_0, x_n)$ and hence in $(a,b)$ exists such that $f^{(n)}(c) = 0$.
 
 \begin{enumerate}[label=\alph*.]
     \item Use Rolle's Theorem to show that $f'(z_i) = 0$ for $n$ numbers in $[a,b]$ with 
     $a < z_1 < z_2 < \cdots < z_{n} < b$.
 
     \begin{proof}[Solution]
-        We are unable to show that without further assumption. Since our goal is proving the 
-        Generalized Rolle's Theorem, we will proceed with the assumption that $f(x)$ is $n$ times 
-        differentiable on $(a, b)$, and that $f(x) = f(a) = f(b)$ at $n - 1$ distinct numbers such 
-        that $a < x_2 < x_3 \cdots < x_n < b$. For clarity, we will also denote $x_1 = a$ and 
-        $x_{n+1} = b$ such that $a = x_1 < x_2 < \cdots < x_{n+1} = b$.
+        We are unable to prove solely with the information contained in (a). Therefore, we will 
+        proceed with the assumptions made in the \emph{Generalized Rolle's Theorem}.
 
-        Now consider each interval $[x_i, x_{i+1}]$ for all $i\in [0, 1, \dots, n]$. Notice that 
-        there are $n$ such intervals and $f(x_i) = f(x_{i+1})$. Hence, by 
-        Rolle's Theorem, there exists $z_i \in (x_i, x_{i+1})$ such that $f'(z_i) = 0$. Therefore, 
+        Now consider each interval $[x_{i-1}, x_i]$ for all $i\in [1, 2, \dots, n]$. Notice that 
+        there are $n$ such intervals and $f(x_{i-1}) = f(x_i)=0$. Hence, by 
+        Rolle's Theorem, there exists $z_i \in (x_{i-1}, x_i)$ such that $f'(z_i) = 0$. Therefore, 
         we can conclude that $f'(z_i) = 0$ for $n$ numbers in $[a,b]$ with $a < z_1 < z_2 < \cdots 
         < z_{n} < b$.
     \end{proof}
@@ -190,7 +190,7 @@ Let $f(x) = 2x\cdot cos(2x) - (x-2)^2$ and $x_0 = 0$.
     there are $n+1-j$ distinct numbers in $[a,b]$, where $f^{(j)}$ is 0.
 
     \begin{proof}[Solution]
-        We can easily show by induction on $j$. Base case is already established in (a). Now, assume that 
+        We can easily show by induction on $j$ up until $n$. Base case is already established in (a). Now, assume that 
         $f^{(k)}(y_i) = 0$ for $n+1-k$ distinct numbers in $[a,b]$. Consider each interval $(y_i, 
         y_{i+1})$ for $i\in [1, 2, \dots, n-k]$. There are $n-k$ such intervals and $f^{(k)}(y_i) =
         f^{(k)}(y_{i+1})$. Hence, by Rolle's Theorem, there exists $n-k$ numbers of $u_i \in (y_i, y_{i+1})$ such 
@@ -205,8 +205,7 @@ Let $f(x) = 2x\cdot cos(2x) - (x-2)^2$ and $x_0 = 0$.
     
     \begin{proof}[Solution]
         Notice our only assumptions are that $f(x)$ is $n$ times differentiable on $(a, b)$, and that 
-        $f(x) = f(a) = f(b)$ at $n - 1$ distinct numbers such that $a < x_2 < x_3 \cdots < x_n < b$, 
-        which is equivalent to saying $f(x)$ is constant for $n+1$ distinct numbers in $[a,b]$. 
+        $f(x) = 0$ at $n + 1$ distinct numbers such that $a \le x_0 < x_1 \cdots < x_n \le b$.
 
         With the mentioned assumptions, we concluded that there are $n+1-j$ distinct numbers in 
         $[a,b]$, where $f^{(j)}$ is 0. Now take $j = n$, we have $n+1-n = 1$ distinct number in 

@@ -488,8 +488,8 @@ covariance $\gamma_{xy}(s,t) = 1$ for $t = s + 1$  and $\gamma_{xy}(s,t) =
 0$ for $t \neq s+1$ because of their independence. Hence, $\gamma_{xy}(s,t)$ is 
 only dependent on $s-t$ and 
 is invariant to any shift in time. However, $x$ and $y$ are not strongly 
-jointly stationary. A counter-example would be to take $(x_t, y_{t+1}) \not\sim 
-(x_{t+1}, y_{y+2})$ because one pair would be a joint independent 
+jointly stationary. A counter-example would be to take $(x_t, y_{t-1}) \not\sim 
+(x_{t+1}, y_t)$ because one pair would be a joint independent 
 gaussian distribution and the other would be a joint independent uniform 
 distribution.
 
@@ -515,14 +515,14 @@ y_{t_\ell})$. Indeed, the mean of each coordinate is $\mu_x$ or $\mu_y$, which
 are constant. Hence, the mean vector is invariant to time shift.
 
 We will then prove that the covariance matrix is invariant to time shift. Notice the 
-entries of the convariance matrix is determined by the covariance between each 
+entries of the covariance matrix is determined by the covariance between each 
 coordinate in the $(x_{s_1}, x_{s_2}, \dots, x_{s_k}, y_{t_1}, y_{t_2}, \dots, 
-y_{t_\ell})$. If the covariance is between $x$, the convariance is invariant 
+y_{t_\ell})$. If the covariance is between $x$, the covariance is invariant 
 of time shift because $x$ is weakly stationary, and the same holds for $y$. 
-If the convariance is between $x, y$, the convariance is also invariant to time 
-shift, because $x,y$ are weakly jointly stationary. Hence, convariance between 
+If the covariance is between $x, y$, the covariance is also invariant to time 
+shift, because $x,y$ are weakly jointly stationary. Hence, covariance between 
 any two arbitrary coordinates are invariant to time shift. Hence, the 
-convariance matrix is invariant to time shift.
+covariance matrix is invariant to time shift.
 
 14. (3 pts)
 Write down explicit formulas that shows how to estimate the cross-covariance 

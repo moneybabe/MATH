@@ -417,12 +417,35 @@ A function $\kappa$ is said to be *positive semidefinite* (PSD) provided that
 \sum_{i,j=1}^n a_i a_j \kappa(t_i - t_j) \geq 0, \quad \text{for all $n \geq 1$, 
 all $a_1,\dots,a_n$, and all $t_1,\dots,t_n$}.
 \]
-Prove that is $x_t$, $t = 1,2,3,\dots$ is stationary, and $\gamma_x(h)$ is its
+Prove that if $x_t$, $t = 1,2,3,\dots$ is stationary, and $\gamma_x(h)$ is its
 auto-covariance function (as a function of lag $h$), then $\gamma_x$ is PSD.
 You may use any equivalences between PSD and other linear-algebraic properties 
 that you want, as long as you state clearly what you are using.
 
 SOLUTION GOES HERE
+
+We will take the variance of the linear combination of the time series, and we 
+will realize that it is in the required form.
+
+\begin{align*}
+    Var(\sum_{i=1}^n a_i \cdot x_{t_i}) & = \sum_{i=1}^{n} a_i^2 \cdot 
+    Var(x_{t_i}) + \sum_{i \neq j} a_i a_j \cdot Cov(x_{t_i}, x_{t_j}) \\
+    & = \sum_{i=1}^{n} a_i^2 \cdot Cov(x_{t_i}, x_{t_i}) + 
+    \sum_{i \neq j} a_i a_j \cdot Cov(x_{t_i}, x_{t_j}) \\
+    & = \sum_{i=1}^{n}\sum_{j=1}^{n} a_i a_j \cdot Cov(x_{t_i}, x_{t_j}) \\
+    & = \sum_{i=1}^{n}\sum_{j=1}^{n} a_i a_j \cdot \gamma_x(t_i - t_j).
+\end{align*}
+
+Notice that the variance is always greater than or equal to 0. Hence, we have 
+\begin{align*}
+    \sum_{i=1}^{n}\sum_{j=1}^{n} a_i a_j \cdot \gamma_x(t_i - t_j) \geq 0.
+\end{align*}
+
+Indeed, $\gamma_x$ is PSD.
+
+Side note: the reason it works here is because $Cov(x_{t_i}, x_{t_j})$ can be 
+written as a function of $t_i - t_j$ under the stationary assumption. If it is 
+not the case, we cannot use this method to prove PSD.
 
 # Joint stationarity
 \def\eqd{\overset{d}{=}}
@@ -459,7 +482,7 @@ strongly jointly stationary.
 
 SOLUTION GOES HERE
 
-Define a time series $x_t$ the same as in Q10, and define $y_{t+1} = x_t$. Then, 
+Define a time series $x_t$ the same as in Q10, and define $y_{s+1} = x_s$. Then, 
 as proved in Q10, both $x$ and $y$ are weekly stationary. Also, the cross 
 covariance $\gamma_{xy}(s,t) = 1$ for $t = s + 1$  and $\gamma_{xy}(s,t) = 
 0$ for $t \neq s+1$ because of their independence. Hence, $\gamma_{xy}(s,t)$ is 

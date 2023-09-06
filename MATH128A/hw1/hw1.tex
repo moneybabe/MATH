@@ -310,10 +310,13 @@ by each of the following methods.
     \item An approximate value of $e^{-5}$ correct to three digits is $6.74\times 10^{-3}$. 
     Which formula,(a) or (b), gives the most accuracy, and why?
     \begin{proof}[Solution]
-        (b) obviously gives a more accurate answer. With (a) method, we are adding and subtracting 
-        large numbers, which will cause a lot of cancellation and takes longer to converge. With 
-        (b) method, we are only adding the numbers and taking the reciprocal. Dividing by an 
-        increasing large number will cause the result to converge faster.
+        (b) obviously gives a more accurate answer. 
+        
+        Notice that $e^{-5}$ is a very small number. However, with the (a) approach, it is adding 
+        and subtracting large numbers. This will cause a lot of cancellation to reach a small number.
+        On the other hand, with the (b) approach, we are only adding the numbers and taking the 
+        reciprocal. Dividing by an increasing large number will immediately result in a small number, 
+        which would be closer to the actual value, thus converge faster.
     \end{proof}
 \end{enumerate}
 

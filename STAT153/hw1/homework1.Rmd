@@ -192,11 +192,12 @@ increase over time).
 
 n_simulations <- 100
 n_steps <- 500
+drift <- 0.1
 
 # 1. Simulate 100 random walks each of length 500, with nonzero drift
 random_walks <- matrix(0, n_simulations, n_steps)
 for (i in 1:n_simulations){
-  random_walks[i, ] <- cumsum(rnorm(n_steps, 0, 1))
+  random_walks[i, ] <- cumsum(rnorm(n_steps, 0, 1) + drift)
 }
 
 # 2. Plot them on the same plot using transparent coloring

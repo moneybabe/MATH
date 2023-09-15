@@ -97,8 +97,8 @@ Determine the following limits. No proofs are required, but show any relevant al
         \textit{squeeze lemma}.
     \end{proposition}
     \begin{proof}
-        For an arbitrary $\epsilon>0$, we know for $n > N_c$, $$|c_n-s|<\epsilon\Rightarrow 
-        c_n<s+\epsilon$$ and for $m>N_a$, $$|a_m-s|<\epsilon\Rightarrow a_m>s-\epsilon.$$ 
+        For an arbitrary $\epsilon>0$, we know $\exists N_c$ such that for $n > N_c$, $$|c_n-s|<\epsilon\Rightarrow 
+        c_n<s+\epsilon$$ and $\exists N_a$ such that for $m>N_a$, $$|a_m-s|<\epsilon\Rightarrow a_m>s-\epsilon.$$ 
         Now take for $N = \max\{N_c, N_a\}$, we have for $k>N$, $$s_k<c_k<s+
         \epsilon.$$ At the same time, $$s-\epsilon<a_k<s_k.$$ Hence, 
         $$s-\epsilon < s_k < s + \epsilon$$ and $|s_k-s| < \epsilon.$
@@ -110,8 +110,9 @@ Determine the following limits. No proofs are required, but show any relevant al
     \end{proposition}
     \begin{proof}
         Notice $-t_n\le s_n\le t_n$. If we can show that $\lim (-t_n) = 0$, then by the squeeze 
-        lemma, $\lim s_n = 0$. Now for an arbitrary $\epsilon>0$, take $n>N_t$, 
-        $$|-t_n-0| = |t_n| = |t_n - 0|<\epsilon.$$ Hence, $\lim (-t_n) = 0$.
+        lemma, $\lim s_n = 0$. We know $\exists N$ such that for $\epsilon>0$, take $n>N$, 
+        $$|t_n-0|<\epsilon\Rightarrow|-t_n-0| = |t_n| = |t_n - 0|<\epsilon.$$
+        Hence, $\lim (-t_n) = 0$.
     \end{proof}
 \end{enumerate}
 
@@ -130,6 +131,9 @@ Let $(s_n)$ be a sequence in $\mathbb{R}$.
             & \Leftrightarrow |(|s_n|)-0| < \epsilon.
         \end{align*}
     \end{proof}
+
+    Read the equivalence form in both forward and backward directions, we can see that 
+    $\lim s_n = 0$ if and only if $\lim |s_n| = 0$.
 
     \item
     Observe that if $s_n = (-1)^n$, then $\lim|s_n|$ exists, but $\lim s_n$ does not exist.
@@ -195,9 +199,9 @@ Let $(s_n)$ be a sequence that converges.
 \begin{proof}
     \begin{align*}
         \lim \frac{n+1}{n} & = \lim \frac{1 + 1/n}{1} \\
-        & = \lim (1+1/n) \cdot \lim 1 \\
-        & = (\lim 1 + \lim 1/n)\cdot \lim 1 \\
-        & = 1.
+        & = \lim (1+1/n) \cdot \lim 1 \qquad (\because\lim s_n/t_n = \lim s_n \cdot \lim 1/t_n)\\
+        & = (\lim 1 + \lim 1/n)\cdot \lim 1 \qquad (\because\lim s_n + t_n = \lim s_n + \lim t_n) \\
+        & = 1. \qquad (\because \lim 1 = 1, \lim 1/n = 0)
     \end{align*}
 \end{proof}
 
@@ -222,8 +226,10 @@ Let $s_1=1$ and for $n\ge1$ let $s_{n+1}=\sqrt{s_n+1}$.
         Notice $\lim_{n\rightarrow\infty}s_{n+1} = s = \lim_{n\rightarrow\infty}s_n$. Hence, 
         \begin{align*}
             \lim_{n\rightarrow\infty} s_{n+1} & = \lim_{n\rightarrow\infty} \sqrt{s_n+1} \\
-            \lim_{n\rightarrow\infty} s_{n+1} & = \sqrt{\lim_{n\rightarrow\infty} s_n+1} \\ 
-            s & = \sqrt{s+1} \\
+            \left(\lim_{n\rightarrow\infty} s_{n+1}\right)^2 & = \lim_{n\rightarrow\infty} \sqrt{s_n+1}
+            \cdot \lim_{n\rightarrow\infty} \sqrt{s_n+1} \\
+            \left(\lim_{n\rightarrow\infty} s_{n+1}\right)^2 & = \lim_{n\rightarrow\infty} (s_n+1) \\ 
+            s^2 & = {s+1} \\
             s^2 - s - 1 & = 0.
         \end{align*}
 

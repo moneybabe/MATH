@@ -130,6 +130,24 @@ Let $(s_n)$ be a sequence in $\mathbb{R}$.
             & \Leftrightarrow |(|s_n|)-0| < \epsilon.
         \end{align*}
     \end{proof}
+
+    \item
+    Observe that if $s_n = (-1)^n$, then $\lim|s_n|$ exists, but $\lim s_n$ does not exist.
+    \begin{proof}[Solution]
+        The first claim is trivial, since $|s_n| = 1$ for all $n$, so $\lim|s_n| = 1$.
+
+        Now assume for contradiction that $\lim s_n = s\in\mathbb{R}$ exists. Then, $\exists N$
+        such that for $n>N$ implies for any $\epsilon>0$, $$|(-1)^n-s|<\epsilon.$$
+        Consider $\epsilon = 1$, then $|(-1)^{N+1}-s|<1$ and $|(-1)^{N+2}-s|<1$. This means 
+        $|-1-s|<1$ and $|1-s|<1\Rightarrow s\in (-2,0)$ and $s\in (0,2)$. This is a contradiction.
+
+        Or another way to arrive at contradiction is using the triangle inequality such that 
+        \begin{align*}
+            2 > |1-s| + |-1-s| & \ge |1-s-(-1-s)| \\
+            2 > |1-s| + |-1-s| & \ge 2 \\
+            2 & > 2.
+        \end{align*}
+    \end{proof}
 \end{enumerate}
 
 \section*{Exercise 8.9}
@@ -208,11 +226,11 @@ Let $s_1=1$ and for $n\ge1$ let $s_{n+1}=\sqrt{s_n+1}$.
             s & = \sqrt{s+1} \\
             s^2 - s - 1 & = 0.
         \end{align*}
+
         Solving the quadratic equation, we get $s = \frac{1}{2}\left(1\pm\sqrt{5}\right)$.
         Notice $s_n > 0$ for all $n$, so $\lim s_n\ge 0$ [check \emph{proposition 4}]. Thus, 
         $\lim (s_n) = \frac{1}{2}\left(1+\sqrt{5}\right)$.
-        
-        \newpage
+
         \emph{Attempt to prove $(s_n)$ converges:}
 
         We first show that $s_n$ is monotonic increasing in the interval 

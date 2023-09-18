@@ -107,23 +107,15 @@ $$\lim_{n\to\infty}\frac{|p_{n+1}-p|}{|p_n-p|}=0.$$
     \item[a.] Show that if $p_n\rightarrow p$ of order $\alpha$ for $\alpha>1$, then $\{p_n\}$ 
     is superlinearly convergence to $p$.
     \begin{proof}
-        We know 
-        \begin{align*}
-            \lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_n-p|^\alpha} & = C \\
-            \frac{\lim_{n\rightarrow\infty}|p_{n+1}-p|}{\lim_{n\rightarrow\infty}|p_n-p|^\alpha} & = C \\
-            \lim_{n\rightarrow\infty}|p_{n+1}-p| & = C\lim_{n\rightarrow\infty}|p_n-p|^\alpha.
-        \end{align*}
-        
-        Now, we are interested in evaluating 
         \begin{align*}
             \lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_n-p|} & = 
-            \frac{\lim_{n\rightarrow\infty}|p_{n+1}-p|}{\lim_{n\rightarrow\infty}|p_n-p|} \\
-            & = \frac{C\lim_{n\rightarrow\infty}|p_n-p|^\alpha}{\lim_{n\rightarrow\infty}|p_n-p|} \\
-            & = C\lim_{n\rightarrow\infty}|p_n-p|^{\alpha-1}.
+            \lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_n-p|^\alpha}\cdot|p_n-p|^{\alpha-1} \\
+            & = \lim_{n\rightarrow\infty}\frac{|p_{n+1}-p|}{|p_n-p|^\alpha}\cdot
+            \lim_{n\rightarrow\infty}|p_n-p|^{\alpha-1} \\
+            & = C\cdot 0 \\
+            & = 0.
         \end{align*}
-        Since $\lim_{n\rightarrow\infty}|p_n-p|=0$ and $\alpha-1$ as a constant is larger than 0, 
-        $C\lim_{n\rightarrow\infty}|p_n-p|^{\alpha-1}=0$. Hence, the limit is indeed 0 and 
-        $\{p_n\}$ is superlinearly convergent to $p$.
+        
     \end{proof}
 
     \item[b.] Show that $p_n=\frac{1}{n^n}$ is superlinearly convergent to 0 but does not 

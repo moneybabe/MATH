@@ -337,4 +337,94 @@ From (1), we can derive (2)
     & = \sigma^2\left(X^TX\right)^{-1}.
 \end{align*}
 
+
+
+
+
+
+
+
+There need to be at least $n$ linearly independent features, $p=n$.
+For MSE to be zero, the l2 norm $||y - \hat{y}||_2 = 0$, which means $y = \hat{y}$.
+Note that $\hat{y} = X \hat{beta}$, a span of the column space of $X$. In order for $y = \hat{y}$, 
+the column space of $X$ needs to span the entire space of $y$, which means the column space of $X$ 
+needs to have dimension greater than or equal to $n = \dim y$.
+
+
+Assume for the sake of contradiction that the training MSE 
+$$\sum_{i=1}^n (y_i - \tilde{y}_i)^2 > \sum_{i=1}^n (y_i - \hat{y}_i)^2.$$
+However, notice we can take $\tilde{\beta}$ to be $\hat{\beta}$ and appending $0$'s to the end of 
+$\tilde{\beta}$ to make it a $p+1$-dimensional vector. 
+Then, $\tilde{y} = X\tilde{\beta} = X\hat{\beta} = \hat{y}$. Hence, 
+$$\sum_{i=1}^n (y_i - \tilde{y}_i)^2 = \sum_{i=1}^n (y_i - \hat{y}_i)^2,$$
+which contradicts our assumption. Therefore, the training MSE is always less than or equal to the 
+test MSE.
+
+
+
+
+
+
+
+
+
+
+
+Population:
+
+Define $$Q:=\mathbb{E}\left[(y-\beta_0-x^T\beta)^2\right].$$
+Note: $y$ is a random variable, $x$ is a random vector, $\beta_0$ is a scalar, and $\beta$ is a 
+vector.
+
+To find $\beta_0$, we set
+\begin{align*}
+    \frac{\partial Q}{\partial \beta_0} = 2\mathbb{E}\left[(\beta_0+x^T\beta-y)\right] & 0 \\
+    \beta_0 + \mu_x^T\beta - \mu_y & = 0 \\
+    \underline{\beta_0} & = \mu_y - \mu_x^T\beta.
+\end{align*}
+
+To find $\beta$, we set
+\begin{align}
+    \frac{\partial Q}{\partial \beta} & = 0 \nonumber \\
+    2\mathbb{E}\left[(\beta_0+x^T\beta-y)x^T\right] & = 0 \\
+    2\mathbb{E}\left[x(\beta_0+x^T\beta-y)^T\right] & = 0 \\
+    2\mathbb{E}\left[x(\beta_0+x^T\beta-y)\right] & = 0 \\
+    \mathbb{E}\left[x\right]\beta_0 + \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \mathbb{E}[x]\left(\mathbb{E}[y]-\mathbb{E}\left[x^T\right]\beta\right) + 
+    \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \mathbb{E}[x]\mathbb{E}[y] - \mathbb{E}[x]\mathbb{E}\left[x^T\right]\beta +
+    \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \left(\mathbb{E}[x]\mathbb{E}\left[x^T\right] - \mathbb{E}\left[xx^T\right]\right)\beta & = 
+    \mathbb{E}[xy] - \mathbb{E}[x]\mathbb{E}[y] \nonumber \\
+    \mathrm{Cov}(x)\beta & = \mathrm{Cov}(x,y) \nonumber \\
+    \underline{\beta} & = \mathrm{Cov}(x)^{-1}\mathrm{Cov}(x,y). \nonumber 
+\end{align}
+Note: from (1) to (2), we take transpose of everything inside the expectation because we want to 
+keep the the expectation as a column vector to follow the tradition. The tranpose only change 
+the representation and does not affect the values.
+From (2) to (3), we use the fact that $(\beta_0+x^T\beta-y)$ is a scalar, and the transpose of a 
+scalar is itself.
+
+Sample:
+
+Define $$Q:= (y-X\beta)^T(y-X\beta).$$
+
+To fine $\beta$, we set
+\begin{align}
+    \frac{\partial Q}{\partial \beta} = 2(y-X\beta)^T(-X) & = 0 \\
+    y^TX-\beta^TX^TX & = 0  \\
+    \beta^TX^TX & = y^TX \nonumber \\
+    \beta^T & = y^TXX^{-1}\left(X^{T}\right)^{-1} \nonumber \\
+    \beta^T & = y^TX\left(X^TX\right)^{-1} \nonumber \\
+    \beta & = \left(\left(X^TX\right)^{-1}\right)^TX^Ty \\
+    \underline{\beta} & = \left(X^TX\right)^{-1}X^Ty. \nonumber
+\end{align}
+Note: in (4), we used the chain rule in matrix form. In (5), we used the fact that a transpose of 
+sum is the sum of transposes, then distributed the transpose to each term. In (6), we used the fact 
+the transpose of inverse is the inverse of transpose. 
+
+
+
+
+
 \end{document}

@@ -281,6 +281,59 @@ squares coefficient, deriving either representation in Q5 will be fine.
 
 SOLUTION GOES HERE
 
+**Population:**
+
+Define $$Q:=\mathbb{E}\left[(y-\beta_0-x^T\beta)^2\right].$$
+Note: $y$ is a random variable, $x$ is a random vector, $\beta_0$ is a scalar, and $\beta$ is a 
+vector.
+
+To find $\beta_0$, we set
+\begin{align*}
+    \frac{\partial Q}{\partial \beta_0} = 2\mathbb{E}\left[(\beta_0+x^T\beta-y)\right] & 0 \\
+    \beta_0 + \mu_x^T\beta - \mu_y & = 0 \\
+    \underline{\beta_0} & = \mu_y - \mu_x^T\beta.
+\end{align*}
+
+To find $\beta$, we set
+\begin{align}
+    \frac{\partial Q}{\partial \beta} & = 0 \nonumber \\
+    2\mathbb{E}\left[(\beta_0+x^T\beta-y)x^T\right] & = 0 \qquad (1)\\
+    2\mathbb{E}\left[x(\beta_0+x^T\beta-y)^T\right] & = 0 \qquad (2) \\
+    2\mathbb{E}\left[x(\beta_0+x^T\beta-y)\right] & = 0 \qquad (3) \\
+    \mathbb{E}\left[x\right]\beta_0 + \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \mathbb{E}[x]\left(\mathbb{E}[y]-\mathbb{E}\left[x^T\right]\beta\right) + 
+    \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \mathbb{E}[x]\mathbb{E}[y] - \mathbb{E}[x]\mathbb{E}\left[x^T\right]\beta +
+    \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \left(\mathbb{E}[x]\mathbb{E}\left[x^T\right] - \mathbb{E}\left[xx^T\right]\right)\beta & = 
+    \mathbb{E}[xy] - \mathbb{E}[x]\mathbb{E}[y] \nonumber \\
+    \mathrm{Cov}(x)\beta & = \mathrm{Cov}(x,y) \nonumber \\
+    \underline{\beta} & = \mathrm{Cov}(x)^{-1}\mathrm{Cov}(x,y). \nonumber 
+\end{align}
+Note: from (1) to (2), we take transpose of everything inside the expectation because we want to 
+keep the the expectation as a column vector to follow the tradition. The tranpose only change 
+the representation and does not affect the actual meaning.
+From (2) to (3), we use the fact that $(\beta_0+x^T\beta-y)$ is a scalar, and the transpose of a 
+scalar is itself.
+
+**Sample:**
+
+Define $$Q:= (y-X\beta)^T(y-X\beta).$$
+
+To fine $\beta$, we set
+\begin{align}
+    \frac{\partial Q}{\partial \beta} = 2(y-X\beta)^T(-X) & = 0 \qquad (4)\\
+    y^TX-\beta^TX^TX & = 0  \qquad (5) \\
+    \beta^TX^TX & = y^TX \nonumber \\
+    \beta^T & = y^TXX^{-1}\left(X^{T}\right)^{-1} \nonumber \\
+    \beta^T & = y^TX\left(X^TX\right)^{-1} \nonumber \\
+    \beta & = \left(\left(X^TX\right)^{-1}\right)^TX^Ty \qquad (6) \\
+    \underline{\beta} & = \left(X^TX\right)^{-1}X^Ty. \nonumber
+\end{align}
+Note: in (4), we used the chain rule in matrix form. In (5), we used the fact that a transpose of 
+sum is the sum of transposes, then distributed the transpose to each term. In (6), we used the fact 
+the transpose of inverse is the inverse of transpose. 
+
 # Marginal-multiple connection
 
 7. (1 pts)
@@ -440,6 +493,22 @@ indeed equivalent to the statement of the Gauss-Markov theorem given in lecture.
 
 SOLUTION GOES HERE
 
+According to the Gauss Markov theorem, 
+\begin{align*}
+  \mathrm{MSE}(a^T\hat{\beta}) & \le \mathrm{MSE}(a^T\tilde{\beta}) = \mathrm{MSE}(c^Ty) \\
+  \mathrm{Bias}(a^T\hat\beta)^2 + \mathrm{Var}(a^T\hat{\beta}) & \le \mathrm{Bias}(a^T\tilde{\beta})^2 + \mathrm{Var}(a^T\tilde{\beta}) \\
+  \mathrm{Var}(a^T\hat{\beta}) & \le \mathrm{Var}(a^T\tilde{\beta}) \\
+  \mathrm{Cov}(a^T\hat{\beta}) & \le \mathrm{Cov}(a^T\tilde{\beta}) \\
+  a\mathrm{Cov}(\hat{\beta})a^T & \le a\mathrm{Cov}(\tilde{\beta})a^T \\
+  0 & \le a\mathrm{Cov}(\tilde{\beta})a^T - a\mathrm{Cov}(\hat{\beta})a^T \\
+  0 & \le a\left(\mathrm{Cov}(\tilde{\beta}) - \mathrm{Cov}(\hat{\beta})\right)a^T \\
+  \mathrm{Cov}(\hat\beta) & \lesssim \mathrm{Cov}(\tilde\beta).
+\end{align*}
+
+Note that the derivation is true whether reading from top to bottom or bottom to top.
+Hence, the Gauss Markov theorem is indeed equivalent to the statement that 
+$\mathrm{Cov}(\hat\beta) \lesssim \mathrm{Cov}(\tilde\beta)$.
+
 # Cross-validation
 
 12. (3 pts)
@@ -461,10 +530,17 @@ the plot (and label this as "Training MAE" to clearly differentiate it).
 
 ```{r}
 # CODE GOES HERE
+
+library(tidyverse)
+library(astsa)
+library(fpp3)
+library(epidatasets)
+
 k = 4 # lag
 n = length(cmort)
 first_half = 1:n <= floor(n/2)
-second_half = 1:n > floor(n/2)
+second_half = 1:n > floor(n / 2)
+cmort_vec = as.numeric(cmort)
 tempr_vec = as.numeric(tempr)
 part_vec = as.numeric(part)
 
@@ -478,7 +554,7 @@ w = 200 # This is our trailing window length
 for (t in (t0+1):n) {
   reg_trailing = lm(
     cmort_vec ~ lagged_tempr_vec + lagged_part_vec,
-    subset = (1:n) <= t - k & (1:n) > t - k - w
+    subset = (1:n) <= t - k & (1:n) > t - w - k
   )
   yhat_trailing[t - t0] = predict(
     reg_trailing,
@@ -501,7 +577,7 @@ training_fitted = predict(reg_first_half, newdata = data.frame(
   lagged_part_vec = lagged_part_vec[first_half]
 ))
 
-mae_training = mean(abs(cmort[first_half] - training_fitted)[-1:-4])
+mae_training = mean(abs(cmort[first_half] - training_fitted), na.rm = TRUE)
 
 par(mar = c(2, 4, 2, 0.5))
 plot(time(cmort)[first_half], cmort[first_half], type = "l", 
@@ -530,59 +606,48 @@ the predictor matrix by calling `cbind()` on the lagged feature vectors.
 ```{r}
 # CODE GOES HERE
 
+# Define lag sizes and initialize vectors
+lags = c(4, 8, 12)
 n = length(cmort)
+n_lags = length(lags)
 first_half = 1:n <= floor(n/2)
 second_half = 1:n > floor(n/2)
+
+cmort_vec = as.numeric(cmort)
 tempr_vec = as.numeric(tempr)
 part_vec = as.numeric(part)
 
-lags = c(4, 8, 12)
-n_lags = length(lags)
-lagged_data = list()
+# Create matrix for all lags
+mat = dplyr::lag(part_vec, lags[1])
+mat = cbind(mat, dplyr::lag(tempr_vec, lags[1]))
 
-for (k in lags) {
-  lagged_data[[paste0("lagged_part_", k)]] = dplyr::lag(part_vec, k)
-  lagged_data[[paste0("lagged_tempr_", k)]] = dplyr::lag(tempr_vec, k)
+for (i in 2:n_lags) {
+  mat = cbind(mat, dplyr::lag(part_vec, lags[i]))
+  mat = cbind(mat, dplyr::lag(tempr_vec, lags[i]))
 }
 
-# Combine lagged data into a data frame
-lagged_df = as.data.frame(cbind(lagged_data))
-
+# Adjust the prediction part
 t0 = floor(n/2)
-yhat_trailing = rep(NA, length = n-t0)
-w = 200  # This is our trailing window length
+yhat_trailing = rep(NA, n - t0)
+w = 200 # Trailing window length
 
 for (t in (t0+1):n) {
-  reg_trailing = lm(
-    cmort_vec ~ ., 
-    data = lagged_df,
-    subset = (1:n) <= t & (1:n) > t - w
-  )
+  reg_trailing = lm(cmort_vec ~ .,
+                    data.frame(mat),
+                    subset = (1:n) <= t - 4 & (1:n) > t - w - 4)
+  
   yhat_trailing[t - t0] = predict(
     reg_trailing,
-    newdata = lagged_df[t, ]
+    newdata = data.frame(t(mat[t, ]))
   )
 }
 
-mae_trailing = mean(abs(cmort[second_half] - yhat_trailing))
-
-reg_first_half = lm(
-  cmort_vec ~ .,
-  data = lagged_df,
-  subset = first_half
-)
-
-training_fitted = predict(reg_first_half, newdata = lagged_df[first_half,])
-
-mae_training = mean(abs(cmort[first_half] - training_fitted)[-1:-max(lags)])
-
-# ... [plotting code]
-
+mae_trailing = mean(abs(cmort[second_half] - yhat_trailing), na.rm = TRUE)
 
 # Now, for the initial training set
-reg_first_half = lm(cmort_vec ~ mat, subset = first_half)
+reg_first_half = lm(cmort_vec ~ ., data.frame(mat), subset = first_half)
 
-training_fitted = predict(reg_first_half, newdata = as.data.frame(mat[first_half, ]))
+training_fitted = predict(reg_first_half, newdata = data.frame(mat[first_half, ]))
 
 mae_training = mean(abs(cmort[first_half] - training_fitted), na.rm = TRUE)
 
@@ -603,6 +668,12 @@ legend("topleft", legend = c(paste("CV MAE =", round(mae_trailing, 2)),
 
 ```
 
+**Did the training MAE go down? Did the cross-validated MAE go down?**
+Yes, the training MAE did go down as we added more features, and hence be able 
+to fit the training data better. The cross-validated MAE also went down, but 
+not as much as the training MAE. This is because the cross-validated MAE is 
+measured on the test set, which is not used to train the model. 
+
 14. (2 pts)
 Repeat once more the same exercise as in the last question but but now with many
 lags per variable: use lags 4, 5, ..., through 50 for each of particulate level 
@@ -611,7 +682,78 @@ down? Did the cross-validated MAE go down? Are you surprised? Discuss.
 
 ```{r}
 # CODE GOES HERE
+
+lags = seq(4:50)
+n = length(cmort)
+n_lags = length(lags)
+first_half = 1:n <= floor(n/2)
+second_half = 1:n > floor(n/2)
+
+cmort_vec = as.numeric(cmort)
+tempr_vec = as.numeric(tempr)
+part_vec = as.numeric(part)
+
+# Create matrix for all lags
+mat = dplyr::lag(part_vec, lags[1])
+mat = cbind(mat, dplyr::lag(tempr_vec, lags[1]))
+
+for (i in 2:n_lags) {
+  mat = cbind(mat, dplyr::lag(part_vec, lags[i]))
+  mat = cbind(mat, dplyr::lag(tempr_vec, lags[i]))
+}
+
+# Adjust the prediction part
+t0 = floor(n/2)
+yhat_trailing = rep(NA, n - t0)
+w = 200 # Trailing window length
+
+for (t in (t0+1):n) {
+  reg_trailing = lm(cmort_vec ~ .,
+                    data.frame(mat),
+                    subset = (1:n) <= t - 4 & (1:n) > t - w - 4)
+  
+  yhat_trailing[t - t0] = predict(
+    reg_trailing,
+    newdata = data.frame(t(mat[t, ]))
+  )
+}
+
+mae_trailing = mean(abs(cmort[second_half] - yhat_trailing), na.rm = TRUE)
+
+# Now, for the initial training set
+reg_first_half = lm(cmort_vec ~ ., data.frame(mat), subset = first_half)
+
+training_fitted = predict(reg_first_half, newdata = data.frame(mat[first_half, ]))
+
+mae_training = mean(abs(cmort[first_half] - training_fitted), na.rm = TRUE)
+
+# Plot
+par(mar = c(2, 4, 2, 0.5))
+plot(time(cmort)[first_half], cmort[first_half], type = "l", 
+     xlim = range(time(cmort)), ylim = range(cmort),
+     xlab = "", ylab = "Cardiovascular deaths", 
+     main = "Cross-validation, training on trailing window", lty = 2)
+lines(time(cmort)[second_half], cmort[second_half], col = 8, lty = 2)
+lines(time(cmort)[second_half], yhat_trailing, col = 4)
+lines(time(cmort)[first_half], training_fitted, col = 6, lty = 1)
+legend("topright", legend = c("Observed", "Predicted", "Training fit"), 
+       lty = c(2, 1, 1), col = c(8, 4, 6))
+legend("topleft", legend = c(paste("CV MAE =", round(mae_trailing, 2)), 
+                             paste("Training MAE =", round(mae_training, 2))),
+       bty = "n")
+
 ```
+
+**Did the training MAE go down? Did the cross-validated MAE go down? Are you surprised??**
+Yes the training MAE did go down, which I am not surprised because more features 
+are able to pick up more details in the training data and fit more closely 
+to the training data. The cross-validated MAE did not go down but instead 
+rised significantly. I was surprised in the beginning, but then I realized that 
+the cross-validated MAE is measured on the test set, which is not used to train 
+the model. Hence, the model is overfitting to the training data and does not 
+represent the true relationship between the features and the response. Therefore, 
+when we use the model to predict on the test set, the model does not perform 
+well and the cross-validated MAE is high.
 
 # More features, the merrier?
 
@@ -632,11 +774,31 @@ given sample regression problem.
 
 SOLUTION GOES HERE
 
+Assume for the sake of contradiction that the training MSE 
+$$\sum_{i=1}^n (y_i - \tilde{y}_i)^2 > \sum_{i=1}^n (y_i - \hat{y}_i)^2.$$
+However, notice we can take $\tilde{\beta}$ to be $\hat{\beta}$ and appending 
+$0$'s to the end of 
+$\tilde{\beta}$ to make it a $p+1$-dimensional vector. 
+Then, $\tilde{y} = X\tilde{\beta} = X\hat{\beta} = \hat{y}$. Hence, 
+$$\sum_{i=1}^n (y_i - \tilde{y}_i)^2 = \sum_{i=1}^n (y_i - \hat{y}_i)^2,$$
+which contradicts our assumption. Therefore, the training MSE will always be 
+less than or equal to the original MSE if we add more features to it.
+
 16. (2 pts) 
 How many linearly independent features do we need (how large should $p$ be) in 
 order to achieve a perfect training accuracy, i.e., training MSE of zero? Why?
 
 SOLUTION GOES HERE
+
+There need to be $n$ linearly independent features, $p=n$.
+For MSE to be zero, the $\ell_2$ norm $||y - \hat{y}||_2 = 0$, which means $y = \hat{y}$.
+Note that $\hat{y} = X \hat{\beta}$, a linear combination of the column vectors of $X$. In order 
+to make sure there exists $\hat{y}$ such that $y = \hat{y}$ for all $y\in \mathbb{R}^n$, 
+the column space of $X$ needs to span the entire space of $\mathbb{R}^n$, which means the 
+column space of $X$ 
+needs to have dimension at least $n = \dim y$.
+Then, notice there can never be more than $n$ linearly independent features,
+because the dimension of the column space of $X$ is at most $n$.
 
 17. (Bonus)
 Implement an example in R in order to verify your answer to Q16 empirically. 
@@ -647,4 +809,63 @@ predictions should be super wild looking).
 
 ```{r}
 # CODE GOES HERE
+n = length(cmort)
+first_half = 1:n <= floor(n/2)
+second_half = 1:n > floor(n/2)
+lags = 1:floor(n/6)
+n_lags = length(lags)
+
+cmort_vec = as.numeric(cmort)
+tempr_vec = as.numeric(tempr)
+part_vec = as.numeric(part)
+
+# Create matrix for all lags
+mat = dplyr::lag(part_vec, lags[1])
+mat = cbind(mat, dplyr::lag(tempr_vec, lags[1]))
+
+for (i in 2:n_lags) {
+  mat = cbind(mat, dplyr::lag(part_vec, lags[i]))
+  mat = cbind(mat, dplyr::lag(tempr_vec, lags[i]))
+}
+
+# Adjust the prediction part
+t0 = floor(n/2)
+yhat_trailing = rep(NA, n - t0)
+w = 200 # Trailing window length
+
+for (t in (t0+1):n) {
+  reg_trailing = lm(cmort_vec ~ .,
+                    data.frame(mat),
+                    subset = (1:n) <= t - 1 & (1:n) > t - w - 1)
+  
+  yhat_trailing[t - t0] = predict(
+    reg_trailing,
+    newdata = data.frame(t(mat[t, ]))
+  )
+}
+
+mae_trailing = mean(abs(cmort[second_half] - yhat_trailing), na.rm = TRUE)
+
+# Now, for the initial training set
+reg_first_half = lm(cmort_vec ~ ., data.frame(mat), subset = first_half)
+
+training_fitted = predict(reg_first_half, newdata = data.frame(mat[first_half, ]))
+
+mae_training = mean(abs(cmort[first_half] - training_fitted), na.rm = TRUE)
+
+# Plot
+par(mar = c(2, 4, 2, 0.5))
+plot(time(cmort)[first_half], cmort[first_half], type = "l", 
+     xlim = range(time(cmort)), ylim = range(cmort),
+     xlab = "", ylab = "Cardiovascular deaths", 
+     main = "Cross-validation, training on trailing window", lty = 2)
+lines(time(cmort)[second_half], cmort[second_half], col = 8, lty = 2)
+lines(time(cmort)[second_half], yhat_trailing, col = 4)
+lines(time(cmort)[first_half], training_fitted, col = 6, lty = 1)
+legend("topright", legend = c("Observed", "Predicted", "Training fit"), 
+       lty = c(2, 1, 1), col = c(8, 4, 6))
+legend("topleft", legend = c(paste("CV MAE =", round(mae_trailing, 2)), 
+                             paste("Training MAE =", round(mae_training, 2))),
+       bty = "n")
+
 ```

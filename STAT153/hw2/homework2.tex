@@ -424,6 +424,56 @@ which means
 
 SOLUTION GOES HERE
 
+\textbf{Population:}
+
+Define \[Q:=\mathbb{E}\left[(y-\beta_0-x^T\beta)^2\right].\] Note: \(y\)
+is a random variable, \(x\) is a random vector, \(\beta_0\) is a scalar,
+and \(\beta\) is a vector.
+
+To find \(\beta_0\), we set \begin{align*}
+    \frac{\partial Q}{\partial \beta_0} = 2\mathbb{E}\left[(\beta_0+x^T\beta-y)\right] & 0 \\
+    \beta_0 + \mu_x^T\beta - \mu_y & = 0 \\
+    \underline{\beta_0} & = \mu_y - \mu_x^T\beta.
+\end{align*}
+
+To find \(\beta\), we set \begin{align}
+    \frac{\partial Q}{\partial \beta} & = 0 \nonumber \\
+    2\mathbb{E}\left[(\beta_0+x^T\beta-y)x^T\right] & = 0 \qquad (1)\\
+    2\mathbb{E}\left[x(\beta_0+x^T\beta-y)^T\right] & = 0 \qquad (2) \\
+    2\mathbb{E}\left[x(\beta_0+x^T\beta-y)\right] & = 0 \qquad (3) \\
+    \mathbb{E}\left[x\right]\beta_0 + \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \mathbb{E}[x]\left(\mathbb{E}[y]-\mathbb{E}\left[x^T\right]\beta\right) + 
+    \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \mathbb{E}[x]\mathbb{E}[y] - \mathbb{E}[x]\mathbb{E}\left[x^T\right]\beta +
+    \mathbb{E}\left[xx^T\right]\beta - \mathbb{E}[xy] & = 0 \nonumber \\
+    \left(\mathbb{E}[x]\mathbb{E}\left[x^T\right] - \mathbb{E}\left[xx^T\right]\right)\beta & = 
+    \mathbb{E}[xy] - \mathbb{E}[x]\mathbb{E}[y] \nonumber \\
+    \mathrm{Cov}(x)\beta & = \mathrm{Cov}(x,y) \nonumber \\
+    \underline{\beta} & = \mathrm{Cov}(x)^{-1}\mathrm{Cov}(x,y). \nonumber 
+\end{align} Note: from (1) to (2), we take transpose of everything
+inside the expectation because we want to keep the the expectation as a
+column vector to follow the tradition. The tranpose only change the
+representation and does not affect the actual meaning. From (2) to (3),
+we use the fact that \((\beta_0+x^T\beta-y)\) is a scalar, and the
+transpose of a scalar is itself.
+
+\textbf{Sample:}
+
+Define \[Q:= (y-X\beta)^T(y-X\beta).\]
+
+To fine \(\beta\), we set \begin{align}
+    \frac{\partial Q}{\partial \beta} = 2(y-X\beta)^T(-X) & = 0 \qquad (4)\\
+    y^TX-\beta^TX^TX & = 0  \qquad (5) \\
+    \beta^TX^TX & = y^TX \nonumber \\
+    \beta^T & = y^TXX^{-1}\left(X^{T}\right)^{-1} \nonumber \\
+    \beta^T & = y^TX\left(X^TX\right)^{-1} \nonumber \\
+    \beta & = \left(\left(X^TX\right)^{-1}\right)^TX^Ty \qquad (6) \\
+    \underline{\beta} & = \left(X^TX\right)^{-1}X^Ty. \nonumber
+\end{align} Note: in (4), we used the chain rule in matrix form. In (5),
+we used the fact that a transpose of sum is the sum of transposes, then
+distributed the transpose to each term. In (6), we used the fact the
+transpose of inverse is the inverse of transpose.
+
 \hypertarget{marginal-multiple-connection}{%
 \section{Marginal-multiple
 connection}\label{marginal-multiple-connection}}
@@ -839,6 +889,13 @@ the statement that
 
 \includegraphics{homework2_files/figure-latex/unnamed-chunk-3-1.pdf}
 
+\textbf{Did the training MAE go down? Did the cross-validated MAE go
+down?} Yes, the training MAE did go down as we added more features, and
+hence be able to fit the training data better. The cross-validated MAE
+also went down, but not as much as the training MAE. This is because the
+cross-validated MAE is measured on the test set, which is not used to
+train the model.
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{13}
@@ -918,6 +975,19 @@ the statement that
 
 \includegraphics{homework2_files/figure-latex/unnamed-chunk-4-1.pdf}
 
+\textbf{Did the training MAE go down? Did the cross-validated MAE go
+down? Are you surprised??} Yes the training MAE did go down, which I am
+not surprised because more features are able to pick up more details in
+the training data and fit more closely to the training data. The
+cross-validated MAE did not go down but instead rised significantly. I
+was surprised in the beginning, but then I realized that the
+cross-validated MAE is measured on the test set, which is not used to
+train the model. Hence, the model is overfitting to the training data
+and does not represent the true relationship between the features and
+the response. Therefore, when we use the model to predict on the test
+set, the model does not perform well and the cross-validated MAE is
+high.
+
 \hypertarget{more-features-the-merrier}{%
 \section{More features, the merrier?}\label{more-features-the-merrier}}
 
@@ -947,8 +1017,9 @@ appending \(0\)'s to the end of \(\tilde{\beta}\) to make it a
 \(p+1\)-dimensional vector. Then,
 \(\tilde{y} = X\tilde{\beta} = X\hat{\beta} = \hat{y}\). Hence,
 \[\sum_{i=1}^n (y_i - \tilde{y}_i)^2 = \sum_{i=1}^n (y_i - \hat{y}_i)^2,\]
-which contradicts our assumption. Therefore, the training MSE is always
-less than or equal to the test MSE.
+which contradicts our assumption. Therefore, the training MSE will
+always be less than or equal to the original MSE if we add more features
+to it.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -989,8 +1060,67 @@ dimension of the column space of \(X\) is at most \(n\).
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# CODE GOES HERE}
+\NormalTok{n }\OtherTok{=} \FunctionTok{length}\NormalTok{(cmort)}
+\NormalTok{first\_half }\OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n }\SpecialCharTok{\textless{}=} \FunctionTok{floor}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{second\_half }\OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n }\SpecialCharTok{\textgreater{}} \FunctionTok{floor}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{lags }\OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{floor}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{6}\NormalTok{)}
+\NormalTok{n\_lags }\OtherTok{=} \FunctionTok{length}\NormalTok{(lags)}
+
+\NormalTok{cmort\_vec }\OtherTok{=} \FunctionTok{as.numeric}\NormalTok{(cmort)}
+\NormalTok{tempr\_vec }\OtherTok{=} \FunctionTok{as.numeric}\NormalTok{(tempr)}
+\NormalTok{part\_vec }\OtherTok{=} \FunctionTok{as.numeric}\NormalTok{(part)}
+
+\CommentTok{\# Create matrix for all lags}
+\NormalTok{mat }\OtherTok{=}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{lag}\NormalTok{(part\_vec, lags[}\DecValTok{1}\NormalTok{])}
+\NormalTok{mat }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(mat, dplyr}\SpecialCharTok{::}\FunctionTok{lag}\NormalTok{(tempr\_vec, lags[}\DecValTok{1}\NormalTok{]))}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\NormalTok{n\_lags) \{}
+\NormalTok{  mat }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(mat, dplyr}\SpecialCharTok{::}\FunctionTok{lag}\NormalTok{(part\_vec, lags[i]))}
+\NormalTok{  mat }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(mat, dplyr}\SpecialCharTok{::}\FunctionTok{lag}\NormalTok{(tempr\_vec, lags[i]))}
+\NormalTok{\}}
+
+\CommentTok{\# Adjust the prediction part}
+\NormalTok{t0 }\OtherTok{=} \FunctionTok{floor}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{yhat\_trailing }\OtherTok{=} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, n }\SpecialCharTok{{-}}\NormalTok{ t0)}
+\NormalTok{w }\OtherTok{=} \DecValTok{200} \CommentTok{\# Trailing window length}
+
+\ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in}\NormalTok{ (t0}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{n) \{}
+\NormalTok{  reg\_trailing }\OtherTok{=} \FunctionTok{lm}\NormalTok{(cmort\_vec }\SpecialCharTok{\textasciitilde{}}\NormalTok{ .,}
+                    \FunctionTok{data.frame}\NormalTok{(mat),}
+                    \AttributeTok{subset =}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n) }\SpecialCharTok{\textless{}=}\NormalTok{ t }\SpecialCharTok{{-}} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n) }\SpecialCharTok{\textgreater{}}\NormalTok{ t }\SpecialCharTok{{-}}\NormalTok{ w }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
+  
+\NormalTok{  yhat\_trailing[t }\SpecialCharTok{{-}}\NormalTok{ t0] }\OtherTok{=} \FunctionTok{predict}\NormalTok{(}
+\NormalTok{    reg\_trailing,}
+    \AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(mat[t, ]))}
+\NormalTok{  )}
+\NormalTok{\}}
+
+\NormalTok{mae\_trailing }\OtherTok{=} \FunctionTok{mean}\NormalTok{(}\FunctionTok{abs}\NormalTok{(cmort[second\_half] }\SpecialCharTok{{-}}\NormalTok{ yhat\_trailing), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Now, for the initial training set}
+\NormalTok{reg\_first\_half }\OtherTok{=} \FunctionTok{lm}\NormalTok{(cmort\_vec }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\FunctionTok{data.frame}\NormalTok{(mat), }\AttributeTok{subset =}\NormalTok{ first\_half)}
+
+\NormalTok{training\_fitted }\OtherTok{=} \FunctionTok{predict}\NormalTok{(reg\_first\_half, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(mat[first\_half, ]))}
+
+\NormalTok{mae\_training }\OtherTok{=} \FunctionTok{mean}\NormalTok{(}\FunctionTok{abs}\NormalTok{(cmort[first\_half] }\SpecialCharTok{{-}}\NormalTok{ training\_fitted), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Plot}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{0.5}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{time}\NormalTok{(cmort)[first\_half], cmort[first\_half], }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }
+     \AttributeTok{xlim =} \FunctionTok{range}\NormalTok{(}\FunctionTok{time}\NormalTok{(cmort)), }\AttributeTok{ylim =} \FunctionTok{range}\NormalTok{(cmort),}
+     \AttributeTok{xlab =} \StringTok{""}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Cardiovascular deaths"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Cross{-}validation, training on trailing window"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{time}\NormalTok{(cmort)[second\_half], cmort[second\_half], }\AttributeTok{col =} \DecValTok{8}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{time}\NormalTok{(cmort)[second\_half], yhat\_trailing, }\AttributeTok{col =} \DecValTok{4}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{time}\NormalTok{(cmort)[first\_half], training\_fitted, }\AttributeTok{col =} \DecValTok{6}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Observed"}\NormalTok{, }\StringTok{"Predicted"}\NormalTok{, }\StringTok{"Training fit"}\NormalTok{), }
+       \AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"CV MAE ="}\NormalTok{, }\FunctionTok{round}\NormalTok{(mae\_trailing, }\DecValTok{2}\NormalTok{)), }
+                             \FunctionTok{paste}\NormalTok{(}\StringTok{"Training MAE ="}\NormalTok{, }\FunctionTok{round}\NormalTok{(mae\_training, }\DecValTok{2}\NormalTok{))),}
+       \AttributeTok{bty =} \StringTok{"n"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+\includegraphics{homework2_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 \end{document}

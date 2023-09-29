@@ -175,12 +175,15 @@
     We know there exists $N$ such that for $n\ge m>N$, 
     $\left|\sum_{k=m}^{n}a_k\right|<\sqrt[p]{\epsilon}$ for all $\epsilon>0$.
     Take some $\epsilon>0$ and such $N$, then
-    \begin{align*}
-        \left|\sum_{k=m}^{n}a_k\right| & < \sqrt[p]{\epsilon} \\
-        \left|\sum_{k=m}^{n}a_k\right|^p & < \epsilon \\
+    \begin{align}
+        \left|\sum_{k=m}^{n}a_k\right| & < \sqrt[p]{\epsilon} \nonumber \\
+        \left|\sum_{k=m}^{n}a_k\right|^p & < \epsilon \nonumber \\
         \left|\sum_{k=m}^na_k^p\right| \le \left|\left(\sum_{k=m}^na_k\right)^p\right| & < \epsilon.
-    \end{align*}
+    \end{align}
     Hence, $\sum a_n^p$ satifies Cauchy criterion and thus converges.
+
+    Note: the left inequality in (1) is true because $a_k\ge 0$ for all $k$ so there are simply extra 
+    nonnegative terms in $\left|\left(\sum_{k=m}^na_k\right)^p\right|$.
 \end{proof}
 
 \newpage
@@ -308,11 +311,13 @@
 \end{proof}
 
 \begin{proposition}
-    SHow that $\sum_{n=1}^{\infty}\frac{1}{n}$ diverges by comparing with the series 
+    Show that $\sum_{n=1}^{\infty}\frac{1}{n}$ diverges by comparing with the series 
     $\sum_{n=2}^{\infty}a_n$ where $(a_n)$ is the sequence 
     $$(\frac{1}{2},\frac{1}{4},\frac{1}{4},\frac{1}{8},\frac{1}{8},\frac{1}{8},\frac{1}{8}
     ,\frac{1}{16},\frac{1}{16},\frac{1}{16},\frac{1}{16},\frac{1}{16},\frac{1}{16},\frac{1}{16}
     ,\frac{1}{16},\frac{1}{32},\frac{1}{32}, \cdots).$$
+    
+    Note: this is also known as the Cauchy Condensation Test.
 \end{proposition}
 \begin{proof}
     We will show that $\sum_{n=2}^{\infty}\frac{1}{n}$ diverges and thus 
@@ -324,6 +329,105 @@
     $\sum_{n=2}^{\infty}a_n = \lim_{k\to\infty}k\left(\frac{1}{2}\right)=\infty$. 
 
     Hence, by Comparison Test, $\sum_{n=1}^{\infty}\frac{1}{n}$ also diverges.
+\end{proof}
+
+\newpage
+\section*{Chapter 15}
+\begin{proposition}
+    $\sum \left[sin\left(\frac{n\pi}{6}\right)\right]^n$ diverges.
+\end{proposition}
+\begin{proof}
+    Notice that when $n = 12k + 3, \left[sin\left(\frac{n\pi}{6}\right)\right]^n = 1$. Hence, 
+    the summation never converges.
+\end{proof}
+
+\begin{proposition}
+    $\sum \left[sin\left(\frac{n\pi}{7}\right)\right]^n$ converges.
+\end{proposition}
+\begin{proof}
+    We will show that the summation converges absolutely, hence converges.
+
+    Notice $\left|sin\left(\frac{n\pi}{7}\right)\right|$ is always between 0 and 1. In fact, it is 
+    bounded by above by some $r<1$ such that $\left|sin\left(\frac{n\pi}{7}\right)\right| \le r<1$
+    and $\left|sin\left(\frac{n\pi}{7}\right)\right|^n \le r^n<1$. 
+    Then by Comparison Test, $\sum\left|sin\left(\frac{n\pi}{7}\right)\right|^n$ converges because 
+    $\sum r^n$ converges, which can be shown easily by Ratio Test or Root Test.
+\end{proof}
+
+\begin{proposition}
+    $\sum_{n=2}^{\infty}\frac{1}{n(\log n)^p}$ converges if and only if $p>1$.
+\end{proposition}
+\begin{proof}
+    We proceed with Integral Test with $f(x)=\frac{1}{x(\log x)^p}$. Notice $f(x)$ is continuous,
+    positive, and decreasing for $x\ge 2$. Also, $f(n) = a_n$. Then for $p\neq 1$
+    \begin{align}
+        \lim_{n\to\infty}\int_{2}^{n}\frac{1}{x(\log x)^p}dx & = 
+        \lim_{n\to\infty}\left[\frac{(\log x)^{1-p}}{1-p}\right]_2^n.
+    \end{align}
+    For $p = 1$, we have 
+    \begin{align}
+        \lim_{n\to\infty}\int_{2}^{n}\frac{1}{x(\log x)}dx & =
+        \lim_{n\to\infty}\left[\log(\log x)\right]_2^n = \infty.
+    \end{align}
+
+    Then for $(\Rightarrow)$ direction, we know that if $p=1$, (2) goes to infinity, thus the 
+    summation diverges. If $p<1$, (1) goes to infinity, thus the summation diverges again. Hence, 
+    forward direction is shown by contrapositive.
+
+    For $(\Leftarrow)$ direction, we know that if $p>1$, (1) converges, thus the summation converges.
+\end{proof}
+
+\begin{proposition}
+    $\sum_{n=4}^{\infty}\frac{1}{n(\log n)(\log\log n)}$ diverges.
+\end{proposition}
+\begin{proof}
+    We proceed with Integral Test with $f(x)=\frac{1}{x(\log x)(\log\log x)}$. Notice $f(x)$ is 
+    decreasing, $f(n) = a_n$, and all $a_n$ are nonnegative. Then
+    \begin{align*}
+        \lim_{n\to\infty}\int_{4}^{n}\frac{1}{x(\log x)(\log\log x)}dx & = 
+        \lim_{n\to\infty}\left[\log(\log(\log x))\right]_4^n = \infty.
+    \end{align*}
+\end{proof}
+
+\newpage
+\begin{proposition}
+    $\sum_{n=2}^{\infty}\frac{\log n}{n^2}$ converges.
+\end{proposition}
+\begin{proof}
+    \textbf{Integral Test:} 
+
+    We can integrate $f(x)=\frac{\log x}{x^2}$ to get
+    \begin{align*}
+        \lim_{n\to\infty}\int_{2}^{n}\frac{\log x}{x^2}dx & = 
+        \lim_{n\to\infty}\int_{2}^{n}-(\log x)d\left(\frac{1}{x}\right) \\
+        & = \lim_{n\to\infty}\left[-\frac{\log x}{x}\right]_2^n +
+        \lim_{n\to\infty}\int_{2}^{n}\frac{1}{x^2}dx \\
+        & = \lim_{n\to\infty}\left[-\frac{\log x}{x}\right]_2^n -
+        \lim_{n\to\infty}\left[\frac{1}{x}\right]_2^n \\
+        & = \frac{1}{2},
+    \end{align*}
+    and conclude that $\sum_{n=2}^{\infty}\frac{\log n}{n^2}$ converges.
+
+    \textbf{Comparison Test:}
+
+    We know that for $n>N$ where $N$ is some constant, $\sqrt{n} > \log n$. This can be proved by 
+    obversing that $\sqrt{n} > \log n$ when $n = 100$, and we see by first derivative that 
+    $\sqrt{n}$ has a higher increasing rate than $\log n$ for all $n$. Hence, we can conclude that 
+    $\sqrt{n} > \log n$ for all $n\ge 100$.
+
+    Then, we see $\frac{\log n}{n^2} < \frac{1}{n^{3/2}}$ for $n\ge 100$. We know that 
+    $\sum \frac{1}{n^{3/2}}$ converges for $p>1$ $\Rightarrow \sum_{100}^{\infty}\frac{1}{n^{3/2}}$
+    converges $\Rightarrow \sum_{100}^{\infty}\frac{\log n}{n^2}$ converges $\Rightarrow 
+    \sum_{2}^{\infty}\frac{\log n}{n^2}$ converges.
+\end{proof}
+
+\begin{proposition}
+    If $(a_n)$ is a decreasing sequence of real numbers and if $\sum a_n$ converges, then 
+    $\lim na_n=0$.
+\end{proposition}
+\begin{proof}
+    Since $\sum a_n$ converges, we know it satisfies Cauchy criterion. In other words, there exists 
+    $N$ such that for $n\ge m>N$, $$\left|\sum_{k=m}^{n}a_k\right| < \epsilon.$$ Then, 
 \end{proof}
 
 \end{document}

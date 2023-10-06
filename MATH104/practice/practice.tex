@@ -30,7 +30,7 @@
 
 \newtheorem{thm}{Theorem}
 \newtheorem{proposition}[thm]{Proposition}
-\newtheorem{cor}[thm]{Corollary}
+\newtheorem{corollary}[thm]{Corollary}
 
 % title information
 \title{Math 104 Practice}
@@ -427,7 +427,237 @@
 \end{proposition}
 \begin{proof}
     Since $\sum a_n$ converges, we know it satisfies Cauchy criterion. In other words, there exists 
-    $N$ such that for $n\ge m>N$, $$\left|\sum_{k=m}^{n}a_k\right| < \epsilon.$$ Then, 
+    $N$ such that for $n\ge m>N$, 
+    \begin{align*}
+        \left|\sum_{k=m}^{n}a_k\right| = \sum_{k=m}^{n}a_k & < \frac{\epsilon}{2}.
+    \end{align*}
+    Notice $(a_n)$ is a decreasing sequence and $\lim a_n=0$ is a necessary condition for $\sum a_n$ 
+    to converge, hence all $a_n$ are non-negative. Therefore, we can remove the absolute value.
+    
+    In particular, for $m=N+1$,
+    \begin{align}
+        (n-N)a_n & \le \sum_{k=N+1}^{n}a_k \nonumber \\
+        na_n & \le \sum_{k=N+1}^{n}a_k + Na_n.
+    \end{align}
+    Note that since $(a_n)$ converges to 0 and all $a_n$ are non-negative, we know there exists 
+    $N'$ such that
+    $$a_n  = |a_n-0| < \frac{\epsilon}{2N}.$$
+    Therefore, putting back to (4), as long as $n > \max\{N,N'\}$
+    $$|na_n - 0| = na_n \le \sum_{k=N+1}^{n}a_k + Na_n < 
+    \frac{\epsilon}{2} + N\frac{\epsilon}{2N} = \epsilon.$$
 \end{proof}
+
+\newpage
+\section*{Chapter 17}
+\begin{proposition}
+    $\sqrt{x}$ is continuous on its domain $[0,\infty)$.
+\end{proposition}
+\begin{proof}
+    We consider non-negative sequences $(x_n)$ because any sequence with negative terms would not 
+    make sense on $f(x_n)$.
+    
+    We have to show that if $(x_n)$ converges to some $x_0\in[0, \infty)$, $f(x_n)=\sqrt{x_n}$ 
+    converges to $\sqrt{x_0}$. In other words, we seek to find $N$ such that for $\epsilon>0$, as 
+    long as $n>N$,
+    $$|\sqrt{x_n}-\sqrt{x_0}|<\epsilon.$$
+    
+    Consider $x_0=0$, since $(x_n)\to 0$, there exists some $N$ such that for $n>N$,
+    \begin{align*}
+        |x_n| & < \epsilon^2 \\
+        \sqrt{|x_n|} & < \epsilon \\
+        |\sqrt{x_n}| & < \epsilon.
+    \end{align*}
+    Therefore, $\sqrt{x}$ is continouous at $x=0$.
+
+    For $x_0>0$, we need to show the existence of $N$ such that for $n>N$,
+    \begin{align*}
+        |\sqrt{x_n}-\sqrt{x_0}| & < \epsilon \\
+        \left|\frac{x_n-x_0}{\sqrt{x_n}+\sqrt{x_0}}\right| & < \epsilon \\
+        \left|\frac{x_n-x_0}{\sqrt{x_n}+\sqrt{x_0}}\right| \le 
+        \left|\frac{x_n-x_0}{\sqrt{x_0}}\right| & < \epsilon \\
+        \left|\frac{x_n-x_0}{\sqrt{x_0}}\right| & < \epsilon \\
+        \left|{x_n-x_0}\right| & < \sqrt{x_0}\cdot \epsilon.
+    \end{align*}
+    Indeed, there exists such $N$ because $(x_n)$ converges to $x_0$.
+\end{proof}
+
+\begin{proposition}
+    If $m\in \mathbb{N}$, then the function $f(x)=x^m$ is continuous on $\mathbb{R}$.
+\end{proposition}
+\begin{proof}
+    Suppose an arbitrary sequence $(x_n)$ that converges to $x_0\in\mathbb{R}$, then 
+    \begin{align*}
+        \lim f(x_n) & = \lim x_n^m \\
+        & = (\lim x_n)^m \\
+        & = x_0^m \\
+        & = f(x_0).
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    Every polynomial function $p(x)=a_0+a_1x+\cdots+a_nx^n$ is continuous on $\mathbb{R}$.
+\end{corollary}
+\begin{proof}
+    Let $f_k = a_kx^k$ for $k\in[0,n]$.
+    We have shown in previous proposition that $x^k$ is continuous for $k\in[1,n]$. Notice $x^0=1$ 
+    is continuous on $\mathbb{R}$ apparently because every sequence $(x_n)$ that converges to $1$ 
+    will have $(x_n)^0=1$.
+
+    Therefore, $f_k$ is continuous on $\mathbb{R}$ because it's a scalar multiple of a continuous 
+    function. Consequently, $p(x)$ is continuous on $\mathbb{R}$ because it's a sum of continuous 
+    functions.
+\end{proof}
+
+\begin{proposition}
+    A rational function is a function $f$ of the form $p/q$ where $p,q$ are polynomial functions. 
+    The domain of $f$ is $\{x\in\mathbb{R}:q(x)\neq0\}$. Then every rational function is continuous.
+\end{proposition}
+\begin{proof}
+    From \emph{Corollary 26}, we know every polynomial is continous on $\mathbb{R}$ and of course 
+    on $\mathbb{R}\backslash \{x:q(x)=0\}$. Hence $p/q$ is continuous since it's a division of two continuous 
+    functions where $q\neq0$.
+\end{proof}
+
+\begin{proposition}
+    $\min(f,g)=\frac{1}{2}(f+g)-\frac{1}{2}|f-g|$.
+\end{proposition}
+\begin{proof}
+    Assume $f>g$, then 
+    \begin{align*}
+        \frac{1}{2}(f+g) - \frac{1}{2}|f-g| & = \frac{1}{2}(f+g) - \frac{1}{2}(f-g) \\
+        & = g \\
+        & = \min(f,g).
+    \end{align*}
+    Assume $g\ge f$, then
+    \begin{align*}
+        \frac{1}{2}(f+g) - \frac{1}{2}|f-g| & = \frac{1}{2}(f+g) - \frac{1}{2}(g-f) \\
+        & = f \\
+        & = \min(f,g).
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    $\min(f,g)=-\max(-f,-g)$.
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        \max(f,g) & = \frac{1}{2}(f+g)+\frac{1}{2}|f-g| \\
+        \max(-f,-g) & = \frac{1}{2}(-f-g)+\frac{1}{2}|-f+g| \\
+        \max(-f,-g) & = - \frac{1}{2}(f+g)+\frac{1}{2}|g-f| \\
+        -\max(-f,-g) & = \frac{1}{2}(f+g)-\frac{1}{2}|f-g| \\
+        -\max(-f,-g) & = \min(f,g).
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    If $f$ and $g$ are continuous at $x_0$ in $\mathbb{R}$, then $\min(f,g)$ is continuous at $x_0$.
+\end{corollary}
+\begin{proof}
+    $f,g\in C^0(x_0)\Rightarrow f+g, f-g \in C^0(x_0)\Rightarrow f+g, |f-g| \in C^0(x_0)
+    \Rightarrow \frac{1}{2}(f+g), \frac{1}{2}|f-g| \in C^0(x_0)
+    \Rightarrow \frac{1}{2}(f+g)+\frac{1}{2}|f-g| \in C^0(x_0)
+    \Rightarrow \min(f,g) \in C^0(x_0)$.
+\end{proof}
+
+\begin{proposition}
+    $g(x)=x^3$ is continuous on $\mathbb{R}$.
+\end{proposition}
+\begin{proof}
+    Consider arbitrary $c\in\mathbb{R}$. We seek to find $\delta$ such that for $|x-c|<\delta$, 
+    $|x^3-c^3|<\epsilon$.
+
+    Let's evaluate $|x^3-c^3|$:
+    \begin{align*}
+        |x^3-c^3| & = |x-c||x^2+xc+c^2| \\
+        & \le |x-c|\left(|x^2|+|xc|+|c^2|\right).
+    \end{align*}
+
+    For $|x-c|<1$, then 
+    \begin{align*}
+        |x^2|+|xc|+|c^2| & < |c+1|^2 + |c+1||c| + |c^2|.
+    \end{align*}
+    Let $M = |c+1|^2 + |c+1||c| + |c^2|>0$. Hence, let $|x-c|<\delta = \min\{\epsilon/M,1\}$, then
+    \begin{align*}
+        |x^3-c^3| & < |x-c|M < \frac{\epsilon}{M}M = \epsilon.
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    Let $f$ be a continuous real-valued function with domain $(a,b)$. If $f(r)=0$ for each rational 
+    number $r$ in $(a,b)$, then $f(x)=0$ for all $x\in(a,b)$.
+\end{proposition}
+\begin{proof}
+    We will show that if there are some $x_0\in(a,b)$ such that 
+    $f(x_0)=c\neq0$, then $f$ is not continuous at $x_0$, hence not continuous on $(a,b)$.
+
+    Assume for the sake of contradiction that there exists $x_0\in(a,b)\backslash\mathbb{Q}$ such 
+    that $f(x_0)=c\neq0$. Let $\epsilon = \frac{|c|}{2}$. However for $|f(x_0)-f(x)|<\epsilon$, there 
+    does not exist $\delta$ such that $|x-x_0|<\delta\Rightarrow|f(x_0)-f(x)|<\epsilon$ because 
+    there is always a rational number $x'\in (x_0-\delta, x_0+\delta)$ according to the density of 
+    $\mathbb{Q}$, and $|f(x')-f(x_0)|=|c|>\epsilon$. Then, the contradiction that $f$ is not 
+    continuous is reached.
+\end{proof}
+
+\begin{corollary}
+    Let $f$ and $g$ be continuous real-valued functions on $(a,b)$ such that $f(r)=g(r)$ for each 
+    rational number $r$ in $(a,b)$, then $f(x)=g(x)$ for all $x\in(a,b)$.
+\end{corollary}
+\begin{proof}
+    Let $f(r)=g(r)=c$ and define $f'(x)=f(x)-c$ and $g'(x)=g(x)-c$. Then from \emph{Proposition 33},
+    we know $f'(x)=g'(x)=0$ because $f'$ and $g'$ are continuous and $f'(r)=g'(r)=0$. Therefore, 
+    $f'(x)=g'(x)=0\Rightarrow f'(x)+c=g'(x)+c=c\Rightarrow f(x)=g(x)=c$ for all $x\in(a,b)$.
+\end{proof}
+
+\begin{proposition}
+    Let $h(x)=x$ for rational numbers $x$ and $h(x)=0$ for irrational numbers, then $h$ in 
+    continuous only at $x=0$.
+\end{proposition}
+\begin{proof}
+    $x_0=0:$ Let $\epsilon>0$. Then for $|x-x_0|<\epsilon$, $|h(x)-h(x_0)|=|h(x)-0|<\epsilon$ because for 
+    irrational numbers $x$, $|h(x)-0| = 0<\epsilon$, and for rational numbers $x$, $|h(x)-0|=
+    |x-0|<\epsilon$.
+
+    \textbf{$x_0\neq 0$ and irrational}: Let $\epsilon = \frac{|x_0|}{2}$. Assume for the sake of contradiction 
+    that there exists $\delta$ such that $|x-x_0|<\delta\Rightarrow|h(x)-0|<\epsilon$. However, 
+    by density of $\mathbb{Q}$ there exists a rational number $x'\in (x_0-\delta, x_0+\delta)$ 
+    such that $|x'|>|x_0|$ [$x'\in(x_0,x_0+\delta)$ if $x_0>0$, $x'\in(x_0-\delta,x_0)$ if 
+    $x_0\le 0$]. Then $|h(x')-0|=|x'|>|x_0|>\epsilon$.
+
+    \textbf{$x_0\neq0$ and rational}: Let $\epsilon = \frac{|x_0|}{2}$. Assume for the sake of contradiction 
+    that there exists $\delta$ such that $|x-x_0|<\delta\Rightarrow|h(x)-x_0|<\epsilon$. However, 
+    by density of irrationals there exists an irrational number $x'\in (x_0-\delta, x_0+\delta)$. 
+    Then $|h(x')-x_0|=|0-x_0|=|x_0|>\epsilon$.
+\end{proof}
+
+\begin{proposition}
+    For each nonzero rational number $x$, write $x = \frac{p}{q}$ where $p,q$ are integers with 
+    no common factors and $q>0$, and then define $f(x)=\frac{1}{q}$. Also define $f(0)=1$ and 
+    $f(x)=0$ for all $x\in\mathbb{R}\backslash\mathbb{Q}$. Thus $f(x)=1$ for each integer, 
+    $f(\frac{1}{2})=f(\frac{-1}{2})=f\frac{3}{2}=\cdots=\frac{1}{2}$, etc. Then $f$ is continuous 
+    at each point of $\mathbb{R}\backslash\mathbb{Q}$ and discontinuous at each point of 
+    $\mathbb{Q}$.
+\end{proposition}
+\begin{proof}
+    \textbf{Discontinuous on $\mathbb{Q}$}: Let $x_0\in\mathbb{Q}$. Define a sequence of irrational 
+    numbers $(x_n)$ that converges to $x_0$, but $f(x_n)=0$ for all $n$ and obviously $\lim x_n=0\neq
+    f(x_0)$ [notice $f(x_0)$ is never 0 for rational number $x_0$].
+
+    \textbf{Continuous on $\mathbb{R}\backslash\mathbb{Q}$}: Let $x_0\in\mathbb{R}\backslash
+    \mathbb{Q}$ and $\epsilon>0$. Then let $N=\min\{n>\frac{1}{\epsilon}:n\in\mathbb{N}\}$. 
+    Now consider the interval $I = (x_0-1, x_0+1)$. We know there is only a finite number of 
+    $\frac{p}{q}\in I$ such that $q<N$ [consider $q=N-1$, there are only finite multiples of 
+    $\frac{1}{q}\in I$ because the multiple will eventually "step over" the interval; this is true 
+    all for $q<N$]. Since there is only a finite number of such fractions, we can take the fraction 
+    that is closest to $x_0$, denote $r$, and let $\delta = |r-x_0|$. Then, the interval 
+    $(x_0-\delta,x_0+\delta)$ only contains either irrational numbers or $\frac{p}{q}$ with 
+    $q\ge N>\frac{1}{\epsilon}$. 
+
+    Therefore, for rational $x$ such that $|x-x_0|<\delta$, $f(x)\le \frac{1}{N} < \epsilon\Rightarrow
+    |f(x)-f(x_0)|=|f(x)-0|<\epsilon$. Obviously for irrational $x$, $|f(x)-f(x_0)|$ is always 0.
+
+    Intuition: We can zoom into $x_0$ to find an interval where only very very small mesh of 
+    fractions is contained in there because all larger fractions would "step over" the interval
+\end{proof}
+
 
 \end{document}

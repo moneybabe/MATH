@@ -57,13 +57,35 @@ Proof of $\hat{\beta}=\tilde{\beta}+\eta$ is also a least squares solution for $
 Denote the prediction from $\tilde{\beta}$ as $\tilde{y} = X\tilde{\beta}$ with MSE = $y-\tilde{y}$. 
 Then the prediction from $\hat{\beta}$
 \begin{align}
-    \hat{y} & = X\hat{y} \\
-    & = X(\tilde{y}+\eta) \\
-    & = X\tilde{y}+X\eta \\
+    \hat{y} & = X\hat{\beta} \\
+    & = X(\tilde{\beta}+\eta) \\
+    & = X\tilde{\beta}+X\eta \\
     & = \tilde{y}+X\eta \\
     & = \tilde{y}.
 \end{align}
 Therefore, they have the same MSE. Since $\hat{\beta}$ is a least squares solution, $\tilde{\beta}+
 \eta$ is also a least squares solution.
+
+
+
+Since null$(X)\not\perp e_j$, there exists some $v\in$ null$(X)$ that has non-zero $j$-th 
+coorindate. Denote the $j$-th coordinate of $v$ as a real number $c$. If $c>0$, we can construct 
+$\hat{\beta}=\tilde{\beta} - \left(\frac{\tilde{\beta}_j}{c}\right)v - v$, which has the $j$-th coordinate 
+less than 0. If $c<0$, we can construct 
+$\hat{\beta}=\tilde{\beta}+\left(\frac{\tilde{\beta}_j}{c}\right)v-v$, which also has the $j$-th 
+coordinate less than 0.
+
+For either case, the prediction 
+\begin{align*}
+    \hat{y} & = X\tilde{\beta} \\
+    & = X\left[\tilde{\beta}\pm \left(\frac{\tilde{\beta}_j}{c}\right)v-v\right] \\
+    & = X\tilde{\beta} \pm X\left(\frac{\tilde{\beta}_j}{c}\right)v - Xv \\
+    & = X\tilde{\beta} \pm \left(\frac{\tilde{\beta}_j}{c}\right)Xv - Xv \\
+    & = X\tilde{\beta} \qquad (\because v \in \mathrm{null}(X)) \\
+    & = \tilde{y}.
+\end{align*}
+Hence, $\tilde{\beta}$ and $\hat{\beta}$ will have the same prediction under $X$, so as the MSE.
+
+
 
 \end{document}

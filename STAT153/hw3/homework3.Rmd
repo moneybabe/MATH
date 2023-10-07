@@ -1,5 +1,5 @@
 ---
-title: 'Homework 3: [YOUR NAME HERE]'
+title: 'Homework 3: Neo Lee'
 subtitle: 'Introduction to Time Series, Fall 2023'
 date: 'Due Thursday October 5 at 5pm'
 output:
@@ -143,6 +143,8 @@ lambda_ridge = ridge$lambda
 y_predict_ridge = predict(ridge, newx = x_test, s = lambda_ridge)
 ridge_mae = apply(abs(y_predict_ridge - y_test), 2, mean)
 least_mae_ridge_lambda = lambda_ridge[which.min(ridge_mae)]
+
+par(mar = c(2, 4, 2, 0.5))
 plot(time(cmort), cmort,
     type = "l", col = 8,
     xlim = range(time(cmort)),
@@ -161,11 +163,9 @@ legend("topright",
     lty = 1
 )
 legend("topleft",
-    legend = c(paste("Test MAE =", round(ridge_mae[which.min(ridge_mae)], 2)),
-        paste("lambda =", round(least_mae_ridge_lambda, 2))
-    ),
-    col = 1,
-    lty = 1
+    legend = c(paste("Test MAE =", round(ridge_mae[which.min(ridge_mae)], 3)),
+        paste("lambda =", round(least_mae_ridge_lambda, 3))
+    )
 )
 
 # lasso regression on first half of the time series
@@ -177,6 +177,8 @@ lambda_lasso = lasso$lambda
 y_predict_lasso = predict(lasso, newx = x_test, s = lambda_lasso)
 lasso_mae = apply(abs(y_predict_lasso - y_test), 2, mean)
 least_mae_lasso_lambda = lambda_lasso[which.min(lasso_mae)]
+
+par(mar = c(2, 4, 2, 0.5))
 plot(time(cmort), cmort,
     type = "l", col = 8,
     xlim = range(time(cmort)),
@@ -195,11 +197,9 @@ legend("topright",
     lty = 1
 )
 legend("topleft",
-    legend = c(paste("Test MAE =", round(lasso_mae[which.min(lasso_mae)], 2)),
-        paste("lambda =", round(least_mae_lasso_lambda, 2))
-    ),
-    col = 1,
-    lty = 1
+    legend = c(paste("Test MAE =", round(lasso_mae[which.min(lasso_mae)], 3)),
+        paste("lambda =", round(least_mae_lasso_lambda, 3))
+    )
 )
 
 ```
@@ -213,6 +213,7 @@ split-sample validation, in Q3?
 optimal_lasso_beta = beta_lasso[-1, which.min(lasso_mae)]
 optimal_lasso_beta != 0
 ```
+All features are used in the MAE-optimal lasso model.
 
 5. (8 pts)
 Repeat Q3, except implement time series cross-validation instead of split-sample 
@@ -255,6 +256,13 @@ for (i in lags[-1]) {
   x = cbind(x, dplyr::lag(part_vec, i))
   x = cbind(x, dplyr::lag(tempr_vec, i))
 }
+x_train = x[1:floor(length(y) / 2), ]
+x_test = x[(floor(length(y) / 2) + 1):length(y), ]
+
+na_obs = 1:max(lags)
+x_train = x_train[-na_obs, ]
+y_train = y_train[-na_obs]
+
 t0 = floor(length(y) / 2) + 1
 ####################### above is data preparation #############################
 
@@ -272,6 +280,8 @@ for (t in t0:length(y)) {
 
 cv_mae_ridge = apply(abs(y_predict_ridge - y[t0:length(y)]), 2, mean)
 optimal_lambda_ridge = lambda_ridge[which.min(cv_mae_ridge)]
+
+par(mar = c(2, 4, 2, 0.5))
 plot(time(cmort), cmort,
     type = "l", col = 8,
     xlim = range(time(cmort)),
@@ -291,11 +301,9 @@ legend("topright",
 )
 legend("topleft",
     legend = c(paste("CV MAE =", 
-        round(cv_mae_ridge[which.min(cv_mae_ridge)], 2)),
-        paste("lambda =", round(optimal_lambda_ridge, 2))
-    ),
-    col = 1,
-    lty = 1
+        round(cv_mae_ridge[which.min(cv_mae_ridge)], 3)),
+        paste("lambda =", round(optimal_lambda_ridge, 3))
+    )
 )
 
 # lasso regression on trailing window of 200 time points
@@ -312,6 +320,8 @@ for (t in t0:length(y)) {
 
 cv_mae_lasso = apply(abs(y_predict_lasso - y[t0:length(y)]), 2, mean)
 optimal_lambda_lasso = lambda_lasso[which.min(cv_mae_lasso)]
+
+par(mar = c(2, 4, 2, 0.5))
 plot(time(cmort), cmort,
     type = "l", col = 8,
     xlim = range(time(cmort)),
@@ -331,11 +341,9 @@ legend("topright",
 )
 legend("topleft",
     legend = c(paste("CV MAE =", 
-        round(cv_mae_lasso[which.min(cv_mae_lasso)], 2)),
-        paste("lambda =", round(optimal_lambda_lasso, 2))
-    ),
-    col = 1,
-    lty = 1
+        round(cv_mae_lasso[which.min(cv_mae_lasso)], 3)),
+        paste("lambda =", round(optimal_lambda_lasso, 3))
+    )
 )
 
 ```
@@ -350,7 +358,66 @@ components were consistently large in magnitude over time.
 
 ```{r}
 # CODE GOES HERE
+window_size = 200
+lags = seq(4, 40, 4)
+y = as.numeric(cmort)
+tempr_vec = as.numeric(tempr)
+part_vec = as.numeric(part)
+x = dplyr::lag(part_vec, lags[1])
+x = cbind(x, dplyr::lag(tempr_vec, lags[1]))
+for (i in lags[-1]) {
+  x = cbind(x, dplyr::lag(part_vec, i))
+  x = cbind(x, dplyr::lag(tempr_vec, i))
+}
+x_train = x[1:floor(length(y) / 2), ]
+x_test = x[(floor(length(y) / 2) + 1):length(y), ]
+
+na_obs = 1:max(lags)
+x_train = x_train[-na_obs, ]
+y_train = y_train[-na_obs]
+
+t0 = floor(length(y) / 2) + 1
+
+####################### above is data preparation #############################
+
+# lasso regression on trailing window of 200 time points
+y_predict_lasso = matrix(NA, length(y) - t0 + 1, length(lambda_lasso))
+lasso_coeff = matrix(NA, length(y) - t0 + 1, 20)
+for (t in t0:length(y)) {
+    x_train = x[(t - window_size - min(lags) + 1):(t - min(lags)), ]
+    y_train = y[(t - window_size - min(lags) + 1):(t - min(lags))]
+    lasso = glmnet(x_train, y_train, alpha = 1, lambda = least_mae_lasso_lambda)
+    y_predict_lasso[t - t0 + 1, ] = predict(
+        lasso,
+        newx = x[t, ], s = lambda_lasso
+    )
+    lasso_coeff[t - t0 + 1, ] = coef(lasso)[-1]
+    
+}
+
+part_beta_mean = apply(abs(lasso_coeff[, seq(1, 20, 2)]), 2, mean)
+tempr_beta_mean = apply(abs(lasso_coeff[, seq(2, 20, 2)]), 2, mean)
+
+par(mar = c(2, 4, 2, 0.5))
+plot(seq(4, 40, 4),
+    part_beta_mean,
+    type = "h", xlab = "Lag", ylab = "Coefficient",
+    main = "Lasso Coefficient Absolute Mean By Lag - Particulate"
+)
+plot(seq(4, 40, 4),
+    tempr_beta_mean,
+    type = "h", xlab = "Lag", ylab = "Coefficient",
+    main = "Lasso Coefficient Absolute Mean By Lag - Temperature"
+)
 ```
+
+From question 5, we have already found the optimal lambda for lasso is around 
+0.005. Now, we re-fit the lasso model with the optimal lambda on a trailing 
+window of 200 time points and record its beta coefficients. Then, we plot the 
+absolute mean of all the fitted beta coefficients by lag. From the plot, we 
+can see lag 4, 8, and 20 of Particulate is significant, while lag 4, 20, and 
+16 of Temperature is significant.
+
 
 # HP filter
 
@@ -377,7 +444,40 @@ that the HP filter acts like a kernel smoother.
 
 ```{r}
 # CODE GOES HERE
+n = 100
+lambda = 100
+
+D = matrix(0, nrow = n - 2, ncol = n)
+for (i in 1:(n - 2)) {
+    D[i, i] = 1
+    D[i, i + 1] = -2
+    D[i, i + 2] = 1
+}
+
+K = solve(diag(n) + lambda * t(D) %*% D)
+
+par(mar = c(2, 4, 2, 0.5))
+plot(1:n, K[25, ],
+    col = 1, 
+    main = "HP filter matrix by row", 
+    type = "l",
+    xlab = "n",
+    ylab = "weights"
+)
+lines(1:n, K[50, ], col = 2)
+lines(1:n, K[75, ], col = 3)
+legend("topright",
+    legend = c("i = 25", "i = 50", "i = 75"),
+    col = c(1, 2, 3),
+    lty = 1
+)
 ```
+
+The curves look like Gaussian kernel smoother to me, except with negative 
+weights at the tail of thr curve. Indeed, HP filter acts like a kernal smoother 
+as we can see from the plot: looking at $i=50$, it looks like a smoother with 
+kernel function that produces a bell 
+shaped weights for bandwidth = 50 from 25 to 75.
 
 8. (Bonus) 
 Do a literature search to find theory on the *asymptotically equivalent kernel* 
@@ -443,6 +543,42 @@ tf_subset = trendfilter(x = boston$Year[inds != 1],
 yhat = predict(tf_subset, x.new = boston$Year[inds == 1])
 plot(boston$Year, boston$Minutes, col = 8)
 points(boston$Year[inds == 1], yhat[, 25], col = 2, pch = 19)
+
+y_predict = matrix(NA, nrow = n, ncol = length(lambda))
+for (i in 1:5) {
+    tf_fit = trendfilter(
+        x = boston$Year[inds != i],
+        y = boston$Minutes[inds != i],
+        k = 1, lambda = lambda
+    )
+    y_predict[inds == i, ] = predict(tf_fit, x.new = boston$Year[inds == i])
+}
+
+cv_mae = apply(abs(y_predict - boston$Minutes), 2, mean)
+optimal_lambda_index = which.min(cv_mae)
+optimal_lambda = lambda[optimal_lambda_index]
+
+par(mar = c(2, 4, 2, 0.5))
+plot(boston$Year,
+    boston$Minutes,
+    col = 8, 
+    type = "l", 
+    xlab = "Year", 
+    ylab = "Minutes", 
+    main = "Trend Filtering For Boston Marathon"
+)
+lines(boston$Year, y_predict[, optimal_lambda_index], col = 2)
+legend("topright",
+    legend = c("Observed", "Predicted"),
+    col = c(8, 2),
+    lty = 1
+)
+legend("topleft",
+    legend = c(
+        paste("CV MAE =", round(cv_mae[optimal_lambda_index], 3)),
+        paste("lambda =", round(optimal_lambda, 3))
+    )
+)
 ```
 
 # Spectral analysis
@@ -460,6 +596,43 @@ analysis and filtering").
 
 SOLUTION GOES HERE
 
+\begin{align*}
+    \mu_t & = \mathbb{E}(x_t) \\
+    & = \mathbb{E}\left[\sum_{j=1}^p \Big( U_{j1} \cos(2\pi\omega_j t) + U_{j2} \sin(2\pi\omega_j t) \Big)\right] \\
+    & = \mathbb{E}\left[\sum_{j=1}^p\left(U_{j1}+U{j2}\right)\right] \\
+    & = 0.
+\end{align*}
+
+
+**Notation:** Use $S$ to represent $x_s$ and $T$ to represent $x_t$, so $S_{k1} = U_{k1}\cos(2\pi\omega_is)$, $S_{k2} = U_{k2}\sin(2\pi\omega_is)$, 
+while 
+$T_{k1} =
+U_{k1}\cos(2\pi\omega_it)$, $T_{k2} = U_{k2}\sin(2\pi\omega_it)$. Notice the $S$ and $T$ are 
+uncorrelated if they have different subscripts.
+Then the auto-covariance is
+\begin{align*}
+    \gamma(s,t) & = \mathrm{Cov}\left(x_s,x_t\right) \\
+    & = \mathrm{Cov}\left(\sum_{j=1}^p \Big( U_{j1} \cos(2\pi\omega_j s) + U_{j2} \sin(2\pi\omega_j s) \Big),
+    \sum_{j=1}^p \Big( U_{j1} \cos(2\pi\omega_j t) + U_{j2} \sin(2\pi\omega_j t) \Big)\right) \\
+    & = \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j1}, T_{i1}\right) + 
+    \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j1}, T_{i2}\right) + 
+    \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j2}, T_{i1}\right) + 
+    \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j2}, T_{i2}\right) \\
+    & = \sum_{i=1}^{p}\mathrm{Cov}\left(S_{i1}, T_{i1}\right) + 
+    \sum_{i=1}^{p}\mathrm{Cov}\left(S_{i2}, T_{i2}\right) \\
+    & = \sum_{i=1}^{p}\sigma^2\cos(2\pi\omega_is)\cos(2\pi\omega_it) +
+    \sum_{i=1}^{p}\sigma^2\sin(2\pi\omega_is)\sin(2\pi\omega_it) \\
+    & = \sigma^2\sum_{i=1}^{p}\left[\cos(2\pi\omega_is)\cos(2\pi\omega_it) +
+    \sin(2\pi\omega_is)\sin(2\pi\omega_it)\right] \\
+    & = \sigma^2\sum_{i=1}^{p}\cos(2\pi\omega_is - 2\pi\omega_it) \\
+    & = \sigma^2\sum_{i=1}^{p}\cos(2\pi\omega_i(s-t)),
+\end{align*}
+which after reparametrizing to the lag $h$ is the same as 
+$$\gamma(h) = \sigma^2\sum_{i=1}^{p}\cos(2\pi\omega_ih).$$
+
+Since the auto-covariance is dependent on the lag only and mean is a constant 0, the process is 
+weakly stationary.
+
 11. (2 pts)
 Construct a small empirical example to verify the auto-covariance formula you 
 derived in Q10. That is, generate a process with at least $p=2$ components. 
@@ -468,4 +641,36 @@ formula you derived.
 
 ```{r}
 # CODE GOES HERE
+n = 10000
+sd1 = 1
+sd2 = 2
+U_11 = rnorm(1, mean = 0, sd = sd1)
+U_12 = rnorm(1, mean = 0, sd = sd1)
+U_21 = rnorm(1, mean = 0, sd = sd2)
+U_22 = rnorm(1, mean = 0, sd = sd2)
+
+w_1 = 0.1
+w_2 = 0.4
+
+x = U_11 * cos(2 * pi * w_1 * 1:n) + U_12 * sin(2 * pi * w_1 * 1:n) + 
+    U_21 * cos(2 * pi * w_2 * 1:n) + U_22 * sin(2 * pi * w_2 * 1:n)
+
+theoretical_acf = function(h) {
+    sd1^2 * cos(2 * pi * w_1 * h) + sd2^2 * cos(2 * pi * w_2 * h)
+}
+theoretical_cov = rep(0, 11)
+for (i in 1:11) {
+    theoretical_cov[i] = theoretical_acf(i - 1)
+}
+
+par(mar = c(2, 4, 2, 0.5))
+acf(x, type = "covariance", lag.max = 10, main="Empirical Autocovariance")
+plot(0:10, theoretical_cov,
+    col = 2, type = "h",
+    main = "Theoretical Autocovariance"
+)
+abline(h = 0, col = 1)
+```
+```
+
 ```

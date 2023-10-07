@@ -87,5 +87,42 @@ For either case, the prediction
 Hence, $\tilde{\beta}$ and $\hat{\beta}$ will have the same prediction under $X$, so as the MSE.
 
 
+\begin{align*}
+    \mu_t & = \mathbb{E}(x_t) \\
+    & = \mathbb{E}\left[\sum_{j=1}^p \Big( U_{j1} \cos(2\pi\omega_j t) + U_{j2} \sin(2\pi\omega_j t) \Big)\right] \\
+    & = \mathbb{E}\left[\sum_{j=1}^p\left(U_{j1}+U{j2}\right)\right] \\
+    & = 0.
+\end{align*}
+
+
+Notation: Use $S$ to represent $x_s$ and $T$ to represent $x_t$, so $S_{k1} = U_{k1}\cos(2\pi\omega_is)$, $S_{k2} = U_{k2}\sin(2\pi\omega_is)$, 
+while 
+$T_{k1} =
+U_{k1}\cos(2\pi\omega_it)$, $T_{k2} = U_{k2}\sin(2\pi\omega_it)$. Notice the $S$ and $T$ are 
+uncorrelated if they have different subscripts.
+Then the auto-covariance is
+\begin{align*}
+    \gamma(s,t) & = \mathrm{Cov}\left(x_s,x_t\right) \\
+    & = \mathrm{Cov}\left(\sum_{j=1}^p \Big( U_{j1} \cos(2\pi\omega_j s) + U_{j2} \sin(2\pi\omega_j s) \Big),
+    \sum_{j=1}^p \Big( U_{j1} \cos(2\pi\omega_j t) + U_{j2} \sin(2\pi\omega_j t) \Big)\right) \\
+    & = \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j1}, T_{i1}\right) + 
+    \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j1}, T_{i2}\right) + 
+    \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j2}, T_{i1}\right) + 
+    \sum_{j=1}^{p}\sum_{i=1}^{p}\mathrm{Cov}\left(S_{j2}, T_{i2}\right) \\
+    & = \sum_{i=1}^{p}\mathrm{Cov}\left(S_{i1}, T_{i1}\right) + 
+    \sum_{i=1}^{p}\mathrm{Cov}\left(S_{i2}, T_{i2}\right) \\
+    & = \sum_{i=1}^{p}\sigma^2\cos(2\pi\omega_is)\cos(2\pi\omega_it) +
+    \sum_{i=1}^{p}\sigma^2\sin(2\pi\omega_is)\sin(2\pi\omega_it) \\
+    & = \sigma^2\sum_{i=1}^{p}\left[\cos(2\pi\omega_is)\cos(2\pi\omega_it) +
+    \sin(2\pi\omega_is)\sin(2\pi\omega_it)\right] \\
+    & = \sigma^2\sum_{i=1}^{p}\cos(2\pi\omega_is - 2\pi\omega_it) \\
+    & = \sigma^2\sum_{i=1}^{p}\cos(2\pi\omega_i(s-t)),
+\end{align*}
+which after reparametrizing to the lag $h$ is the same as 
+$$\gamma(h) = \sigma^2\sum_{i=1}^{p}\cos(2\pi\omega_ih).$$
+
+Since the auto-covariance is dependent on the lag only and mean is a constant 0, the process is 
+weakly stationary.
+
 
 \end{document}

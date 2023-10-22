@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{amsfonts, amsmath, amssymb, amsthm} % Math notations imported
+\usepackage{amsfonts, amsmath, amssymb, amsthm, dsfont} % Math notations imported
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{setspace}
@@ -30,10 +30,28 @@
 
 \newtheorem{thm}{Theorem}
 \newtheorem{proposition}[thm]{Proposition}
-\newtheorem{cor}[thm]{Corollary}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{lemma}[thm]{Lemma}
+
+\newcommand*{\Var}{\ensuremath{\mathrm{Var}}}
+\newcommand*{\Cov}{\ensuremath{\mathrm{Cov}}}
+\newcommand*{\Corr}{\ensuremath{\mathrm{Corr}}}
+\newcommand*{\Bias}{\ensuremath{\mathrm{Bias}}}
+\newcommand*{\MSE}{\ensuremath{\mathrm{MSE}}}
+\newcommand*{\range}{\ensuremath{\mathrm{range}}\,}
+\renewcommand*{\implies}{\ensuremath{\Longrightarrow}}
+\renewcommand*{\impliedby}{\ensuremath{\Longleftarrow}}
+\newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\R}{\ensuremath{\mathbb{R}}}
+\newcommand*{\C}{\ensuremath{\mathbb{C}}}
+\newcommand*{\N}{\ensuremath{\mathbb{N}}}
+\newcommand*{\E}{\ensuremath{\mathds{E}}}
+\renewcommand*{\P}{\ensuremath{\mathds{P}}}
+\newcommand*{\p}{\ensuremath{\mathcal{P}}}
 
 % title information
-\title{Math 109 HW}
+\title{Math XXX HW}
 \author{Neo Lee}
 \date{MM/DD/YYYY}
 

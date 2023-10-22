@@ -153,6 +153,24 @@ such that $p(x_j)=y_j$, for all $j=0,\ldots, n$.
     [Theorem 4.11].
 
     Therefore, $p-q=0\implies p=q$.
+
+    \textbf{Alternative:} Define a linear map $T:\mathcal{P}_n(\mathbb{R})\to \mathbb{R}^{n+1}$ with 
+    the action 
+    $$T:p\mapsto (p(x_0), p(x_1), \cdots, p(x_n)).$$
+    $T$ is indeed a linear map because 
+    $$T(p+q) = ((p+q)(x_0), \cdots, (p+q)(x_n)) = (p(x_0), \cdots, p(x_n))+(q(x_0),\cdots, q(x_n))
+    =T(p)+T(q)$$
+    $$T(\lambda p) = (\lambda p(x_0),\cdots, \lambda p(x_n))=\lambda (p(x_0),\cdots, p(x_n))=
+    \lambda T(p).$$
+    
+    Then notice $T$ is injective because for $T(p)=0$, $p$ must be zero when evaluated at distinct 
+    data sites $\{x_j:j=[0,\dots,n]\}$, which means $p$ must have $n+1$ distinct roots.
+    But an $n$ degree polynomial can only have at most $n$ distinct roots. Hence, $p$ must be the 
+    zero polynomial and $\mathrm{null}T = \{0\}$. 
+    
+    Since $T$ is a linear map from $n+1$ dimension to $n+1$ dimension and is injective, it implies 
+    $T$ is surjective. Therefore, there always exists a unique $p$ such that 
+    $$T(p)=(p(x_0),\cdots,p(x_n))=(y_0, \cdots, y_n).$$
 \end{proof}
 
 \newpage

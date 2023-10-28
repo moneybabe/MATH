@@ -117,6 +117,15 @@ Let $f(x)=4$ for $x\ge 0, f(x)=0$ for $x<0$, and $g(x)=x^2$ for all $x$. Thus $\
     \item Which of the functions $f,g,f+g,fg,f\circ g, g\circ f$ is continuous?
     \begin{proof}[Solution]\indent 
         \begin{enumerate}
+            \item [($f$):]
+            Not continuous. Consider $x_0=0$ and two sequences 
+            $(s_n)=\frac{1}{n}, (t_n)=\frac{-1}{n}$. Then Then $\lim s_n=\lim t_n=0$, but
+            $\lim f(s_n)=\lim 4 = 4\neq 0=\lim f(t_n) = \lim 0$.
+
+            \item [($g$):]
+            Continuous. Consider $x_0\in\R$. Then for any sequence $(s_n)\to x_0$, 
+            $\lim g(s_n) = \lim s_n^2 = \lim s_n \cdot \lim s_n = x_0^2 = g(x_0)$.
+
             \item [($f+g$):] Not continuous. Consider $x_0=0$ and two sequences 
             $(s_n)=\frac{1}{n}$, $(t_n)=\frac{-1}{n}$. Then $\lim s_n=\lim t_n=0$, but
             $\lim (f+g)(s_n)=\lim 4 + \lim s_n \cdot \lim s_n = 4\neq 0=\lim (f+g)(t_n) = \lim t_n 

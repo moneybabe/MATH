@@ -115,11 +115,19 @@
         because $\sum a^k$ converges as $|a|<1\implies\sum a^k$ satisfies Cauchy Criterion
         $\implies$ such $N$ exists. Hence, $\sum\frac{x^n}{1+x^n}$ converges uniformly on $[0,a]$.
 
-        \item No, the series does not converge uniformly on $[0,1)$. As $x\to 1$,
-        the series converges more slowly, which means we need to find a larger $N$ to satisfy
-        Cauchy Criterion. As this is an open interval, we can always find $x$ approaching 1 that needs a larger
-        $N$ to satisfy Cauchy Criterion. Hence, the series does not satisfy the Cauchy Criterion
-        uniformly on $[0,1)$ and hence does not converge uniformly on $[0,1)$.
+        \item No, the series does not converge uniformly on $[0,1)$. 
+        Denote $f_n(x) = \sum_{k=0}^{n}\frac{x^k}{1+x^k}$. Assume for the sake of contradiction that 
+        the series converges uniformly on $[0,1)$, then there exists $N$ such that for all $n> N$,
+        $$|f_n(x)-f(x)|<\epsilon \qquad \text{for all $x\in[0,1)$},$$ where 
+        $$f(x)= \sum_{k=0}^{\infty}\frac{x^k}{1+x^k}.$$
+        Specifically for $n=N+1$
+        $$\left|\sum_{k=0}^{n}\frac{x^k}{1+x^k}-\sum_{k=0}^{\infty}\frac{x^k}{1+x^k}\right|
+        = \left|\sum_{k=N+2}^{\infty}\frac{x^k}{1+x^k}\right|<\epsilon \qquad \text{for all $x\in[0,1)$}.$$
+        Now denote $g(x)=\left|\sum_{k=N+2}^{\infty}\frac{x^k}{1+x^k}\right|$. However, notice 
+        as $x\to1$, $g(x)\to \infty$. Therefore, there always exists $x\in[0,1)$ such that
+        $g(x)>\epsilon$, which is a contradiction. Hence, the series does not converge uniformly
+        on $[0,1)$.
+        
         
     \end{enumerate}
 \end{proof}

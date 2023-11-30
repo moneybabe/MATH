@@ -1,32 +1,11 @@
-\documentclass{article}
-\usepackage{amsfonts, amsmath, amssymb, amsthm, dsfont} % Math notations imported
+\usepackage{amsfonts, amsmath, amssymb, amsthm, dsfont, mathtools}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{indentfirst}
 \usepackage[margin=1in]{geometry}
-\graphicspath{{./images/}} % Path to images
-
-% \begin{figure}[htb!]
-%      \centering
-%      \includegraphics[scale=0.5]{coloring.png}
-%      \caption{Coloring of the graph.}
-% \end{figure}
-
-% \begin{figure}[htb]
-%     \qquad
-%     \begin{minipage}{.4\textwidth}
-%         \centering
-%         \includegraphics[scale=0.35]{prims.png}
-%         \caption{}
-%     \end{minipage}    
-%     \qquad
-%     \begin{minipage}{.4\textwidth}
-%         \centering
-%         \includegraphics[scale=0.35]{kruskal.png}
-%         \caption{}
-%     \end{minipage}        
-% \end{figure} 
+\graphicspath{{./images/}}
+\setstretch{1.15}
 
 \newtheorem{thm}{Theorem}
 \newtheorem{proposition}[thm]{Proposition}
@@ -38,12 +17,20 @@
 \newcommand*{\Corr}{\ensuremath{\mathrm{Corr}}}
 \newcommand*{\Bias}{\ensuremath{\mathrm{Bias}}}
 \newcommand*{\MSE}{\ensuremath{\mathrm{MSE}}}
+
 \newcommand*{\range}{\ensuremath{\mathrm{range}}\,}
 \newcommand*{\spann}{\ensuremath{\mathrm{span}}\,}
 \newcommand*{\nul}{\ensuremath{\mathrm{null}}\,}
 \newcommand*{\dom}{\ensuremath{\mathrm{dom}}\,}
+
+\newcommand*{\pdv}[3][]{\frac{\partial^{#1}}{\partial#3^{#1}}#2}
 \renewcommand*{\implies}{\ensuremath{\Longrightarrow}}
 \renewcommand*{\impliedby}{\ensuremath{\Longleftarrow}}
+\renewcommand*{\l}{\left}
+\renewcommand*{\r}{\right}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
 \newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
 \newcommand*{\R}{\ensuremath{\mathbb{R}}}
@@ -53,17 +40,39 @@
 \newcommand*{\E}{\ensuremath{\mathds{E}}}
 \renewcommand*{\P}{\ensuremath{\mathds{P}}}
 \newcommand*{\p}{\ensuremath{\mathcal{P}}}
+\renewcommand*{\L}{\mathcal{L}}
 
-% title information
-\title{Math XXX HW}
-\author{Neo Lee}
-\date{MM/DD/YYYY}
 
-\setstretch{1.15}
-% main content
-\begin{document} 
+% deliminators
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 
-% placing title information; comment out if using fancyhdr
-\maketitle 
 
-\end{document}
+\let\oldleq\leq % save them in case they're every wanted
+\let\oldgeq\geq
+
+\newcommand*{\img}[3][]{
+    \begin{figure}[htb!]
+         \centering
+         \includegraphics[scale=#1]{#2}
+         \caption{#3}
+    \end{figure}
+}
+\newcommand*{\imgs}[5][]{
+    \begin{figure}[htb]
+        \qquad
+        \begin{minipage}{.4\textwidth}
+            \centering
+            \includegraphics[scale=#1]{#2}
+            \caption{#3}
+        \end{minipage}    
+        \qquad
+        \begin{minipage}{.4\textwidth}
+            \centering
+            \includegraphics[scale=#1]{#4}
+            \caption{#5}
+        \end{minipage}
+    \end{figure} 
+}

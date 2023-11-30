@@ -3,5 +3,6 @@
 *.fls
 *.log
 *.synctex.gz
+*.toc
 *.DS_Store
 *cache*

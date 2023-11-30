@@ -1,0 +1,77 @@
+\documentclass{book}
+\input{preamble.tex}
+\input{macros.tex}
+
+\title{\Huge{MATH 104 Notes}\\\emph{Book: Elementary Analysis - Ross}}
+\author{\huge{Neo Lee}}
+\date{Fall 2023}
+
+\begin{document}
+
+\maketitle
+\let\cleardoublepage\clearpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+
+\chapter{Starting a new chapter}
+\section{Demo of commands}
+\dfn{Some defintion}{
+	yap
+}
+\qs{Some question}{yap}
+\sol{
+	\pf{Some proof}{yap}
+}
+\nt{Some note}
+\thm{Some theorem}{
+	yap
+}
+\wc{Some wrong concept}{
+	yap
+}
+\mlemma{Some lemma}{
+	yap
+}
+\mprop{Some proposition}{
+	yap
+}
+\ex{Some example}{
+	yap
+}
+\clm{Some claim}{
+	yap
+}
+\cor{Some corollary}{
+	yap
+}
+\thmcon{Some unlabeled theorem}
+
+This is a new paragraph
+
+
+\begin{algorithm}
+	\caption{Some algorithm}
+	\KwIn{input}
+	\KwOut{output}
+	\SetAlgoLined
+	\SetNoFillComment
+	\tcc{This is a comment}
+	This is first line \tcp*{This is also a comment}
+	\uIf{$x > 5$} {
+		do nothing
+	} \uElseIf {$x < 5$} {
+		do nothing
+	} \Else {
+		do nothing
+	}
+	\While{$x == 5$}{
+		still do nothing
+	}
+	\ForEach{$x = 1:5$}{
+		do nothing
+	}
+	\Return{return nothing}
+\end{algorithm}
+
+
+\end{document}

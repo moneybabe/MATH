@@ -1,3 +1,17 @@
+\usepackage{amsfonts, amsmath, amssymb, amsthm, dsfont, mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage[margin=1in]{geometry}
+\graphicspath{{./images/}}
+\setstretch{1.15}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{lemma}[thm]{Lemma}
+
 \newcommand*{\Var}{\ensuremath{\mathrm{Var}}}
 \newcommand*{\Cov}{\ensuremath{\mathrm{Cov}}}
 \newcommand*{\Corr}{\ensuremath{\mathrm{Corr}}}
@@ -15,8 +29,7 @@
 \renewcommand*{\l}{\left}
 \renewcommand*{\r}{\right}
 \renewcommand{\leq}{\leqslant}
-\renewcommand{\geq}{\geqslant}
-\newcommand*{\tb}{\textbf}
+\renewcommand{\geq}{\geqslant}\newcommand*{\tb}{\textbf}
 \renewcommand*{\t}{\text}
 
 \newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
@@ -29,7 +42,6 @@
 \renewcommand*{\P}{\ensuremath{\mathds{P}}}
 \newcommand*{\p}{\ensuremath{\mathcal{P}}}
 \renewcommand*{\L}{\mathcal{L}}
-\newcommand*{\U}{\mathcal{U}}
 
 
 % deliminators
@@ -38,7 +50,7 @@
 \DeclarePairedDelimiter{\inner}{\langle}{\rangle}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-\DeclarePairedDelimiter{\round}{\lfloor}{\rceil}
+
 
 \let\oldleq\leq % save them in case they're every wanted
 \let\oldgeq\geq

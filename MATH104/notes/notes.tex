@@ -7,71 +7,271 @@
 \date{Fall 2023}
 
 \begin{document}
-
+\text{Computer Modern}\selectfont
 \maketitle
 \let\cleardoublepage\clearpage
 \pdfbookmark[section]{\contentsname}{toc}
 \tableofcontents
 
-\chapter{Starting a new chapter}
-\section{Demo of commands}
-\dfn{Some defintion}{
-	yap
-}
-\qs{Some question}{yap}
-\sol{
-	\pf{Some proof}{yap}
-}
-\nt{Some note}
-\thm{Some theorem}{
-	yap
-}
-\wc{Some wrong concept}{
-	yap
-}
-\mlemma{Some lemma}{
-	yap
-}
-\mprop{Some proposition}{
-	yap
-}
-\ex{Some example}{
-	yap
-}
-\clm{Some claim}{
-	yap
-}
-\cor{Some corollary}{
-	yap
-}
-\thmcon{Some unlabeled theorem}
+\chapter{Metric Spaces}
+\section{Some Topological Concepts in Metric Spaces}
+\dfn{Metric and Metric Space}{
+	Let $S$ be a set, and suppose $d$ is a function defined for all paris $(x,y)$ of elements 
+	from $S$ satisfying 
+	\begin{enumerate}
+		\item [\textbf{D1.}] $d(x,x)=0$ for all $x\in S$ and $d(x,y)>0$ for distinct $x,y$ in $S$.
+		\item [\textbf{D2.}] $d(x,y)=d(y,x)$ for all $x,y\in S$.
+		\item [\textbf{D3.}] $d(x,z)\le d(x,y)+d(y,z)$ for all $x,y,z\in S$.
+	\end{enumerate}
 
-This is a new paragraph
+	We call such function $d$ the \emph{distance function} or a \emph{metric}  on $S$. A 
+	\emph{metric space} $S$ is a set $S$ together with a metric on it. Properly speaking, the 
+	metric space is the pair $S,d$ since a set $S$ may have more than one metric on it.
+}
+
+\ex{}{
+	Let dist$(a,b)=|a-b|$ for $a,b\in\R$. Then dist is a metric on \R. Notice $\textbf{D3}$ follows 
+	direcly from the triangular inequality for real numbers. Therefore, for any metric $d$, we 
+	call the property $\textbf{D3}$ the \emph{triangular inequality}.
+}
+\ex{}{
+	The space of all $k$-tuples
+	$$\tb{x}=(x_1,x_2,\dots,x_k)\qquad \text{where}\qquad x_j\in\R\qquad\text{for }j=1,2,\dots,k,$$
+	is called \emph{k-dimensional Euclidean space} and written $\R^k$. 
+
+	$R^k$ has multiple metrics on it, and the most familiar metric is the \emph{Euclidean norm}:
+	$$d(\tb{x},\tb{y})=\sqrt{(x_1-y_1)^2+(x_2-y_2)^2+\dots+(x_k-y_k)^2}\qquad \text{for }
+	\tb{x},\tb{y}\in\R^k.$$
+}
+
+\dfn{Convergence in Metric Space}{
+	A sequence $(s_n)$ in a metric space $S,d$ \emph{converges} to $s\in S$ if 
+	$$\lim_{n\to\infty}d(s_n,s)=0.$$ A sequence $(s_n)\in S$ is a \emph{Cauchy sequence} if
+	for each $\epsilon>0$ there is an integer $N$ such that 
+	$$m,n>N \implies d(s_m,s_n)<\epsilon.$$
+	
+	\nt{
+		The metric space $(S,d)$ is \emph{complete} if every Cauchy sequence in $S$ is convergent.
+	}
+}
+\mlemma{}{
+	A sequence $(\tb{x}^{(n)})\in \R^k$ converges if and only if each of its component sequences
+	$(x_j^{(n)})$ converges in \R. A sequence $(\tb{x}^{(n)})\in\R^k$ is a Cauchy sequence if and
+	only if each of its component sequences $(x_j^{(n)})$ is a Cauchy sequence in \R.
+}
+\thm{}{
+	Euclidean $k$-space $\R^k$ is complete.
+	\nt{
+		In other words, every Cauchy sequence in $\R^k$ is convergent.
+	}
+}
+\dfn{Boundedness of $\R^k$}{
+	A set $S\in\R^k$ is bounded if there exists $M>0$ such that 
+	$$\max\{|x_j|:j=1,2,\dots,k\}\le M$$ for all $\tb{x}=(x_1,x_2,\dots,x_k)\in S.$
+}
+\thm{Bolzano-Weierstrass Theorem for Euclidean $k$-space}{
+	Eveery bounded sequence in $\R^k$ has a convergent subsequence.
+}
+
+\dfn{Open Set}{
+	Let $(S,d)$ be a metric space. Let $E$ be a subset of $S$. An element $s_0\in E$ is interior to 
+	$E$ if for some $r>0$ we have 
+	$$\{s\in S:d(s,s_0)<0\}\subseteq E.$$
+
+	\nt{
+		In other words, $s_0$ is interior to $E$ if there exists an open ball with radius $r>0$ 
+		centered at $s_0$ such that all points $\in S$ and in the ball are still in $E$.
+	}
+
+	We denote $E^\circ$ as the set of points in $E$ that are interior to $E$. The set $E$ is
+	\emph{open} on $S$ if every point of $E$ is interior to $E$, i.e., if $E=E^\circ$.
+}
+\thm{Property of Open Set}{
+	\begin{enumerate}[label=\textbf{(\roman*)}]
+		\item $S$ is open in $S$.
+		\item The empty set $\emptyset$ is open in $S$.
+		\item The union of any collection of open sets in $S$ is also open in $S$.
+		\item The intersection of finitely many open sets in $S$ is also open in $S$.
+	\end{enumerate}
+}
+\nt{
+	Metric spaces are fairly general and useful objects, in the sense that when one is interested 
+	in convergence of certain objects (such as points or functions), there is often a metric 
+	that assists in the study of the convergence.
+
+	However, sometimes no metric will work but there is still some sort of convergence notion. 
+	Frequently, the toolbox we need for studying such behavior is what is called a \emph{topology}. 
+	
+	Topologies are more general than metrics, and they are defined in terms of open sets rather
+	than distance functions. In particular, the open sets defined by a metric form a topology.
+	Because of this abstract theory of topology, concepts that can be defined in terms of open sets 
+	are called topological. Hence, we are slowly entering the realm of topology by studying open
+	sets in metric spaces.
+}
+\dfn{Closed Set}{
+	Let $(S,d)$ be a metric space. A subset $E$ of $S$ is \emph{closed} if its complement
+	$S\setminus E$ is an open set in $S$. Because of \emph{Theorem 1.3 (iii)}, the intersection of any 
+	collection of closed sets in $S$ is also closed in $S$. 
+	
+	The closure $E^-$ of a set $E$ is the intersection of all closed sets in $S$ that 
+	contain $E$. 
+
+	The \emph{boundary} of a set $E$ is the set of $E^-\setminus E^\circ$; points in the boundary
+	set are called \emph{boundary points} of $E$.
+
+	\nt{
+		For every bounary point $s$ of $E$, all open balls centered at $s$ must contain some point in $E$
+		and some point in $S\setminus E$. Because if $s$ has an open ball that does not contain any points
+		in $E$, then $s$ is not in a limit point of $E$ and thus not in $E^-$. On the other hand, if
+		$s$ has an open ball that does not contain points in $S\setminus E$, then that open ball is 
+		contained in $E$ and thus $s$ is interior to $E$.
+	}
+}
+\thm{Property of Closed Set}{
+	\begin{enumerate}[label=\textbf{(\roman*)}]
+		\item The set $E$ is closed if and only if $E^-=E$.
+		\item The set $E$ is closed if and only if it contains the limits of all convergent
+		sequences of points in $E$.
+		\item An element is in $E^-$ if and only if it is the limit of some sequence of points in $E$.
+		\item A point $s$ is in the boundary of $E$ if and only if it belongs to both the closure of 
+		$E$ and the closure of $S\setminus E$.
+	\end{enumerate}
+}
+\ex{Open Intervals and Closed Intervals in \R}{
+	In \R, open intervals $(a,b)$ are open sets. Closed intervals $[a,b]$ are closed sets. 
+	The interior of $[a,b]$ is $(a,b)$. The boundary of both $(a,b)$ and $[a,b]$ is the 
+	two-element set $\{a,b\}$.
+
+	Every open set in $\R$ is the union of a disjoint sequence of open intervals. However, 
+	a closed set in $\R$ need not be the union of a disjoint sequence of closed intervals and points.
+}
+\ex{Open Balls and Closed Balls}{
+	In $\R^k$, open balls $\{\tb{x}:d(\tb{x},\tb{x}_0)<r\}$ are open sets, and closed balls 
+	$\{\tb{x}:d(\tb{x},\tb{x}_0)\le r\}$ are closed sets. The boundary of each of these sets is
+	the sphere $\{\tb{x}:d(\tb{x},\tb{x}_0)=r\}$.
+
+	In the plane $\R^2$, the sets 
+	$$\{(x,y):x>0\}\qquad\t{and}\qquad\{(x,y):x>0, y>0\}$$
+	are open. If $>$ is replaced by $\ge$, we obtain clsoed sets. Many sets are neither open nor 
+	closed. For example, $[0,1)$ are neither open nor closed in \R, and 
+	$\{(x,y):x>0, y\ge 0\}$ is neither open nor closed in $\R^2$.
+}
+\thm{}{
+	Let $F_n$ be a decreasing sequence $[i.e., F_1 \supseteqq F_2\supseteq\cdots]$ of closed, 
+	bounded, and nonempty sets in $\R^k$. Then $\bigcap_{n=1}^\infty F_n$ is also closed, bounded, 
+	and nonempty.
+
+	\nt{
+		\begin{itemize}
+			\item 
+			We can think of this theorem as a generalization of the Nested Interval Property in \R.
+			\item 
+			Also, we can substitute the word "closed and bounded" with "compact" in the theorem.
+		\end{itemize}
+	}
+}
+\ex{Cantor Set}{
+	Cantor set is a nonempty, closed, and bounded set in \R. It is constructed by removing the
+	middle third of the interval $[0,1]$, then removing the middle thirds of the two remaining
+	pieces, and so on. The Cantor set is the set of all points that remain after this process is
+	repeated infinitely many times.
+
+	The sum of the intervals removed at the $n$th stage is $\l(\frac{2}{3}\r)^n$, and this tends to 
+	zero as $n\to\infty$. Yet, the points remaining after the infinite process is so large that 
+	it cannot be written as a sequence; in set-theoretic terms it is "uncountable". The interior 
+	of the Cantor set is empty, and hence its boundary is the set itself.
+}
+\dfn{}{
+	Let $(S,d)$ be a metric space. A family $\mathcal{U}$ of open sets is said to be an 
+	\emph{open cover} for a set $E$ if each point of $E$ belongs to at least one set in 
+	$\mathcal{U}$, i.e.,
+	$$E\subseteq\{U:U\in\U\}.$$
+
+	A \emph{subcover} of $\U$ is any subfamily of $\U$ that still covers $E$. A cover or subcover 
+	is finite if it contains only finitely many sets; yet the sets themselves can be infinite.
+
+	A set $E$ is \emph{compact} if every open cover of $E$ has a finite subcover.
+
+	\nt{
+		The word "family" here emphasizes it is a collections of sets, usually indexed loosely. 
+		So a family is a set of sets.
+	}
+}
+\thm{Heine-Borel Theorem}{
+	A subset $E$ of $\R^k$ is compact if and only if it is closed and bounded.
+}
+\dfn{$k$-cell}{
+	A \emph{$k$-cell} $F$ in $\R^k$ is a set of the form 
+	$$\{x\in\R^k:a_j\le x_j\le b_j\text{ for }j=1,2,\dots,k\}$$
+	where $a_j,b_j\in\R$ and $a_j\le b_j$ for $j=1,2,\dots,k$.
+
+	The \emph{diameter} of $F$ is 
+	$$\delta=\sqrt{(b_1-a_1)^2+(b_2-a_2)^2+\dots+(b_k-a_k)^2},$$
+	that is, $\delta = \sup\{d(\tb{x},\tb{y}):\tb{x},\tb{y}\in F\}.$
+	\nt{
+		$F$ is a union of $2^k$ $k$-cells each having diameter $\delta/2$.
+	}
+}
+\ex{}{
+	A 2-cell in $\R^2$ is a rectangle. A 3-cell in $\R^3$ is a rectangular box.
+}
+\thm{}{
+	Every $k$-cell in $\R^k$ is compact.
+}
+\ex{}{
+	Let $E$ be a nonempty subset of a metric space $(S,d)$. Consider the function 
+	$d(E,x)=\inf\{d(y,x):y\in E\}$ for $x\in S$. This function satifies $|d(E,x_1)-d(E,x_2)|\le d(x_1,x_2)$.
+
+	We want to show that if $E$ is compact and if $E\subseteq U$ for some open subset $U\subseteq S$,
+	then for some $\delta>0$, we have 
+	$$\{y\in S:d(E,y)<\delta\}\subseteq U,$$ in other words, any point in $S$ that is within a 
+	distance $\delta$ of $E$ is in $U$.
+
+	\pf{Proof}{
+		Since $U$ is open, for each $x\in E$, which is also in $U$, there exists some 
+		$r_x$ such that $$\{y\in S:d(y,x)<r_x\}\subseteq U\t{ for some } r_x>0.$$
+
+		The open balls $\{y\in S:d(y,x)<\frac{r_x}{2}\}$ cover $E$. Since $E$ is compact, a finite 
+		subfamily also covers $E$. That is there are $x_1,\dots,x_n\in E$ so that 
+		$$E\subseteq \bigcup_{i=1}^n\{y\in S:d(y,x_i)<\frac{r_{x_i}}{2}\}.$$
+		Let $\delta=\frac{1}{2}\min\{r_{x_1},\dots,r_{x_n}\}$.
+
+		Now consider an arbitrary $y\in S$ and $d(E,y)<\delta$. Then for some $x\in E$, 
+		we have $d(y, x)<\delta$. Moreover, $d(x,x_k)<\frac{r_{x_k}}{2}$ for some $k\in
+		\{1,2,\dots,n\}$. Therefore, by "passing through" this closest point $x$ to reach 
+		$x_k$, 
+		$$d(y,x_k)\le d(x,y)+d(x,x_k)<\delta+\frac{r_k}{2}\le\frac{r_k}{2}+\frac{r_k}{2}=r_k.$$
+		Hence, $y$ is within the "safe" open ball centered at $x_k$, which is contained in $U$.
+	}
+}
 
 
-\begin{algorithm}
-	\caption{Some algorithm}
-	\KwIn{input}
-	\KwOut{output}
-	\SetAlgoLined
-	\SetNoFillComment
-	\tcc{This is a comment}
-	This is first line \tcp*{This is also a comment}
-	\uIf{$x > 5$} {
-		do nothing
-	} \uElseIf {$x < 5$} {
-		do nothing
-	} \Else {
-		do nothing
-	}
-	\While{$x == 5$}{
-		still do nothing
-	}
-	\ForEach{$x = 1:5$}{
-		do nothing
-	}
-	\Return{return nothing}
-\end{algorithm}
+
+
+\section{Metric Spaces: Continuity}
+\section{Metric Spaces: Connectedness}
+We generealize the notion of "connectedness" from $\R$ to metric spaces.
+
+\dfn{Disconnected}{
+	Let $E$ be a subset of metric space $(S,d)$. The set $E$ is \emph{disconnected}  if one of the 
+	following two equivalent conditions holds:
+	\begin{enumerate}[label=\textbf{(\alph*)}]
+		\item There are open subsets $U_1$ and $U_2$ of $S$ such that 
+		\begin{align}
+			(E\cap U_1)\cap(E\cap U_2)=\emptyset& \text{ and }E=(E\cap U_1)\cup(E\cap U_2)\\
+			E\cap U_1\neq\emptyset& \text{ and }E\cap U_2\neq\emptyset.
+		\end{align}
+
+		\item There are nonempty disjoint subsets $A$ and $B$ of $E$ such that such that 
+		$E=A\cup B$ and neither set intersects the closure of the other set, i.e.,
+		\begin{align}
+			A^-\cap B \neq \emptyset& \text{ and }A\cap B^- \neq \emptyset.
+		\end{align}
+	\end{enumerate}
+	We say that $E$ is \emph{connected} if it is not disconnected.
+}
+
+
 
 
 \end{document}

@@ -1,0 +1,184 @@
+\documentclass{article}
+\input{macros.tex}
+
+\title{Math 104 HW12}
+\author{Neo Lee}
+\date{12/01/2023}
+
+\begin{document} 
+
+\maketitle 
+
+\subsection*{Exercise 31.2}
+Find the Taylor series for the functions $\sinh =\frac{1}{2}\l(e^x-e^{-x}\r)$ 
+and $\cosh =\frac{1}{2}\l(e^x+e^{-x}\r)$ and indicate why they converge to 
+$\sinh$ and $\cosh$ respectively for all $x\in\R$.
+\begin{proof}[Solution]
+    The even degree derivatives of $\sinh$ centered at 0 are 
+    all 0, and the odd degree derivatives are all 1. Thus, the Taylor series 
+    for $\sinh$ is
+    \[
+        \sinh(x) = \sum_{n=0}^\infty \frac{x^{2n+1}}{(2n+1)!}.
+    \]
+    On the other hand, the even degree derivatives of $\cosh$ centered at 0
+    are all 1, and the odd degree derivatives are all 0. Thus, the Taylor series
+    for $\cosh$ is
+    \[
+        \cosh(x) = \sum_{n=0}^\infty \frac{x^{2n}}{(2n)!}.
+    \]
+    
+    For all $x\in\R$, $x\in(-|x|-1,|x|+1)$, and both $\sinh^{(n)}$ and $\cosh^{(n)}$ 
+    are bounded on this interval (by $e^{|x|+1}$) for all $n\in\N$. Thus, by \emph{Corollary 31.4},
+    the remainder term of Taylor series for both $\sinh$ and $\cosh$ tend to 0 
+    as $n\to\infty$ for all $x\in\R$. Thus, the Taylor series for both $\sinh$ 
+    and $\cosh$ converges to $\sinh$ and $\cosh$ respectively for all $x\in\R$.
+\end{proof}
+
+\newpage
+\subsection*{Exercise 31.5}
+Let $g(x)=e^{-1/x^2}$ for $x\neq 0$ and $g(0)=0$.
+\begin{enumerate}[label=\tb{(\alph*)}]
+    \item Show $g^{(n)}(0)=0$ for all $n=0,1,2,\dots$.
+    \item Show the Taylor series for $g$ about 0 agrees with $g$ only at $x=0$.
+\end{enumerate}
+\begin{proof}[Solution]\indent
+    \begin{enumerate}[label=\tb{(\alph*)}]
+        \item
+        Let \(f(x)=e^{-1/x}\), then $g(x)=f(x^2)$ for all $x\in\R$. Since $f$ is differentiable at 0,
+        and $x^2$ is differentiable at 0. By the Chain rule, $g$ is differentiable at 0, and
+        \[
+            g'(x)=f'(x^2)\cdot 2x
+        \]
+        for all $x=0$. Since $f^k$ is differentiable at 0 for all $k\in\Z^{\ge}$, and $x^j$ is 
+        differentiable at 0 for all $j\in\N$, we can apply Chain rule and Product rule repeatedly 
+        to obtain higher degree derivatives of $g$ at 0. 
+
+        The formula for derivatives of $g$ at 0 is
+        \[
+            g^{(n)}(x)=\sum_{k=0}^n a_kf^{(k)}(x^2)\cdot x^{b_k}
+        \]
+        for some non-negative integers $a_k$ and $b_k$. 
+        From \emph{example 3}, we know $f^{(n)}(0)=0$ for $n\in\Z^\ge$. Hence, $g^{(n)}(x)$ evaluated at 0 is 0 for 
+        all $n\in\Z^\ge$.
+        
+        \item
+        The Taylor series of $g$ about 0 is 
+        \[
+            \sum_{n=0}^\infty \frac{g^{(n)}(0)}{n!}x^n=0.
+        \]
+        Clearly, $g(x)=0$ for all $x\neq 0$, but $g(0)=0$. Thus, the Taylor series
+        for $g$ about 0 agrees with $g$ only at $x=0$.
+    \end{enumerate}    
+\end{proof}
+
+\newpage
+\subsection*{Exercise 32.2}
+Let $f(x)=x$ for rational $x$ and $f(x)=0$ for irrational $x$.
+\begin{enumerate}[label=\tb{(\alph*)}]
+    \item 
+    Calculate the upper and lower Darboux integrals for $f$ on $[0,b]$.
+    \item
+    Is $f$ integrable on $[0,b]$?
+\end{enumerate}
+\begin{proof}[Solution]\indent
+    \begin{enumerate}[label=\tb{(\alph*)}]
+        \item For any partition $P$ of $[0,b]$, the supremum of $f$ on any subinterval
+        of $P$ is the right endpoint of the subinterval, and the infimum of $f$ on any
+        subinterval of $P$ is 0 because rationals and irrationals are dense in $\R$.
+
+        Therefore, with any partition $P$ of $[0,b]$, 
+        \[
+          U(f,P) = \sum_{k=1}^{n}x_k\cdot (x_k-x_{k-1}).
+        \]
+        In fact, $f$ has the same upper Darboux integrals as $g(x)=x$ on $[0,b]$ because they have 
+        the same $U(f,P)$ for any $P$. 
+        From calculus, we know that $g$ is integrable on $[0,b]$ and 
+        \[
+            \int_0^b g(x)dx = \frac{b^2}{2}.
+        \] 
+        Hence, the upper Darboux integral of $g$ is $\frac{b^2}{2}$, and the upper Darboux 
+        integral of $f$ is also $\frac{b^2}{2}$.
+
+        On the other hand, for any partition $P$ of $[0,b]$,
+        \[
+            L(f,P) = \sum_{k=1}^{n}0\cdot (x_k-x_{k-1})=0.  
+        \]
+        Hence, the lower Darboux integral of $f$ is 0.
+
+        \emph{Alternatively for $g(x)=x$,} we can show that it is integrable on $[0,b]$ 
+        by evaluating its upper and lower Darboux integrals by partitioning $[0,b]$ into
+         $\l[\frac{(k-1)b}{n}, \frac{kb}{n}\r]$ and letting $n\to\infty$.
+
+        \item
+        Since the upper and lower Darboux integrals of $f$ are not equal, $f$ is not integrable.
+    \end{enumerate}    
+\end{proof}
+
+
+\newpage
+\subsection*{Exercise 32.7}
+Let $f$ be integrable on $[a, b]$, and suppose $g$ is a function on $[a,b]$ such that 
+$g(x)=f(x)$ except for finitely many $x\in[a,b]$. Show that $g$ is integrable on $[a,b]$
+and $\int_a^b g(x)dx=\int_a^b f(x)dx$.
+\begin{proof}[Solution]
+    Let $S$ be the set of points $x\in[a,b]$ such that $g(x)\neq f(x)$. Then for any partition $P$,
+    define 
+    \[
+        P' = P\cup \{\cdots, t_k, x-\frac{1}{n}, x, t_{k+1},\cdots\} \qquad \t{for } x\in S.
+    \]
+    where the $t$'s belong to the original $P$ and $n$ is chosen such that $x-\frac{1}{n}>t_k$.
+    Since $P\subseteq P'$, by \emph{Lemma 32.2}, 
+    \[
+        L(f,P)\le L(f,P')\le U(f,P')\le U(f,P),  
+    \]
+    we can just focus on the partition $P'$. 
+
+    Now for any partition $P'$, 
+    $U(f,P')$ and $U(g,P')$ only differ by the finitely many subintervals that contain points in $S$.
+    In fact, we can write 
+    \[
+        U(g,P') = U(f,P') - \sum_{x\in S}M(f, [x-\frac{1}{n}, x])\cdot \frac{1}{n} + 
+        \sum_{x\in S}M(g, [x-\frac{1}{n}, x])\cdot \frac{1}{n}
+    \]
+    Since $S$ is finite, the two terms on the right hand side equal 0 when $n\to \infty$, and hence 
+    \[
+        U(g,P') = U(f,P').
+    \]
+    Similarly, we can show that $L(g,P') = L(f,P')$. Thus, $g$ and $f$ have the same upper and lower
+    Darboux integrals, and $g$ is integrable on $[a,b]$ with $\int_a^b g(x)dx=\int_a^b f(x)dx$.
+
+    \emph{Note:} We have not considered the case where $M(f, [x-\frac{1}{n},x])$ or 
+    $M(g, [x-\frac{1}{n},x])$ is infinite. However, since $f$ and $g$ only differ by finite terms
+    on that interval, if any of the two is infinite, the other must also be infinite. In that case, 
+    we don't do any manipulation within that interval, and the proof still holds. 
+    The same is true for the case where $m(f, [x-\frac{1}{n},x])$ or
+    $m(g, [x-\frac{1}{n},x])$ is infinite.
+\end{proof}
+
+
+\newpage
+\subsection*{Exercise 33.4}
+Give an example of a function $f$ on $[0,1]$ that is not integrable for which 
+$|f|$ is integrable.
+\begin{proof}[Solution]
+    Let $f(x)=-1$ for rationals and $f(x)=1$ for irrationals. Then $|f(x)|=1$ for all $x\in[0,1]$.
+    From calculus (or we can go through the tedious upper and lower Darboux argument), we know 
+    that $|f|$ is integrable on $[0,1]$ and 
+    \[
+        \int_0^1 |f(x)|dx = 1.
+    \]
+    
+    However, for any partition $P$, 
+    \[
+      m(f, p) = -1 \qquad \t{and} \qquad M(f, p) = 1,  
+    \]
+    where $p$ is any subinterval of $P$. 
+    Hence, 
+    \[
+        L(f,P) = \sum_{k=1}^{n} -1\cdot (x_k-x_{k-1}) = -1 \qquad \t{and} \qquad 
+        U(f,P) = \sum_{k=1}^{n} 1\cdot (x_k-x_{k-1}) = 1.    
+    \]
+    Thus, $f$ is not integrable on $[0,1]$.
+\end{proof}
+
+\end{document}

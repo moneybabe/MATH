@@ -1,0 +1,83 @@
+\documentclass{book}
+\input{preamble.tex}
+\input{macros.tex}
+
+\title{\Huge{MATH 110 Notes}\\\emph{Book: Linear Algebra Done Right}}
+\author{\huge{Neo Lee}}
+\date{Fall 2023}
+
+\begin{document}
+
+\maketitle
+\let\cleardoublepage\clearpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+
+\chapter{Isometry}
+\section{November 30}
+\dfn{Isometry and Unitary}{
+    $T\in\L(V,w)$ is called an isometry if $\norm{T\vec{v}}=\norm{\vec{v}}$ for 
+    all $\vec{v}\in V$.
+    \nt{
+        In case $T\in\L(V)$ is an \emph{invertible} isometry, it is called \emph{unitary}.
+    }
+}
+\nt{
+    If $T\in\L(v)$ is unitary, then any eigen-pair $(\lambda,\vec{v})$ of $T$ satifies 
+    $$\norm{T\vec{v}}=\norm{\lambda\vec{v}}=\abs{\lambda}\norm{\vec{v}}=\norm{\vec{v}}.$$
+    So $\abs{\lambda}=1$.
+}
+\mprop{Isometry only has eigenvalues of modulus 1.}{
+    If $T$ is an isometry, then 
+    $$\norm{T\vec{e_j}}=\norm{\vec{e_j}}=1,$$
+    but also $$\norm{T\vec{e_j}}=\norm{s_j\cdot \vec{f_j}}=s_j=1.$$
+}
+\mprop{Isometry is injective.}{
+    \pf{Proof}{
+        Recall $\nul T^*T=\nul T$. So if $\vec{v}\in\nul T\implies T\vec{v}=\vec{0}$, then
+        $$\norm{\vec{v}}=\norm{T\vec{v}}=\norm{\vec{0}}=0\implies \vec{v}=\vec{0}.$$
+
+        This also shows isometries do not have zero singular values.
+    }
+}
+\dfn{Jordan Normal Form}{
+    \nt{
+        The goal of Jordan Normal Form is to get a matrix representation of $T$ that is as
+        simple (diagonal) as possible. This way, we get sparse matrices that are easy to
+        compute with or understand.
+    }
+
+    Setting: Let $V$ be a finite-dimensional vector space over $\C$ and $T\in\L(V)$.
+
+    First, represent $V=U\oplus W$ where $U,W$ are invariant subspaces of $T$, and 
+    $T$ is nilpotent on $U$ and invertible on $W$. Here nilpotent on $U$ means 
+    $T^k\vec{v}=\vec{0}$ for all $\vec{v}\in U$ and some $k\in\N$. We already get a 
+    block diagonal matrix representation of $T$ when writing $\vec{v}=\vec{u}+\vec{w}$ for 
+    $\vec{v}\in V$, $\vec{u}\in U$, and $\vec{w}\in W$.
+
+    $\{0\}\subseteq\nul T\subseteq\nul T^2\subseteq\cdots$ is a chain of subspaces of $V$. 
+    Since $V$ is finite-dimensional, there exists $k\in\N$ such that $\nul T^k=\nul T^{k+1}$. 
+    In other words, $\nul T^k$ will stabilize at some point.
+
+    Take $U=\nul T^k$ and $W=\range T^k$ where $\nul T^k$ stabilize. Notice, by the rank-nullity 
+    theorem, $\dim U+\dim W=\dim V$. If $\vec{x}\in U\cap W$, i.e., $\vec{x}=T^k\vec{v}$ 
+    for some $\vec{v}\in V$, then $T^k\vec{x}=T^{2k}\vec{v}=\vec{0}$, so $\vec{v}\in \nul T^{2k}=
+    \nul T^k$. Thus, $\vec{x}=T^k\vec{v}=\vec{0}$.
+
+    Within the subspace $U$, $T^k=0$. Witout loss of generality, $U$ is our whole space. 
+    Then there exists $\vec{u_0}\in U$ such that $T^{k-1}\vec{u_0}\neq 0$ but 
+    $T^k\vec{u_0}=0$. Then, there exists $v_0\in V$ such that $\inner{T^{k-1}\vec{v_0},v_0}\neq 0$.
+    Consider the matrix 
+    $$\inner{T^{j-1}\vec{u_0}, T^{*^{k-i}}\vec{v_0}}\text{ for }i, j=1,2,\dots, k,$$
+    which is an invertible matrix. 
+    
+    This implies that $\spann(\vec{u_0}, T\vec{u_0},\dots, T^{k-1}\vec{u_0})\oplus 
+    \spann(\vec{v_0}, T^*\vec{v_0},\dots, T^{*^{k-1}}\vec{v_0})^\perp=U$. Indeed, if $\vec{v}$ 
+    is in the intersection of the two subspaces, this creates a linear system precisely with the 
+    matrix above, which is invertible. Thus, $\vec{v}=\vec{0}$.
+
+    Then, represent $U$ as a direct sum of generalized eigenspaces of $T$.
+
+}
+
+\end{document}

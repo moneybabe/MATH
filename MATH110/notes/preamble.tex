@@ -7,6 +7,7 @@
 \usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
 \usepackage[varbb]{newpxmath}
 \usepackage{xfrac}
+\usepackage{indentfirst}
 \usepackage[T1]{fontenc}
 \usepackage[makeroom]{cancel}
 \usepackage{bookmark}
@@ -33,6 +34,10 @@
 \usepackage{xifthen}
 \usepackage{pdfpages}
 \usepackage{transparent}
+\usepackage{setspace}
+\setstretch{1.15}
+\DeclareSymbolFont{letters}     {OML}{cmm} {m}{it}
+\DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
 
 
 \newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
@@ -628,20 +633,20 @@
 % SELF MADE COMMANDS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
-\newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
-\newcommand{\mlemma}[2]{\begin{Lemma}{#1}{}#2\end{Lemma}}
-\newcommand{\mprop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
-\newcommand{\clm}[2]{\begin{claim}{#1}{}#2\end{claim}}
+\newcommand{\thm}[2]{\begin{Theorem}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Theorem}}
+\newcommand{\cor}[2]{\begin{Corollary}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Corollary}}
+\newcommand{\mlemma}[2]{\begin{Lemma}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Lemma}}
+\newcommand{\mprop}[2]{\begin{Prop}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Prop}}
+\newcommand{\clm}[2]{\begin{claim}{#1}{}\setlength{\parindent}{0.5cm}#2\end{claim}}
 \newcommand{\wc}[2]{\begin{wconc}{#1}{}\setlength{\parindent}{1cm}#2\end{wconc}}
-\newcommand{\thmcon}[1]{\begin{Theoremcon}{#1}\end{Theoremcon}}
-\newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
-\newcommand{\dfn}[2]{\begin{Definition}[colbacktitle=red!75!black]{#1}{}#2\end{Definition}}
-\newcommand{\dfns}[2]{\begin{definition}[colbacktitle=red!75!black]{#1}{}#2\end{definition}}
-\newcommand{\qs}[2]{\begin{question}{#1}{}#2\end{question}}
-\newcommand{\sol}[1]{\begin{solution}{#1}{}\end{solution}}
-\newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
-\newcommand{\nt}[1]{\begin{note}#1\end{note}}
+\newcommand{\thmcon}[1]{\begin{Theoremcon}{\setlength{\parindent}{0.5cm}#1}\end{Theoremcon}}
+\newcommand{\ex}[2]{\begin{Example}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Example}}
+\newcommand{\dfn}[2]{\begin{Definition}[colbacktitle=red!75!black]{#1}{}\setlength{\parindent}{0.5cm}#2\end{Definition}}
+\newcommand{\dfns}[2]{\begin{definition}[colbacktitle=red!75!black]{#1}{}\setlength{\parindent}{0.5cm}#2\end{definition}}
+\newcommand{\qs}[2]{\begin{question}{#1}{}\setlength{\parindent}{0.5cm}#2\end{question}}
+\newcommand{\sol}[1]{\begin{solution}{\setlength{\parindent}{0.5cm}#1}{}\end{solution}}
+\newcommand{\pf}[2]{\begin{myproof}[#1]\setlength{\parindent}{0.5cm}#2\end{myproof}}
+\newcommand{\nt}[1]{\begin{note}\setlength{\parindent}{0.5cm}#1\end{note}}
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}

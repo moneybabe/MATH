@@ -1,0 +1,295 @@
+\documentclass{article}
+\input{macros.tex}
+
+\title{Math 110 HW13}
+\author{Neo Lee}
+\date{12/02/2023}
+
+\begin{document} 
+\maketitle 
+
+\subsection*{Problem 1.}
+Let $T$ be a self-adjoint operator on a finite-dimensional inner product space (real or complex) such that $\lambda_1, \lambda_2, \lambda_3 \in \R$ are the only eigenvalues of $T$. Prove that
+$p(T)=0$ where $p(\lambda):= (\lambda - \lambda_1)(\lambda - \lambda_2)(\lambda - \lambda_3)$.
+Give a counterexample to this statement for an operator which is not self-adjoint.
+\begin{proof}
+    Since $T$ is self-adjoint, hence normal, by either the Real or Complex spectral theorem, 
+    $V$ has an orthonormal basis consisting of eigenvectors of $T$, denote them as $e_1,\dots, f_1,
+    \dots, g_1,\dots$, where $e, f, g$ are the eigenvectors corresponding to $\lambda_1, \lambda_2,
+    \lambda_3$ respectively. Then, for any $v\in V$, we can write $v$ as a linear combination of
+    these eigenvectors, i.e. 
+    \[
+        v = \sum_{i=1}^n \alpha_i e_i + \sum_{i=1}^n \beta_i f_i + \sum_{i=1}^n \gamma_i g_i.  
+    \] 
+    We use the property that polynomials applied on operators are commutative under composition,
+    then, 
+    \begin{align*}
+        p(T)v = &\, (T-\lambda_1 I)(T-\lambda_2 I)(T-\lambda_3 I)
+        \l(\sum_{i=1}^n \alpha_i e_i + \sum_{i=1}^n \beta_i f_i + \sum_{i=1}^n \gamma_i g_i\r) \\
+        = &\, (T-\lambda_1 I)(T-\lambda_2 I)(T-\lambda_3 I)\l(\sum_{i=1}^n \alpha_i e_i\r) \\
+        & + (T-\lambda_1 I)(T-\lambda_2 I)(T-\lambda_3 I)\l(\sum_{i=1}^n \beta_i f_i\r) \\
+        & + (T-\lambda_1 I)(T-\lambda_2 I)(T-\lambda_3 I)\l(\sum_{i=1}^n \gamma_i g_i\r) \\
+        = &\, (T-\lambda_2 I)(T-\lambda_3 I)(T-\lambda_1)\l(\sum_{i=1}^n \alpha_i e_i\r) \\
+        & + (T-\lambda_1 I)(T-\lambda_3)(T-\lambda_2 I)\l(\sum_{i=1}^n \beta_i f_i\r) \\
+        & + (T-\lambda_1 I)(T-\lambda_2 I)(T-\lambda_3)\l(\sum_{i=1}^n \gamma_i g_i\r) \\
+        = &\, 0,
+    \end{align*}
+    because $e\in \nul(T-\lambda_1 I), f\in \nul(T-\lambda_2 I), g\in \nul(T-\lambda_3 I)$.
+    Therefore, $p(T)v = 0$ for all $v\in V$, i.e. $p(T) = 0$. 
+    
+    \tb{Counterexample:} Let $V=\R^4$ and $T$ be an opeartor with the action 
+    \[
+      T(e_1) = e_1, \quad T(e_2) = 2e_2, \quad T(e_3) = 3e_3, \quad T(e_4) = e_1 + e_4.
+    \]
+    Clearly this is not self-adjoint as can be seen from the matrix form that it does not equal 
+    its conjugate transpose. Also, the eigenvalues are $1,2,3$ as can be seen from the matrix form 
+    as an upper triangular matrix with $1,2,3$ as diagonal entries. 
+
+    Now, we apply $p(T)$ on $e_4$,
+    \begin{align*}
+        p(T)e_4 & = (T-I)(T-2I)(T-3I)e_4 \\
+        & = (T-I)(T-2I)(e_1+e_4-3e_4) \\
+        & = (T-I)(T-2I)(e_1-2e_4) \\
+        & = (T-I)[(e_1-2(e_1+e_4)) - 2(e_1-2e_4)] \\
+        & = (T-I)(-3e_1+2e_4) \\
+        & = 2e_1\neq 0.
+    \end{align*}
+    
+\end{proof}
+
+
+\newpage
+\subsection*{Problem 2.}
+Let $T \in {\cal L}(V)$. Show that
+$$\langle v,u\rangle_T := \langle Tv,u\rangle $$
+is an inner product on $V$ if and only if $T$ is positive (per our definition of positivity).
+\begin{proof}
+    (\implies) Assume $\inner{v,u}_T$ is an inner product on $V$. Then, 
+    \[
+      \inner{Tv,v} = \inner{v,v}_T \ge 0.
+    \]
+    Also,
+    \begin{align*}
+        \inner{v,Tu} & = \overline{\inner{Tu, v}} \\
+        & = \overline{\inner{u,v}_T} \\
+        & = \inner{v,u}_T \\
+        & = \inner{Tv, u} \\
+        & = \inner{v, T^*u}.
+    \end{align*}
+    Hence, by the uniqueness of Riesz representation theorem, $T = T^*$, i.e. $T$ is self-adjoint.
+    Therefore, $T$ is positive.
+
+    (\impliedby) Assume $T$ is positive. 
+
+    \tb{Positivity:} For any $v\in V$, 
+    \[
+        \inner{v,v}_T = \inner{Tv, v} \ge 0.
+    \]
+
+    \tb{Definiteness:} 
+    \[
+        \inner{v,v}_T = 0 \iff \inner{Tv, v} = 0.
+    \]
+    Per our definition of strict positivity, $\inner{Tv, v}> 0$ for all $v\neq 0\in V$.
+    Hence, 
+    \[
+        \inner{Tv, v} = 0 \iff v=0.
+    \]
+
+    \tb{Additivity on the first slot:} For any $u,v,w\in V$,
+    \[
+      \inner{u+v,w}_T = \inner{T(u+v), w} = \inner{Tu + Tv, w} = \inner{Tu, w} + \inner{Tv, w} =
+        \inner{u,w}_T + \inner{v,w}_T.
+    \]
+
+    \tb{Homogeneity on the first slot:} For any $u,v\in V$ and $\alpha\in \F$,
+    \[
+        \inner{\alpha u, v}_T = \inner{T(\alpha u), v} = \inner{\alpha Tu, v} = \alpha \inner{Tu, v} =
+        \alpha \inner{u,v}_T.
+    \]
+
+    \tb{Conjugate symmetry:} For any $u,v\in V$,
+    \[
+        \inner{u,v}_T = \inner{Tv, u} = \overline{\inner{u, Tv}} = \overline{\inner{Tu, v}}
+        = \overline{\inner{u,v}_T}.
+    \]
+\end{proof}
+
+\newpage
+\subsection*{Problem 3.}
+Show that the operator $T=-D^2$ is nonnegative on the space
+$V:= \spann (1, \cos x, \sin x)$ over $\R$, with the inner product $$\langle f,g\rangle
+:= \int_{-\pi}^\pi f(x) g(x) dx.$$  Find
+\begin{description}
+\item{(a)} its square root operator $\sqrt{T}$;
+\item{(b)} an example of a self-adjoint operator $R\neq \sqrt{T}$ such that $R^2=T$;
+\item{(c)} an example of a non-self-adjoint operator $S$ such that $S^*S=T$.
+\end{description}
+\begin{proof}
+    Let $f = a + b\cos x + c\sin x$. Then,
+    \[
+      T(f) = -D^2(a + b\cos x + c\sin x) = -D^2(a) - D^2(b\cos x) - D^2(c\sin x) = b\cos x + c\sin x,
+    \]
+    and
+    \begin{align*}
+        \inner{Tf, f} & = \inner{b\cos x + c\sin x, a + b\cos x + c\sin x} \\
+        & = \int_{-\pi}^\pi (b\cos x + c\sin x)(a + b\cos x + c\sin x) dx \\
+        & = \int_{-\pi}^\pi b^2\cos^2 x + \int_{-\pi}^\pi c^2 \sin^2 xdx \qquad 
+        (\emph{everything else are orthogonal}) \\
+        & = b^2\pi + c^2\pi \ge 0.
+    \end{align*}
+    \begin{enumerate}[label=(\alph*)]
+        \item $T(1)=0, T(\cos x)=\cos x, T(\sin x)=\sin x$. Hence, $T$ has eigenvalues $0,1,1$ with
+            corresponding eigenvectors $1,\cos x, \sin x$ respectively. Then, by the spectral theorem,
+            $T$ has orthonormal eigenbasis $\{\frac{1}{\sqrt{2\pi}},\frac{\cos x}{\sqrt{\pi}}, 
+            \frac{\sin x}{\sqrt{\pi}}\}$. $\sqrt{T}$ is uniquely determined by its action on the
+            eigenbasis by scaling with the square root of the corresponding eigenvalues, i.e.
+            \[
+                \sqrt{T}\l(\frac{1}{\sqrt{2\pi}}\r) = 0, \quad
+                \sqrt{T}\l(\frac{\cos x}{\sqrt{\pi}}\r) = \frac{\cos x}{\sqrt{\pi}}, \quad
+                \sqrt{T}\l(\frac{\sin x}{\sqrt{\pi}}\r) = \frac{\sin x}{\sqrt{\pi}}.
+            \]
+            We can see that $\sqrt{T} = T$.
+
+            \item
+            Define $R$ with the action on the eigenbasis as
+            \[
+                R\l(\frac{1}{\sqrt{2\pi}}\r) = 0, \quad
+                R\l(\frac{\cos x}{\sqrt{\pi}}\r) = \frac{\cos x}{\sqrt{\pi}}, \quad
+                R\l(\frac{\sin x}{\sqrt{\pi}}\r) = -\frac{\sin x}{\sqrt{\pi}}.
+            \]
+
+            \item 
+            Define $S$ with the action on the eigenbasis as
+            \[
+                S\l(\frac{1}{\sqrt{2\pi}}\r) = 0, \quad
+                S\l(\frac{\cos x}{\sqrt{\pi}}\r) = \frac{1}{\sqrt{2\pi}}, \quad
+                S\l(\frac{\sin x}{\sqrt{\pi}}\r) = \frac{\cos x}{\sqrt{\pi}}.
+            \]    
+            The adjoint of $S$ is
+            \[
+                S^*\l(\frac{1}{\sqrt{2\pi}}\r) = \frac{\cos x}{\sqrt{\pi}}, \quad
+                S^*\l(\frac{\cos x}{\sqrt{\pi}}\r) = \frac{\sin x}{\sqrt{\pi}}, \quad
+                S^*\l(\frac{\sin x}{\sqrt{\pi}}\r) = 0.
+            \]
+    \end{enumerate}    
+\end{proof}
+
+
+\newpage
+\subsection*{Problem 4.}
+Let $T_1$ and $T_2$ be normal operators on an $n$-dimensional inner product space $V$. 
+Suppose both  have $n$ distinct eigenvalues $\lambda_1, \ldots, \lambda_n$. 
+Show that there is an isometry $S\in {\cal L}(V)$ such that $T_1=S^*T_2S$. 
+\begin{proof}
+    Since both operators have $n$ distinct eiganvalues, their eigenvectors are linearly
+    independent and span the whole space. Besides, by \emph{Theorem 7.22}, the eigenvectors are 
+    orthogonal since $T_1$ and $T_2$ are normal. We normalize the eigenvectors and denote them as
+    $e_1,\dots, e_n$ and $f_1,\dots, f_n$ for $T_1$ and $T_2$ respectively. 
+    
+    Then, we can construct an isometry $S$ that maps from the eigen-basis of $T_1$ to the 
+    eigen-basis of $T_2$ by 
+    \[
+        S:e_i\mapsto f_i.
+    \]
+    In fact, this isometry is invertible and hence a unitary operator. 
+    Then, for any $v\in V$, we can write $v$ as a linear combination of these eigenvectors, i.e.
+    \[
+        v = \sum_{i=1}^n \alpha_i e_i.
+    \]
+
+    Then, 
+    \[
+      T_1(v) = \sum_{i=1}^n \alpha_i \lambda_i e_i.
+    \]
+    On the other hand, 
+    \begin{align*}
+        S^*T_2S(v) & = S^*T_2S\l(\sum_{i=1}^n \alpha_i e_i\r) \\
+        & = S^*T_2\l(\sum_{i=1}^n \alpha_i f_i\r) \\
+        & = S^*\l(\sum_{i=1}^n \alpha_i \lambda_i f_i\r) \\
+        & = S^{-1}\l(\sum_{i=1}^n \alpha_i \lambda_i f_i\r) \qquad (S^* = S^{-1}\because S 
+        \t{ is unitary})\\
+        & = \sum_{i=1}^n \alpha_i \lambda_i e_i = T_1(v).
+    \end{align*}
+\end{proof}
+
+\newpage
+\subsection*{Problem 5.}
+Find the singular values of the operator $T  \in {\cal P}_3(\C): p(x) \mapsto 2xp'(x)-x^2p''(x)$ if the inner product on ${\cal P}_3(\C)$ is defined as
+$$ \langle p , q\rangle := \int_{-1}^1 p(x)\,\overline{q(x)} \,dx.$$
+\begin{proof}[Solution]
+    We first orthonormalize the basis $\{1,x,x^2,x^3\}$.
+    \begin{align*}
+        v_1 & = 1 \\
+        \norm{v_1} & = \sqrt{\inner{v_1, v_1}} = \sqrt{\int_{-1}^1 1\cdot 1 dx} = \sqrt{2} \\
+        e_1 & = \frac{1}{\sqrt{2}} \\
+        v_2 & = x - \inner{x, e_1}e_1 = x \\
+        & = x - \frac{1}{2}\int_{-1}^1 x dx \\
+        & = x \\
+        \norm{v_2} & = \sqrt{\inner{v_2, v_2}} = \sqrt{\int_{-1}^1 x^2 dx} = \sqrt{\frac{2}{3}} \\
+        e_2 & = \sqrt{\frac{3}{2}}x \\
+        v_3 & = x^2 - \inner{x^2, e_1}e_1 - \inner{x^2, e_2}e_2 \\
+        & = x^2 - \frac{1}{2}\int_{-1}^1 x^2 dx - \frac{3}{2}x\int_{-1}^1 x^3 dx \\
+        & = x^2 - \frac{1}{3} \\
+        \norm{v_3} & = \sqrt{\inner{v_3, v_3}} = \sqrt{\int_{-1}^1 (x^2 - \frac{1}{3})^2 dx} =
+        \sqrt{\frac{8}{45}} \\
+        e_3 & = \sqrt{\frac{45}{8}}(x^2 - \frac{1}{3}) \\
+        v_4 & = x^3 - \inner{x^3, e_1}e_1 - \inner{x^3, e_2}e_2 - \inner{x^3, e_3}e_3 \\
+        & = x^3 - \frac{1}{2}\int_{-1}^1 x^3 dx - \frac{3}{2}x\int_{-1}^1 x^4 dx -
+        \frac{45}{8}(x^2 - \frac{1}{3})\int_{-1}^1 x^5 dx \\
+        & = x^3 - \frac{3}{5}x \\
+        \norm{v_4} & = \sqrt{\inner{v_4, v_4}} = \sqrt{\int_{-1}^1 (x^3 - \frac{3}{5}x)^2 dx} =
+        \sqrt{\frac{8}{175}} \\
+        e_4 & = \sqrt{\frac{175}{8}}(x^3 - \frac{3}{5}x).
+    \end{align*}
+
+    Now we construct $\mathcal{M}(T,(e_1,e_2,e_3,e_4))$ by inspecting $T$'s action on the orthonormal
+    basis.
+    \begin{align*}
+        T(e_1) & = 0 \\
+        T(e_2) & = 2x\cdot\sqrt{\frac{3}{2}} = 2e_2 \\
+        T(e_3) & = 2x\l(2\cdot\sqrt{\frac{45}{8}}x\r) - x^2\l(2\cdot\sqrt{\frac{45}{8}}\r) \\
+        & = 4\sqrt{\frac{45}{8}}x^2 - 2\sqrt{\frac{45}{8}}x^2 \\
+        & = 2e_3 + \sqrt{5}e_1 \\
+        T(e_4) & = 2x\l(3\sqrt{\frac{175}{8}}x^2-\frac{3\sqrt{7}}{8}\r) - x^2\l(6\sqrt{\frac{175}{8}}x\r) \\
+        & = 6\sqrt{\frac{175}{8}}x^3 - 2\frac{3\sqrt{7}}{\sqrt{8}}x - 6\sqrt{\frac{175}{8}}x^3 \\
+        & = -\sqrt{21}e_2.
+    \end{align*}
+
+    Hence, the matrix representation of $T$ with respect to the orthonormal basis is
+    \[
+        \mathcal{M}(T,(e_1,e_2,e_3,e_4)) = \begin{bmatrix}
+            0 & 0 & \sqrt{5} & 0 \\
+            0 & 2 & 0 & -\sqrt{21} \\
+            0 & 0 & 2 & 0 \\
+            0 & 0 & 0 & 0
+        \end{bmatrix}.
+    \]
+    Then the matrix representation of $T^*$ is the conjugate transpose, which is 
+    \[
+        \mathcal{M}(T^*,(e_1,e_2,e_3,e_4)) = \begin{bmatrix}
+            0 & 0 & 0 & 0 \\
+            0 & 2 & 0 & 0 \\
+            \sqrt{5} & 0 & 2 & 0 \\
+            0 & -\sqrt{21} & 0 & 0
+        \end{bmatrix}.
+    \]
+    Then, 
+    \[
+      \mathcal{M}(T^*)\mathcal{M}(T) = \begin{bmatrix}
+          0 & 0 & 0 & 0 \\
+          0 & 4 & 0 & -2\sqrt{21} \\
+          0 & 0 & 9 & 0 \\
+          0 & -2\sqrt{21} & 0 & 21
+        \end{bmatrix}.
+    \]
+    By solving the characteristic equation 
+    \[
+        -\lambda(9-\lambda)\l[(4-\lambda)(21-\lambda)-84\r] = 0,
+    \]
+    we get $\lambda = 0$ with multiplicity 2, $\lambda = 9$ with multiplicity 1, and $\lambda = 25$
+    with multiplicity 1. Hence, the singular values of $T$ are $\sqrt{25} = 5, \sqrt{9} = 3, 0$.
+\end{proof}
+
+
+\end{document}

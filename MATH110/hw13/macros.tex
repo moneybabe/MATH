@@ -1,0 +1,80 @@
+\usepackage{amsfonts, amsmath, amssymb, amsthm, dsfont, mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage[margin=1in]{geometry}
+\graphicspath{{./images/}}
+\setstretch{1.15}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{lemma}[thm]{Lemma}
+
+\newcommand*{\Var}{\ensuremath{\mathrm{Var}}}
+\newcommand*{\Cov}{\ensuremath{\mathrm{Cov}}}
+\newcommand*{\Corr}{\ensuremath{\mathrm{Corr}}}
+\newcommand*{\Bias}{\ensuremath{\mathrm{Bias}}}
+\newcommand*{\MSE}{\ensuremath{\mathrm{MSE}}}
+
+\newcommand*{\range}{\ensuremath{\mathrm{range}}\,}
+\newcommand*{\spann}{\ensuremath{\mathrm{span}}\,}
+\newcommand*{\nul}{\ensuremath{\mathrm{null}}\,}
+\newcommand*{\dom}{\ensuremath{\mathrm{dom}}\,}
+
+\newcommand*{\pdv}[3][]{\frac{\partial^{#1}}{\partial#3^{#1}}#2}
+\renewcommand*{\implies}{\ensuremath{\Longrightarrow}}
+\renewcommand*{\impliedby}{\ensuremath{\Longleftarrow}}
+\renewcommand*{\l}{\left}
+\renewcommand*{\r}{\right}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}\newcommand*{\tb}{\textbf}
+\renewcommand*{\t}{\text}
+
+\newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\R}{\ensuremath{\mathbb{R}}}
+\newcommand*{\F}{\ensuremath{\mathbb{F}}}
+\newcommand*{\C}{\ensuremath{\mathbb{C}}}
+\newcommand*{\N}{\ensuremath{\mathbb{N}}}
+\newcommand*{\E}{\ensuremath{\mathds{E}}}
+\renewcommand*{\P}{\ensuremath{\mathds{P}}}
+\newcommand*{\p}{\ensuremath{\mathcal{P}}}
+\renewcommand*{\L}{\mathcal{L}}
+
+
+% deliminators
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\|}{\|}
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+
+\let\oldleq\leq % save them in case they're every wanted
+\let\oldgeq\geq
+
+\newcommand*{\img}[3][]{
+    \begin{figure}[htb!]
+         \centering
+         \includegraphics[scale=#1]{#2}
+         \caption{#3}
+    \end{figure}
+}
+\newcommand*{\imgs}[5][]{
+    \begin{figure}[htb]
+        \qquad
+        \begin{minipage}{.4\textwidth}
+            \centering
+            \includegraphics[scale=#1]{#2}
+            \caption{#3}
+        \end{minipage}    
+        \qquad
+        \begin{minipage}{.4\textwidth}
+            \centering
+            \includegraphics[scale=#1]{#4}
+            \caption{#5}
+        \end{minipage}
+    \end{figure} 
+}

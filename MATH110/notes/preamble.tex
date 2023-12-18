@@ -37,7 +37,6 @@
 \usepackage{setspace}
 \setstretch{1.15}
 \DeclareSymbolFont{letters}     {OML}{cmm} {m}{it}
-\DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
 
 
 \newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
@@ -608,12 +607,12 @@
 {}
 {\hfill\small \thecontentspage}
 []
-\titlecontents*{subsection}[3.7pc]
-{\addvspace{-1pt}\small}
-{}
+\titlecontents{subsection}[3.7pc]
+{\addvspace{-1pt}\small\qquad}
+{\contentslabel[\thecontentslabel]{2pc}}
 {}
 {\ --- \small\thecontentspage}
-[ \textbullet\ ][]
+[]
 
 \makeatletter
 \renewcommand{\tableofcontents}{%
@@ -634,7 +633,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\thm}[2]{\begin{Theorem}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Theorem}}
-\newcommand{\cor}[2]{\begin{Corollary}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Corollary}}
+\newcommand{\mcor}[2]{\begin{Corollary}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Corollary}}
 \newcommand{\mlemma}[2]{\begin{Lemma}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Lemma}}
 \newcommand{\mprop}[2]{\begin{Prop}{#1}{}\setlength{\parindent}{0.5cm}#2\end{Prop}}
 \newcommand{\clm}[2]{\begin{claim}{#1}{}\setlength{\parindent}{0.5cm}#2\end{claim}}

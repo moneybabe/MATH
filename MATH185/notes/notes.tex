@@ -1,0 +1,194 @@
+\documentclass{book}
+\input{preamble.tex}
+\input{macros.tex}
+
+\title{\Huge{MATH 185 Notes}\\\emph{Professor: Constantin Teleman}}
+\author{\huge{Neo Lee}}
+\date{\huge{Spring 2024}}
+
+\begin{document}
+
+\maketitle
+\let\cleardoublepage\clearpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+
+\chapter{First chapter}
+\section{Lecture 1 (skipped)}
+\section{Lecture 2}
+\dfn{Integral powers of complex numbers from geomtery}{
+	If $z=r\cdot e^{i\theta}$, so $\abs{z}=r$ and define $\arg{z}=\theta$, 
+	then $z^n=r^n\cdot e^{in\theta}$.
+	\nt{
+		$\abs{z} = r$ can be shown by writing $e^{i\theta}=\cos\theta+i\sin\theta$ and taking absolute
+		value. 
+	}
+	\nt{
+		Because of our definition, integral powers of complex numbers can be easily visualized in polar
+		coordinates. In particular, for $z=r\cdot e^{i\theta}$, $$\abs{z}=r^n\quad \t{and} \quad
+		\arg{z^n} = n\theta.$$
+	}
+}
+\ex{Map from $z\to z^2$}{
+	Let $z=x+yi$, then $\re z$ is mapped from $x$ to $x^2$, while $\im z$ is mapped from $yi$ to
+	$-y^2$.
+
+	$$z=x+yi\mapsto x^2-y^2+2xyi.$$ Hence, $\re z^2 = x^2-y^2$ and $\im z = 2xy$. If we plot $z^2$
+	on the real and imaginary axis, then it's a parabola.
+}
+
+\thm{De Moivre formula}{
+	$$(\cos\theta+i\sin\theta)^n = \cos(n\theta)+i\sin(n\theta).$$
+	\pf{Proof}{
+		This falls immediately by taking $n^\t{}th$ power of $z=e^i\theta$ and following
+		\emph{definition 1.1}.
+	}
+	\nt{
+		By applying binomial expansion to the left hand side of De Moivre formula, we get the following
+		consequences immediately:
+		\begin{align*}
+			\cos^n\theta - {n\choose2} \cos^{n-2}\theta\cdot\sin^2\theta +\cdots & = \cos(n\theta) \\
+			i\l(n\cdot\cos^{n-1}\theta\cdot\sin\theta - {n\choose3}\cos^{n-3}\theta\cdot\sin^3\theta + \cdots \r) & = i\sin(n\theta).
+		\end{align*}
+		From the first equation, we can see $\cos^2\theta - \sin^2\theta = \cos(2\theta)$ is a
+		special case of De Moivre formula. From the second equation, we can see
+		$2\cos\theta\cdot\sin\theta = \sin(2\theta)$ is a special case as well.
+	}
+}
+
+\dfn{$n^\text{th}$ roots of complex number}{
+	The $n^\t{th}$ roots of complex number are the solutions $z$ to the equation $z^n=x$.
+	\nt{
+		We call the solutions $z$ to the equation $z^n=1$ the $n^\t{th}$ roots of unity.
+	}
+}
+
+\mprop{There are $n^\t{th}$ distinct roots of unity}{
+	There are $n^\t{th}$ distinct roots $z$ to the equation $z^n=1$, and they are 
+	$$1,\cos\frac{2\pi}{n}+i\sin\frac{2\pi}{n}, \cos\frac{4\pi}{n}+i\sin\frac{4\pi}{n},\cdots,
+	\cos\frac{(2n-2)\pi}{n} + i\sin\frac{(2n-2)\pi}{n}.$$
+	Let $\xi_n = \cos\frac{2\pi}{n} + i\sin\frac{2\pi}{n}$, then the list is 
+	$$1,\xi_n, \xi_n^2, \dots, \xi_n^{n-1}.$$
+	\nt{
+		The roots are essentially cutting the unit circle into $n$ parts, and the cuts lying on the unit
+		circle are the roots.
+	}
+}
+
+\cor{Linear factorization of $x^n-1$}{
+	From the previous proposition, we have the linear factorization 
+	$$x^n-1=(x-1)(x-\xi_n)(x-\xi_n^2)\cdots(x-\xi_n^{n-1}).$$
+	\pf{Proof}{
+		From Bezout's theorem, if $x=a$ is a solution to $P(x)=0$, then $(x-a)$ divides $P(x)$. Now
+		from \emph{proposition 1.1}, we found all the roots to $x^n-1=0$, so we can linearly factor
+		$x^n-1$. 
+	}
+}
+
+\dfn{Primitive roots of unity}{
+	An $n^\t{th}$ root of unity $\xi$ is called primitive if $\xi^n=1$ but $\xi^k\neq 1$ for all
+	$0<k<n$. In other words $\xi$ is the $n^\t{th}$ primitive root of unity if $\xi$ raised to the
+	power $n$ is the first time equating to 1.
+}
+
+\ex{$6^\t{th}$ roots of unity}{
+	Consider the equation $z^6=1$ and let $\xi_n = \cos\frac{\pi}{3}+i\sin\frac{\pi}{3}$. From
+	\emph{proposition 1.1}, we know all the roots are raising $\xi$ to the power until $5$. Then by
+	drawing it geometrically as points on the unit circle, and raising power is equavalent to
+	rotating along the circle, the $6^\t{th}$ primitive roots are $\xi$ and $\xi^5$.
+}
+
+\thm{$n^\t{th}$ roots of unity can be partition into divisors of $n$}{
+	Let $\{d_1, \dots, d_k\}$ be the divisors of $n$, then the set of $n^\t{th}$ roots of unity
+	can be partitioned into groups of primitive $d_k^\t{th}$ roots of unity.
+}
+
+\thm{Factorization of $x^n-1$ in integer coefficient terms}{
+	Define the $d^\t{th}$ cyclotomic polynomial as $\Phi_d(x)$, which is an irreducible polynomial
+	over rationals and with integer coefficients. Then, grouping the factors of
+	$$x^n-1=(x-1)(x-\xi_n)\cdots(x-\xi_n^{n-1})$$ according to divisors of $n$ with primitive roots
+	gives a factorization $$x^n-1=\prod_{d\vert n}\Phi_d(x).$$
+}
+
+\ex{Factorization of $x^3-1$ and $x^6-1$}{
+	\begin{align*}
+		x^3-1 & = \underbrace{(x-1)}_{\Phi_1(x)}\underbrace{(x^2+x+1)}_{\Phi_3(x)} \\
+		x^6-1 & = \underbrace{(x-1)}_{\Phi_1(x)}\underbrace{(x+1)}_{\Phi_2(x)}
+		\underbrace{(x^2+x+1)}_{\Phi_3(x)}\underbrace{(x^2-x+1)}_{\Phi_6(x)}.
+	\end{align*}
+}
+
+\dfn{"Cyclotomic integers"}{
+	Cyclotomic integers are $\Z[\xi_2,\xi_3,\dots] = \Z[\xi_n]$ for a fixed $n$. Equivalently, it's
+	formed by adjoining all roots of units to $\Z$.
+}
+
+
+
+
+
+
+
+
+\chapter{Starting a new chapter}
+\section{Demo of commands}
+\dfn{Some defintion}{
+	yap
+}
+\qs{Some question}{yap}
+\sol{
+	\pf{Some proof}{yap}
+}
+\nt{Some note}
+\thm{Some theorem}{
+	yap
+}
+\wc{Some wrong concept}{
+	yap
+}
+\mlemma{Some lemma}{
+	yap
+}
+\mprop{Some proposition}{
+	yap
+}
+\ex{Some example}{
+	yap
+}
+\clm{Some claim}{
+	yap
+}
+\cor{Some corollary}{
+	yap
+}
+\thmcon{Some unlabeled theorem}
+
+This is a new paragraph
+
+
+\begin{algorithm}
+	\caption{Some algorithm}
+	\KwIn{input}
+	\KwOut{output}
+	\SetAlgoLined
+	\SetNoFillComment
+	\tcc{This is a comment}
+	This is first line \tcp*{This is also a comment}
+	\uIf{$x > 5$} {
+		do nothing
+	} \uElseIf {$x < 5$} {
+		do nothing
+	} \Else {
+		do nothing
+	}
+	\While{$x == 5$}{
+		still do nothing
+	}
+	\ForEach{$x = 1:5$}{
+		do nothing
+	}
+	\Return{return nothing}
+\end{algorithm}
+
+
+\end{document}

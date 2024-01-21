@@ -1,0 +1,206 @@
+\documentclass{book}
+\input{preamble.tex}
+\input{macros.tex}
+
+\title{\Huge{MATH 105 Notes}\\\emph{Professor: Khalilah Beal-Uribe}}
+\author{\huge{Neo Lee}}
+\date{\huge{Spring 2024}}
+
+\begin{document}
+
+\maketitle
+\let\cleardoublepage\clearpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+
+\chapter{First chapter}
+\section{Lecture 1}
+\dfn{Norm}{
+	Given a vector space $V$ over a subfield $\F$ of $\C$, a norm of $V$ is a real-valued function
+	$p:V\to\R$ satisfying the following properties:
+	\begin{enumerate}
+		\item \tb{Triangle inequality:} $p(v+w)\leq p(v)+p(w)$,
+		\item \tb{Absolute homogeneity:} $p(\alpha v) = |\alpha|p(v)$,
+		\item \tb{Positive definiteness:} $p(v) \geq 0$ and $p(v) = 0$ iff $v = 0$.
+	\end{enumerate}
+	\nt{
+		Usually, we denote the norm of $v$ by $\norm{v}$, and for clarity of the underlying vector 
+		space, we may write $\norm{v}_V$.
+	}
+}
+\mprop{Normed space is a metric space}{
+	Let $V$ be a normed space. Then the function $d:V\times V\to\R$ defined by
+	$d(v,w) = p(v-w) = \norm{v-w}$ is a metric on $V$.
+}
+\dfn{Isomorphism in vector spaces}{
+	A function $f:V\to W$ between two vector spaces $V$ and $W$ over the same field $\F$ is called an
+	isomorphism if it is bijective and linear. If such an isomorphism exists, we say that the two vector
+	spaces are isomorphic.	
+}
+\dfn{Homeomorphism}{
+	A function $f:X\to Y$ between two topological spaces $X$ and $Y$ is called a homeomorphism if it
+	satisfies the following properties:
+	\begin{enumerate}
+		\item $f$ is bijective,
+		\item $f$ is continuous,
+		\item $f^{-1}$ is continuous.
+	\end{enumerate}
+	If such a homeomorphism exists, we say that the two topological spaces are homeomorphic.
+}
+\nt{
+	In general, isomorphism does not imply homeomorphism. However, in certain cases, they are
+	equivalent, which will be discussed in details later.
+}
+\dfn{Operator norm}{
+	Let $T:V\to W$ be a linear oepration between normed spaces. Denote $\norm{\cdot}_V$ and
+	$\norm{\cdot}_W$ be the norms in $V$ and $W$ respectively. The operator norm of $A$ is defined 
+	by 
+	\begin{align*}
+		\norm{T} & = \sup \l\{\frac{\norm{Tv}_W}{\norm{v}_V}: v\neq 0, v\in V \r\} \\
+		& = \inf \l\{c\geq 0: \norm{Tv}_W\leq c\norm{v}_V, \forall v\in V \r\}
+	\end{align*}
+	\nt{
+		We say that $T$ is bounded if $\norm{T} < \infty$.
+	}
+}
+
+\section{Lecture 2}
+\thm{Multiplication of matrices are composition of linear maps}{
+	$T_A\circ T_b=T_{AB}.$
+}
+\thm{Bounded operator is equivalent to continuous}{
+	Let $T:V\to W$ be a linear transformation from one normed space to another. The following are
+	equivalent:
+	\begin{enumerate}
+		\item $\norm{T} < \infty$,
+		\item $T$ is uniformly continuous,
+		\item $T$ is continuous,
+		\item $T$ is continuous at $0$.
+	\end{enumerate}
+	\pf{Proof}{
+		We show that $(1)\implies (2)\implies (3)\implies (4)\implies (1)$.
+		\begin{itemize}
+			\item $(1)\implies (2)$: Let $M=\norm{T}<\infty$, and let $\delta = \frac{\epsilon}{M}$.
+			Then for any $x,y\in V$ such that $\norm{x-y}<\delta$, we have 
+			\begin{align*}
+				\norm{Tx-Ty} & = \norm{T(x-y)} \\
+				& \leq M\norm{x-y} \\
+				& < M\delta \\
+				& = \epsilon.
+			\end{align*}
+			Hence, $T$ is uniformly continuous.
+
+			\item $(2)\implies (3)$: Trivial. Uniformly continuous automatically implies continuous.
+			\item $(3)\implies (4)$: Trivial. $T$ is continuous over the whole domain implies that
+			it is continuous at any point in the domain, including $0$.
+
+			\item $(4)\implies (1)$: Let $\epsilon=1$, then there exists $\delta>0$ such that 
+			$\norm{x}<\delta$ implies $\norm{Tx}<1$. Then for any $v\neq 0$, define
+			$v'=\frac{\delta}{2\norm{v}}$, then $\norm{v'}<\delta$ and hence
+			$\norm{Tv'}<1$. Then we have 
+			\begin{align*}
+				\norm{Tv'} & < 1\\
+				\l\|T\l(\frac{\delta}{2\norm{v}}v\r)\r\| & < 1 \\
+				\frac{\delta}{2\norm{v}}\norm{Tv} & < 1 \\
+				\norm{Tv} & < \frac{2}{\delta}\norm{v}.
+			\end{align*}
+			Then, from our \emph{definition 1.1.4} of operator norm, we have
+			$\norm{T}<\frac{2}{\delta}$ and hence $\norm{T}<\infty$.
+		\end{itemize}
+	}
+}
+\thm{Linear map from finite-dimensional Euclidean space to normed space is continuous}{
+	Let $T:\R^n\to W$, where $T$ is linear and $W$ is a normed space. Then 
+	\begin{enumerate}
+		\item $T$ is continuous,
+		\item if $T$ is an isomorphism, then $T$ is a homeomorphism.
+	\end{enumerate}
+}
+\cor{Linear maps from finite-dimensional normed space to normed space are continuous}{
+	All linear maps from finite-dimensional normed space to another normed space are continuous, and all
+	isomorphisms from finite-dimensional space to normed space are homeomorphisms.
+
+	In particular, if a finite-dimensional vector spaces is equipped with two norms, then the
+	identity map between them is a homeomorphism. For example, $T:\M\to\L$ is a homeomorphism.
+	\pf{Proof}{
+		Let $V$ be a $n$-dimensional normed space and $W$ be another normed space, and $T:V\to W$. Then,
+		there exists an isoemorphism $S:V\to\R^n$. \emph{Theorem 1.2.2} gaurentees that $S$ and $S^{-1}$
+		are homeomorphisms. Then, $T\circ S:\R^n\to W$ is also a continuous linear map guaranteed by
+		\emph{Theorem 1.2.2}. Then, $$T = (T\circ S)\circ S^{-1}$$ is also a continuous linear because
+		it is a composition of continuous linear maps. Hence, $T$ is continuous.
+
+		Now, if $T:V\to W$ is an isomorphism where $V$ is a finite-dimensional normed space. Then, 
+		$W$ is also a finite-dimensional normed space. Then, $T$ is continuous by the above argument.
+		Then, $T^{-1}:W\to V$ is a linear map from a finite-dimensional normed space, hence also 
+		continuous. Therefore, $T$ is a homeomorphism.
+
+		Finally, let $V$ be a finite-dimenisonal vector space equipped with two norms
+		$\norm{\cdot}_1$ and $\norm{\cdot}_2$. Then, the identity map $I:V\to V$ is an isomorphism 
+		between the two finite-dimensional normed spaces. Then, $I$ is a homeomorphism by the above 
+		argument.
+	}
+}
+
+
+\chapter{Starting a new chapter}
+\section{Demo of commands}
+\dfn{Some defintion}{
+	yap
+}
+\qs{Some question}{yap}
+\sol{
+	\pf{Some proof}{yap}
+}
+\nt{Some note}
+\thm{Some theorem}{
+	yap
+}
+\wc{Some wrong concept}{
+	yap
+}
+\mlemma{Some lemma}{
+	yap
+}
+\mprop{Some proposition}{
+	yap
+}
+\ex{Some example}{
+	yap
+}
+\clm{Some claim}{
+	yap
+}
+\cor{Some corollary}{
+	yap
+}
+\thmcon{Some unlabeled theorem}
+
+This is a new paragraph
+
+
+\begin{algorithm}
+	\caption{Some algorithm}
+	\KwIn{input}
+	\KwOut{output}
+	\SetAlgoLined
+	\SetNoFillComment
+	\tcc{This is a comment}
+	This is first line \tcp*{This is also a comment}
+	\uIf{$x > 5$} {
+		do nothing
+	} \uElseIf {$x < 5$} {
+		do nothing
+	} \Else {
+		do nothing
+	}
+	\While{$x == 5$}{
+		still do nothing
+	}
+	\ForEach{$x = 1:5$}{
+		do nothing
+	}
+	\Return{return nothing}
+\end{algorithm}
+
+
+\end{document}

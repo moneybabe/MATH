@@ -1,0 +1,201 @@
+\documentclass{book}
+\input{preamble.tex}
+\input{macros.tex}
+
+\title{\Huge{MATH 113 Notes}\\\emph{Professor: Forte Shinko}}
+\author{\huge{Neo Lee}}
+\date{\huge{Spring 2024}}
+
+\begin{document}
+
+\maketitle
+\let\cleardoublepage\clearpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+
+\chapter{Motivation}
+\section{Abstraction}
+We have two very similar theorems, and turns out they can be generalized into one single property,
+hence the abstraction. This is the idea of abstraction, and it is the core of modern mathematics. 
+
+\thm{Prime factorization}{
+	Every integer $n > 1$ can be uniquely factorized as a product of primes.
+}
+\thm{Fundamental theorem of algebra in \R}{
+	Every polynomial $p(x)$ of degree $n > 0$ with real coefficients can be factorized into a
+	product of linear and quadratic polynomials with real coefficients.
+}
+
+It turns out that these two theorems are very similar, and we can describe them with one single 
+property, namely the unique factorization domain (UFD). 
+\cor{Generalization as UFD}{
+	\begin{enumerate}
+		\item $\l(\Z, +,\cdot\r)$ is a UFD.
+		\item $\l(\R[x], +,\cdot\r)$ is a UFD.
+	\end{enumerate}
+}
+
+With abstraction, we can also prove theorems in a more general setting and sometimes apply
+generalized theorems to specific cases to get an easier proof.
+\thm{Fermat's little theorem}{
+	If $p$ is a prime and $a \in \Z$, then $a^p \equiv a \pmod{p}$.
+	\pf{Proof}{
+		Apply Lagrange's theorem to the group $\l( \Z /p \Z , \cdot\r)$.
+	}
+	\nt{
+		This proof using abstracted theorem is much easier than the original proof in traditional 
+		number theory.
+	}
+}
+
+\chapter{Group Theory}
+\section{Lecture 1}
+\dfn{Binary operation}{
+	A binary operation on a set $S$ is a funtion from $S \times S$ to $S$. 
+}
+\ex{Addition on \Z}{
+	We can define addition on $\Z$ as a binary operation, since for any $a, b \in \Z$, $a + b \in
+	\Z$.
+}
+\wc{Non-examples of binary operation}{
+	\begin{enumerate}
+		\item 
+		Subtraction on $\N$ is not a binary operation. Consider the case $a = 1, b = 2$, then $a - b 
+		= -1 \notin \N$.
+		
+		\item
+		Division on $\R$ is not a binary operation. Division by zero is not defined on $\R$. Hence, 
+		division is not a binary operation from $\R \times \R$ to $\R$.
+	\end{enumerate}
+}
+
+\section{Lecture 2}
+Some examples of binary operations:
+\ex{The midpoint operation on $\R^2$}{
+	$$T(\vec{a},\vec{b})=\frac{1}{2}(\vec{a}+\vec{b}).$$
+}
+\ex{The set of functions from $\R$ to $\R$}{
+	Some examples are $x^2, \sin x$. The set of functions from $\R$ to $\R$ has a binary operation of
+	composition, taking $(f,g)$  to $f\circ g$.
+	\nt{
+		For convenience, we typically write composition by $fg = f\circ g$.
+	}
+}
+\ex{Cross product}{
+	Cross product is a binary operation on $\R^3$.
+	\wc{Dot product is not a binary operation}{
+		Dot product is not a binary operation on $\R^3$, since the result of dot product is a scalar, 
+		which is not in $\R^3$. In particular \emph{dot prodcut}: $\R^3 \times \R^3 \to \R$.
+	}
+}
+\dfn{Matrix of $n\times n$}{
+	Denote $\M_n(\F)$ to be the set of $n\times n$ matrices over $\F$.
+}
+\ex{$\M_n(\F)$ has two common binary operations}{
+	Namely addition and multiplication on matrices.
+}
+\ex{Power set of \R}{
+	The power set of $\R$ has union and intersection as binary operations.
+	\nt{
+		$\{1,2,3\}\cup \{\pi, e\} = \{1,2,3,\pi,e\}$ is in the power set of \R.
+	}
+}
+\dfn{Monus operation}{
+	Consider the monus operation defined by $(x,y)\mapsto\max(x-y, 0)$.
+}
+\dfn{Multiplication table (aka Cayley table)}{
+	Try to do the Cayley table on the set $\{0,1,2,3\}$ with the monus operation.
+	\nt{
+		You can also define a binary opeartion by simply listing out the Cayley table. Hence, a binary
+		operation on $\{0,1,2,3\}$ is just any way to fill the $4\times 4$ grid. So binary operation is
+		actually not that unique.
+	}
+}
+\nt{
+	In this class, we typically talk about sets equipped with binary operations. For example, we talk
+	abou the set $\Z$ equipped with addition $(\Z, +)$ or even with multiplication as well $(\Z, +,
+	\cdot)$.
+}
+\dfn{Group}{
+	A group is a set $G$ equipped with a binary operation $\cdot$ such that
+	\begin{enumerate}
+		\item \tb{Associativity:} $\cdot$ is associative, i.e. $(a\cdot b)\cdot c = a\cdot (b\cdot
+		c)$ for all $a,b,c\in G$.
+
+		\item \tb{Existence of identity:} There exists an identity element $e\in G$ such that
+		$e\cdot a = a\cdot e = a$ for all $a\in G$.
+		
+		\item \tb{Existence of inverse:} For every $a\in G$, there exists an inverse $a^{-1}\in G$
+		such that $a\cdot a^{-1} = a^{-1}\cdot a = e$.
+	\end{enumerate}
+}
+
+
+
+
+
+
+
+
+\chapter{Starting a new chapter}
+\section{Demo of commands}
+\dfn{Some defintion}{
+	yap
+}
+\qs{Some question}{yap}
+\sol{
+	\pf{Some proof}{yap}
+}
+\nt{Some note}
+\thm{Some theorem}{
+	yap
+}
+\wc{Some wrong concept}{
+	yap
+}
+\mlemma{Some lemma}{
+	yap
+}
+\mprop{Some proposition}{
+	yap
+}
+\ex{Some example}{
+	yap
+}
+\clm{Some claim}{
+	yap
+}
+\cor{Some corollary}{
+	yap
+}
+\thmcon{Some unlabeled theorem}
+
+This is a new paragraph
+
+
+\begin{algorithm}
+	\caption{Some algorithm}
+	\KwIn{input}
+	\KwOut{output}
+	\SetAlgoLined
+	\SetNoFillComment
+	\tcc{This is a comment}
+	This is first line \tcp*{This is also a comment}
+	\uIf{$x > 5$} {
+		do nothing
+	} \uElseIf {$x < 5$} {
+		do nothing
+	} \Else {
+		do nothing
+	}
+	\While{$x == 5$}{
+		still do nothing
+	}
+	\ForEach{$x = 1:5$}{
+		do nothing
+	}
+	\Return{return nothing}
+\end{algorithm}
+
+
+\end{document}

@@ -116,6 +116,16 @@ Some examples of binary operations:
 	abou the set $\Z$ equipped with addition $(\Z, +)$ or even with multiplication as well $(\Z, +,
 	\cdot)$.
 }
+\dfn{Monoid}{
+	A monoid is a set $M$ equipped with a binary operation $\cdot$ such that
+	\begin{enumerate}
+		\item \tb{Associativity:} $\cdot$ is associative, i.e. $(a\cdot b)\cdot c = a\cdot (b\cdot
+		c)$ for all $a,b,c\in M$.
+
+		\item \tb{Existence of identity:} There exists an identity element $e\in M$ such that
+		$e\cdot a = a\cdot e = a$ for all $a\in M$.
+	\end{enumerate}
+}
 \dfn{Group}{
 	A group is a set $G$ equipped with a binary operation $\cdot$ such that
 	\begin{enumerate}
@@ -128,8 +138,18 @@ Some examples of binary operations:
 		\item \tb{Existence of inverse:} For every $a\in G$, there exists an inverse $a^{-1}\in G$
 		such that $a\cdot a^{-1} = a^{-1}\cdot a = e$.
 	\end{enumerate}
-}
+	\nt{
+		\begin{itemize}
+			\item 
+			We typically denote a group by $(G, \cdot)$, but sometimes we omit the binary operation
+			$\cdot$ if it is clear from the context.
 
+			\item
+			Group is an extension of monoid, since every group is a monoid, but not every monoid is
+			a group.
+		\end{itemize}
+	}
+}
 
 
 

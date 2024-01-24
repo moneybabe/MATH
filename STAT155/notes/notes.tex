@@ -2,7 +2,7 @@
 \input{preamble.tex}
 \input{macros.tex}
 
-\title{\Huge{STAT 155 Notes}\\\emph{Game Theory}}
+\title{\Huge{STAT 155 Notes}\\\emph{Professor: Adrian Gonzalez Casanova}}
 \author{\huge{Neo Lee}}
 \date{\huge{Spring 2024}}
 
@@ -13,9 +13,88 @@
 \pdfbookmark[section]{\contentsname}{toc}
 \tableofcontents
 
-\chapter{Beginning a new semester}
+\chapter{Combinatorial games}
 \section{Lecture 1 (skipped)}
-\section{Lecture 2}
+\section{Lecture 2 (skipped)}
+\section{Lecture 3}
+\dfn{Combinatorial game}{
+	A two-player game of perfect information where the players alternate moves and the game
+	ends in a finite number of moves. At each position $v\in V$, there is a set of moves 
+	$E_v$ available to the player whose turn it is. The game ends when $E_v = \emptyset$. 
+	\nt{
+		We can think of a combinatorial game as a directed graph $G = (V,E)$ where $V$ is the 
+		set of positions and $E$ is the set of edges. The game starts at some vertex $v_0$ and 
+		ends when $v_0$ has no outgoing edges.
+	}
+}
+\dfn{Impartial game}{
+	A game where the set of moves available to each player is the same at each position. The
+	terminal reward to each player is the same. Players alternate moves.
+}
+\dfn{Partisan game}{
+	The complement definition of an impartial game.
+}
+\ex{Impartial games}{
+	\begin{enumerate}
+		\item Tic-tac-toe
+		\item Chomp 
+		\item Subtraction games
+		\item Nim
+	\end{enumerate}
+}
+\dfn{Proressively bounded combinatorial game}{
+	A combinatorial game is progressively bounded if for every starting position $v_0$, there is a
+	finite bound $B(v_0)$ on the number of moves in the game before the game ends.
+}
+\dfn{Strategy}{
+	Let $V_{NT}\subseteq V$ is the set of non-terminal positions. A strategy for a player is a function
+	that assigns a legal move to each non-terminal position $v\in V_{NT}$ $$\sigma: V_{NT} \to
+	\cup_{v\in V_{NT}} E_v.$$
+}
+\dfn{Winning strategy}{
+	A winning strategy for a player from position $v\in V$ is a strategy that is guaranteed to result in
+	a win for that player.
+}
+\thm{Existence of a winning strategy}{
+	In a progressively bounded, impartial combinatorial game, $V=F\sqcup S$. That is, from any initial
+	position, one of the players has a winning strategy.
+	\nt{
+		Denote $F, S$ as the wining positions for first and second player respectively.
+	}
+	\pf{Proof}{
+		We prove this by induction on the finite bound $B(v)$ on the number of moves in the game before
+		the game ends. If $B(v) = 0$, then the game ends immediately and $v$ is a winning position either
+		for the first or second player. Hence, for $B(v) = 0$, the theorem holds.
+
+		Now suppose that the theorem holds for all $B(v) < k$ and consider a game with $B(v) = k$.
+		Let $v\in V$ be the initial position. Without loss of generality, suppose it is the first
+		player's turn. The player can move along some edges $e\in E_v$ to $v'$. By inductive
+		hypothesis, $V=F\sqcup S$ for $B(v)=k-1$. If $v'\in F$, then the first player has a winning
+		strategy at $v$, else if $v'\in S$, then the second player has a winning strategy at $v$.
+		Hence, for all $v$, either $v\in F$ or $v\in S$. This proves the theorem.
+	}
+}
+\thm{Existence of winning strategy for first player in rectangular Chomp}{
+	In a non-terminal rectangular Chomp game with $m\times n$ for board, the first player always
+	has a winning strategy.
+
+	\pf{Proof}{
+		First player eats the top right corner to move to $v'$. Then, by \emph{Theorem 1.3.1}, the
+		new position $v'$ is either a winning position for the first player or the second player.
+		Suppose $v'\in S$, and the next move by the second player moves to $v''$. Then, in fact, the
+		first player can choose to not eat the right top corner in the first move, but instead
+		directly move to $v''$, which would make $v$ the winning position for the first player.
+		\nt{
+			\begin{itemize}
+				\item 
+				$v'$ is the rectangular board with the top right corner eaten.
+
+				\item
+				This is called a \emph{strategy stealing}.
+			\end{itemize}
+		}
+	}
+}
 
 
 

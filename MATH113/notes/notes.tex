@@ -151,8 +151,40 @@ Some examples of binary operations:
 	}
 }
 
+\section{Lecture 3}
+\ex{($\M_n(\R), \cdot$) is a monoid but not group}{
+	Matrix multiplication is associative, and the identity matrix $I_n$ is the identity element.
+	However, not every matrix has an inverse (is invertible). 
+}
+\ex{$S^S$ is a monoid}{
+	Let $S$ be a set. Then $S^S$ is the set of all functions from $S$ to $S$. The binary operation
+	is composition, i.e. $(f,g)\mapsto f\circ g$. The identity element is the identity function 
+	$\mathrm{id}_S$. Obviously, composition is associative. However, depending on the set $S$ not
+	all functions necessarily have an inverse.
+}
+\mprop{Unique identity}{
+	A binary operation can have at most one identity element.
+	\pf{Proof}{
+		Suppose $e_1$ and $e_2$ are both identity elements. Then $e_1 = e_1\cdot e_2 = e_2$.
+	}
+}
+\dfn{Identity}{
+	Since we have shown that identity is unique, it make sense to denote the identity element of a
+	group $G$ by $e_G$ or simply $e$ if it is clear from the context.
+}
+\dfn{Power of zero is identity}{
+	For any $a\in G$, we define $a^0 = e$.
+}
+\ex{$(\Z, \cdot)$ is not a group}{
+	The only invertible elements are $\pm1$.
+}
+\ex{Integer mod $n$}{
+	Let $n\in\Z^+$, define the set of integers mod $n$ by $\Z/n\Z = \{0,1,\dots,n-1\}$. $(\Z/n\Z,
+	+)$ is a group but $(\Z/n\Z, \cdot)$ is not a group because consider $0\in\Z/n\Z$, then $0\cdot 
+	a = 0$ for all $a\in\Z/n\Z$, so $0$ does not have an inverse.
+}
 
-
+\section{Lecture 4}
 
 
 

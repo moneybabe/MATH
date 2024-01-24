@@ -2,8 +2,10 @@
 \input{preamble.tex}
 \input{macros.tex}
 
-\title{\Huge{MATH 105 Notes}\\\emph{Professor: Khalilah Beal-Uribe}}
+\title{\Huge{MATH 105 Notes}\\\emph{Professor: Khalilah Beal-Uribe}\\\emph{Book: Real Mathematical
+Analysis\thanks{An introductory but holistic, intuitive, and easy to read book.} by Pugh}}
 \author{\huge{Neo Lee}}
+
 \date{\huge{Spring 2024}}
 
 \begin{document}
@@ -139,6 +141,107 @@
 		between the two finite-dimensional normed spaces. Then, $I$ is a homeomorphism by the above 
 		argument.
 	}
+}
+
+\section{Lecture 3}
+Our goal is to generalize on-variable differentiation to multi-variable differentiation. In more
+precise terms, we want to:
+\nt{
+	Obtain a natural derivative of $F:U\to\R^m$ at a point $p\in$ open set $U\subseteq\R^n$ by
+	generalizing the derivative of $f:U\to \R$ at a point $p\in U\subseteq\R$.
+
+	The key is to understand that $f$ is differentiable at $p$ if and only if $f$ is "approximately
+	linear" at $p$.
+}
+	Consider an example in 2-dimensional Euclidean space to motivate our new definition of
+	derivatives in multi-dimensional spaces. 
+\ex{Derivative in $\R^2$}{
+	Is $f:\R^2\to\R^2$ defined by $$f(x_1,x_2):=(x_1^2,x_2^2)$$ differentiable at the point
+	$(1,2)\in\R^2$? 
+
+	\sol{
+		Let's first try to use the definition of derivative in $\R$ to see if it works. Let
+		$p=(1,2)$, then we have 
+		$$f'(p) = \lim_{h\to 0}\frac{f(p+h)-f(p)}{h} = \lim_{h\to
+		0}\frac{f(\inner{1,2}+h)-f(1,2)}{h}$$ where $h$ is a vector. But this does not make sense 
+		because we have not defined what it meant by division of a vector by a scalar. Hence, we
+		need a new definition of derivative in $\R^2$, or more generally in multi-dimensional
+		spaces. 
+	}
+}
+\dfn{Multi-variable derivative (aka total derivative or Frechet derivative)}{
+		Let $f:U\to\R^m$ be given where $U$ is an open subset of $\R^n$. The function $f$ is
+		differentiable at $p\in U$ with derivative $(Df)_p=T$ if $T:\R^n\to\R^m$ is a linear
+		transformation and 
+		$$f(p+v)=f(p)+T(v)+R(v)\implies \lim_{\norm{v}\to 0}\frac{R(v)}{\norm{v}}=0.$$
+		\nt{
+			The form is coming from the definition of derivative in $\R$ by rearranging the terms in 
+			$$f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$$ to $$f(x+h)=f(x)+f'(x)h+R(h)\implies
+			\lim_{h\to0}\frac{R(h)}{\norm{h}}=0.$$ We say that they Taylor remainder $R$ is
+			\emph{sublinear} because it tends to 0 faster than $\norm{v}$.
+		}
+		\nt{
+			Our definition of differentiability is coordinate free, which means we can study
+			differentiation on spaces other than $\R^n$, e.g. differential manifolds, which is the
+			natural next topic to study after $\R^n$.
+		}
+}
+\ex{Back to \emph{example 1.3.1}}{
+	Under our new definition, we can try to determine the differentiability of $f$ at $p=(1,2)$.
+	Write \begin{align*}
+		f(p+v) & = f(1+v_1,2+v_2) \\
+		& = \inner{(1+v_1)^2,(2+v_2)^2} \\
+		& = \inner{1+2v_1+v_1^2,4+4v_2+v_2^2} \\
+		& = \inner{1,4} + \inner{2v_1,4v_2} + \inner{v_1^2,v_2^2} \\
+		& = f(p) + \inner{2v_1,4v_2} + \inner{v_1^2,v_2^2}.
+	\end{align*}
+	Then, we can define $T:\R^2\to\R^2$ by $T(v_1,v_2)=\inner{2v_1,4v_2}$ and $R:\R^2\to\R^2$ by
+	$R(v_1,v_2)=\inner{v_1^2,v_2^2}$. Now we just have to show that
+	$\lim_{\norm{v}\to0}\frac{R(v)}{\norm{v}}=0$. We can check whether the norm of
+	$\frac{R(v)}{\norm{v}}$ go to 0 when $\norm{v}\to0$. It doesn't matter which norm we choose (the
+	Euclidean norm, sum norm, or max norm, etc.), because they are equivalent in finite-dimensional
+	spaces. Let's choose the Euclidean norm for simplicity. Then, we have
+	\begin{align*}
+		\l\|\frac{R(v)}{\norm{v}}\r\| = \frac{1}{\norm{v}}\norm{\inner{v_1^2, v_2^2}} 
+		& = \sqrt{\frac{v_1^4 + v_2^4}{v_1^2+v_2^2}} \\
+		& = \sqrt{\frac{v_1^4}{v_1^2+v_2^2} + \frac{v_2^4}{v_1^2+v_2^2}} \\
+		& \leq \sqrt{\frac{v_1^4}{v_1^2} + \frac{v_2^4}{v_2^2}} = \sqrt{v_1^2 + v_2^2} = \norm{v},
+	\end{align*}
+	which obviously goes to 0 when $\norm{v}\to0$. Hence, $f$ is differentiable at $p=(1,2)$ with 
+	derivative $T(v_1,v_2)=\inner{2v_1,4v_2}$.
+	\nt{
+		Note: this $T$ is only true for $p=(1,2)$. For other points, we may have different derivatives. 
+	}
+}
+\thm{Derivative is unique}{
+	If $f$ is differentiable at $p$, then it uniquely determins $(Df)_p$ according to the limit
+	formula, valid for all $u\in\R^n$,
+	$$(Df)_p(u)=\lim_{t\to0}\frac{f(p+tu)-f(p)}{t}.$$
+	\pf{Proof}{
+		Let $T$ be a linear transformation that satisfies \emph{definition 1.3.1}. Now fix any
+		$u\in\R^n$ and take $v=tu$. Then
+		$$\frac{f(p+tu)-f(p)}{t}=\frac{T(tu)+R(tu)}{t}=T(u)+\frac{R(tu)}{t\norm{u}}\norm{u} = T(u) +
+		\frac{R(tu)}{\norm{tu}}\norm{u}.$$ The last term converges to 0 as $t\to 0$ since
+		$\norm{tu}\to 0$. Limits, when they exist, are unique, so $T(u)$ is uniquely determined.
+	}
+}
+\thm{Differentiability implies continuity}{
+	\pf{Proof}{
+		Differentiability at $p$ implies that $$|f(p+v)-f(p)|=|(Df)_p(v)+R(v)|\leq |(Df)_p(v)|+|R(v)|
+		= \norm{(Df)_p}|v| + |R(v)|,$$ which tends to 0 as $v\to 0$ since $\norm{(Df)_p}$ is finite
+		in a finite-dimensional space and $R$ is sublinear. Hence, $f$ is continuous at $p$.
+	}
+}
+\cor{Total derivative existsnce implies partial derivative existence}{}
+\ex{Some important concepts}{
+	\begin{itemize}
+		\item All partial derivatives exist at a point does not imply total derivative exists at
+		that point.
+		\item All directional derivatives exist at a point does not imply total derivative exists at
+		that point.
+		\item Partial derivatives exist and are continuous at a point implies total derivative
+		exists at that point.
+	\end{itemize}
 }
 
 

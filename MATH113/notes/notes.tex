@@ -185,6 +185,48 @@ Some examples of binary operations:
 }
 
 \section{Lecture 4}
+\dfn{Unit group of monoid $M$}{
+	Let $M$ be a monoid, then denote $M^\times$ to be the unit group (group of units) of $M$, where it is
+	the set of all invertible elements of $M$, which is a group under the binary operation of $M$.
+	\nt{
+		We call the invertible element of a monoid the unit element.
+	}
+}
+\nt{
+	We infer the group $\Q^\times$ as $(\Q, \cdot)^\times$ instead of $(Q,+)^\times$ because
+	$(\Q,+)$ is automatically a group, which we denote as the group \Q anyways.
+}
+\mprop{Unique inverse}{
+	Let $M$ be a monoid, and $a,b$ be inversitible. Then $ab$ is invertible and
+	$(ab)^{-1}=b^{-1}a^{-1}$.
+}
+\ex{Integer matrix}{
+	Consider the monoid $(\M_n(\Z), \cdot)$. Then the unit group is $(\M_n(\Z), \cdot)^\times$,
+	which we denote as $\mathrm{GL}_n(\Z)$, called the general linear group of degree $n$ over \Z.
+	In other words, it's all the invertible $n\times n$ matrices with integer entries.
+	\nt{
+		A matrix $A\in\M_n(\Z)$ is invertible if and only if $\det A \in\Z$ is invertible as an element
+		of the monoid $(\Z, \cdot)$, i.e. $\det A = \pm 1$.
+	}
+}
+\dfn{Symmetric group}{
+	Let $X$ be a set and consider the monoid $(X^X,\circ)$, the set of all functions from $X\to X$
+	under composition. Then the unit group $(X^X,\circ)^\times$ is called the symmetric group on $X$
+	and is denoted by $\mathrm{Sym}(X)$ or $S_X$.
+	
+	\nt{
+		In other words, the symmetric group on $X$ is the set of all bijections from $X$ to $X$.
+	}
+}
+\ex{Sym(\R)}{
+	Define the function $f:\R\to\R$ by $f(x)=2x+1$. Then $f\in\mathrm{Sym}(\R)$.
+	\pf{Proof}{
+		From elementary algebra, we know that $f$ is bijective. In particular 
+		\[
+			f^{-1} = g:x\mapsto \frac{x-1}{2}.
+		\] It is easy to see that $g\circ f = f\circ g = e$.
+	}
+}
 
 
 

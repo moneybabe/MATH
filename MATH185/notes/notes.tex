@@ -123,7 +123,273 @@
 	formed by adjoining all roots of units to $\Z$.
 }
 
+\section{Lecture 3 (skipped)}
+\section{Lecture 4}
+\subsection{Multi-variable real differentiation}
+\nt{
+	Naturally constructed functions will often have singularities, for example, the inversion 
+	$$z\mapsto \frac{1}{z}.$$ As $z\to0$ in \C, $\abs{z}\to0$ in \R, so
+	$\abs{z^{-1}}=\abs{z}^{-1}\to\infty$. This can be fixed by the extended complex plane $\C\cup
+	\{\infty\}.$ 
+}
+\dfn{Real differentiation in $\R$}{
+	Let $I\in\R$ be an open interval. A function $f:I\to\R$ is differentiable at a point $x_0\in I$
+	if $$\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$$ exists.
+}
+\ex{Motivating example of new defintion of $\R^2$ differentiation}{
+	We say $f(x_0)+f'(x_0)(x-x_0)$ is the best linear appriximation to $f$ at point $x_0$, and 
+	$$\frac{|f(x)-f(x_0)-f'(x_0)(x-x_0)|}{|x-x_0|}\to0\quad\t{as}\quad x\to x_0.$$
+	\nt{
+		With some knowledge of multivariable analysis, we can get this definition by rearranging the
+		definition of multi-variable differentiation involving the Taylor remainder $R(x-x_0)$.
+	}
+}
+\dfn{Real differentiation from $\R^2\to\R$}{
+	Let $U\in\R^2$ be an open subset. A function $f:U\to\R$ is differentiable at $\inner{x_0,y_0}\in
+	U$ if there exists a linear map $Df:\R^2\to\R$ such that 
+	$$\frac{|f(\inner{x,y})-f(\inner{x_0,y_0})-Df(\inner{x-x_0,y-y_0})|}{\norm{\inner{x-x_0,y-y_0}}}\to
+	0\quad\t{as}\quad\inner{x,y}\to\inner{x_0,y_0}.$$ 
+	\nt{
+		$Df$ is the derivative at $\inner{x_0,y_0}$, which gives the best linear approximation to $f$ 
+		at $\inner{x_0,y_0}$.
+	}
+}
+\dfn{Partial differentiation from $\R^2\to \R$}{
+	Let $f:U\to\R$ where $U$ is an open subset of $\R^2$, then $$\pdv[]{f}{x}=\lim_{x\to
+	x_0}\frac{f(\inner{x,y_0})-f(\inner{x_0,y_0})}{x-x_0}\quad\t{and}\quad\pdv[]{f}{y}=\lim_{x\to
+	x_0}\frac{f(\inner{x_0,y})-f(\inner{x_0,y_0})}{y-y_0}.$$
+	\nt{
+	\begin{itemize}
+		\item 
+		This is reducible to the definition of real differentiation in $\R$ by fixing $x=x_0$ or
+		$y=y_0$.
 
+		\item
+		$Df$ as the derivative at $\inner{x_0,y_0}$ in this case is given by the (matrix)
+		multiplication by the vector $\inner{\pdv[]{f}{x}, \pdv[]{f}{y}}$.
+	\end{itemize}	
+	}
+}
+\dfn{Differentiation from $\R^2$ to $\R^2$}{
+	Obvious adoptation of the previous definition, where $f$ is a vector valued function, say
+	$\R^2\to\R^2$. If $f=\begin{bmatrix}
+		f_1 \\ f_2
+	\end{bmatrix}$, $Df$ is the Jacobian matric $\begin{bmatrix}
+		\pdv[]{f_1}{x} & \pdv[]{f_1}{y} \\
+		\pdv[]{f_2}{x} & \pdv[]{f_2}{y}
+	\end{bmatrix}$.
+}
+\thm{Sufficient condition for total differentiability}{
+	If all partial derivatives of $f$ exist and are continuous in a neighborhood of
+	$\inner{x_0,y_0}$, then $f$ is totally differentiable at $\inner{x_0,y_0}$.
+}
+\nt{
+	For limits and convergence questions in \C, we can consider it as limits and convergence in
+	$\R^2$. However, note that we cannot treat differentiability in $\C$ directly as
+	differentiability in $\R^2$, which we will later prove that there are extra conditions.
+}
+\nt{
+	Addition and multiplication of complexnumbesr are continuous functions $\C\times\C\to\C$, and
+	inversion map $z\to z^{-1}=\frac{z}{\abs{z}^2}$ is also continuous away from $z=0$.
+}
+
+\subsection{Complex differentiation}
+\dfn{Complex differentiable}{
+	$f$ is complex differentiable at $z_0$ if $$\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}$$ exists.
+	\nt{ 
+		The limit is the (complex) derivative of $f$ at $z_0, f'(z_0)$.
+	}
+}
+\thm{Complex differentiability implies continuity}{
+	If $f$ is complex differentiable at $x_0$, then $f$ is continuous at $z_0$.
+	\pf{Proof}{
+		\begin{align*}
+			\lim_{z\to z_0}f(x)-f(x_0) & = \lim_{z\to z_0}\l(f(x)-f(x_0)\r)\frac{z-z_0}{z-z_0} \\
+			& = \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0} \cdot \lim_{z\to z_0}z-z_0 \\
+			& = f'(z_0)\cdot 0 = 0.
+		\end{align*}
+	}
+}
+\ex{Derivative of monomial}{
+	Let $f(z)=z^n$, then notice $$\frac{f(z)-f(z_0)}{z-z_0}=\frac{z^n-z_0^n}{z-z_0}=z^{n-1}+z^{n-2}z_0
+	+\cdots+z_0^{n-1}.$$ Since addition and multiplication are continuous on $\C$ and $\lim_{z\to z_0}z =
+	z_0$, the limit of the RHS is $nz_0^{n-1}$. Hence, $f'(z_0)=nz_0^{n-1}$.
+}
+\thm{Properties of complex differentiation}{
+	If $f,g$ are complex differentiable at $z_0$, then
+	\begin{enumerate}
+		\item $f+g$ is complex differentiable at $z_0$ and $(f+g)'(z_0)=f'(z_0)+g'(z_0)$.
+		\item $fg$ is complex differentiable at $z_0$ and $(fg)'(z_0)=f'(z_0)g(z_0)+f(z_0)g'(z_0)$.
+		\item If $g(z_0)\neq 0$, then $\frac{f}{g}$ is complex differentiable at $z_0$ and
+			$$\l(\frac{f}{g}\r)'(z_0)=\frac{f'(z_0)g(z_0)-f(z_0)g'(z_0)}{g(z_0)^2}.$$
+	\end{enumerate}
+	\pf{Proof}{
+		The same proof as in $\R$ using absolute value of complex numbers and triangle inequality.
+	}
+}
+\cor{Complex differentiable of rational functions}{
+	Let 
+	\[
+		z = \frac{P(z)}{Q(z)} \quad\t{for some polynomials } P,Q \t{ and } Q \neq 0.
+	\]
+	We can omplex differentiate $z$ using the same algebraic manipulation as in $\R$. 
+	\pf{Proof}{
+		From \emph{example 1.4.2}, we know how to differentiate monomials just like in the real case,
+		and from \emph{theorem 1.4.3}, we can differentiate polynomials just like in the real case by
+		linear combination of monomials. Hence, we can differentiate $P(z)$ and $Q(z)$, and then apply
+		\emph{theorem 1.4.3 (3)}.
+	}
+}
+\ex{$f=\frac{1}{z}$}{
+	$f'(z)=\frac{-1}{z^2}$ when $z\neq0$.
+}
+\dfn{Holomorphic}{
+	$f:U\to\C$ is holomorphic if it is complex differentiable at every point in the open set
+	$U\subseteq\C$.
+}
+\subsection{Complex vs real differentiability}
+\mprop{Complex differentiabilit implies $\R^2$ differentiability}{
+	Consider complex number $z=x+yi$ and $f(z)=u(x,y)+iv(x,y)$.
+	If $f$ is complex differentiable at $z_0=x_0+y_0i$, then the map 
+	\[
+		\begin{bmatrix}
+			u(x,y) \\ v(x,y)
+		\end{bmatrix}: \R^2\to\R^2
+	\]
+	is real differentiable at $\inner{x_0,y_0}$.
+	\pf{Proof}{
+		If $f$ is differentiable at $z_0$, then 
+		\[
+			\lim_{z\to z_0}\frac{f(z)-f(z_0)-f'(z_0)(z-z_0)}{z-z_0} = 0,
+		\]
+		which is equivalent to 
+		\[
+			\lim_{z\to z_0}\frac{|f(z)-f(z_0)-f'(z_0)(z-z_0)|}{|z-z_0|} = 0.
+		\]
+		Now notice that in face $f'(z_0)$ is a linear homogeneous function from $\C\to\C$. Again if
+		we consider $z_0=x_0+y_0i$, then $f'(z_0)$ is a linear function of $\inner{x_0,y_0}$ from
+		$\R^2\to\R^2$. Hence, we have found the derivative $D\begin{bmatrix}
+			u(x_0,y_0) \\ v(x_0,y_0)
+		\end{bmatrix}$, which is $f'(z_0)$ when writing in vector $\R^2$ form.
+		\nt{
+			Since $f'(z_0)$ is a linear function from $\C\to\C$, it is simply scaling $z_0$ by a complex 
+			number. if $f'(z_0) = (p + qi)z_0$, then $\re f'(z_0) = p\cdot\re z_0 - q\cdot\im z_0$ and
+			$\im f'(z_0)=p\cdot\im z_0 + q\cdot\re z_0$. Writing it in matrix form and representing
+			complex numbers as vectors in $\R^2$, we get the matrix 
+			$
+				\begin{bmatrix}
+					p & -q \\
+					q & p
+				\end{bmatrix}.
+			$
+		}
+	}	
+}
+\thm{Equivalence of complex and $\R^2$ differentiability}{
+	\[
+		(z=x+yi)\mapsto (f(z)=w=u(x,y)+v(x,y)i)
+	\] is complex differentiable at $z_0 = x_0+y_0i$ if and only if the map 
+	\[
+		\begin{bmatrix}
+			x \\ y
+		\end{bmatrix}\mapsto 
+		\begin{bmatrix}
+			u(x,y) \\ v(x,y)
+		\end{bmatrix}
+	\] is real differentiable at $(x_0,y_0)$ AND satisfies the Cauchy-Reimann equations 
+	\[
+		u_x = v_y,\quad v_x = -u_y
+	\] at $(x_0,y_0)$.
+}
+\ex{Exponential}{
+	The complex exponential $f:z\mapsto e^z$ is holomorphic in \C.
+	\pf{Proof}{
+		\[
+			f:z\mapsto e^z \iff f:(x+yi)\mapsto e^x(\cos y + i\sin y).	
+		\]
+		If we write it in $\R^2$, then 
+		\[
+			g:\begin{bmatrix}
+				x \\ y
+			\end{bmatrix}\mapsto 
+			\begin{bmatrix}
+				e^x\cos y \\ e^x\sin y
+			\end{bmatrix}.
+		\] We know the function is differentiable in $\R^2$ because the partial derivatives exist and 
+		are continuous. In particular, the derivative is 
+		\[
+			Dg: \begin{bmatrix}
+				x \\ y
+			\end{bmatrix}\mapsto 
+			\begin{bmatrix}
+				e^x\cos y & -e^x\sin y \\
+				e^x\sin y & e^x\cos y
+			\end{bmatrix}.	
+		\]
+		Indeed, the Cauchy-Reimann equations are satisfied, and hence $f$ is real differentiable in
+		$\R^2$, hence complex differentiable in \C, which is the definition of holomorphic.
+	}
+}
+\ex{Other holomorphic / non-holomorphic examples}{
+	\begin{itemize}
+		\item $(x,y)\mapsto\l(x^2+y^2,2xy\r)$ \quad  non-holomorphic
+		\item $(x,y)\mapsto\l(x^2-y^2,2xy\r)$
+		\item $(x,y)\mapsto\l(\frac{1}{2}\log\l(x^2+y^2\r),\arctan\frac{y}{x}\r)$
+	\end{itemize}
+	\pf{Proof}{
+		Conside as $U\to\R^2:U\subseteq\R^2$ map and check that the Jacobian matrix satisfies the 
+		Cauchy-Reimann equations.
+	}
+}
+\subsection{Some general properties of holomorphic functions}
+\mprop{Set of holomorphic maps is an algebra}{
+	The set of holomorphic maps $U\to\C$ is an algebra:
+	\begin{itemize}
+		\item If $f,g$ are holomorphic, then $f+g$ is holomorphic.
+		\item If $k\in\C$, then $kf$ is holomorphic.
+		\item If $f,g$ are holomorphic, then $fg$ is holomorphic.
+		\item If $f,g$ are holomorphic and $g(z)\neq 0$ for all $z\in U$, then $\frac{f}{g}$ is
+			holomorphic.
+	\end{itemize}
+}
+\thm{Holomorphic function implies holomorphic derivative}{
+	If $f:U\to\C$ is holomorphic and twice real differentiable, then $f'$ is also holomorphic.
+	\nt{
+		In fact, the assumption of twice real differentiable can be omitted because holomorphic maps are
+		infinitely differentiable.
+	}
+	\pf{Proof}{
+		Let $f(x+yi)=u(x,y)+v(x,y)i$ where $u,v:U\to\R$. Then the Jacobian matrix of $f$ is
+		\[
+			Df = \begin{bmatrix}
+					u_x & u_y \\
+					v_x & v_y
+			\end{bmatrix} = 
+			\begin{bmatrix}
+				u_x & -v_x \\
+				v_x & u_x
+			\end{bmatrix}
+		\]
+		Or we can write $Df=(u_x-v_x) + (v_x+u_x)i$, then the Hessian matrix (derivative of $f'$) of
+		$f$ is
+		\[
+			D^2f = \begin{bmatrix}
+				u_{xx}-v_{xx} & u_{xy}-v_{xy} \\
+				v_{xx}+u_{xx} & v_{xy}+u_{xy}
+			\end{bmatrix} = 
+			\begin{bmatrix}
+				u_{xx}-v_{xx} & \overbrace{u_{yx} - v_{yx}}^{\t{Clairaut's}} \\
+				u_{xx}+v_{xx} & \underbrace{v_{yx} + u_{yx}}_{\t{Clairaut's}}
+			\end{bmatrix} = 
+			\begin{bmatrix}
+				u_{xx}-v_{xx} & \overbrace{-u_{xx} - v_{xx}}^{u_x = v_y,v_x = -u_y} \\
+				u_{xx}+v_{xx} & \underbrace{u_{xx} - v_{xx}}_{u_x = v_y,v_x = -u_y}
+			\end{bmatrix}.
+		\]
+		Hence, we have shown that for $D^2f=f''$ is also real differentiable satisfying the 
+		Cauchy-Reimann equations. Hence, $f'$ is holomorphic.
+	}
+}
 
 
 

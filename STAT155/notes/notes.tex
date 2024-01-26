@@ -96,6 +96,44 @@
 	}
 }
 
+\section{Lecture 4}
+\mprop{Being first player is better}{
+	Assuming both players are perfect players, being the first player is usually better than being
+	the second player in a progressively bounded impartial combinatorial game.
+	\pf{Proof}{
+		Let $v_0\in V$ be the starting position. In order for $v_0$ to be in $F$, there only needs to be
+		one neighbor of $v_0$ that is in $S$. However, for $v_0$ to be in $S$, all neighbors of $v_0$ 
+		must be in $F$. 
+
+		Thinking in terms of edges, for $v_0$ to be in $F$, there only needs to be one good edge,
+		but for $v_0$ to be in $S$, all edges must be bad.
+	}
+}
+\mlemma{Partitioning Nim columns}{
+	Given a position $O$ in Nim, partition the board into two sets of columns $X$ and $Y$ such that 
+	$X,Y$ are non-empty disjoint columns. Then $X,Y$ are each individually smaller Nim boards.
+	\begin{enumerate}
+		\item If $X,Y\in S$, then $X\cup Y\in S$.
+		\item If $X\in S, Y\in F$ or $X\in F, Y\in S$, then $X\cup Y\in F$.
+	\end{enumerate}
+	\nt{
+		$X\cup Y$ is the union of the two sets of columns, which returns the original board $O$.
+	}
+	\pf{Proof}{
+		$(1):$ First, notice that $\emptyset\in S$ because if first player starts with an empty 
+		board, it means the previous move made by the second player removed the last column, which
+		means the second player won. 
+
+		$(1)\implies(2):$ Assume without loss of generality that $X\in F, Y\in S$, then we can move
+		the position $X$ to $X'$, which is in $S$. Then, $X'\cup Y\in S$ by $(1)$, which implies 
+		by reverting one move, $X\cup Y\in F$.
+	}
+	\nt{
+		This is only true for Nim because Nim guarantees that the two sets of columns are disjoint
+		and making a move on one set of columns does not affect the other set of columns.
+	}
+}
+
 
 
 
